@@ -42,12 +42,12 @@ class _HomePageState extends State<HomePage> {
                 return ListView.builder(
                   itemCount: tweets.length,
                   itemBuilder: (context, index) {
-                    final tweet = tweets[index];
+                    final tweets = tweets[index];
                     return ListTile(
                       subtitle: Text(
-                        tweet.username,
+                        tweets.username,
                       ),
-                      title: Text(tweet.tweets),
+                      title: Text(tweets.tweets),
                     );
                   },
                 );
