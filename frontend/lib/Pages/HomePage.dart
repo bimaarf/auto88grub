@@ -3,8 +3,7 @@ import 'package:frontend/Model/ModelTweets.dart';
 import 'package:frontend/Model/api_service.dart';
 
 class HomePage extends StatefulWidget {
-  // ignore: use_key_in_widget_constructors
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -23,34 +22,42 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fetch API Example'),
+        title: Text(
+          'Flutter 🙌',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
       ),
-      body: FutureBuilder<List<Tweets>>(
-        future: _tweets,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
-          } else if (snapshot.hasData) {
-            final tweets = snapshot.data!;
-            return ListView.builder(
-              itemCount: tweets.length,
-              itemBuilder: (context, index) {
-                final tweet = tweets[index];
-                return ListTile(
-                  title: Text(tweet.username),
-                  subtitle: Text(tweet.tweets),
+      body: Container(
+          color: Colors.black, // Set your desired background color here
+          child: FutureBuilder<List<Tweets>>(
+            future: _tweets,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text('Error: ${snapshot.error}'),
                 );
-              },
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
+              } else if (snapshot.hasData) {
+                final tweets = snapshot.data!;
+                return ListView.builder(
+                  itemCount: tweets.length,
+                  itemBuilder: (context, index) {
+                    final tweet = tweets[index];
+                    return ListTile(
+                      subtitle: Text(
+                        tweet.username,
+                      ),
+                      title: Text(tweet.tweets),
+                    );
+                  },
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
+          )),
     );
   }
 }

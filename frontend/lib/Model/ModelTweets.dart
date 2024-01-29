@@ -7,9 +7,9 @@ class Tweets {
 
   factory Tweets.fromJson(Map<String, dynamic> json) {
     return Tweets(
-      id: json['id'],
-      username: json['username'],
-      tweets: json['tweets'],
+      id: json['data']['id'],
+      username: json['data']['username'],
+      tweets: json['data']['tweets'],
     );
   }
 }
