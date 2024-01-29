@@ -1,16 +1,32 @@
-class Tweets {
-  int? id;
-  String? username;
-  String? tweets;
+class Tweet {
+  final int userId;
+  final int id;
+  final String text;
 
-  Tweets({this.id, this.username, this.tweets});
+  Tweet({required this.userId, required this.id, required this.text});
 
-  Tweets.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    username = json['username'];
-    tweets = json['tweets'];
+  factory Tweet.fromJson(Map<String, dynamic> json) {
+    return Tweet(
+      userId: json['user_id'],
+      id: json['id'],
+      text: json['text'],
+    );
   }
 }
+
+// class Tweets {
+//   int? id;
+//   String? username;
+//   String? tweets;
+
+//   Tweets({this.id, this.username, this.tweets});
+
+//   Tweets.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     username = json['username'];
+//     tweets = json['tweets'];
+//   }
+// }
 
 
 // class Tweets {

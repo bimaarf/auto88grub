@@ -1,63 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Model/ModelTweets.dart';
-import 'package:frontend/Model/api_service.dart';
+import 'package:frontend/Service/TweetService.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  final String title;
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  late Future<List<Tweets>> _tweets;
+class _MyHomePageState extends State<MyHomePage> {
+  List<Tweet> _tweets = [];
 
   @override
   void initState() {
     super.initState();
-    _tweets = ApiService().fetchTweets();
+    fetchTweets();
+  }
+
+  Future<void> fetchTweets() async {
+    try {
+      final tweets = await TweetService.fetchTweets();
+      setState(() {
+        _tweets = tweets;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Flutter 🙌',
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.black,
+        title: Text(widget.title),
       ),
-      body: Container(
-          color: Colors.black, // Set your desired background color here
-          child: FutureBuilder<List<Tweets>>(
-            future: _tweets,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text('Error: ${snapshot.error}'),
+      body: _tweets.isEmpty
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              itemCount: _tweets.length,
+              itemBuilder: (context, index) {
+                final tweet = _tweets[index];
+                return ListTile(
+                  title: Text(tweet.text),
+                  subtitle: Text('User ID: ${tweet.userId}'),
                 );
-              } else if (snapshot.hasData) {
-                final tweets = snapshot.data!;
-                return ListView.builder(
-                  itemCount: tweets.length,
-                  itemBuilder: (context, index) {
-                    final tweets = tweets[index];
-                    return ListTile(
-                      subtitle: Text(
-                        tweets.username,
-                      ),
-                      title: Text(tweets.tweets),
-                    );
-                  },
-                );
-              } else {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            },
-          )),
+              },
+            ),
     );
   }
 }
