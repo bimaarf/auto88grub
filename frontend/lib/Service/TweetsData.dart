@@ -1,23 +1,23 @@
 import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/Service/TweetsData.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
-  runApp(MyApp());
+  runApp(MyHomePage());
 }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Fetch API',
-      home: MyHomePage(),
-    );
-  }
-}
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Fetch API',
+//       home: MyHomePage(),
+//     );
+//   }
+// }
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -29,14 +29,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final String apiUrl =
       'http://bimarf.in/api/tweets?page=1&perPage=10'; // Ganti dengan URL API Anda
-
-  int _selectedIndex = 0;
-
-  List<Widget> _widgetOptions = <Widget>[
-    Center(child: MyHomePage()),
-    Center(child: Text('Index 1: Business')),
-    Center(child: Text('Index 2: School')),
-  ];
 
   Future<List<Map<String, dynamic>>> fetchData() async {
     final response = await http.get(Uri.parse(apiUrl));
@@ -66,30 +58,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:
-            Text('Auto Hide on Scroll', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.black,
-      ),
-      body: _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
+      body: Container(
+        color: Colors.black,
+        child: Center(
+          child: TweetsData(),
+        ),
       ),
     );
   }
@@ -102,6 +75,15 @@ class _MyHomePageState extends State<MyHomePage> {
       },
       child: CustomScrollView(
         slivers: <Widget>[
+          SliverAppBar(
+            backgroundColor: Colors.black,
+            title: Text(
+              'Auto Hide on Scroll',
+              style: TextStyle(color: Colors.white),
+            ),
+            floating: true,
+            snap: true,
+          ),
           SliverToBoxAdapter(
             child: FutureBuilder(
               future: fetchData(),
@@ -192,14 +174,11 @@ class _MyHomePageState extends State<MyHomePage> {
         return AlertDialog(
           backgroundColor: Colors.black
               .withOpacity(0.6), // Set the background color with opacity
-          title: Text(
-            'Love Popup',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
+          title: Text('Love Popup',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700)),
           actions: [
             TextButton(
               onPressed: () {
@@ -211,11 +190,5 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       },
     );
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 }
