@@ -294,6 +294,51 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.blue.withOpacity(0.05),
+                            borderRadius: BorderRadius.circular(10)),
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
+                        child: const Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.car_rental,
+                              size: 50,
+                              color: Colors.blue,
+                            ),
+                            Text('Mobil'),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.blue.withOpacity(0.05),
+                            borderRadius: BorderRadius.circular(10)),
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
+                        child: const Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.car_rental,
+                              size: 50,
+                              color: Colors.blue,
+                            ),
+                            Text('Mobil'),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 // Add more widgets inside the Column if needed
               ],
             ),
