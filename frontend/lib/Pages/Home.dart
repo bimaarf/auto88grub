@@ -1,6 +1,5 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarList.dart';
 import 'package:frontend/Pages/Components/Home/FirstMenuList.dart';
 
 class Home extends StatefulWidget {
@@ -34,7 +33,7 @@ class _HomeState extends State<Home> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.only(top: 30),
+            padding: const EdgeInsets.only(top: 30),
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border(
@@ -114,6 +113,7 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const CardCarList(),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -159,51 +159,7 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.05),
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.car_rental,
-                              size: 50,
-                              color: Colors.blue,
-                            ),
-                            Text('Mobil'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.05),
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.car_rental,
-                              size: 50,
-                              color: Colors.blue,
-                            ),
-                            Text('Mobil'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

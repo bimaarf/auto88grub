@@ -87,8 +87,8 @@ class _FirstMenuListState extends State<FirstMenuList> {
               children: List.generate(
                 menu.length,
                 (index) => Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 2.0),
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(3),
+                  width: 80,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [

@@ -45,7 +45,6 @@ class MessageListView {
                   style: theme.textTheme.bodyLarge!
                       .copyWith(color: theme.colorScheme.onPrimary),
                 ),
-                Text('asd'),
               ],
             ),
           ),

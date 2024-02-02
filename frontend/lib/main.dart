@@ -61,15 +61,32 @@ class _NavigationExampleState extends State<NavigationExample> {
             label: 'Home',
           ),
           NavigationDestination(
-            icon: Badge(child: Icon(Icons.notifications_sharp)),
+            selectedIcon: Icon(
+              Icons.notifications_on_sharp,
+              color: Colors.white,
+            ),
+            icon: Badge(
+                label: Text('21'), child: Icon(Icons.notifications_active)),
             label: 'Notifications',
           ),
           NavigationDestination(
+            selectedIcon: Icon(
+              Icons.message,
+              color: Colors.white,
+            ),
             icon: Badge(
               label: Text('2'),
-              child: Icon(Icons.messenger_sharp),
+              child: Icon(Icons.message),
             ),
             label: 'Messages',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),
@@ -113,6 +130,9 @@ class _NavigationExampleState extends State<NavigationExample> {
 
         // Messages page
         MessageListView(theme: theme).build(),
+        const ProfileScreen(
+          profileName: 'asd',
+        ),
       ][currentPageIndex],
     );
   }
