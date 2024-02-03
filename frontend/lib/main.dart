@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Home.dart';
 import 'package:frontend/Pages/Message.dart';
+import 'package:frontend/Pages/Profile.dart';
 
 void main() => runApp(const NavigationBarApp());
 
@@ -131,7 +132,7 @@ class _NavigationExampleState extends State<NavigationExample> {
         // Messages page
         MessageListView(theme: theme).build(),
         const ProfileScreen(
-          profileName: 'asd',
+          profileName: 'Jokowi',
         ),
       ][currentPageIndex],
     );

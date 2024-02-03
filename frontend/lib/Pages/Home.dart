@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarList.dart';
 import 'package:frontend/Pages/Components/Home/FirstMenuList.dart';
+import 'package:frontend/Pages/Profile.dart';
 
 class Home extends StatefulWidget {
   const Home({
@@ -27,6 +28,7 @@ class _HomeState extends State<Home> {
     );
   }
 
+  @override
   void initState() {
     super.initState();
     carItem = [
@@ -70,10 +72,25 @@ class _HomeState extends State<Home> {
         'subtitle': 'Rp 5x9.000.000',
         'note': 'booet',
       },
+      {
+        'id': '6',
+        'imageUrl':
+            'https://cf-images.us-east-1.prod.boltdns.net/v1/static/1078702682/f0f68b26-e5a5-4f34-a46b-f386813d3d1a/d7b81a61-a041-446e-9226-4e2ef533bae9/652x366/match/image.jpg',
+        'title': 'DAIHATSU GRANMAX (BLACK) TIPE BOX 1.5 M/T (2018)',
+        'subtitle': 'Rp 3x9.000.000',
+        'note': 'booet',
+      },
+      {
+        'id': '7',
+        'imageUrl':
+            'https://www.carscoops.com/wp-content/uploads/2022/04/BYD-Seal-9.jpg',
+        'title': 'DAIHATSU GRANMAX (RED) TIPE BOX 1.5 M/T (2018)',
+        'subtitle': 'Rp 2x9.000.000',
+        'note': 'booet',
+      },
     ];
   }
 
-  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
@@ -350,24 +367,6 @@ class _HomeState extends State<Home> {
             ),
           )
         ],
-      ),
-    );
-  }
-}
-
-class ProfileScreen extends StatelessWidget {
-  final String profileName;
-
-  const ProfileScreen({required this.profileName});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile: $profileName'),
-      ),
-      body: Center(
-        child: Text('Profile details for $profileName'),
       ),
     );
   }
