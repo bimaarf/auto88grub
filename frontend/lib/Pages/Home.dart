@@ -16,6 +16,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   // Function to navigate to the profile screen
+  var carItem;
   void _navigateToProfileScreen(String profileName) {
     // Use Navigator to push a new route
     Navigator.push(
@@ -24,6 +25,52 @@ class _HomeState extends State<Home> {
         builder: (context) => ProfileScreen(profileName: profileName),
       ),
     );
+  }
+
+  void initState() {
+    super.initState();
+    carItem = [
+      {
+        'id': '1',
+        'imageUrl':
+            'https://www.carscoops.com/wp-content/uploads/2022/04/BYD-Seal-1024x555.jpg',
+        'title': 'DAIHATSU GRANMAX (GREY) TIPE BOX 1.5 M/T (2018)',
+        'subtitle': 'Rp 1x9.000.000',
+        'note': 'booet',
+      },
+      {
+        'id': '2',
+        'imageUrl':
+            'https://www.carscoops.com/wp-content/uploads/2022/04/BYD-Seal-9.jpg',
+        'title': 'DAIHATSU GRANMAX (RED) TIPE BOX 1.5 M/T (2018)',
+        'subtitle': 'Rp 2x9.000.000',
+        'note': 'booet',
+      },
+      {
+        'id': '3',
+        'imageUrl':
+            'https://cf-images.us-east-1.prod.boltdns.net/v1/static/1078702682/f0f68b26-e5a5-4f34-a46b-f386813d3d1a/d7b81a61-a041-446e-9226-4e2ef533bae9/652x366/match/image.jpg',
+        'title': 'DAIHATSU GRANMAX (BLACK) TIPE BOX 1.5 M/T (2018)',
+        'subtitle': 'Rp 3x9.000.000',
+        'note': 'booet',
+      },
+      {
+        'id': '4',
+        'imageUrl':
+            'https://www.carscoops.com/wp-content/uploads/2022/04/BYD-Seal-Interior-1.jpg',
+        'title': 'DAIHATSU GRANMAX (YELLOW) TIPE BOX 1.5 M/T (2018)',
+        'subtitle': 'Rp 4x9.000.000',
+        'note': 'booet',
+      },
+      {
+        'id': '5',
+        'imageUrl':
+            'https://www.carscoops.com/wp-content/uploads/2022/04/BYD-Seal-9.jpg',
+        'title': 'DAIHATSU GRANMAX (PINK) TIPE BOX 1.5 M/T (2018) ',
+        'subtitle': 'Rp 5x9.000.000',
+        'note': 'booet',
+      },
+    ];
   }
 
   @override
@@ -113,7 +160,10 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CardCarList(),
+                CardCarList(
+                  carItem:
+                      carItem, // Replace with your actual list of car items
+                ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
