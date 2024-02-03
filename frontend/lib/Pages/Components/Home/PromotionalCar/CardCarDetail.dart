@@ -70,7 +70,7 @@ class CardCarDetail extends StatelessWidget {
                         Colors.red.withOpacity(0),
                         Colors.black.withOpacity(0.3),
                         ModalRoute.of(context)!.animation!.value),
-                    padding: const EdgeInsets.fromLTRB(16, 42, 16, 24),
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
