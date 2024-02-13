@@ -15,7 +15,7 @@ export const CarouselBlog = () => {
                   rows.push(
                     <div
                       key={i}
-                      className="block  w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                      className="block cursor-pointer w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                       <div className="relative overflow-hidden bg-cover bg-no-repeat">
                         <img
                           src="https://img.antaranews.com/cache/800x533/2024/02/10/gm-logos-reuters-1.jpg"
@@ -23,7 +23,7 @@ export const CarouselBlog = () => {
                         />
                       </div>
                       <div className="p-6">
-                        <h1 className="font-bold whitespace-pre-wrap text-start text-gray-800 text-sm">
+                        <h1 className="font-bold hover:text-orange-500 whitespace-pre-wrap text-start text-gray-800 text-sm">
                           Daihatsu bukukan penjualan ritel 16.976 unit mobil
                           pada Januari...
                         </h1>
@@ -32,6 +32,13 @@ export const CarouselBlog = () => {
                           positif di Indonesia pada Januari, dengan capaian
                           16.976 unit, atau
                         </p>
+                        <div className="flex justify-between text-xs text-orange-500 mt-2">
+                          <div className="flex justify-start items-center gap-1">
+                            <i className="fas fa-tag"></i>
+                            <p>Technology</p>
+                          </div>
+                          <p>5 Februari 2024 11:34</p>
+                        </div>
                       </div>
                     </div>
                   );
@@ -50,7 +57,7 @@ export const CarouselBlog = () => {
                   rows.push(
                     <div
                       key={i}
-                      className="block  w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                      className="block cursor-pointer w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                       <div className="relative overflow-hidden bg-cover bg-no-repeat">
                         <img
                           src="https://img.antaranews.com/cache/800x533/2024/02/10/gm-logos-reuters-1.jpg"
@@ -58,7 +65,7 @@ export const CarouselBlog = () => {
                         />
                       </div>
                       <div className="p-6">
-                        <h1 className="font-bold whitespace-pre-wrap text-start text-gray-800 text-sm">
+                        <h1 className="font-bold hover:text-orange-500 whitespace-pre-wrap text-start text-gray-800 text-sm">
                           Daihatsu bukukan penjualan ritel 16.976 unit mobil
                           pada Januari...
                         </h1>
@@ -67,6 +74,13 @@ export const CarouselBlog = () => {
                           positif di Indonesia pada Januari, dengan capaian
                           16.976 unit, atau
                         </p>
+                        <div className="flex justify-between text-xs text-orange-500 mt-2">
+                          <div className="flex justify-start items-center gap-1">
+                            <i className="fas fa-tag"></i>
+                            <p>Technology</p>
+                          </div>
+                          <p>5 Februari 2024 11:34</p>
+                        </div>
                       </div>
                     </div>
                   );

@@ -237,9 +237,9 @@ export const Home = () => {
             </div>
           </div>
         </div>
-        <div className="w-full -z-10 md:px-20 mt-10">
+        <div className="w-full -z-10 md:px-20 mt-20">
           <div
-            ref={ref}
+            ref={ref}s
             className="md:space-y-4 sm:text-xl whitespace-nowrap md:text-4xl text-gray-800 p-4 lg:text-5xl font-bold text-center"
             style={{ fontFamily: "'Marko One', sans-serif" }}>
             <div className="md:p-10 md:space-y-10">
