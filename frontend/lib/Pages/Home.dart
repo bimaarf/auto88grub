@@ -17,6 +17,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   // Function to navigate to the profile screen
+
   var carItem;
   void _navigateToProfileScreen(String profileName) {
     // Use Navigator to push a new route
@@ -91,6 +92,7 @@ class _HomeState extends State<Home> {
     ];
   }
 
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(

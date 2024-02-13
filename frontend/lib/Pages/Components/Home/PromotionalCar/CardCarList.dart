@@ -6,7 +6,7 @@ class CardCarList extends StatelessWidget {
   final List<Map<String, String>> carItem;
 
   const CardCarList({
-    Key? key,
+    Key? key, // Add Key type here
     required this.carItem,
   }) : super(key: key);
 
@@ -15,25 +15,7 @@ class CardCarList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.ideographic,
-          children: [
-            Text(
-              'Mobil Promosi',
-              textAlign: TextAlign.right,
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Icon(
-              Icons.discount,
-              size: 10,
-              color: Color.fromARGB(255, 247, 181, 0),
-            )
-          ],
-        ),
+        const MobilRow(),
         SizedBox(
           height: 200,
           child: ListView.builder(
@@ -41,12 +23,42 @@ class CardCarList extends StatelessWidget {
             itemCount: carItem.length,
             itemBuilder: (context, index) {
               var item = carItem[index];
-              CardCardItem(
+              return CardCardItem(
+                // Add 'return' here
                 carData: item,
               );
             },
           ),
         ),
+      ],
+    );
+  }
+}
+
+class MobilRow extends StatelessWidget {
+  const MobilRow({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.ideographic,
+      children: [
+        Text(
+          'Mobil Promosi',
+          textAlign: TextAlign.right,
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Icon(
+          Icons.discount,
+          size: 10,
+          color: Color.fromARGB(255, 247, 181, 0),
+        )
       ],
     );
   }

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { SidebarMenu } from "./__SidebarMenu";
 
 export const Headers = () => {
   const [navTogleBtn, setNavTogleBtn] = useState(false);
-  const navRedirect = useNavigate();
   return (
     <>
-      <div className="p-4 lg:px-10 sticky top-0 z-40 bg-white shadow-lg backdrop-blur-lg">
+      <div className="p-4 lg:px-10 sticky top-0 z-50 bg-white shadow-lg backdrop-blur-lg">
         <div className="lg:container lg:mx-auto">
           <div className="flex justify-between">
             <h1 className="text-xl font-medium text-slate-700 cursor-pointer active:scale-95 duration-300">
@@ -15,7 +13,10 @@ export const Headers = () => {
               <span className="text-red-500">88</span>
               GROUP
             </h1>
-            <SidebarMenu navTogleBtn={navTogleBtn} setNavTogleBtn={setNavTogleBtn} />
+            <SidebarMenu
+              navTogleBtn={navTogleBtn}
+              setNavTogleBtn={setNavTogleBtn}
+            />
             <div className="md:flex text-md hidden justify-center items-center gap-10">
               <div className="flex cursor-pointer active:scale-95 duration-200 text-red-700 justify-start items-center gap-1 font-semibold text-sm">
                 <i className="fas fa-home"></i>

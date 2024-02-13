@@ -7,7 +7,7 @@ export const SidebarMenu = ({ setNavTogle, navTogleBtn }) => {
   return (
     <>
       <div
-        className={`fixed top-10 overflow-x-hidden h-screen z-50 p-4 duration-300 ease-in-out bg-white shadow-xl xl:w-64
+        className={`fixed lg:hidden top-10 overflow-x-hidden h-screen z-50 p-4 duration-300 ease-in-out bg-white shadow-xl xl:w-64
         ${navTogleBtn ? "left-0" : "xl:-left-44 -left-64 overflow-hidden"}
         `}>
         <div className="xl:fixed left-5">

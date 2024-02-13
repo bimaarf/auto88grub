@@ -96,7 +96,8 @@ class ProfileScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
@@ -108,16 +109,16 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.abc,
                       color: Colors.white,
                       size: 24,
                     ),
                   ),
-                  SizedBox(width: 10), // Add space between icon and text
+                  const SizedBox(width: 10), // Add space between icon and text
                   // Adjust padding for better spacing
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5),
                     child: Text(
                       'Label',
                       style: TextStyle(
