@@ -1,10 +1,21 @@
 import React, { useEffect } from "react";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
+import { TESelect } from "tw-elements-react";
 
 export const Car = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const dataPrice = [
+    { text: "One", value: 1 },
+    { text: "Two", value: 2 },
+    { text: "Three", value: 3 },
+    { text: "Four", value: 4 },
+    { text: "Five", value: 5 },
+    { text: "Six", value: 6 },
+    { text: "Seven", value: 7 },
+    { text: "Eight", value: 8 },
+  ];
   return (
     <>
       <div
@@ -37,6 +48,7 @@ export const Car = () => {
         <div className="md:flex justify-center gap-4">
           <div className="sm:w-full md:w-1/4 border-r md:sticky md:top-10 md:overflow-y-auto md:overflow-hidden space-y-5 sm:h-full md:h-screen pr-4">
             <div className="space-y-2">
+              {/* <TESelect data={dataPrice} /> */}
               <label htmlFor="price" className="font-semibold">
                 *Harga Mobil Dibawah:
               </label>

@@ -37,7 +37,7 @@ export const Testimony = () => {
           </div>
         </div>
       </div>
-      <div className="container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 mx-auto">
+      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto">
         <div className="flex justify-center">
           <CarouselTestimony />
         </div>

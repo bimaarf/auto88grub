@@ -78,7 +78,7 @@ function App() {
           <Route path="/tentang-kami" element={<About />} />
           <Route path="/kunjungi-kami" element={<Visit />} />
           <Route path="/FAQ" element={<FAQ />} />
-          <Route path="/career" element={<Career />} />
+          <Route path="/karir" element={<Career />} />
         </CustomSwitch>
         <Footer />
       </Router>

@@ -159,9 +159,9 @@ export const Headers = () => {
                 <p className="whitespace-nowrap">FAQ</p>
               </div>
               <div
-                onClick={() => navRedirect("/career")}
+                onClick={() => navRedirect("/karir")}
                 className={`${
-                  location.pathname === "/career"
+                  location.pathname === "/karir"
                     ? "text-red-700"
                     : "text-slate-700"
                 } flex justify-start hover:text-red-700 cursor-pointer active:scale-95 duration-200 items-center gap-1 font-medium text-sm`}>

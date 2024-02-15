@@ -7,10 +7,10 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
   return (
     <>
       <div
-        className={`fixed lg:hidden top-10 overflow-x-hidden h-screen z-50 p-4 duration-300 ease-in-out bg-white shadow-xl xl:w-64
+        className={`fixed overflow-y-auto lg:hidden top-10  h-screen z-50 p-4 duration-300 ease-in-out bg-white shadow-xl xl:w-64
         ${navTogleBtn ? "left-0" : "xl:-left-44 -left-72 overflow-hidden"}
         `}>
-        <div className="xl:fixed left-5 space-y-3">
+        <div className="xl:fixed left-5 h-full space-y-3">
           <div
             onClick={() => {
               navRedirect("/");
