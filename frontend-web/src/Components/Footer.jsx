@@ -37,7 +37,6 @@ export const Footer = () => {
           <iframe
             className="w-full mt-10 md:mt-0 h-96"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31918.530705747184!2d109.3129089120015!3d-0.05711189630879183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d5b55c8a317d9%3A0x242874b558373c1f!2sAuto%20Mobil88%20(Depan%20Raja%20Uduk%20%2F%20Bank%20Danamon%20Serdam%20%2F%20350m%20dari%20simpang%20Polda)!5e0!3m2!1sen!2sid!4v1707962147844!5m2!1sen!2sid"
-            allowfullscreen=""
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade">
             {" "}

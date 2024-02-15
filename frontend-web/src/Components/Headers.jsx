@@ -6,9 +6,7 @@ export const Headers = () => {
   const [navTogleBtn, setNavTogleBtn] = useState(false);
   const navRedirect = useNavigate();
   const location = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
+
   return (
     <>
       <div className="p-4 lg:px-10 sticky top-0 z-50 bg-white shadow-lg backdrop-blur-lg">
@@ -85,24 +83,24 @@ export const Headers = () => {
                     <div
                       onClick={() => navRedirect("/konsultasi")}
                       className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
-                      <i className="fas fa-info-circle"></i>
-                      <p className="whitespace-nowrap">Panduan Konsultasi</p>
+                      <i className="fas fa-book"></i>
+                      <p className="whitespace-nowrap">Konsultasi</p>
                     </div>
                   </li>
                   <li>
                     <div
                       onClick={() => navRedirect("/tukar-tambah")}
                       className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
-                      <i className="fas fa-info-circle"></i>
-                      <p className="whitespace-nowrap">Panduan Tukar Tambah</p>
+                      <i className="fas fa-book"></i>
+                      <p className="whitespace-nowrap">Tukar Tambah</p>
                     </div>
                   </li>
                   <li>
                     <div
                       onClick={() => navRedirect("/kredit-mobil")}
                       className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
-                      <i className="fas fa-info-circle"></i>
-                      <p className="whitespace-nowrap">Panduan Kredit Mobil</p>
+                      <i className="fas fa-book"></i>
+                      <p className="whitespace-nowrap">Kredit Mobil</p>
                     </div>
                   </li>
                 </ul>
@@ -128,7 +126,7 @@ export const Headers = () => {
                     <div
                       onClick={() => navRedirect("/syarat-dan-ketentuan")}
                       className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
-                      <i className="fas fa-info-circle"></i>
+                      <i className="fas fa-book"></i>
                       <p className="whitespace-nowrap">Syarat dan Ketentuan</p>
                     </div>
                   </li>
@@ -136,7 +134,7 @@ export const Headers = () => {
                     <div
                       onClick={() => navRedirect("/tentang-kami")}
                       className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
-                      <i className="far fa-building"></i>
+                      <i className="fas fa-building"></i>
                       <p className="whitespace-nowrap">Tentang Kami</p>
                     </div>
                   </li>

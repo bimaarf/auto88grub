@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
-import { CarouselCar } from "../Components/__CarouselCar";
 
 export const Promo = () => {
+  const promoRef = useRef(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const handleScroll = () => {
+      if (promoRef.current) {
+        const elementTop = promoRef.current.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (elementTop < windowHeight) {
+          promoRef.current.classList.add("fade-in");
+        } else {
+          promoRef.current.classList.remove("fade-in");
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <div
-        className="w-full -z-10 px-20 relative top-0"
+        ref={promoRef}
+        className="w-full -z-10 px-20 relative top-0 fade-in-on-scroll overflow-hidden"
         style={{
           backgroundImage: `url(${bannerImg})`,
           backgroundRepeat: "no-repeat",
@@ -20,7 +42,7 @@ export const Promo = () => {
           <div className="md:p-20 p-8 md:rounded-xl">
             <div className="text-white flex justify-center items-center align-middle">
               <div
-                className="md:space-y-4 font-bold text-center align-middle flex  bg-black px-10 py-4 bg-opacity-20"
+                className="md:space-y-4 font-bold text-center align-middle flex w-96 justify-center bg-black px-10 py-4 bg-opacity-20"
                 style={{ fontFamily: "'Marko One', sans-serif" }}>
                 <div className="space-y-4">
                   <h1 className="text-white text-3xl">Koleksi Kami</h1>
@@ -31,7 +53,7 @@ export const Promo = () => {
           </div>
         </div>
       </div>
-      <div className="container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 mx-auto">
+      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-1 md:mx-auto">
         <div className="flex justify-center gap-4 ">
           <div className="grid sm:grid-cols-1 md:grid-cols-5 gap-4">
             {(function (rows, i, len) {

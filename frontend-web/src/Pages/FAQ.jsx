@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
 
 export const FAQ = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div
-        className="w-full -z-10 px-20 relative top-0"
+        className="w-full -z-10 px-20 relative top-0 overflow-hidden"
         style={{
           backgroundImage: `url(${bannerImg})`,
           backgroundRepeat: "no-repeat",
@@ -19,7 +22,7 @@ export const FAQ = () => {
           <div className="md:p-20 p-8 md:rounded-xl">
             <div className="text-white flex justify-center items-center align-middle">
               <div
-                className="md:space-y-4 font-bold text-center align-middle flex  bg-black px-10 py-4 bg-opacity-20"
+                className="md:space-y-4 font-bold text-center align-middle flex w-96 justify-center bg-black px-10 py-4 bg-opacity-20"
                 style={{ fontFamily: "'Marko One', sans-serif" }}>
                 <div className="space-y-4">
                   <h1 className="text-white text-3xl capitalize">FAQ</h1>
@@ -30,7 +33,7 @@ export const FAQ = () => {
           </div>
         </div>
       </div>
-      <div className="container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 mx-auto">
+      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto">
         <div role="tablist" className="tabs tabs-lifted">
           <input
             type="radio"
@@ -60,7 +63,6 @@ export const FAQ = () => {
               </div>
             </div>
           </div>
-
           <input
             type="radio"
             name="my_tabs_2"

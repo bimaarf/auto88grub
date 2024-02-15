@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TECarousel, TECarouselItem } from "tw-elements-react";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
 
 export const Consultation = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div
@@ -26,7 +29,7 @@ export const Consultation = () => {
                   <h1 className="text-white text-3xl capitalize">
                     Panduan Konsultasi
                   </h1>
-                  <h1 className=" text-5xl">AUTO88GROUP</h1>
+                  <h1 className="text-xl md:text-5xl">AUTO88GROUP</h1>
                 </div>
               </div>
             </div>

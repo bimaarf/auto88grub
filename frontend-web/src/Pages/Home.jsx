@@ -19,7 +19,6 @@ export const Home = () => {
       }
     }
   };
-  
 
   useEffect(() => {
     fadeInOnScroll(carouselRef);
@@ -32,6 +31,9 @@ export const Home = () => {
   const carouselCarRecomenRef = useRef(null);
   const carouselTestimonyRef = useRef(null);
   // Add more refs if needed
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div
@@ -75,7 +77,7 @@ export const Home = () => {
               className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
               <div
-                className="md:p-10 md:space-y-10 md:text-4xl lg:text-5xl element"
+                className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element"
                 ref={carouselRef}>
                 <h1>Mobil Rekomendasi</h1>
               </div>
@@ -97,7 +99,7 @@ export const Home = () => {
         }}>
         <div
           ref={carouselRef}
-          className="md:space-y-4 element sm:text-xl whitespace-nowrap md:text-4xl text-white p-4 lg:text-5xl font-bold text-center"
+          className="md:space-y-4 element sm:text-xl whitespace-nowrap md:text-4xl text-white p-4 lg:text-4xl font-bold text-center"
           style={{ fontFamily: "'Marko One', sans-serif" }}>
           <div className="md:p-10 md:space-y-10">
             <h1 className="upp">Cari Mobil Berdasarkan Jenis</h1>
@@ -118,7 +120,7 @@ export const Home = () => {
               className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
               <div
-                className="md:p-10 md:space-y-10 md:text-4xl lg:text-5xl element"
+                className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element"
                 ref={carouselRef}>
                 <h1>Mobil Promosi</h1>
               </div>
@@ -176,7 +178,7 @@ export const Home = () => {
               className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
               <div
-                className="md:p-10 md:space-y-10 md:text-4xl lg:text-5xl element"
+                className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element"
                 ref={carouselRef}>
                 <h1>Mobil Terbaru</h1>
               </div>
@@ -247,7 +249,7 @@ export const Home = () => {
           </div>
         </div>
         <div
-          className="w-full -z-10 md:px-20 mt-10"
+          className="w-full -z-10 md:px-20 mt-10 mb-20"
           style={{
             backgroundImage: `url(${bannerImg})`,
             backgroundRepeat: "no-repeat",
@@ -257,7 +259,7 @@ export const Home = () => {
           }}>
           <div
             ref={carouselRef}
-            className="md:space-y-4 element sm:text-xl whitespace-nowrap md:text-4xl text-white p-4 lg:text-5xl font-bold text-center"
+            className="md:space-y-4 element sm:text-xl whitespace-nowrap md:text-4xl text-white p-4 lg:text-4xl font-bold text-center"
             style={{ fontFamily: "'Marko One', sans-serif" }}>
             <div className="md:p-10 md:space-y-10">
               <h1>Berita Terkini</h1>
@@ -277,7 +279,7 @@ export const Home = () => {
           <div
             ref={carouselRef}
             s
-            className="md:space-y-4 element sm:text-xl whitespace-nowrap md:text-4xl text-gray-800 p-4 lg:text-5xl font-bold text-center"
+            className="md:space-y-4 element sm:text-xl whitespace-nowrap md:text-4xl text-gray-800 p-4 lg:text-4xl font-bold text-center"
             style={{ fontFamily: "'Marko One', sans-serif" }}>
             <div className="md:p-10 md:space-y-10">
               <h1>Testimoni Konsumen</h1>

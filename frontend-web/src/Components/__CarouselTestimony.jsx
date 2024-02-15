@@ -9,7 +9,7 @@ export const CarouselTestimony = () => {
           <TECarouselItem
             itemID={1}
             className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
-            <div className="grid sm:grid-cols-1 md:grid-cols-5 gap-4">
+            <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {(function (rows, i, len) {
                 while (++i <= len) {
                   rows.push(

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
 
 export const Car = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div
-        className="w-full -z-10 px-20 relative top-0"
+        className="w-full -z-10 px-20 relative top-0 overflow-hidden"
         style={{
           backgroundImage: `url(${bannerImg})`,
           backgroundRepeat: "no-repeat",
@@ -19,7 +22,7 @@ export const Car = () => {
           <div className="md:p-20 p-8 md:rounded-xl">
             <div className="text-white flex justify-center items-center align-middle">
               <div
-                className="md:space-y-4 font-bold text-center align-middle flex  bg-black px-10 py-4 bg-opacity-20"
+                className="md:space-y-4 font-bold text-center align-middle flex w-96 justify-center bg-black px-10 py-4 bg-opacity-20"
                 style={{ fontFamily: "'Marko One', sans-serif" }}>
                 <div className="space-y-4">
                   <h1 className="text-white text-3xl">Koleksi Kami</h1>
@@ -30,9 +33,9 @@ export const Car = () => {
           </div>
         </div>
       </div>
-      <div className="container bg-white p-10 rounded-xl -mt-20 mx-auto z-30 relative">
-        <div className="flex justify-center gap-4">
-          <div className="w-1/4 border-r space-y-5 h-screen pr-4">
+      <div className="md:container bg-white p-10 rounded-xl -mt-20 sm:mx-2 md:mx-auto z-30 relative">
+        <div className="md:flex justify-center gap-4">
+          <div className="sm:w-full md:w-1/4 border-r md:sticky md:top-10 md:overflow-y-auto md:overflow-hidden space-y-5 sm:h-full md:h-screen pr-4">
             <div className="space-y-2">
               <label htmlFor="price" className="font-semibold">
                 *Harga Mobil Dibawah:
@@ -236,8 +239,8 @@ export const Car = () => {
               </button>
             </div>
           </div>
-          <div className="w-3/4">
-            <div className="grid sm:grid-cols-1 md:grid-cols-5 gap-4">
+          <div className="sm:w-full md:mt-0 mt-10 md:w-3/4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {(function (rows, i, len) {
                 while (++i <= len) {
                   rows.push(

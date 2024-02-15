@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { TECarousel, TECarouselItem } from "tw-elements-react";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
 
 export const Terms = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div
@@ -37,7 +40,7 @@ export const Terms = () => {
         <h1 className="text-xl md:text-5xl w-full border-b mb-6 pb-4 border-dashed font-semibold text-red-800">
           Syarat & Ketentuan Berlaku
         </h1>
-        <ol class="list-decimal space-y-2">
+        <ol className="list-decimal space-y-2">
           <li>Untuk pembelian CASH cukup membawa data identitas (KTP/SIM)</li>
           <li>
             <p>Untuk pembelian KREDIT syarat yang dibutuhkan adalah:</p>

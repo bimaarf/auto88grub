@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
 
 export const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div
@@ -32,8 +35,8 @@ export const About = () => {
           </div>
         </div>
       </div>
-      <div className="container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 mx-auto">
-        <div className="flex items-start gap-16 p-4">
+      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-1 md:mx-auto">
+        <div className="md:flex items-start gap-16 p-4">
           <div className="sm:w-full md:w-1/2">
             <img
               src="https://auto88group.com/image/about-us/20230704142843.jpg"

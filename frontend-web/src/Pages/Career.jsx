@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
 
 export const Career = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div
-        className="w-full -z-10 px-20 relative top-0"
+        className="w-full -z-10 px-20 relative top-0 overflow-hidden"
         style={{
           backgroundImage: `url(${bannerImg})`,
           backgroundRepeat: "no-repeat",
@@ -19,7 +22,7 @@ export const Career = () => {
           <div className="md:p-20 p-8 md:rounded-xl">
             <div className="text-white flex justify-center items-center align-middle">
               <div
-                className="md:space-y-4 font-bold text-center align-middle flex  bg-black px-10 py-4 bg-opacity-20"
+                className="md:space-y-4 font-bold text-center align-middle flex w-96 justify-center bg-black px-10 py-4 bg-opacity-20"
                 style={{ fontFamily: "'Marko One', sans-serif" }}>
                 <div className="space-y-4">
                   <h1 className="text-white text-3xl capitalize">Karir</h1>
@@ -30,7 +33,7 @@ export const Career = () => {
           </div>
         </div>
       </div>
-      <div className="container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 mx-auto">
+      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto">
         <div role="tablist" className="tabs tabs-lifted">
           <input
             type="radio"
@@ -53,18 +56,18 @@ export const Career = () => {
                 <p className=" border-b pb-2">Admin Keuangan</p>
               </div>
               <div className="collapse-content text-sky-700">
-                <div className="flex justify-start items-center gap-10">
-                  <div className="flex justify-start items-center gap-2">
-                    <i className="fas fa-shopping-bag"></i>
-                    <p>Finance & Administration</p>
+                <div className="md:flex sm:space-y-4 md:space-y-0 justify-start items-center gap-10">
+                  <div className="flex justify-start text-sm whitespace-nowrap items-center gap-4">
+                    <i className="fas w-1/12 fa-shopping-bag"></i>
+                    <p className="w-11/12">Finance & Administration</p>
                   </div>
-                  <div className="flex justify-start items-center gap-2">
-                    <i className="fas fa-signal "></i>
-                    <p>min 1 tahun</p>
+                  <div className="flex justify-start text-sm whitespace-nowrap items-center gap-4">
+                    <i className="fas w-1/12 fa-signal "></i>
+                    <p className="w-11/12">min 1 tahun</p>
                   </div>
-                  <div className="flex justify-start items-center gap-2">
-                    <i className="fas fa-map-marker-alt"></i>
-                    <p>Pontianak</p>
+                  <div className="flex justify-start text-sm whitespace-nowrap items-center gap-4">
+                    <i className="fas w-1/12 fa-map-marker-alt"></i>
+                    <p className="w-11/12">Pontianak</p>
                   </div>
                 </div>
               </div>
@@ -75,18 +78,18 @@ export const Career = () => {
                 <p className=" border-b pb-2">Operator Cuci & Salon Mobil</p>
               </div>
               <div className="collapse-content text-sky-700">
-                <div className="flex justify-start items-center gap-10">
-                  <div className="flex justify-start items-center gap-2">
-                    <i className="fas fa-shopping-bag"></i>
-                    <p>Workshop</p>
+                <div className="md:flex sm:space-y-4 md:space-y-0 justify-start items-center gap-10">
+                  <div className="flex justify-start text-sm whitespace-nowrap items-center gap-4">
+                    <i className="fas w-1/12 fa-shopping-bag"></i>
+                    <p className="w-11/12">Workshop</p>
                   </div>
-                  <div className="flex justify-start items-center gap-2">
-                    <i className="fas fa-signal "></i>
-                    <p>min 1 tahun</p>
+                  <div className="flex justify-start text-sm whitespace-nowrap items-center gap-4">
+                    <i className="fas w-1/12 fa-signal "></i>
+                    <p className="w-11/12">min 1 tahun</p>
                   </div>
-                  <div className="flex justify-start items-center gap-2">
-                    <i className="fas fa-map-marker-alt"></i>
-                    <p>Pontianak</p>
+                  <div className="flex justify-start text-sm whitespace-nowrap items-center gap-4">
+                    <i className="fas w-1/12 fa-map-marker-alt"></i>
+                    <p className="w-11/12">Pontianak</p>
                   </div>
                 </div>
               </div>
@@ -97,18 +100,18 @@ export const Career = () => {
                 <p className=" border-b pb-2">Marketing</p>
               </div>
               <div className="collapse-content text-sky-700">
-                <div className="flex justify-start items-center gap-10">
-                  <div className="flex justify-start items-center gap-2">
-                    <i className="fas fa-shopping-bag"></i>
-                    <p>Marketing</p>
+                <div className="md:flex sm:space-y-4 md:space-y-0 justify-start items-center gap-10">
+                  <div className="flex justify-start text-sm whitespace-nowrap items-center gap-4">
+                    <i className="fas w-1/12 fa-shopping-bag"></i>
+                    <p className="w-11/12">Marketing</p>
                   </div>
-                  <div className="flex justify-start items-center gap-2">
-                    <i className="fas fa-signal "></i>
-                    <p>Fresh Graduate Open</p>
+                  <div className="flex justify-start text-sm whitespace-nowrap items-center gap-4">
+                    <i className="fas w-1/12 fa-signal "></i>
+                    <p className="w-11/12">Fresh Graduate Open</p>
                   </div>
-                  <div className="flex justify-start items-center gap-2">
-                    <i className="fas fa-map-marker-alt"></i>
-                    <p>Pontianak</p>
+                  <div className="flex justify-start text-sm whitespace-nowrap items-center gap-4">
+                    <i className="fas w-1/12 fa-map-marker-alt"></i>
+                    <p className="w-11/12">Pontianak</p>
                   </div>
                 </div>
               </div>

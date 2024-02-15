@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
 import { CarouselCar } from "../Components/__CarouselCar";
 import { CarouselTestimony } from "../Components/__CarouselTestimony";
 
 export const Testimony = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <div
