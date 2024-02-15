@@ -15,7 +15,7 @@ export const CarouselTestimony = () => {
                   rows.push(
                     <div
                       key={i}
-                      className="block  w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                      className="block hover:scale-105 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                       <div className="relative overflow-hidden bg-cover bg-no-repeat">
                         <img
                           src="https://www.auto88group.com/image/testimonial/20240120141214.jpg"
@@ -50,7 +50,7 @@ export const CarouselTestimony = () => {
                   rows.push(
                     <div
                       key={i}
-                      className="block  w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                      className="block hover:scale-105 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                       <div className="relative overflow-hidden bg-cover bg-no-repeat">
                         <img
                           src="https://www.auto88group.com/image/testimonial/20240120141214.jpg"

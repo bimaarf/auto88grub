@@ -10,7 +10,7 @@ export const Headers = () => {
   return (
     <>
       <div className="p-4 lg:px-10 sticky top-0 z-50 bg-white shadow-lg backdrop-blur-lg">
-        <div className="lg:container lg:mx-auto">
+        <div className="lg:container lg:mx-auto overflow-x-auto whitespace-nowrap overflow-hidden">
           <div className="flex justify-between">
             <h1
               onClick={() => navRedirect("/")}
@@ -178,9 +178,10 @@ export const Headers = () => {
                 <p className="whitespace-nowrap">Masuk</p>
               </div>
             </div>
+            <p></p>
             <button
               onClick={() => setNavTogleBtn(navTogleBtn ? false : true)}
-              className="py-2 text-slate-700 px-4 fas fa-bars rounded active:scale-95 hover:bg-gray-300 hover:bg-opacity-20 duration-300 bg-white bg-opacity-10"></button>
+              className="py-2 text-slate-700 px-4 fas fa-bars md:hidden rounded active:scale-95 hover:bg-gray-300 hover:bg-opacity-20 duration-300 bg-white bg-opacity-10"></button>
           </div>
         </div>
       </div>

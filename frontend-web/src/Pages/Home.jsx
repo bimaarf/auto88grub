@@ -63,7 +63,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="relative z-40 w-11/12  md:container mx-auto -mt-40 md:-mt-20 md:px-40">
+      <div className="relative z-40 w-11/12  md:container mx-auto -mt-14 md:px-40">
         <div
           className="shadow-2xl md:rounded-badge element fade-in-left"
           ref={carouselRef}>
@@ -101,14 +101,16 @@ export const Home = () => {
           ref={carouselRef}
           className="md:space-y-4 element sm:text-xl whitespace-nowrap md:text-4xl text-white p-4 lg:text-4xl font-bold text-center"
           style={{ fontFamily: "'Marko One', sans-serif" }}>
-          <div className="md:p-10 md:space-y-10">
-            <h1 className="upp">Cari Mobil Berdasarkan Jenis</h1>
-            <CarouselCar />
-            <div className="text-xs text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
-              <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
-                <i className="fas fa-angle-down"></i>
-                <p>Selengkapnya</p>
-              </div>
+          <div
+            className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element my-10"
+            ref={carouselRef}>
+            <h1>Mobil Berdasarkan Jenis</h1>
+          </div>
+          <CarouselCar />
+          <div className="text-xs text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
+            <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
+              <i className="fas fa-angle-down"></i>
+              <p>Selengkapnya</p>
             </div>
           </div>
         </div>
@@ -135,7 +137,7 @@ export const Home = () => {
                   rows.push(
                     <div
                       key={i}
-                      className="block  w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                      className="block hover:scale-105 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                       <div className="relative overflow-hidden bg-cover bg-no-repeat">
                         <img
                           className="rounded-t-lg"
@@ -184,16 +186,16 @@ export const Home = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-center gap-4 ">
+          <div className="flex justify-center gap-4 mt-10">
             <div
-              className="grid sm:grid-cols-2 xl:grid-cols-5 gap-4 element"
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 element"
               ref={carouselRef}>
               {(function (rows, i, len) {
                 while (++i <= len) {
                   rows.push(
                     <div
                       key={i}
-                      className="block  w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                      className="block hover:scale-105 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                       <div className="relative overflow-hidden bg-cover bg-no-repeat">
                         <img
                           className="rounded-t-lg"
@@ -202,35 +204,40 @@ export const Home = () => {
                         />
                       </div>
                       <div className="p-6">
-                        <h1 className="font-bold text-gray-800 sm:text-xs md:text-lg">
+                        <h1 className="font-bold text-gray-800 text-sm md:text-md">
                           DAIHATSU ALL NEW AYLA (WHITE) TIPE X 1.0 M/T
                           (2023)....
                         </h1>
-                        <p className="text-gray-800 font-light sm:text-xs md:text-md text-left">
+                        <p className="text-gray-800 font-light text-xs md:text-md text-left">
                           HATCHBACK / - / PREMIUM
                         </p>
-                        <p className="text-gray-800 sm:text-xs md:text-md font-medium line-through text-right">
+
+                        <p className="text-gray-800 text-xs md:text-md font-medium line-through text-right">
                           Rp 1x4.000.000
                         </p>
-                        <p className="text-gray-800 sm:text-xs md:text-md md:text-xl font-bold text-right">
+                        <p className="text-gray-800 text-sm md:text-xl font-bold text-right">
                           Rp 1x4.000.000
                         </p>
-                        <div className="flex mt-4 justify-between gap-2 font-medium text-xs md:text-md text-gray-600">
-                          <div className="flex justify-start items-center gap-1">
-                            <i className="fas fa-gauge"></i>
-                            <p>65.132 km</p>
+                        <div className="flex justify-between">
+                          <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
+                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                              <i className="fas fa-gauge"></i>
+                              <p>65.132 km</p>
+                            </div>
+                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                              <i className="fas fa-calendar"></i>
+                              <p>2014</p>
+                            </div>
                           </div>
-                          <div className="flex justify-start items-center gap-1">
-                            <i className="fas fa-calendar"></i>
-                            <p>2014</p>
-                          </div>
-                          <div className="flex justify-start items-center gap-1">
-                            <i className="fas fa-gear"></i>
-                            <p>4x2</p>
-                          </div>
-                          <div className="flex justify-start items-center gap-1">
-                            <i className="fas fa-eye"></i>
-                            <p>114</p>
+                          <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
+                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                              <i className="fas fa-gear"></i>
+                              <p>4x2</p>
+                            </div>
+                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                              <i className="fas fa-eye"></i>
+                              <p>114</p>
+                            </div>
                           </div>
                         </div>
                       </div>

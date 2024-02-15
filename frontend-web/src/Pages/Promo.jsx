@@ -55,7 +55,7 @@ export const Promo = () => {
       </div>
       <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-1 md:mx-auto">
         <div className="flex justify-center gap-4 ">
-          <div className="grid sm:grid-cols-1 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {(function (rows, i, len) {
               while (++i <= len) {
                 rows.push(
@@ -70,19 +70,45 @@ export const Promo = () => {
                       />
                     </div>
                     <div className="p-6">
-                      <h1 className="font-bold text-gray-800 sm:text-sm md:text-md">
+                      <h1 className="font-bold text-gray-800 text-sm md:text-md">
                         DAIHATSU ALL NEW AYLA (WHITE) TIPE X 1.0 M/T (2023)....
                       </h1>
-                      <p className="text-gray-800 font-medium line-through text-right">
+                      <p className="text-gray-800 font-light text-xs md:text-md text-left">
+                        HATCHBACK / - / PREMIUM
+                      </p>
+
+                      <p className="text-gray-800 text-xs md:text-md font-medium line-through text-right">
                         Rp 1x4.000.000
                       </p>
-                      <p className="text-gray-800 text-xl font-bold text-right">
+                      <p className="text-gray-800 text-sm md:text-xl font-bold text-right">
                         Rp 1x4.000.000
                       </p>
+                      <div className="flex justify-between">
+                        <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
+                          <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                            <i className="fas fa-gauge"></i>
+                            <p>65.132 km</p>
+                          </div>
+                          <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                            <i className="fas fa-calendar"></i>
+                            <p>2014</p>
+                          </div>
+                        </div>
+                        <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
+                          <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                            <i className="fas fa-gear"></i>
+                            <p>4x2</p>
+                          </div>
+                          <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                            <i className="fas fa-eye"></i>
+                            <p>114</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 );
-                if (window.innerWidth <= 768) break;
+                // if (window.innerWidth <= 768) break;
               }
               return rows;
             })([], 0, 15)}

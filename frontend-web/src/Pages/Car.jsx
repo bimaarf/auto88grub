@@ -73,7 +73,7 @@ export const Car = () => {
                 name="merk"
                 id="merk"
                 className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-1000">
-                <option value="1.000.000.000">Semua</option>
+                <option value="Semua">Semua</option>
                 <option value="1.000.000.000">1.000.000.000</option>
                 <option value="750.000.000">750.000.000</option>
                 <option value="500.000.000">500.000.000</option>
