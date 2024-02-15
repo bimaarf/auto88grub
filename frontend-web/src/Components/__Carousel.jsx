@@ -10,6 +10,7 @@ export const Carousel = () => {
             itemID={1}
             className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
             <img
+              draggable={false}
               src={require("../Images/Banner/banner-home.jpg")}
               className="block w-full object-contain"
               alt="..."
@@ -25,6 +26,7 @@ export const Carousel = () => {
             itemID={2}
             className="relative float-left hidden -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
             <img
+              draggable={false}
               src={require("../Images/Banner/banner-home.jpg")}
               className="block w-full object-contain"
               alt="..."
@@ -40,6 +42,7 @@ export const Carousel = () => {
             itemID={3}
             className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
             <img
+              draggable={false}
               // src={require("../Images/Banner/logo-tfnCopy.png")}
               src={require("../Images/Banner/banner-home.jpg")}
               className="block w-full object-contain"

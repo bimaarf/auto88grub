@@ -11,8 +11,20 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TopBarProgress from "react-topbar-progress-indicator";
 import "./App.css";
+import { Footer } from "./Components/Footer";
 import { Headers } from "./Components/Headers";
+import { Car } from "./Pages/Car";
 import { Home } from "./Pages/Home";
+import { Promo } from "./Pages/Promo";
+import { Testimony } from "./Pages/Testimony";
+import { Consultation } from "./Pages/Consultation";
+import { TradeIns } from "./Pages/TradeIns";
+import { CarCredit } from "./Pages/CarCredit";
+import { Terms } from "./Pages/Terms";
+import { About } from "./Pages/About";
+import { Visit } from "./Pages/Visit";
+import { FAQ } from "./Pages/FAQ";
+import { Career } from "./Pages/Career";
 function App() {
   const [getRole, setRole] = useState("");
   const [authCheck, setAuthCheck] = useState(false);
@@ -55,8 +67,20 @@ function App() {
       <Router>
         <Headers setTheme={setTheme} theme={theme} />
         <CustomSwitch>
-          <Route path="/" element={<Home />} />
+          <Route path="/" exact element={<Home />} />
+          <Route path="/promo" element={<Promo />} />
+          <Route path="/mobil" element={<Car />} />
+          <Route path="/testimoni" element={<Testimony />} />
+          <Route path="/konsultasi" element={<Consultation />} />
+          <Route path="/tukar-tambah" element={<TradeIns />} />
+          <Route path="/kredit-mobil" element={<CarCredit />} />
+          <Route path="/syarat-dan-ketentuan" element={<Terms />} />
+          <Route path="/tentang-kami" element={<About />} />
+          <Route path="/kunjungi-kami" element={<Visit />} />
+          <Route path="/FAQ" element={<FAQ />} />
+          <Route path="/career" element={<Career />} />
         </CustomSwitch>
+        <Footer />
       </Router>
     </>
   );

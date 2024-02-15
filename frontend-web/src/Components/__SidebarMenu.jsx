@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 
-export const SidebarMenu = ({ setNavTogle, navTogleBtn }) => {
+export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
   const navRedirect = useNavigate();
   return (
     <>
@@ -14,6 +14,7 @@ export const SidebarMenu = ({ setNavTogle, navTogleBtn }) => {
           <div
             onClick={() => {
               navRedirect("/");
+              setNavTogleBtn(false);
             }}
             className="text-gray-800 w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
             <div className="w-1/12">
@@ -28,7 +29,8 @@ export const SidebarMenu = ({ setNavTogle, navTogleBtn }) => {
           </div>
           <div
             onClick={() => {
-              navRedirect("/");
+              navRedirect("/promo");
+              setNavTogleBtn(false);
             }}
             className="text-gray-800 w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
             <div className="w-1/12">

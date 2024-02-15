@@ -3,29 +3,35 @@ import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
 import { Carousel } from "../Components/__Carousel";
 import { CarouselCar } from "../Components/__CarouselCar";
 import { CarouselCarRecomen } from "../Components/__CarouselCarRecomen";
-import "../App.css"; // Import your CSS file containing the animations
 import { CarouselBlog } from "../Components/__CarouselBlog";
 import { CarouselTestimony } from "../Components/__CarouselTestimony";
 
 export const Home = () => {
-  const ref = useRef(null);
+  const fadeInOnScroll = (ref) => {
+    const element = ref.current;
+    if (element) {
+      const elementTop = element.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      if (elementTop < windowHeight) {
+        element.classList.add("fade-in-visible");
+      } else {
+        element.classList.remove("fade-in-visible");
+      }
+    }
+  };
+  
 
   useEffect(() => {
-    const fadeInOnScroll = () => {
-      const element = ref.current;
-      if (element) {
-        const elementTop = element.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        if (elementTop < windowHeight) {
-          element.classList.add("fade-in-left");
-        }
-      }
-    };
-
-    window.addEventListener("scroll", fadeInOnScroll);
-    return () => window.removeEventListener("scroll", fadeInOnScroll);
+    fadeInOnScroll(carouselRef);
+    fadeInOnScroll(carouselCarRecomenRef);
+    fadeInOnScroll(carouselTestimonyRef);
+    // Add more slides here if needed
   }, []);
 
+  const carouselRef = useRef(null);
+  const carouselCarRecomenRef = useRef(null);
+  const carouselTestimonyRef = useRef(null);
+  // Add more refs if needed
   return (
     <>
       <div
@@ -56,7 +62,9 @@ export const Home = () => {
         </div>
       </div>
       <div className="relative z-40 w-11/12  md:container mx-auto -mt-40 md:-mt-20 md:px-40">
-        <div className="shadow-2xl md:rounded-badge" ref={ref}>
+        <div
+          className="shadow-2xl md:rounded-badge element fade-in-left"
+          ref={carouselRef}>
           <Carousel />
         </div>
       </div>
@@ -67,8 +75,8 @@ export const Home = () => {
               className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
               <div
-                className="md:p-10 md:space-y-10 md:text-4xl lg:text-5xl"
-                ref={ref}>
+                className="md:p-10 md:space-y-10 md:text-4xl lg:text-5xl element"
+                ref={carouselRef}>
                 <h1>Mobil Rekomendasi</h1>
               </div>
             </div>
@@ -88,12 +96,18 @@ export const Home = () => {
           height: "50vh",
         }}>
         <div
-          ref={ref}
-          className="md:space-y-4 sm:text-xl whitespace-nowrap md:text-4xl text-white p-4 lg:text-5xl font-bold text-center"
+          ref={carouselRef}
+          className="md:space-y-4 element sm:text-xl whitespace-nowrap md:text-4xl text-white p-4 lg:text-5xl font-bold text-center"
           style={{ fontFamily: "'Marko One', sans-serif" }}>
           <div className="md:p-10 md:space-y-10">
-            <h1>Cari Mobil Berdasarkan Jenis</h1>
+            <h1 className="upp">Cari Mobil Berdasarkan Jenis</h1>
             <CarouselCar />
+            <div className="text-xs text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
+              <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
+                <i className="fas fa-angle-down"></i>
+                <p>Selengkapnya</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -104,14 +118,16 @@ export const Home = () => {
               className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
               <div
-                className="md:p-10 md:space-y-10 md:text-4xl lg:text-5xl"
-                ref={ref}>
+                className="md:p-10 md:space-y-10 md:text-4xl lg:text-5xl element"
+                ref={carouselRef}>
                 <h1>Mobil Promosi</h1>
               </div>
             </div>
           </div>
           <div className="flex justify-center gap-4 ">
-            <div className="grid sm:grid-cols-1 md:grid-cols-5 gap-4" ref={ref}>
+            <div
+              className="grid sm:grid-cols-1 md:grid-cols-5 gap-4 element"
+              ref={carouselRef}>
               {(function (rows, i, len) {
                 while (++i <= len) {
                   rows.push(
@@ -145,6 +161,12 @@ export const Home = () => {
               })([], 0, 15)}
             </div>
           </div>
+          <div className="text-xs text-red-600 cursor-pointer mt-2 font-bold flex justify-center items-center gap-1 ">
+            <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
+              <i className="fas fa-angle-down"></i>
+              <p>Selengkapnya</p>
+            </div>
+          </div>
         </div>
       </div>
       <div className="bg-white pb-32">
@@ -154,14 +176,16 @@ export const Home = () => {
               className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
               <div
-                className="md:p-10 md:space-y-10 md:text-4xl lg:text-5xl"
-                ref={ref}>
+                className="md:p-10 md:space-y-10 md:text-4xl lg:text-5xl element"
+                ref={carouselRef}>
                 <h1>Mobil Terbaru</h1>
               </div>
             </div>
           </div>
           <div className="flex justify-center gap-4 ">
-            <div className="grid sm:grid-cols-2 xl:grid-cols-5 gap-4" ref={ref}>
+            <div
+              className="grid sm:grid-cols-2 xl:grid-cols-5 gap-4 element"
+              ref={carouselRef}>
               {(function (rows, i, len) {
                 while (++i <= len) {
                   rows.push(
@@ -215,6 +239,12 @@ export const Home = () => {
               })([], 0, 15)}
             </div>
           </div>
+          <div className="text-xs text-red-600 cursor-pointer mt-2 font-bold flex justify-center items-center gap-1 ">
+            <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
+              <i className="fas fa-angle-down"></i>
+              <p>Selengkapnya</p>
+            </div>
+          </div>
         </div>
         <div
           className="w-full -z-10 md:px-20 mt-10"
@@ -226,8 +256,8 @@ export const Home = () => {
             height: "50vh",
           }}>
           <div
-            ref={ref}
-            className="md:space-y-4 sm:text-xl whitespace-nowrap md:text-4xl text-white p-4 lg:text-5xl font-bold text-center"
+            ref={carouselRef}
+            className="md:space-y-4 element sm:text-xl whitespace-nowrap md:text-4xl text-white p-4 lg:text-5xl font-bold text-center"
             style={{ fontFamily: "'Marko One', sans-serif" }}>
             <div className="md:p-10 md:space-y-10">
               <h1>Berita Terkini</h1>
@@ -237,15 +267,28 @@ export const Home = () => {
             </div>
           </div>
         </div>
+        <div className="text-xs mt-20 text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
+          <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
+            <i className="fas fa-angle-down"></i>
+            <p>Selengkapnya</p>
+          </div>
+        </div>
         <div className="w-full -z-10 md:px-20 mt-20">
           <div
-            ref={ref}s
-            className="md:space-y-4 sm:text-xl whitespace-nowrap md:text-4xl text-gray-800 p-4 lg:text-5xl font-bold text-center"
+            ref={carouselRef}
+            s
+            className="md:space-y-4 element sm:text-xl whitespace-nowrap md:text-4xl text-gray-800 p-4 lg:text-5xl font-bold text-center"
             style={{ fontFamily: "'Marko One', sans-serif" }}>
             <div className="md:p-10 md:space-y-10">
               <h1>Testimoni Konsumen</h1>
               <div className="flex justify-center">
                 <CarouselTestimony />
+              </div>
+              <div className="text-xs mt-2 text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
+                <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
+                  <i className="fas fa-angle-down"></i>
+                  <p>Selengkapnya</p>
+                </div>
               </div>
             </div>
           </div>

@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SidebarMenu } from "./__SidebarMenu";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Headers = () => {
   const [navTogleBtn, setNavTogleBtn] = useState(false);
+  const navRedirect = useNavigate();
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <>
       <div className="p-4 lg:px-10 sticky top-0 z-50 bg-white shadow-lg backdrop-blur-lg">
         <div className="lg:container lg:mx-auto">
           <div className="flex justify-between">
-            <h1 className="text-xl font-medium text-slate-700 cursor-pointer active:scale-95 duration-300">
+            <h1
+              onClick={() => navRedirect("/")}
+              className="text-xl font-medium text-slate-700 cursor-pointer active:scale-95 duration-300">
               AUTO
               <span className="text-red-500">88</span>
               GROUP
@@ -18,23 +26,55 @@ export const Headers = () => {
               setNavTogleBtn={setNavTogleBtn}
             />
             <div className="md:flex text-md hidden justify-center items-center gap-10">
-              <div className="flex cursor-pointer active:scale-95 duration-200 text-red-700 justify-start items-center gap-1 font-semibold text-sm">
+              <div
+                onClick={() => navRedirect("/")}
+                className={`flex ${
+                  location.pathname === "/" ? "text-red-700" : "text-slate-700"
+                } cursor-pointer active:scale-95 duration-200 justify-start items-center gap-1 font-semibold text-sm`}>
                 <i className="fas fa-home"></i>
                 <p className="font-semibold ">Beranda</p>
               </div>
-              <div className="flex cursor-pointer text-slate-700 active:scale-95 duration-200 justify-start items-center gap-1 font-semibold text-sm">
+              <div
+                onClick={() => navRedirect("/promo")}
+                className={`flex ${
+                  location.pathname === "/promo"
+                    ? "text-red-700"
+                    : "text-slate-700"
+                } cursor-pointer active:scale-95 duration-200 justify-start items-center gap-1 font-semibold text-sm`}>
                 <i className="fas fa-percentage"></i>
                 <p className="font-semibold ">Promo</p>
               </div>
-              <div className="flex cursor-pointer text-slate-700 active:scale-95 duration-200 justify-start items-center gap-1 font-semibold text-sm">
+              <div
+                onClick={() => navRedirect("/mobil")}
+                className={`flex ${
+                  location.pathname === "/mobil"
+                    ? "text-red-700"
+                    : "text-slate-700"
+                } cursor-pointer active:scale-95 duration-200 justify-start items-center gap-1 font-semibold text-sm`}>
                 <i className="fas fa-car"></i>
                 <p className="font-semibold ">Mobil</p>
+              </div>
+              <div
+                onClick={() => navRedirect("/testimoni")}
+                className={`flex ${
+                  location.pathname === "/testimoni"
+                    ? "text-red-700"
+                    : "text-slate-700"
+                } cursor-pointer active:scale-95 duration-200 justify-start items-center gap-1 font-semibold text-sm`}>
+                <i className="fas fa-handshake"></i>
+                <p className="font-semibold ">Testimoni</p>
               </div>
               <div className="dropdown">
                 <div
                   tabIndex={0}
                   role="button"
-                  className="flex cursor-pointer text-slate-700 active:scale-95 duration-200 hover:text-red-700 font-medium text-sm justify-start items-center gap-1">
+                  className={`flex ${
+                    location.pathname === "/konsultasi" ||
+                    location.pathname === "/tukar-tambah" ||
+                    location.pathname === "/kredit-mobil"
+                      ? "text-red-700"
+                      : "text-slate-700"
+                  } cursor-pointer active:scale-95 duration-200 justify-start items-center gap-1 font-semibold text-sm`}>
                   <p>Panduan</p>
                   <i className="fas fa-caret-down"></i>
                 </div>
@@ -42,19 +82,25 @@ export const Headers = () => {
                   tabIndex={0}
                   className="dropdown-content z-[1] menu p-2 shadow-xl bg-white text-gray-700  rounded-box w-52">
                   <li>
-                    <div className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
+                    <div
+                      onClick={() => navRedirect("/konsultasi")}
+                      className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
                       <i className="fas fa-info-circle"></i>
                       <p className="whitespace-nowrap">Panduan Konsultasi</p>
                     </div>
                   </li>
                   <li>
-                    <div className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
+                    <div
+                      onClick={() => navRedirect("/tukar-tambah")}
+                      className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
                       <i className="fas fa-info-circle"></i>
                       <p className="whitespace-nowrap">Panduan Tukar Tambah</p>
                     </div>
                   </li>
                   <li>
-                    <div className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
+                    <div
+                      onClick={() => navRedirect("/kredit-mobil")}
+                      className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
                       <i className="fas fa-info-circle"></i>
                       <p className="whitespace-nowrap">Panduan Kredit Mobil</p>
                     </div>
@@ -65,7 +111,13 @@ export const Headers = () => {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="flex cursor-pointer text-slate-700 active:scale-95 duration-200 hover:text-red-700 font-medium text-sm justify-start items-center gap-1">
+                  className={`flex ${
+                    location.pathname === "/syarat-dan-ketentuan" ||
+                    location.pathname === "/tentang-kami" ||
+                    location.pathname === "/kunjungi-kami"
+                      ? "text-red-700"
+                      : "text-slate-700"
+                  } cursor-pointer active:scale-95 duration-200 justify-start items-center gap-1 font-semibold text-sm`}>
                   <p>Lihat Lebih</p>
                   <i className="fas fa-caret-down"></i>
                 </div>
@@ -73,34 +125,57 @@ export const Headers = () => {
                   tabIndex={0}
                   className="dropdown-content z-[1] menu p-2 shadow-xl bg-white text-gray-700  rounded-box w-52">
                   <li>
-                    <div className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
+                    <div
+                      onClick={() => navRedirect("/syarat-dan-ketentuan")}
+                      className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
                       <i className="fas fa-info-circle"></i>
                       <p className="whitespace-nowrap">Syarat dan Ketentuan</p>
                     </div>
                   </li>
                   <li>
-                    <div className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
+                    <div
+                      onClick={() => navRedirect("/tentang-kami")}
+                      className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
                       <i className="far fa-building"></i>
                       <p className="whitespace-nowrap">Tentang Kami</p>
                     </div>
                   </li>
                   <li>
-                    <div className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
+                    <div
+                      onClick={() => navRedirect("/kunjungi-kami")}
+                      className="flex justify-start items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
                       <i className="fas fa-phone"></i>
                       <p className="whitespace-nowrap">Kunjungi Kami</p>
                     </div>
                   </li>
                 </ul>
               </div>
-              <div className="flex justify-start cursor-pointer active:scale-95 duration-200 items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
+              <div
+                onClick={() => navRedirect("/FAQ")}
+                className={`${
+                  location.pathname === "/FAQ"
+                    ? "text-red-700"
+                    : "text-slate-700"
+                } flex justify-start hover:text-red-700 cursor-pointer active:scale-95 duration-200 items-center gap-1 font-medium text-sm`}>
                 <i className="fas fa-question"></i>
                 <p className="whitespace-nowrap">FAQ</p>
               </div>
-              <div className="flex justify-start cursor-pointer active:scale-95 duration-200 items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
+              <div
+                onClick={() => navRedirect("/career")}
+                className={`${
+                  location.pathname === "/career"
+                    ? "text-red-700"
+                    : "text-slate-700"
+                } flex justify-start hover:text-red-700 cursor-pointer active:scale-95 duration-200 items-center gap-1 font-medium text-sm`}>
                 <i className="fas fa-link"></i>
                 <p className="whitespace-nowrap">Karir</p>
               </div>
-              <div className="flex justify-start cursor-pointer active:scale-95 duration-200 items-center gap-1  text-slate-700 hover:text-red-700 font-medium text-sm">
+              <div
+                className={`${
+                  location.pathname === "/masuk"
+                    ? "text-red-700"
+                    : "text-slate-700"
+                } flex justify-start hover:text-red-700 cursor-pointer active:scale-95 duration-200 items-center gap-1 font-medium text-sm`}>
                 <i className="fas fa-sign-in"></i>
                 <p className="whitespace-nowrap">Masuk</p>
               </div>
