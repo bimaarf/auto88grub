@@ -10,7 +10,7 @@ export const Headers = () => {
   return (
     <>
       <div className="p-4 lg:px-10 sticky top-0 z-50 bg-white shadow-lg backdrop-blur-lg">
-        <div className="lg:container lg:mx-auto overflow-x-auto whitespace-nowrap overflow-hidden">
+        <div className="lg:container lg:mx-auto  whitespace-nowrap">
           <div className="flex justify-between">
             <h1
               onClick={() => navRedirect("/")}

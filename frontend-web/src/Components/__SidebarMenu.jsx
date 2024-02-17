@@ -1,14 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 
 export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
   const navRedirect = useNavigate();
+  const location = useLocation();
   return (
     <>
       <div
         className={`fixed overflow-y-auto lg:hidden top-10  h-screen z-50 p-4 duration-300 ease-in-out bg-white shadow-xl xl:w-64
-        ${navTogleBtn ? "left-0" : "xl:-left-44 -left-72 overflow-hidden"}
+        ${navTogleBtn ? "left-0" : "-left-80   overflow-hidden"}
         `}>
         <div className="xl:fixed left-5 h-full space-y-3">
           <div
@@ -77,16 +78,18 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
           </div>
           <div className="collapse bg-transparent -mt-2">
             <input type="checkbox" defaultChecked />
-            <div className="text-gray-800 collapse-title w-52 bg-transparent bg-opacity-0 rounded-lg cursor-pointer flex justify-start items-center gap-2 text-sm">
-              <div className="w-1/12">
-                <i className="fas fa-caret-down"></i>
+            <div className="collapse-title">
+              <div className="text-gray-800 w-52 bg-transparent bg-opacity-0 rounded-lg cursor-pointer flex justify-start items-center gap-2 text-sm">
+                <div className="w-1/12">
+                  <i className="fas fa-caret-down"></i>
+                </div>
+                <p
+                  className={`${
+                    navTogleBtn ? "block" : "hidden"
+                  } font-normal w-11/12`}>
+                  Panduan
+                </p>
               </div>
-              <p
-                className={`${
-                  navTogleBtn ? "block" : "hidden"
-                } font-normal w-11/12`}>
-                Panduan
-              </p>
             </div>
             <div className="collapse-content">
               <div
@@ -141,9 +144,11 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
           </div>
           <div className="collapse bg-transparent -mt-4">
             <input type="checkbox" defaultChecked />
-            <div className="text-gray-800 collapse-title w-52 bg-transparent bg-opacity-0 rounded-lg cursor-pointer flex justify-start items-center gap-2 text-sm">
-              <i className="fas fa-caret-down"></i>
-              <p>Lihat Lebih</p>
+            <div className="collapse-title">
+              <div className="text-gray-800 w-52 bg-transparent bg-opacity-0 rounded-lg cursor-pointer flex justify-start items-center gap-2 text-sm">
+                <i className="fas fa-caret-down"></i>
+                <p>Lihat Lebih</p>
+              </div>
             </div>
             <div className="collapse-content">
               <div
@@ -228,8 +233,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
               </h1>
             </div>
           </div>
-
-          {secureLocalStorage.getItem("auth_token") && (
+          {/* {secureLocalStorage.getItem("auth_token") && (
             <>
               <div className="text-gray-800 w-52 mt-10 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
                 <div className="w-1/12">
@@ -276,7 +280,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                 </div>
               </div>
             </>
-          )}
+          )} */}
         </div>
       </div>
     </>

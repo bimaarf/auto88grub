@@ -9,7 +9,7 @@ export const CarouselTestimony = () => {
           <TECarouselItem
             itemID={1}
             className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
-            <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {(function (rows, i, len) {
                 while (++i <= len) {
                   rows.push(
@@ -26,8 +26,8 @@ export const CarouselTestimony = () => {
                         <h1 className="font-bold whitespace-pre-wrap text-gray-800 text-sm">
                           Mawardi
                         </h1>
-                        <article className="prose prose-slate">
-                          <p className="whitespace-pre-wrap italic  font-thin">
+                        <article className="prose prose-slate text-sm">
+                          <p className="whitespace-pre-wrap italic font-thin">
                             "Cepat banget baru beberapa hari sudah dapat kabar
                             bahwa pengajuan sudah approve"
                           </p>
@@ -38,13 +38,13 @@ export const CarouselTestimony = () => {
                   if (window.innerWidth <= 768) break;
                 }
                 return rows;
-              })([], 0, 5)}
+              })([], 0, 4)}
             </div>
           </TECarouselItem>
           <TECarouselItem
             itemID={2}
             className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
-            <div className="grid sm:grid-cols-1 md:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {(function (rows, i, len) {
                 while (++i <= len) {
                   rows.push(
@@ -61,8 +61,8 @@ export const CarouselTestimony = () => {
                         <h1 className="font-bold whitespace-pre-wrap text-gray-800 text-sm">
                           Mawardi
                         </h1>
-                        <article className="prose prose-slate">
-                          <p className="whitespace-pre-wrap italic  font-thin">
+                        <article className="prose prose-slate text-sm">
+                          <p className="whitespace-pre-wrap italic font-thin">
                             "Cepat banget baru beberapa hari sudah dapat kabar
                             bahwa pengajuan sudah approve"
                           </p>
@@ -73,7 +73,7 @@ export const CarouselTestimony = () => {
                   if (window.innerWidth <= 768) break;
                 }
                 return rows;
-              })([], 0, 5)}
+              })([], 0, 4)}
             </div>
           </TECarouselItem>
         </div>

@@ -37,8 +37,8 @@ export const Consultation = () => {
         </div>
       </div>
       <div className="container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 mx-auto">
-        <h1 className="text-xl md:text-5xl w-full border-b mb-6 pb-4 border-dashed font-semibold text-red-800">
-          Konsultasi
+        <h1 className="text-gray-800 font-medium border-b mb-4 pb-2">
+          Panduan Konsultasi
         </h1>
         <div className="grid sm:grid-cols-1 space-y-40 md:space-y-0 md:grid-cols-4">
           <div>

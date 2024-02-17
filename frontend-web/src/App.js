@@ -13,44 +13,38 @@ import TopBarProgress from "react-topbar-progress-indicator";
 import "./App.css";
 import { Footer } from "./Components/Footer";
 import { Headers } from "./Components/Headers";
+import { About } from "./Pages/About";
 import { Car } from "./Pages/Car";
+import { CarCredit } from "./Pages/CarCredit";
+import { Career } from "./Pages/Career";
+import { Consultation } from "./Pages/Consultation";
+import { FAQ } from "./Pages/FAQ";
 import { Home } from "./Pages/Home";
 import { Promo } from "./Pages/Promo";
-import { Testimony } from "./Pages/Testimony";
-import { Consultation } from "./Pages/Consultation";
-import { TradeIns } from "./Pages/TradeIns";
-import { CarCredit } from "./Pages/CarCredit";
 import { Terms } from "./Pages/Terms";
-import { About } from "./Pages/About";
+import { Testimony } from "./Pages/Testimony";
+import { TradeIns } from "./Pages/TradeIns";
 import { Visit } from "./Pages/Visit";
-import { FAQ } from "./Pages/FAQ";
-import { Career } from "./Pages/Career";
+import { CarPreview } from "./Pages/CarPreview";
+// Set Axios base URL
+axios.defaults.baseURL = process.env.REACT_APP_API;
+axios.defaults.headers.common["Accept"] = "application/json";
+axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
+axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+// axios.defaults.headers.post["Content-Type"] =
+//   "application/json/x-www-form-urlencoded; charset=UTF-8; multipart/form-data";
+
+axios.defaults.withCredentials = true;
+
+// Axios request interceptor for adding Authorization header
+axios.interceptors.request.use(function (config) {
+  const token = secureLocalStorage.getItem("auth_token");
+  config.headers.Authorization = token ? `Bearer ${token}` : "";
+  return config;
+});
+
 function App() {
-  const [getRole, setRole] = useState("");
-  const [authCheck, setAuthCheck] = useState(false);
-  const onLoad = () => {
-    axios.get("sanctum/csrf-cookie").then(() => {
-      axios
-        .post("api/onload")
-        .then((res) => {
-          res.data.id_hash === "c9f9b41520bf30c33008baeb6338a4d4f3914732" &&
-            setRole("admin");
-          res.data.id_hash === "ea8167b9f870d746fcb304bb024fe59d6b113e57" &&
-            setRole("member");
-        })
-        .catch(() => {
-          secureLocalStorage.clear();
-          setAuthCheck(false);
-        });
-    });
-  };
-  useEffect(() => {
-    if (secureLocalStorage.getItem("auth_token")) {
-      onLoad();
-      setAuthCheck(true);
-    }
-    setAuthCheck(false);
-  }, []);
   TopBarProgress.config({
     barColors: {
       0: "#b91c1c",
@@ -79,6 +73,7 @@ function App() {
           <Route path="/kunjungi-kami" element={<Visit />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/karir" element={<Career />} />
+          <Route path="/car/preview" element={<CarPreview />} />
         </CustomSwitch>
         <Footer />
       </Router>

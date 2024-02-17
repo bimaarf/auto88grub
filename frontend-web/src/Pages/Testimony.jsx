@@ -10,7 +10,7 @@ export const Testimony = () => {
   return (
     <>
       <div
-        className="w-full -z-10 px-20 relative top-0"
+        className="w-full -z-10 px-20 relative top-0 overflow-hidden"
         style={{
           backgroundImage: `url(${bannerImg})`,
           backgroundRepeat: "no-repeat",
@@ -24,13 +24,19 @@ export const Testimony = () => {
           <div className="md:p-20 p-8 md:rounded-xl">
             <div className="text-white flex justify-center items-center align-middle">
               <div
-                className="md:space-y-4 font-bold text-center align-middle flex  bg-black px-10 py-4 bg-opacity-20"
-                style={{ fontFamily: "'Marko One', sans-serif" }}>
+                className="md:space-y-4 font-bold text-center align-middle flex justify-center bg-black px-10 py-4 bg-opacity-20"
+                style={{
+                  fontFamily: "'Marko One', sans-serif",
+                  width: "500px",
+                }}>
                 <div className="space-y-4">
-                  <h1 className="text-white text-3xl capitalize">
-                    Konsumen Yang Berbahagia
-                  </h1>
-                  <h1 className=" text-5xl">Testimoni</h1>
+                  <img
+                    draggable={false}
+                    src={require("../Images/Banner/logo-tfnCopy.png")}
+                    width={300}
+                    alt=""
+                  />
+                  <h1 className="text-white text-3xl">Testimoni</h1>
                 </div>
               </div>
             </div>
@@ -38,6 +44,9 @@ export const Testimony = () => {
         </div>
       </div>
       <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto">
+        <h1 className="text-gray-800 font-medium border-b mb-4 pb-2">
+          Testimoni
+        </h1>
         <div className="flex justify-center">
           <CarouselTestimony />
         </div>

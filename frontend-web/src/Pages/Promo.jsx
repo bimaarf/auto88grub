@@ -27,8 +27,7 @@ export const Promo = () => {
   return (
     <>
       <div
-        ref={promoRef}
-        className="w-full -z-10 px-20 relative top-0 fade-in-on-scroll overflow-hidden"
+        className="w-full -z-10 px-20 relative top-0 overflow-hidden"
         style={{
           backgroundImage: `url(${bannerImg})`,
           backgroundRepeat: "no-repeat",
@@ -42,26 +41,37 @@ export const Promo = () => {
           <div className="md:p-20 p-8 md:rounded-xl">
             <div className="text-white flex justify-center items-center align-middle">
               <div
-                className="md:space-y-4 font-bold text-center align-middle flex w-96 justify-center bg-black px-10 py-4 bg-opacity-20"
-                style={{ fontFamily: "'Marko One', sans-serif" }}>
+                className="md:space-y-4 font-bold text-center align-middle flex justify-center bg-black px-10 py-4 bg-opacity-20"
+                style={{
+                  fontFamily: "'Marko One', sans-serif",
+                  width: "500px",
+                }}>
                 <div className="space-y-4">
-                  <h1 className="text-white text-3xl">Koleksi Kami</h1>
-                  <h1 className=" text-5xl">PROMO</h1>
+                  <img
+                    draggable={false}
+                    src={require("../Images/Banner/logo-tfnCopy.png")}
+                    width={300}
+                    alt=""
+                  />
+                  <h1 className="text-white text-3xl">Mobil Promo</h1>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-1 md:mx-auto">
+      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-4 md:p-10 sm:mx-1 md:mx-auto">
+        <h1 className="text-gray-800 font-medium border-b mb-4 pb-2">
+          Mobil Promo
+        </h1>
         <div className="flex justify-center gap-4 ">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 element">
             {(function (rows, i, len) {
               while (++i <= len) {
                 rows.push(
                   <div
                     key={i}
-                    className="block  w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                    className="block hover:scale-105 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                     <div className="relative overflow-hidden bg-cover bg-no-repeat">
                       <img
                         className="rounded-t-lg"
@@ -108,7 +118,6 @@ export const Promo = () => {
                     </div>
                   </div>
                 );
-                // if (window.innerWidth <= 768) break;
               }
               return rows;
             })([], 0, 15)}
