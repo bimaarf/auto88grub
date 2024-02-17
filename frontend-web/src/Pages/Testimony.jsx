@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
 import { CarouselCar } from "../Components/__CarouselCar";
 import { CarouselTestimony } from "../Components/__CarouselTestimony";
+import { CarouselTestimonySkeleton } from "../Components/__CarouselTestimonySkeleton";
 
 export const Testimony = () => {
   useEffect(() => {
@@ -48,7 +49,7 @@ export const Testimony = () => {
           Testimoni
         </h1>
         <div className="flex justify-center">
-          <CarouselTestimony />
+          <CarouselTestimonySkeleton />
         </div>
         <div className="text-xs mt-2 text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
           <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">

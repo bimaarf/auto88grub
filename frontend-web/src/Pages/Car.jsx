@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
 import { TESelect } from "tw-elements-react";
+import { useNavigate } from "react-router-dom";
 
 export const Car = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const navRedirect = useNavigate();
   const dataPrice = [
     { text: "One", value: 1 },
     { text: "Two", value: 2 },
@@ -278,45 +280,52 @@ export const Car = () => {
                 while (++i <= len) {
                   rows.push(
                     <div
+                      onClick={() =>
+                        navRedirect({
+                          pathname: "/car/preview",
+                          search: `?slug=DAIHATSU ALL NEW AYLA (WHITE) TIPE X 1.0 M/T (2023)`,
+                        })
+                      }
                       key={i}
-                      className="block active:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                      className="block active:scale-90 hover:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                       <div className="relative overflow-hidden bg-cover bg-no-repeat">
-                        <img
-                          className="rounded-t-lg"
-                          src={require("../Images/Cars/car1.jpg")}
-                          alt=""
-                        />
+                        <div className="relative overflow-hidden bg-cover flex bg-no-repeat justify-center items-center">
+                          <img
+                            className="skeleton animate-ping"
+                            src="https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg"
+                            alt=""
+                          />
+                          <i className="fas fa-spinner text-3xl align-middle self-center absolute text-gray-300 animate-spin"></i>
+                        </div>
                       </div>
                       <div className="p-6">
-                        <h1 className="font-bold text-gray-700 text-xs">
-                          DAIHATSU ALL NEW AYLA (WHITE) TIPE X 1.0 M/T
-                          (2023)....
-                        </h1>
-                        <p className="text-gray-700 text-sm font-medium line-through text-right">
-                          Rp 1x4.000.000
-                        </p>
-                        <p className="text-sky-700 text-md font-bold text-right">
-                          Rp 1x4.000.000
-                        </p>
+                        <p className="skeleton h-3 w-full"></p>
+                        <p className="skeleton h-3 w-2/3 mt-2"></p>
+                        <div className="flex justify-end">
+                          <p className="skeleton h-2 w-1/2 mt-2"></p>
+                        </div>
+                        <div className="flex justify-end">
+                          <p className="skeleton h-2 w-1/2 mt-2"></p>
+                        </div>
                         <div className="flex justify-between">
                           <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
                             <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                              <i className="fas fa-gauge"></i>
-                              <p>65.132 km</p>
+                              <p className="skeleton h-2 w-4 mt-2"></p>
+                              <p className="skeleton h-2 w-10 mt-2"></p>
                             </div>
                             <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                              <i className="fas fa-calendar"></i>
-                              <p>2014</p>
+                              <p className="skeleton h-2 w-4 mt-2"></p>
+                              <p className="skeleton h-2 w-10 mt-2"></p>
                             </div>
                           </div>
                           <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
                             <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                              <i className="fas fa-gear"></i>
-                              <p>4x2</p>
+                              <p className="skeleton h-2 w-4 mt-2"></p>
+                              <p className="skeleton h-2 w-10 mt-2"></p>
                             </div>
                             <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                              <i className="fas fa-eye"></i>
-                              <p>114</p>
+                              <p className="skeleton h-2 w-4 mt-2"></p>
+                              <p className="skeleton h-2 w-10 mt-2"></p>
                             </div>
                           </div>
                         </div>

@@ -16,6 +16,7 @@ import { Headers } from "./Components/Headers";
 import { About } from "./Pages/About";
 import { Car } from "./Pages/Car";
 import { CarCredit } from "./Pages/CarCredit";
+import { CarPreview } from "./Pages/CarPreview";
 import { Career } from "./Pages/Career";
 import { Consultation } from "./Pages/Consultation";
 import { FAQ } from "./Pages/FAQ";
@@ -25,19 +26,13 @@ import { Terms } from "./Pages/Terms";
 import { Testimony } from "./Pages/Testimony";
 import { TradeIns } from "./Pages/TradeIns";
 import { Visit } from "./Pages/Visit";
-import { CarPreview } from "./Pages/CarPreview";
-// Set Axios base URL
+
 axios.defaults.baseURL = process.env.REACT_APP_API;
-axios.defaults.headers.common["Accept"] = "application/json";
-axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
-axios.defaults.headers.post["Content-Type"] = "application/json;charset=utf-8";
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-// axios.defaults.headers.post["Content-Type"] =
-//   "application/json/x-www-form-urlencoded; charset=UTF-8; multipart/form-data";
+axios.defaults.headers.post["Content-Type"] =
+  "application/json/x-www-form-urlencoded; charset=UTF-8; multipart/form-data";
 
 axios.defaults.withCredentials = true;
-
-// Axios request interceptor for adding Authorization header
 axios.interceptors.request.use(function (config) {
   const token = secureLocalStorage.getItem("auth_token");
   config.headers.Authorization = token ? `Bearer ${token}` : "";
@@ -50,16 +45,12 @@ function App() {
       0: "#b91c1c",
     },
   });
-  const [theme, setTheme] = useState(
-    secureLocalStorage.getItem("theme")
-      ? secureLocalStorage.getItem("theme")
-      : "black"
-  );
+
   return (
     <>
       <ToastContainer autoClose={1000} hideProgressBar={true} theme="dark" />
       <Router>
-        <Headers setTheme={setTheme} theme={theme} />
+        <Headers />
         <CustomSwitch>
           <Route path="/" exact element={<Home />} />
           <Route path="/promo" element={<Promo />} />
@@ -75,7 +66,7 @@ function App() {
           <Route path="/karir" element={<Career />} />
           <Route path="/car/preview" element={<CarPreview />} />
         </CustomSwitch>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </>
   );

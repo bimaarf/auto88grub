@@ -11,7 +11,8 @@ export const Carousel = () => {
             className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
             <img
               draggable={false}
-              src={require("../Images/Banner/banner-home.jpg")}
+              loading="eager"
+              src="https://www.auto88group.com/image/slider/20240215164534.jpg"
               className="block w-full object-contain"
               alt="..."
             />
@@ -24,27 +25,11 @@ export const Carousel = () => {
           </TECarouselItem>
           <TECarouselItem
             itemID={2}
-            className="relative float-left hidden -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
-            <img
-              draggable={false}
-              src={require("../Images/Banner/banner-home.jpg")}
-              className="block w-full object-contain"
-              alt="..."
-            />
-            <div className="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block">
-              <h5 className="text-xl">First slide label</h5>
-              <p>
-                Some representative placeholder content for the first slide.
-              </p>
-            </div>
-          </TECarouselItem>
-          <TECarouselItem
-            itemID={3}
             className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
             <img
               draggable={false}
-              // src={require("../Images/Banner/logo-tfnCopy.png")}
               src={require("../Images/Banner/banner-home.jpg")}
+              loading="eager"
               className="block w-full object-contain"
               alt="..."
             />
