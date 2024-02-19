@@ -14,10 +14,16 @@ return new class() extends Migration
     public function up()
     {
         Schema::create('shop_category_product', function (Blueprint $table) {
-            $table->primary(['shop_category_id', 'shop_product_id'])->unique();
-            $table->foreignId('shop_category_id')->unique()->nullable();
-            $table->foreignId('shop_product_id')->unique()->nullable();
+            $table->id();
+            $table->foreignId('shop_category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('shop_product_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+
+            $table->unique(['shop_category_id', 'shop_product_id']);
+            // $table->primary(['shop_category_id', 'shop_product_id'])->unique();
+            // $table->foreignId('shop_category_id')->unique()->nullable();
+            // $table->foreignId('shop_product_id')->unique()->nullable();
+            // $table->timestamps();
         });
     }
 

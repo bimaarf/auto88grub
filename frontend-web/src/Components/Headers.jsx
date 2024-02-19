@@ -45,7 +45,7 @@ export const Headers = () => {
               <div
                 onClick={() => navRedirect("/mobil")}
                 className={`flex ${
-                  location.pathname === "/mobil"
+                  location.pathname.split("/")[1] === "mobil"
                     ? "text-red-700"
                     : "text-slate-700"
                 } cursor-pointer active:scale-95 duration-200 justify-start items-center gap-1 font-semibold text-sm`}>

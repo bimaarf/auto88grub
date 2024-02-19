@@ -55,6 +55,7 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/promo" element={<Promo />} />
           <Route path="/mobil" element={<Car />} />
+          <Route path="/mobil/preview" element={<CarPreview />} />
           <Route path="/testimoni" element={<Testimony />} />
           <Route path="/konsultasi" element={<Consultation />} />
           <Route path="/tukar-tambah" element={<TradeIns />} />
@@ -64,9 +65,8 @@ function App() {
           <Route path="/kunjungi-kami" element={<Visit />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/karir" element={<Career />} />
-          <Route path="/car/preview" element={<CarPreview />} />
         </CustomSwitch>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </>
   );

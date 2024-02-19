@@ -18,7 +18,7 @@ export const CarouselCarRecomen = () => {
                     <div className="relative overflow-hidden bg-cover bg-no-repeat">
                       <img
                         className="rounded-t-lg"
-                        src="https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg"
+                        src="https://www.auto88group.com/image/car/1775/20240201113209.jpg"
                         alt=""
                       />
                     </div>
@@ -80,12 +80,14 @@ export const CarouselCarRecomen = () => {
                     <div className="relative overflow-hidden bg-cover bg-no-repeat">
                       <img
                         className="rounded-t-lg"
-                        src="https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg"
+                        src="https://www.auto88group.com/image/car/1775/20240201113209.jpg"
                         alt=""
                       />
                     </div>
                     <div className="p-6">
-                      <h1 className="font-bold text-gray-800 text-sm md:text-md"></h1>
+                      <h1 className="font-bold text-gray-800 text-sm md:text-md">
+                        DAIHATSU ALL NEW AYLA (WHITE) TIPE X 1.0 M/T (2023)....
+                      </h1>
                       <p className="text-gray-800 font-light text-xs md:text-md text-left">
                         HATCHBACK / - / PREMIUM
                       </p>

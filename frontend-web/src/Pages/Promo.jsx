@@ -1,6 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
+import { fetchCars } from "./Service/__FetchCar";
+import { CurrentFormat } from "../Components/___CurrentFormat";
 
 export const Promo = () => {
   const promoRef = useRef(null);
@@ -24,6 +26,12 @@ export const Promo = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    __GET_CAR();
+  }, []);
+  const __GET_CAR = async () => setCars(await fetchCars());
+  const [getCars, setCars] = useState("");
 
   return (
     <>
@@ -42,7 +50,7 @@ export const Promo = () => {
           <div className="md:p-20 p-8 md:rounded-xl">
             <div className="text-white flex justify-center items-center align-middle">
               <div
-                className="md:space-y-4 font-bold text-center align-middle flex justify-center bg-black px-10 py-4 bg-opacity-20"
+                className="md:space-y-4 animate-pulse font-bold text-center align-middle flex justify-center bg-black px-10 py-4 bg-opacity-20"
                 style={{
                   fontFamily: "'Marko One', sans-serif",
                   width: "500px",
@@ -54,79 +62,143 @@ export const Promo = () => {
                     width={300}
                     alt=""
                   />
-                  <h1 className="text-white text-3xl">Mobil Promo</h1>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-4 md:p-10 sm:mx-1 md:mx-auto">
+      <div className="md:container mb-44 bg-white rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto">
         <h1 className="text-gray-800 font-medium border-b mb-4 pb-2">
           Mobil Promo
         </h1>
-        <div className="flex justify-center gap-4 ">
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {(function (rows, i, len) {
-              while (++i <= len) {
-                rows.push(
-                  <div
-                    onClick={() =>
-                      navRedirect({
-                        pathname: "/car/preview",
-                        search: `?slug=DAIHATSU ALL NEW AYLA (WHITE) TIPE X 1.0 M/T (2023)`,
-                      })
-                    }
-                    key={i}
-                    className="block active:scale-90 hover:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                    <div className="relative overflow-hidden bg-cover bg-no-repeat">
-                      <div className="relative overflow-hidden bg-cover flex bg-no-repeat justify-center items-center">
-                        <img
-                          className="skeleton animate-ping"
-                          src="https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg"
-                          alt=""
-                        />
-                        <i className="fas fa-spinner text-3xl align-middle self-center absolute text-gray-300 animate-spin"></i>
-                      </div>
-                    </div>
-                    <div className="p-6">
-                      <p className="skeleton h-3 w-full"></p>
-                      <p className="skeleton h-3 w-2/3 mt-2"></p>
-                      <div className="flex justify-end">
-                        <p className="skeleton h-2 w-1/2 mt-2"></p>
-                      </div>
-                      <div className="flex justify-end">
-                        <p className="skeleton h-2 w-1/2 mt-2"></p>
-                      </div>
-                      <div className="flex justify-between">
-                        <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
-                          <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                            <p className="skeleton h-2 w-4 mt-2"></p>
-                            <p className="skeleton h-2 w-10 mt-2"></p>
-                          </div>
-                          <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                            <p className="skeleton h-2 w-4 mt-2"></p>
-                            <p className="skeleton h-2 w-10 mt-2"></p>
-                          </div>
+        <div className="flex justify-center gap-4">
+          {getCars ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+              {getCars.map((item, key) => (
+                <div
+                  onClick={() => {
+                    const params = new URLSearchParams();
+                    params.append("slug", item.slug);
+                    params.append("index", item.id);
+                    navRedirect({
+                      pathname: "/mobil/preview",
+                      search: `?${params.toString()}`,
+                    });
+                  }}
+                  key={key}
+                  className="block active:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                  <div className="relative overflow-hidden bg-cover bg-no-repeat">
+                    <img
+                      className="rounded-t-lg"
+                      src="https://www.auto88group.com/image/car/1775/20240201113209.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h1 className="font-bold text-gray-800 text-sm md:text-md">
+                      {item.title.length > 55
+                        ? item.title.slice(0, 55) + "..."
+                        : item.title}
+                    </h1>
+                    <p className="text-gray-800 font-light text-xs md:text-md text-left uppercase">
+                      {item.type.name} / {item.series.name} / {item.fuel.name}
+                    </p>
+                    <p className="text-gray-800 text-xs md:text-md font-medium line-through text-right">
+                      Rp 1x4.000.000
+                    </p>
+                    <p className="text-gray-800 text-sm md:text-xl font-bold text-right">
+                      <CurrentFormat value={item.price} />
+                    </p>
+                    <div className="flex justify-between">
+                      <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
+                        <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                          <i className="fas fa-gauge"></i>
+                          <p>65.132 km</p>
                         </div>
-                        <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
-                          <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                            <p className="skeleton h-2 w-4 mt-2"></p>
-                            <p className="skeleton h-2 w-10 mt-2"></p>
-                          </div>
-                          <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                            <p className="skeleton h-2 w-4 mt-2"></p>
-                            <p className="skeleton h-2 w-10 mt-2"></p>
-                          </div>
+                        <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                          <i className="fas fa-calendar"></i>
+                          <p>{item.year.name}</p>
+                        </div>
+                      </div>
+                      <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
+                        <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                          <i className="fas fa-gear"></i>
+                          <p>{item.gear.name}</p>
+                        </div>
+                        <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                          <i className="fas fa-eye"></i>
+                          <p>114</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                );
-              }
-              return rows;
-            })([], 0, 9)}
-          </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+              {(function (rows, i, len) {
+                while (++i <= len) {
+                  rows.push(
+                    <div
+                      onClick={() =>
+                        navRedirect({
+                          pathname: "/car/preview",
+                          search: `?slug=DAIHATSU ALL NEW AYLA (WHITE) TIPE X 1.0 M/T (2023)`,
+                        })
+                      }
+                      key={i}
+                      className="block active:scale-90 hover:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                      <div className="relative overflow-hidden bg-cover bg-no-repeat">
+                        <div className="relative overflow-hidden bg-cover flex bg-no-repeat justify-center items-center">
+                          <img
+                            className="skeleton animate-ping"
+                            src="https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg"
+                            alt=""
+                          />
+                          <i className="fas fa-spinner text-3xl align-middle self-center absolute text-gray-300 animate-spin"></i>
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <p className="skeleton h-3 w-full"></p>
+                        <p className="skeleton h-3 w-2/3 mt-2"></p>
+                        <div className="flex justify-end">
+                          <p className="skeleton h-2 w-1/2 mt-2"></p>
+                        </div>
+                        <div className="flex justify-end">
+                          <p className="skeleton h-2 w-1/2 mt-2"></p>
+                        </div>
+                        <div className="flex justify-between">
+                          <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
+                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                              <p className="skeleton h-2 w-4 mt-2"></p>
+                              <p className="skeleton h-2 w-10 mt-2"></p>
+                            </div>
+                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                              <p className="skeleton h-2 w-4 mt-2"></p>
+                              <p className="skeleton h-2 w-10 mt-2"></p>
+                            </div>
+                          </div>
+                          <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
+                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                              <p className="skeleton h-2 w-4 mt-2"></p>
+                              <p className="skeleton h-2 w-10 mt-2"></p>
+                            </div>
+                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
+                              <p className="skeleton h-2 w-4 mt-2"></p>
+                              <p className="skeleton h-2 w-10 mt-2"></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+                return rows;
+              })([], 0, 9)}
+            </div>
+          )}
         </div>
         <div className="text-xs mt-2 text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
           <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">

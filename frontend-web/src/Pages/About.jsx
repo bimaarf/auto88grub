@@ -18,16 +18,14 @@ export const About = () => {
           height: "40vh",
           // filter: "blur(2px)", // Apply blur effect to the image
         }}>
-        <div className="absolute inset-0 bg-gradient-to-b flex justify-center from-transparent to-black">
+          <div className="absolute inset-0 bg-gradient-to-b flex justify-center from-transparent to-black">
           <div className="md:p-20 p-8 md:rounded-xl">
             <div className="text-white flex justify-center items-center align-middle">
               <div
-                className="md:space-y-4 font-bold text-center align-middle flex  bg-black px-10 py-4 bg-opacity-20"
+                className="md:space-y-4 font-bold text-center align-middle flex w-96 justify-center bg-black px-10 py-4 bg-opacity-20"
                 style={{ fontFamily: "'Marko One', sans-serif" }}>
                 <div className="space-y-4">
-                  <h1 className="text-white text-3xl capitalize">
-                    Tentang Kami
-                  </h1>
+                  <h1 className="text-white text-3xl capitalize">Tentang Kami</h1>
                   <h1 className="text-xl md:text-5xl">AUTO88GROUP</h1>
                 </div>
               </div>

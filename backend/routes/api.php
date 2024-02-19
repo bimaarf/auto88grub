@@ -34,7 +34,9 @@ Route::post('login', [AuthController::class, 'login']);
 // Routes inside the CORS middleware group
     // Routes for CarController
 Route::get('car/show', [CarController::class, 'showCar']);
-Route::get('blog/show', [BlogController::class, 'view']);
+Route::get('car/preview/{slug}/{carId}', [CarController::class, 'previewCar']);
+Route::get('blog/show', [BlogController::class, 'viewSample']);
+Route::get('blog/sample/show', [BlogController::class, 'viewSample']);
 
 // Routes requiring authentication with Sanctum
 Route::middleware('auth:sanctum')->group(function () {

@@ -13,3 +13,49 @@
   filter: blur(5px); /* Adjust the blur value as needed */
   z-index: -1;
 }
+.logo-text-animation-by-bimarf {
+  background: linear-gradient(
+    330deg,
+    #ff0000 0%,
+    #31e400 25%,
+    #00f7ff 50%,
+    #7f00ff 75%,
+    #ff0000 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animate 1.5s linear infinite;
+  font-weight: bolder;
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* latar belakang semi-transparan */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* pastikan lebih tinggi dari elemen lain di halaman */
+}
+
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

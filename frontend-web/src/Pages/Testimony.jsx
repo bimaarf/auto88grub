@@ -25,7 +25,7 @@ export const Testimony = () => {
           <div className="md:p-20 p-8 md:rounded-xl">
             <div className="text-white flex justify-center items-center align-middle">
               <div
-                className="md:space-y-4 font-bold text-center align-middle flex justify-center bg-black px-10 py-4 bg-opacity-20"
+                className="md:space-y-4 animate-pulse font-bold text-center align-middle flex justify-center bg-black px-10 py-4 bg-opacity-20"
                 style={{
                   fontFamily: "'Marko One', sans-serif",
                   width: "500px",
@@ -37,14 +37,13 @@ export const Testimony = () => {
                     width={300}
                     alt=""
                   />
-                  <h1 className="text-white text-3xl">Testimoni</h1>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto">
+      <div className="md:container mb-44 bg-white rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto">
         <h1 className="text-gray-800 font-medium border-b mb-4 pb-2">
           Testimoni
         </h1>

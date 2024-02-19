@@ -12,7 +12,7 @@ export const Carousel = () => {
             <img
               draggable={false}
               loading="eager"
-              src="https://www.auto88group.com/image/slider/20240215164534.jpg"
+              src="https://www.auto88group.com/image/slider/20240218013231.jpg"
               className="block w-full object-contain"
               alt="..."
             />

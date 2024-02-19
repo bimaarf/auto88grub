@@ -25,7 +25,11 @@ class Post extends Model
     protected $casts = [
         'published_at' => 'date',
     ];
-
+    public function getCreatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['created_at'])
+            ->format('d-m-Y - H:i');
+    }
     public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class, 'blog_author_id');

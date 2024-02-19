@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { TECarousel, TECarouselItem } from "tw-elements-react";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
 
 export const Terms = () => {
