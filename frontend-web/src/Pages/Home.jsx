@@ -4,13 +4,14 @@ import { Carousel } from "../Components/__Carousel";
 import { CarouselBlog } from "../Components/__CarouselBlog";
 import { CarouselBlogSkeleton } from "../Components/__CarouselBlogSkeleton";
 import { CarouselCar } from "../Components/__CarouselCar";
-import { CarouselCarRecomenSkeleton } from "../Components/__CarouselCarRecomenSkeleton";
-import { CarouselTestimonySkeleton } from "../Components/__CarouselTestimonySkeleton";
+import { CarouselCarRecomen } from "../Components/__CarouselCarRecomen";
+import { CarouselTestimony } from "../Components/__CarouselTestimony";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
 import { fetchBlog } from "./Service/__FetchBlog";
 import { fetchCars } from "./Service/__FetchCar";
-import { CarouselTestimony } from "../Components/__CarouselTestimony";
-import { CarouselCarRecomen } from "../Components/__CarouselCarRecomen";
+import { ListCarPromo } from "../Components/__ListCarPromo";
+import { fetchCarPromos } from "./Service/__FetchCarPromos";
+import { ListCarPromoSkeleton } from "../Components/__ListCarPromoSkeleton";
 
 export const Home = () => {
   const navRedirect = useNavigate();
@@ -29,6 +30,7 @@ export const Home = () => {
   };
 
   const __GET_CAR = async () => setCars(await fetchCars());
+  const __GET_CAR_PROMOS = async () => setCarPromos(await fetchCarPromos());
   const __GET_BLOG = async () => setBlog(await fetchBlog());
   useEffect(() => {
     fadeInOnScroll(carouselRef);
@@ -37,11 +39,13 @@ export const Home = () => {
     // window.scrollTo(0, 0);
     __GET_CAR();
     __GET_BLOG();
+    __GET_CAR_PROMOS();
   }, []);
   const carouselRef = useRef(null);
   const carouselCarRecomenRef = useRef(null);
   const carouselTestimonyRef = useRef(null);
   const [getCars, setCars] = useState("");
+  const [getCarPromos, setCarPromos] = useState("");
   const [getBlog, setBlog] = useState("");
 
   return (
@@ -148,66 +152,11 @@ export const Home = () => {
             <div
               className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4"
               ref={carouselRef}>
-              {(function (rows, i, len) {
-                while (++i <= len) {
-                  rows.push(
-                    <div
-                      onClick={() =>
-                        navRedirect({
-                          pathname: "/car/preview",
-                          search: `?slug=DAIHATSU ALL NEW AYLA (WHITE) TIPE X 1.0 M/T (2023)`,
-                        })
-                      }
-                      key={i}
-                      className="block active:scale-90 hover:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                      <div className=" overflow-hidden bg-cover bg-no-repeat">
-                        <div className=" overflow-hidden bg-cover flex bg-no-repeat justify-center items-center">
-                          <img
-                            className="skeleton animate-ping"
-                            src="https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg"
-                            alt=""
-                          />
-                          <i className="fas fa-spinner text-3xl align-middle self-center absolute text-gray-300 animate-spin"></i>
-                        </div>
-                      </div>
-                      <div className="p-6">
-                        <p className="skeleton h-3 w-full"></p>
-                        <p className="skeleton h-3 w-2/3 mt-2"></p>
-                        <div className="flex justify-end">
-                          <p className="skeleton h-2 w-1/2 mt-2"></p>
-                        </div>
-                        <div className="flex justify-end">
-                          <p className="skeleton h-2 w-1/2 mt-2"></p>
-                        </div>
-                        <div className="flex justify-between">
-                          <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
-                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                              <p className="skeleton h-2 w-4 mt-2"></p>
-                              <p className="skeleton h-2 w-10 mt-2"></p>
-                            </div>
-                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                              <p className="skeleton h-2 w-4 mt-2"></p>
-                              <p className="skeleton h-2 w-10 mt-2"></p>
-                            </div>
-                          </div>
-                          <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
-                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                              <p className="skeleton h-2 w-4 mt-2"></p>
-                              <p className="skeleton h-2 w-10 mt-2"></p>
-                            </div>
-                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                              <p className="skeleton h-2 w-4 mt-2"></p>
-                              <p className="skeleton h-2 w-10 mt-2"></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                  if (window.innerWidth <= 768) break;
-                }
-                return rows;
-              })([], 0, 15)}
+              {!getCarPromos ? (
+                <ListCarPromo getCarPromos={getCarPromos} />
+              ) : (
+                <ListCarPromoSkeleton />
+              )}
             </div>
           </div>
           <div
