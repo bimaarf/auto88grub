@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.css";
-const LoadingScreen = () => {
+export const LoadingScreen = () => {
   return (
     <div className="loading-screen duration-1000 fade fade-in">
       <div className="loading-spinner"></div>
@@ -8,4 +8,3 @@ const LoadingScreen = () => {
   );
 };
 
-export default LoadingScreen;

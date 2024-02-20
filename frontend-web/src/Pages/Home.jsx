@@ -6,47 +6,57 @@ import { CarouselBlogSkeleton } from "../Components/__CarouselBlogSkeleton";
 import { CarouselCar } from "../Components/__CarouselCar";
 import { CarouselCarRecomen } from "../Components/__CarouselCarRecomen";
 import { CarouselTestimony } from "../Components/__CarouselTestimony";
-import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
-import { fetchBlog } from "./Service/__FetchBlog";
-import { fetchCars } from "./Service/__FetchCar";
 import { ListCarPromo } from "../Components/__ListCarPromo";
-import { fetchCarPromos } from "./Service/__FetchCarPromos";
 import { ListCarPromoSkeleton } from "../Components/__ListCarPromoSkeleton";
+import { ListNewCar } from "../Components/__ListNewCar";
+import { ListNewCarSkeleton } from "../Components/__ListNewCarSkeleton";
+import { LoadingScreen } from "../Components/___LoadingScreen";
+import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
+import { useStateContext } from "./../Providers/StateProvider";
+import { fetchNewCars } from "./Service/__FetchNewCar";
 
 export const Home = () => {
   const navRedirect = useNavigate();
+  const { state, setState } = useStateContext();
+  const { getNewCars, getCarPromos, getBlog } = state;
+  const { pageNewCar } = state;
 
-  const fadeInOnScroll = (ref) => {
-    const element = ref.current;
-    if (element) {
-      const elementTop = element.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-      if (elementTop < windowHeight) {
-        element.classList.add("fade-in-visible");
-      } else {
-        element.classList.remove("fade-in-visible");
-      }
+  const handleLoadMoreNewCars = async () => {
+    const nextPage = { page: pageNewCar.page, perPage: pageNewCar.perPage + 6 };
+    setState((prevState) => ({
+      ...prevState,
+      pageNewCar: nextPage,
+    }));
+
+    try {
+      const newCars = await fetchNewCars(nextPage);
+      setState((prevState) => ({
+        ...prevState,
+        getNewCars: newCars,
+      }));
+    } catch (error) {
+      console.error("Error fetching new cars:", error);
     }
   };
-
-  const __GET_CAR = async () => setCars(await fetchCars());
-  const __GET_CAR_PROMOS = async () => setCarPromos(await fetchCarPromos());
-  const __GET_BLOG = async () => setBlog(await fetchBlog());
+  const [loadFech, setLoadFetch] = useState(false);
   useEffect(() => {
-    fadeInOnScroll(carouselRef);
-    fadeInOnScroll(carouselCarRecomenRef);
-    fadeInOnScroll(carouselTestimonyRef);
-    // window.scrollTo(0, 0);
-    __GET_CAR();
-    __GET_BLOG();
-    __GET_CAR_PROMOS();
-  }, []);
+    const fetchData = async () => {
+      setLoadFetch(true);
+      try {
+        const newCars = await fetchNewCars(pageNewCar);
+        setState((prevState) => ({
+          ...prevState,
+          getNewCars: newCars,
+        }));
+        setLoadFetch(false);
+      } catch (error) {
+        setLoadFetch(false);
+        console.error("Error fetching new cars:", error);
+      }
+    };
+    fetchData();
+  }, [pageNewCar, setState]);
   const carouselRef = useRef(null);
-  const carouselCarRecomenRef = useRef(null);
-  const carouselTestimonyRef = useRef(null);
-  const [getCars, setCars] = useState("");
-  const [getCarPromos, setCarPromos] = useState("");
-  const [getBlog, setBlog] = useState("");
 
   return (
     <>
@@ -59,7 +69,6 @@ export const Home = () => {
           backgroundPosition: "top",
           backgroundSize: "cover",
           height: "40vh",
-          // filter: "blur(2px)",
         }}
       />
       <div className="absolute inset-0 bg-gradient-to-b mt-10 flex justify-center from-transparent to-black">
@@ -90,16 +99,12 @@ export const Home = () => {
             <div
               className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
-              <div
-                className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element"
-                ref={carouselCarRecomenRef}>
+              <div className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element">
                 <h1>Mobil Rekomendasi</h1>
               </div>
             </div>
           </div>
-          <div
-            ref={carouselCarRecomenRef}
-            className="flex element justify-center gap-4 bg-base-200 rounded-lg bg-opacity-20 p-4">
+          <div className="flex element justify-center gap-4 bg-base-200 rounded-lg bg-opacity-20 p-4">
             <CarouselCarRecomen />
           </div>
         </div>
@@ -114,12 +119,9 @@ export const Home = () => {
           height: "50vh",
         }}>
         <div
-          ref={carouselCarRecomenRef}
           className="md:space-y-4 element sm:text-xl whitespace-nowrap md:text-4xl text-white p-4 lg:text-4xl font-bold text-center"
           style={{ fontFamily: "'Marko One', sans-serif" }}>
-          <div
-            className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element my-10"
-            ref={carouselCarRecomenRef}>
+          <div className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element my-10">
             <h1>Mobil Berdasarkan Jenis</h1>
           </div>
           <div className="grid grid-cols-1 gap-4">
@@ -152,7 +154,7 @@ export const Home = () => {
             <div
               className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4"
               ref={carouselRef}>
-              {!getCarPromos ? (
+              {getCarPromos ? (
                 <ListCarPromo getCarPromos={getCarPromos} />
               ) : (
                 <ListCarPromoSkeleton />
@@ -184,73 +186,24 @@ export const Home = () => {
           </div>
           <div className="flex justify-center gap-4 mt-10">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-              {(function (rows, i, len) {
-                while (++i <= len) {
-                  rows.push(
-                    <div
-                      onClick={() =>
-                        navRedirect({
-                          pathname: "/car/preview",
-                          search: `?slug=DAIHATSU ALL NEW AYLA (WHITE) TIPE X 1.0 M/T (2023)`,
-                        })
-                      }
-                      key={i}
-                      className="block active:scale-90 hover:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                      <div className=" overflow-hidden bg-cover bg-no-repeat">
-                        <div className=" overflow-hidden bg-cover flex bg-no-repeat justify-center items-center">
-                          <img
-                            className="skeleton animate-ping"
-                            src="https://www.peacemakersnetwork.org/wp-content/uploads/2019/09/placeholder.jpg"
-                            alt=""
-                          />
-                          <i className="fas fa-spinner text-3xl align-middle self-center absolute text-gray-300 animate-spin"></i>
-                        </div>
-                      </div>
-                      <div className="p-6">
-                        <p className="skeleton h-3 w-full"></p>
-                        <p className="skeleton h-3 w-2/3 mt-2"></p>
-                        <div className="flex justify-end">
-                          <p className="skeleton h-2 w-1/2 mt-2"></p>
-                        </div>
-                        <div className="flex justify-end">
-                          <p className="skeleton h-2 w-1/2 mt-2"></p>
-                        </div>
-                        <div className="flex justify-between">
-                          <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
-                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                              <p className="skeleton h-2 w-4 mt-2"></p>
-                              <p className="skeleton h-2 w-10 mt-2"></p>
-                            </div>
-                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                              <p className="skeleton h-2 w-4 mt-2"></p>
-                              <p className="skeleton h-2 w-10 mt-2"></p>
-                            </div>
-                          </div>
-                          <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
-                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                              <p className="skeleton h-2 w-4 mt-2"></p>
-                              <p className="skeleton h-2 w-10 mt-2"></p>
-                            </div>
-                            <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                              <p className="skeleton h-2 w-4 mt-2"></p>
-                              <p className="skeleton h-2 w-10 mt-2"></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                }
-                return rows;
-              })([], 0, 15)}
+              {getNewCars ? (
+                <ListNewCar getNewCars={getNewCars} />
+              ) : (
+                <ListNewCarSkeleton />
+              )}
             </div>
           </div>
-          <div className="text-xs text-red-600 cursor-pointer mt-2 font-bold flex justify-center items-center gap-1 ">
-            <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
-              <i className="fas fa-angle-down"></i>
-              <p>Selengkapnya</p>
+          {loadFech && <LoadingScreen />}
+          {getNewCars && getNewCars.data.length < getNewCars.total && (
+            <div className="text-xs text-red-600 cursor-pointer mt-2 font-bold flex justify-center items-center gap-1 ">
+              <div
+                onClick={handleLoadMoreNewCars}
+                className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
+                <i className="fas fa-angle-down"></i>
+                <p>Selengkapnya</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <div className="bg-white pb-32">

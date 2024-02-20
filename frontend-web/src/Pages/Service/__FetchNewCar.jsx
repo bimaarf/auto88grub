@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export async function fetchCarPromos(pageCarPromo) {
+export async function fetchNewCars(pageNewCar) {
   try {
     await axios.get("sanctum/csrf-cookie");
     const response = await axios.get(
-      `api/car/promo/show?page=${pageCarPromo.page}&&perPage=${pageCarPromo.perPage}`
+      `api/car/new/show?page=${pageNewCar.page}&&perPage=${pageNewCar.perPage}`
     );
     return response.data;
   } catch (error) {

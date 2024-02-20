@@ -35,6 +35,7 @@ Route::post('login', [AuthController::class, 'login']);
 // Routes inside the CORS middleware group
     // Routes for CarController
 Route::get('car/show', [CarController::class, 'showCar']);
+Route::get('car/new/show', [CarController::class, 'getNew']);
 Route::get('car/promo/show', [CarPromoController::class, 'showPromo']);
 Route::get('car/preview/{slug}/{carId}', [CarController::class, 'previewCar']);
 Route::get('blog/show', [BlogController::class, 'viewSample']);

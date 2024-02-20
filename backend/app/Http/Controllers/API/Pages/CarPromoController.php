@@ -9,8 +9,10 @@ use Illuminate\Support\Str;
 
 class CarPromoController extends Controller
 {
-    public function showPromo()
+    public function showPromo(Request $request)
     {
+        $page = $request->query('page', 1);
+        $perPage = $request->query('perPage', 10);
         $getData = Promo::with('car')
                         ->join('cars', 'cars.id', 'car_promos.car_id')
                         ->with([
@@ -18,7 +20,7 @@ class CarPromoController extends Controller
                             'car.location', 'car.brand', 'car.model', 'car.type', 'car.cylinder', 'car.transmission', 'car.series',
                             'car.gear', 'car.fuel', 'car.color', 'car.row', 'car.year'
                         ])
-                        ->get(['car_promos.*', 'cars.slug', 'cars.description']);
+                        ->paginate($perPage, ['car_promos.*', 'cars.slug', 'cars.description'], 'page', $page);
 
         $getData->transform(function ($promo) {
             $promo->title = $promo->slug;

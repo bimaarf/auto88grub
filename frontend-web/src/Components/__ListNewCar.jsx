@@ -2,11 +2,11 @@ import React from "react";
 import { CurrentFormat } from "./___CurrentFormat";
 import { useNavigate } from "react-router-dom";
 
-export const ListCarPromo = ({ getCarPromos }) => {
+export const ListNewCar = ({ getNewCars }) => {
   const navRedirect = useNavigate();
   return (
     <>
-      {getCarPromos.data.map((item, key) => (
+      {getNewCars.data.map((item, key) => (
         <div
           onClick={() => {
             const params = new URLSearchParams();
@@ -33,8 +33,7 @@ export const ListCarPromo = ({ getCarPromos }) => {
                 : item.title}
             </h1>
             <p className="text-gray-800 font-light text-xs md:text-md text-left uppercase">
-              {item.car.type.name} / {item.car.series.name} /{" "}
-              {item.car.fuel.name}
+              {item.type.name} / {item.series.name} / {item.fuel.name}
             </p>
             <p className="text-gray-800 text-xs md:text-md font-medium line-through text-right">
               <CurrentFormat value={item.price} />
@@ -50,13 +49,13 @@ export const ListCarPromo = ({ getCarPromos }) => {
                 </div>
                 <div className="flex justify-start text-xs col-span-2 items-center gap-2">
                   <i className="fas fa-calendar"></i>
-                  <p>{item.car.year.name}</p>
+                  <p>{item.year.name}</p>
                 </div>
               </div>
               <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
                 <div className="flex justify-start text-xs col-span-2 items-center gap-2">
                   <i className="fas fa-gear"></i>
-                  <p>{item.car.gear.name}</p>
+                  <p>{item.gear.name}</p>
                 </div>
                 <div className="flex justify-start text-xs col-span-2 items-center gap-2">
                   <i className="fas fa-eye"></i>

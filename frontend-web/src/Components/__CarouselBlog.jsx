@@ -8,6 +8,7 @@ export const CarouselBlog = ({ getBlog }) => {
         <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
           {getBlog.map((slide, keySlide) => (
             <TECarouselItem
+              key={keySlide}
               itemID={keySlide + 1}
               className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
               <div className="grid grid-cols-2 md:grid-cols-6 gap-4">

@@ -1,37 +1,56 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ListCarPromo } from "../Components/__ListCarPromo";
+import { LoadingScreen } from "../Components/___LoadingScreen";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
-import { fetchCars } from "./Service/__FetchCar";
-import { CurrentFormat } from "../Components/___CurrentFormat";
+import { useStateContext } from "../Providers/StateProvider";
+import { fetchCarPromos } from "./Service/__FetchCarPromos";
 
 export const Promo = () => {
-  const promoRef = useRef(null);
   const navRedirect = useNavigate();
+  const { state, setState } = useStateContext();
+  const { getCarPromos, pageCarPromo } = state;
+
+  const handleLoadMoreCarPromos = async () => {
+    const nextPage = {
+      page: pageCarPromo.page,
+      perPage: pageCarPromo.perPage + 6,
+    };
+    setState((prevState) => ({
+      ...prevState,
+      pageCarPromo: nextPage,
+    }));
+
+    try {
+      const promoCars = await fetchCarPromos(nextPage);
+      setState((prevState) => ({
+        ...prevState,
+        getCarPromos: promoCars,
+      }));
+    } catch (error) {
+      console.error("Error fetching new cars:", error);
+    }
+  };
+
+  const [loadFetch, setLoadFetch] = useState(false);
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-    const handleScroll = () => {
-      if (promoRef.current) {
-        const elementTop = promoRef.current.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        if (elementTop < windowHeight) {
-          promoRef.current.classList.add("fade-in");
-        } else {
-          promoRef.current.classList.remove("fade-in");
-        }
+    const fetchData = async () => {
+      setLoadFetch(true);
+      try {
+        const promoCars = await fetchCarPromos(pageCarPromo);
+        setState((prevState) => ({
+          ...prevState,
+          getCarPromos: promoCars,
+        }));
+        setLoadFetch(false);
+      } catch (error) {
+        setLoadFetch(false);
+        console.error("Error fetching new cars:", error);
       }
     };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    __GET_CAR();
-  }, []);
-  const __GET_CAR = async () => setCars(await fetchCars());
-  const [getCars, setCars] = useState("");
+    fetchData();
+  }, [pageCarPromo, setState]);
 
   return (
     <>
@@ -73,68 +92,9 @@ export const Promo = () => {
           Mobil Promo
         </h1>
         <div className="flex justify-center gap-4">
-          {getCars ? (
+          {getCarPromos ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-              {getCars.map((item, key) => (
-                <div
-                  onClick={() => {
-                    const params = new URLSearchParams();
-                    params.append("slug", item.slug);
-                    params.append("index", item.id);
-                    navRedirect({
-                      pathname: "/mobil/preview",
-                      search: `?${params.toString()}`,
-                    });
-                  }}
-                  key={key}
-                  className="block active:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                  <div className="relative overflow-hidden bg-cover bg-no-repeat">
-                    <img
-                      className="rounded-t-lg"
-                      src="https://www.auto88group.com/image/car/1775/20240201113209.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h1 className="font-bold text-gray-800 text-sm md:text-md">
-                      {item.title.length > 55
-                        ? item.title.slice(0, 55) + "..."
-                        : item.title}
-                    </h1>
-                    <p className="text-gray-800 font-light text-xs md:text-md text-left uppercase">
-                      {item.type.name} / {item.series.name} / {item.fuel.name}
-                    </p>
-                    <p className="text-gray-800 text-xs md:text-md font-medium line-through text-right">
-                      Rp 1x4.000.000
-                    </p>
-                    <p className="text-gray-800 text-sm md:text-xl font-bold text-right">
-                      <CurrentFormat value={item.price} />
-                    </p>
-                    <div className="flex justify-between">
-                      <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
-                        <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                          <i className="fas fa-gauge"></i>
-                          <p>65.132 km</p>
-                        </div>
-                        <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                          <i className="fas fa-calendar"></i>
-                          <p>{item.year.name}</p>
-                        </div>
-                      </div>
-                      <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">
-                        <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                          <i className="fas fa-gear"></i>
-                          <p>{item.gear.name}</p>
-                        </div>
-                        <div className="flex justify-start text-xs col-span-2 items-center gap-2">
-                          <i className="fas fa-eye"></i>
-                          <p>114</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+              <ListCarPromo getCarPromos={getCarPromos} />
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
@@ -200,12 +160,17 @@ export const Promo = () => {
             </div>
           )}
         </div>
-        <div className="text-xs mt-2 text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
-          <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
-            <i className="fas fa-angle-down"></i>
-            <p>Selengkapnya</p>
+        {loadFetch && <LoadingScreen />}
+        {getCarPromos && (
+          <div className="text-xs text-red-600 cursor-pointer mt-2 font-bold flex justify-center items-center gap-1">
+            <div
+              onClick={handleLoadMoreCarPromos}
+              className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
+              <i className="fas fa-angle-down"></i>
+              <p>Selanjutnya</p> {/* Change "Selengkapnya" to "Selanjutnya" */}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

@@ -26,6 +26,7 @@ import { Terms } from "./Pages/Terms";
 import { Testimony } from "./Pages/Testimony";
 import { TradeIns } from "./Pages/TradeIns";
 import { Visit } from "./Pages/Visit";
+import { StateProvider } from "./Providers/StateProvider";
 
 axios.defaults.baseURL = process.env.REACT_APP_API;
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
@@ -50,23 +51,25 @@ function App() {
     <>
       <ToastContainer autoClose={1000} hideProgressBar={true} theme="dark" />
       <Router>
-        <Headers />
-        <CustomSwitch>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/promo" element={<Promo />} />
-          <Route path="/mobil" element={<Car />} />
-          <Route path="/mobil/preview" element={<CarPreview />} />
-          <Route path="/testimoni" element={<Testimony />} />
-          <Route path="/konsultasi" element={<Consultation />} />
-          <Route path="/tukar-tambah" element={<TradeIns />} />
-          <Route path="/kredit-mobil" element={<CarCredit />} />
-          <Route path="/syarat-dan-ketentuan" element={<Terms />} />
-          <Route path="/tentang-kami" element={<About />} />
-          <Route path="/kunjungi-kami" element={<Visit />} />
-          <Route path="/FAQ" element={<FAQ />} />
-          <Route path="/karir" element={<Career />} />
-        </CustomSwitch>
-        <Footer />
+        <StateProvider>
+          <Headers />
+          <CustomSwitch>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/promo" element={<Promo />} />
+            <Route path="/mobil" element={<Car />} />
+            <Route path="/mobil/preview" element={<CarPreview />} />
+            <Route path="/testimoni" element={<Testimony />} />
+            <Route path="/konsultasi" element={<Consultation />} />
+            <Route path="/tukar-tambah" element={<TradeIns />} />
+            <Route path="/kredit-mobil" element={<CarCredit />} />
+            <Route path="/syarat-dan-ketentuan" element={<Terms />} />
+            <Route path="/tentang-kami" element={<About />} />
+            <Route path="/kunjungi-kami" element={<Visit />} />
+            <Route path="/FAQ" element={<FAQ />} />
+            <Route path="/karir" element={<Career />} />
+          </CustomSwitch>
+          <Footer />
+        </StateProvider>
       </Router>
     </>
   );
@@ -82,11 +85,11 @@ const CustomSwitch = ({ children }) => {
     if (location.pathname === prevLoc) {
       setPrevLoc("");
     }
-  }, [location]);
+  }, [location]); // Only include location in the dependency array
 
   useEffect(() => {
     setProgress(false);
-  }, [prevLoc]);
+  }, [prevLoc]); // Only include prevLoc in the dependency array
 
   return (
     <>
