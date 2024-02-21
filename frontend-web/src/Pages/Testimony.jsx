@@ -1,61 +1,81 @@
-import React, { useEffect } from "react";
-import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
-import { CarouselCar } from "../Components/__CarouselCar";
+import React, { useEffect, useState } from "react";
 import { CarouselTestimony } from "../Components/__CarouselTestimony";
 import { CarouselTestimonySkeleton } from "../Components/__CarouselTestimonySkeleton";
+
+import { useStateContext } from "../Providers/StateProvider";
+import { HighLightHeader } from "./Context/__HighLightHeader";
+import { fetchTestimony } from "./Service/__FetchTestimony";
 
 export const Testimony = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const { state, setState } = useStateContext();
+  const { getTestimony, pageTestimony } = state;
+
+  const handleLoadMoreTestimony = async () => {
+    const nextPage = {
+      page: pageTestimony.page,
+      perPage: pageTestimony.perPage + 6,
+    };
+    setState((prevState) => ({
+      ...prevState,
+      pageTestimony: nextPage,
+    }));
+
+    try {
+      const testimmonyData = await fetchTestimony(nextPage);
+      setState((prevState) => ({
+        ...prevState,
+        getTestimony: testimmonyData,
+      }));
+    } catch (error) {
+      console.error("Error fetching new cars:", error);
+    }
+  };
+  const [loadFetch, setLoadFetch] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoadFetch(true);
+      try {
+        const testimmonyData = await fetchTestimony(pageTestimony);
+        setState((prevState) => ({
+          ...prevState,
+          getTestimony: testimmonyData,
+        }));
+        setLoadFetch(false);
+      } catch (error) {
+        setLoadFetch(false);
+        console.error("Error fetching new cars:", error);
+      }
+    };
+    fetchData();
+  }, [pageTestimony, setState]);
   return (
     <>
-      <div
-        className="w-full -z-10 px-20 relative top-0 overflow-hidden"
-        style={{
-          backgroundImage: `url(${bannerImg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "top",
-          backgroundSize: "cover", // Ensure the background image covers the entire container
-          height: "40vh",
-          // filter: "blur(2px)", // Apply blur effect to the image
-        }}>
-        <div className="absolute inset-0 bg-gradient-to-b flex justify-center from-transparent to-black">
-          <div className="md:p-20 p-8 md:rounded-xl">
-            <div className="text-white flex justify-center items-center align-middle">
-              <div
-                className="md:space-y-4 animate-pulse font-bold text-center align-middle flex justify-center bg-black px-10 py-4 bg-opacity-20"
-                style={{
-                  fontFamily: "'Marko One', sans-serif",
-                  width: "500px",
-                }}>
-                <div className="space-y-4">
-                  <img
-                    draggable={false}
-                    src={require("../Images/Banner/logo-tfnCopy.png")}
-                    width={300}
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <HighLightHeader />
       <div className="md:container mb-44 bg-white rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto">
         <h1 className="text-gray-800 font-medium border-b mb-4 pb-2">
           Testimoni
         </h1>
         <div className="flex justify-center">
-          <CarouselTestimonySkeleton />
+          {getTestimony ? (
+            <CarouselTestimony getTestimony={getTestimony} />
+          ) : (
+            <CarouselTestimonySkeleton />
+          )}
         </div>
-        <div className="text-xs mt-2 text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
-          <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
-            <i className="fas fa-angle-down"></i>
-            <p>Selengkapnya</p>
+        {getTestimony && getTestimony.data.length < getTestimony.total && (
+          <div className="text-xs text-red-600 cursor-pointer mt-2 font-bold flex justify-center items-center gap-1">
+            <div
+              onClick={handleLoadMoreTestimony}
+              className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
+              <i className="fas fa-angle-down"></i>
+              <p>Selanjutnya</p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html
   lang="en"
-  data-theme="cmyk"
+  data-theme="light"
   class="scroll-smooth [--scroll-mt:9.875rem] lg:[--scroll-mt:6.3125rem]">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/logo-tfnCopy.png" />
+    <meta
+      name="description"
+      content="Kami Merupakan Dealer Resmi Auto88group, Kami Menyediakan berbagai jenis mobil bekas berkualitas dengan harga dan angsuran terjangkau. Kami Melayani Cash/Kredit, Tukar tambah semua merk, Kredit Ulang dan Gadai BPKB." />
+    <meta
+      name="keywords"
+      content="auto88group, autoplaza88, automobil88, autoshow88, mobil bekas, mobil bekas pontianak, mobil bekas murah, dealer mobil bekas pontianak, dealer mobil bekas, cari mobil bekas, harga mobil, showroom mobil bekas pontianak, kredit mobil bekas pontianak, harga mobil bekas, cari mobil seken, harga second mobil, jual mobil bekas, showroom mokas pontianak, showroom mokas kalbar, dealer mobil pontianak, jual beli mobil bekas, jual beli mobil bekas pontianak,mobil second pontianak" />
+    <link rel="canonical" href="https://www.auto88group.com/" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -29,9 +36,19 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>AUTO88GROUP</title>
+    <title>Auto88group | We Bring a Quality</title>
+    <style>
+      /* CSS only for demo purpose*/
+      #btn-back-to-top {
+        position: fixed;
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://kit.fontawesome.com/a3860ea43f.js"
+      crossorigin="anonymous"></script>
   </head>
-
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
@@ -39,5 +56,27 @@
     <script
       type="text/javascript"
       src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+    <button
+      id="to-top-button"
+      onclick="goToTop()"
+      title="Go To Top"
+      class="hidden fixed z-90 bottom-20 scale-150 active:scale-125 duration-200 right-6 border-0 w-10 h-10 rounded-full drop-shadow-md bg-red-700 text-white text-xl font-bold">
+      <i class="fa fa-angle-up"></i>
+    </button>
+    <script>
+      var toTopButton = document.getElementById("to-top-button");
+      function goToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+      window.onscroll = function () {
+        document.body.scrollTop > 200 ||
+        document.documentElement.scrollTop > 200
+          ? toTopButton.classList.remove("hidden")
+          : toTopButton.classList.add("hidden");
+      };
+    </script>
   </body>
 </html>

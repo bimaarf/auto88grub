@@ -38,7 +38,6 @@ class ManageCars extends ManageRecords
                     $color = Color::whereId($data['car_color_id'])->first();
                     $year = Year::whereId($data['car_year_id'])->first();
                     $row = Row::whereId($data['car_row_id'])->first();
-
                     $data['police_number'] = strtoupper($data['police_number']);
                     $data['chassis_number'] = strtoupper($data['chassis_number']);
                     $data['machine_number'] = strtoupper($data['machine_number']);

@@ -1,83 +1,38 @@
 import React from "react";
-import { TECarousel, TECarouselItem } from "tw-elements-react";
 
-export const CarouselTestimony = () => {
+export const CarouselTestimony = ({ getTestimony }) => {
   return (
     <>
-      <TECarousel showControls showIndicators ride="carousel">
-        <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
-          <TECarouselItem
-            itemID={1}
-            className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {(function (rows, i, len) {
-                while (++i <= len) {
-                  rows.push(
-                    <div
-                      key={i}
-                      className="block hover:scale-105 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                      <div className="relative overflow-hidden bg-cover bg-no-repeat">
-                        <img
-                          src="https://www.auto88group.com/image/testimonial/20240120141214.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="p-6 text-center">
-                        <h1 className="font-bold whitespace-pre-wrap text-gray-800 text-sm">
-                          Mawardi
-                        </h1>
-                        <article className="prose prose-slate text-sm">
-                          <p className="whitespace-pre-wrap italic font-thin">
-                            "Cepat banget baru beberapa hari sudah dapat kabar
-                            bahwa pengajuan sudah approve"
-                          </p>
-                        </article>
-                      </div>
-                    </div>
-                  );
-                  if (window.innerWidth <= 768) break;
-                }
-                return rows;
-              })([], 0, 4)}
+      <div>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 justify-center items-center">
+          {getTestimony.data.map((item, key) => (
+            <div
+              onClick={() => window.open(item.link, "_blank")}
+              key={key}
+              className="my-4 cursor-pointer hover:scale-95 duration-300">
+              <div className="flex justify-center space-y-2">
+                <img
+                  draggable={false}
+                  className="rounded-full"
+                  width={220}
+                  src={`${process.env.REACT_APP_API_IMG}storage/${item.image}`}
+                  alt=""
+                />
+              </div>
+              <div className="p-6 text-center">
+                <h1 className="font-bold whitespace-pre-wrap text-gray-800 text-sm">
+                  {item.name}
+                </h1>
+                <div className="prose prose-slate text-sm">
+                  <p className="whitespace-pre-wrap italic font-thin">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
             </div>
-          </TECarouselItem>
-          <TECarouselItem
-            itemID={2}
-            className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {(function (rows, i, len) {
-                while (++i <= len) {
-                  rows.push(
-                    <div
-                      key={i}
-                      className="block hover:scale-105 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                      <div className="relative overflow-hidden bg-cover bg-no-repeat">
-                        <img
-                          src="https://www.auto88group.com/image/testimonial/20240120141214.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="p-6 text-center">
-                        <h1 className="font-bold whitespace-pre-wrap text-gray-800 text-sm">
-                          Mawardi
-                        </h1>
-                        <article className="prose prose-slate text-sm">
-                          <p className="whitespace-pre-wrap italic font-thin">
-                            "Cepat banget baru beberapa hari sudah dapat kabar
-                            bahwa pengajuan sudah approve"
-                          </p>
-                        </article>
-                      </div>
-                    </div>
-                  );
-                  if (window.innerWidth <= 768) break;
-                }
-                return rows;
-              })([], 0, 4)}
-            </div>
-          </TECarouselItem>
+          ))}
         </div>
-      </TECarousel>
+      </div>
     </>
   );
 };

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
+
 import { useLocation } from "react-router-dom";
 import { TECarousel, TECarouselItem } from "tw-elements-react";
+import { HighLightHeader } from "./Context/__HighLightHeader";
 import { fetchCarPreview } from "./Service/__FetchCarPreview";
-import LoadingScreen from "../Components/___LoadingScreen";
 
 export const CarPreview = () => {
   const location = useLocation();
@@ -39,44 +39,7 @@ export const CarPreview = () => {
   }, []);
   return (
     <>
-      <div
-        className="w-full -z-10 px-20 relative top-0"
-        style={{
-          backgroundImage: `url(${bannerImg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "top",
-          backgroundSize: "cover", // Ensure the background image covers the entire container
-          height: "40vh",
-          // filter: "blur(2px)", // Apply blur effect to the image
-        }}>
-        <div className="absolute inset-0 bg-gradient-to-b flex justify-center from-transparent to-black">
-          <div className="md:p-20 p-8 bg-black bg-opacity-20">
-            <div className="text-white flex justify-center items-center">
-              <div
-                className="md:space-y-4 sm:text-3xl md:text-6xl font-bold text-center"
-                style={{ fontFamily: "'Marko One', sans-serif" }}>
-                {getCars ? (
-                  <h1>{getCars.title}</h1>
-                ) : (
-                  <div className="w-screen">
-                    <div className="flex justify-center">
-                      <p className="skeleton h-10 w-2/3 opacity-45"></p>
-                    </div>
-                    <div className="flex justify-center">
-                      <p className="skeleton h-10 w-1/2 mt-2 opacity-45"></p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-            <p className="md:mt-10 mt-4 sm:text-xs md:text-lg font-medium text-white text-center">
-              Pencarian unit mobil dan transaksional akan kami arahkan ke mobbi.
-              Kenalan dulu yuk!
-            </p>
-          </div>
-        </div>
-      </div>
+      <HighLightHeader />
       <div className="bg-white pb-32 md:container sm:mx-2 md:mx-auto">
         <div className="w-11/12  mx-auto mt-10 z-30 relative">
           <TECarousel showControls showIndicators ride="carousel">
@@ -90,7 +53,7 @@ export const CarPreview = () => {
                       rows.push(
                         <div
                           key={i}
-                          className="block hover:scale-105 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                           <div className="relative overflow-hidden bg-cover bg-no-repeat">
                             <img
                               src="https://www.auto88group.com/image/car/1775/20240201113209.jpg"
@@ -114,7 +77,7 @@ export const CarPreview = () => {
                       rows.push(
                         <div
                           key={i}
-                          className="block hover:scale-105 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                           <div className="relative overflow-hidden bg-cover bg-no-repeat">
                             <img
                               src="https://www.auto88group.com/image/car/1775/20240201113209.jpg"
@@ -224,7 +187,7 @@ export const CarPreview = () => {
                       rows.push(
                         <div
                           key={i}
-                          className="block hover:scale-105 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                           <div className="relative overflow-hidden bg-cover bg-no-repeat">
                             <img
                               src="https://www.auto88group.com/image/car/1775/20240201113209.jpg"
@@ -248,7 +211,7 @@ export const CarPreview = () => {
                       rows.push(
                         <div
                           key={i}
-                          className="block hover:scale-105 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                           <div className="relative overflow-hidden bg-cover bg-no-repeat">
                             <img
                               src="https://www.auto88group.com/image/car/1769/320240215151846.jpg"

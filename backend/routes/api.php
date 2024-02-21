@@ -8,6 +8,7 @@ use App\Http\Controllers\API\Car\BrandController;
 use App\Http\Controllers\API\Pages\BlogController;
 use App\Http\Controllers\API\Pages\CarController;
 use App\Http\Controllers\API\Pages\CarPromoController;
+use App\Http\Controllers\API\Pages\TestimonyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,8 @@ Route::post('login', [AuthController::class, 'login']);
 // Routes inside the CORS middleware group
     // Routes for CarController
 Route::get('car/show', [CarController::class, 'showCar']);
+Route::get('car/component/show', [CarController::class, 'getComponents']);
+Route::get('testimonial/show', [TestimonyController::class, 'show']);
 Route::get('car/new/show', [CarController::class, 'getNew']);
 Route::get('car/promo/show', [CarPromoController::class, 'showPromo']);
 Route::get('car/preview/{slug}/{carId}', [CarController::class, 'previewCar']);

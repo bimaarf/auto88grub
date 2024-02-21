@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SidebarMenu } from "./__SidebarMenu";
 import { useLocation, useNavigate } from "react-router-dom";
+import { HomeMarquee } from "../Pages/Context/__HomeMarquee";
 
 export const Headers = () => {
   const [navTogleBtn, setNavTogleBtn] = useState(false);
@@ -9,6 +10,7 @@ export const Headers = () => {
 
   return (
     <>
+      <HomeMarquee />
       <div className="p-4 lg:px-10 sticky top-0 z-50 bg-white shadow-lg backdrop-blur-lg">
         <div className="lg:container lg:mx-auto  whitespace-nowrap">
           <div className="flex justify-between">

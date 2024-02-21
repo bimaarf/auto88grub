@@ -8,6 +8,8 @@ import React, {
 import { fetchBlog } from "../Pages/Service/__FetchBlog";
 import { fetchCarPromos } from "../Pages/Service/__FetchCarPromos";
 import { fetchNewCars } from "../Pages/Service/__FetchNewCar";
+import { fetchTestimony } from "../Pages/Service/__FetchTestimony";
+import { fetchCars } from "../Pages/Service/__FetchCar";
 
 const StateContext = createContext();
 
@@ -15,12 +17,16 @@ const StateProvider = ({ children }) => {
   const [state, setState] = useState({
     pageNewCar: { page: 1, perPage: 6 },
     pageCarPromo: { page: 1, perPage: 12 },
+    pageTestimony: { page: 1, perPage: 6 },
+    pageAllCar: { page: 1, perPage: 6 },
     getCarPromos: null,
+    getAllCars: null,
     getNewCars: null,
     getBlog: null,
+    getTestimony: null,
   });
 
-  const { pageNewCar, pageCarPromo } = state;
+  const { pageNewCar, pageCarPromo, pageTestimony, pageAllCar } = state;
 
   const getCarPromos = useCallback(async () => {
     try {
@@ -57,16 +63,39 @@ const StateProvider = ({ children }) => {
       console.error("Error fetching new cars:", error);
     }
   }, [pageNewCar]);
-
+  const getAllCars = useCallback(async () => {
+    try {
+      const allCars = await fetchCars(pageAllCar);
+      setState((prevState) => ({
+        ...prevState,
+        getAllCars: allCars,
+      }));
+    } catch (error) {
+      console.error("Error fetching new cars:", error);
+    }
+  }, [pageAllCar]);
+  const getTestimony = useCallback(async () => {
+    try {
+      const testimmonyData = await fetchTestimony(pageTestimony);
+      setState((prevState) => ({
+        ...prevState,
+        getTestimony: testimmonyData,
+      }));
+    } catch (error) {
+      console.error("Error fetching blog:", error);
+    }
+  }, [pageTestimony]);
   useEffect(() => {
     const fetchData = async () => {
+      await getTestimony();
       await getBlog();
       await getCarPromos();
       await getNewCars();
+      await getAllCars();
     };
 
     fetchData();
-  }, [getBlog, getCarPromos, getNewCars]);
+  }, [getBlog, getTestimony, getCarPromos, getNewCars, getAllCars]);
 
   return (
     <StateContext.Provider value={{ state, setState }}>

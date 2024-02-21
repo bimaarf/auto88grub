@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
+import { HighLightHeader } from "./Context/__HighLightHeader";
 
 export const Career = () => {
   useEffect(() => {
@@ -7,32 +7,8 @@ export const Career = () => {
   }, []);
   return (
     <>
-      <div
-        className="w-full -z-10 px-20 relative top-0 overflow-hidden"
-        style={{
-          backgroundImage: `url(${bannerImg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "top",
-          backgroundSize: "cover", // Ensure the background image covers the entire container
-          height: "40vh",
-          // filter: "blur(2px)", // Apply blur effect to the image
-        }}>
-        <div className="absolute inset-0 bg-gradient-to-b flex justify-center from-transparent to-black">
-          <div className="md:p-20 p-8 md:rounded-xl">
-            <div className="text-white flex justify-center items-center align-middle">
-              <div
-                className="md:space-y-4 font-bold text-center align-middle flex w-96 justify-center bg-black px-10 py-4 bg-opacity-20"
-                style={{ fontFamily: "'Marko One', sans-serif" }}>
-                <div className="space-y-4">
-                  <h1 className="text-white text-3xl capitalize">Karir</h1>
-                  <h1 className="text-xl md:text-5xl">AUTO88GROUP</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <HighLightHeader />
+
       <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto">
         <div role="tablist" className="tabs tabs-lifted">
           <input
@@ -51,7 +27,7 @@ export const Career = () => {
             role="tabpanel"
             className="tab-content bg-base-100 border-base-300 rounded-box p-6">
             <div className="collapse bg-base-200 bg-opacity-20">
-              <input type="checkbox" />
+              <input defaultChecked type="checkbox" />
               <div className="collapse-title text-md font-medium">
                 <p className=" border-b pb-2">Admin Keuangan</p>
               </div>
@@ -73,7 +49,7 @@ export const Career = () => {
               </div>
             </div>
             <div className="collapse bg-base-200 bg-opacity-20 mt-4">
-              <input type="checkbox" />
+              <input defaultChecked type="checkbox" />
               <div className="collapse-title text-md font-medium">
                 <p className=" border-b pb-2">Operator Cuci & Salon Mobil</p>
               </div>
@@ -95,7 +71,7 @@ export const Career = () => {
               </div>
             </div>
             <div className="collapse bg-base-200 bg-opacity-20 mt-4">
-              <input type="checkbox" />
+              <input defaultChecked type="checkbox" />
               <div className="collapse-title text-md font-medium">
                 <p className=" border-b pb-2">Marketing</p>
               </div>

@@ -3,7 +3,7 @@ import React from "react";
 export const Footer = () => {
   return (
     <>
-      <div className="bg-slate-950 md:px-20 md:py-10 rounded-t-badge">
+      <div className="bg-black/80 md:px-20 md:py-10 rounded-t-badge">
         <div className="md:flex justify-between items-start md:gap-10 mx-3">
           <div className="text-white pt-2">
             <h1 className="font-medium">Alamat</h1>
@@ -24,14 +24,39 @@ export const Footer = () => {
                 https://auto88group.com/
               </a>
             </div>
-
-            <div className="flex justify-center animate-bounce">
-              <img
-                draggable={false}
-                src={require("../Images/Banner/logo-tfnCopy.png")}
-                width={300}
-                alt=""
-              />
+            <h1 className="mt-4 font-medium">Instagram</h1>
+            <div className="mt-4 ml-2 flex items-center gap-2">
+              <i className="fa-brands fa-instagram"></i>
+              <a
+                href="https://www.instagram.com/auto88group.official"
+                target="__blank">
+                @auto88group.official
+              </a>
+            </div>
+            <h1 className="mt-4 font-medium">Facebook</h1>
+            <div className="mt-4 ml-2 flex items-center gap-2">
+              <i className="fa-brands fa-facebook"></i>
+              <a
+                href="https://www.facebook.com/auto88group.id"
+                target="__blank">
+                auto88group
+              </a>
+            </div>
+            <h1 className="mt-4 font-medium">Tiktok</h1>
+            <div className="mt-4 ml-2 flex items-center gap-2">
+              <i className="fa-brands fa-tiktok"></i>
+              <a
+                href="https://www.facebook.com/auto88group.id"
+                target="__blank">
+                @auto88group.official
+              </a>
+            </div>
+            <h1 className="mt-4 font-medium">Twitter</h1>
+            <div className="mt-4 ml-2 flex items-center gap-2">
+              <i className="fa-brands fa-twitter"></i>
+              <a href="https://twitter.com/auto88group" target="__blank">
+                @auto88group
+              </a>
             </div>
           </div>
           <iframe
@@ -40,10 +65,8 @@ export const Footer = () => {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"></iframe>
         </div>
-        <div className="border-t mt-4 p-4 text-gray-100">
-          <p className="md:w-1/2">
-            © Copyright 2023 AUTO88GROUP - All Rights Reserved Images
-          </p>
+        <div className="rounded bg-opacity-20 skeleton mt-4 p-4 text-white">
+          <p className="text-center">© Copyright 2022 CV AUTOPLAZA 88</p>
         </div>
       </div>
     </>

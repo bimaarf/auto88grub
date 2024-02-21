@@ -1,65 +1,68 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TESelect } from "tw-elements-react";
 import { CurrentFormat } from "../Components/___CurrentFormat";
-import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.png";
+
+import { useStateContext } from "../Providers/StateProvider";
+import { HighLightHeader } from "./Context/__HighLightHeader";
 import { fetchCars } from "./Service/__FetchCar";
+import { fetchCarComp } from "./Service/__FetchCarComp";
 
 export const Car = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-    __GET_CAR();
   }, []);
+  // const navRedirect = useNavigate();
+  // const dataPrice = [
+  //   { text: "One", value: 1 },
+  //   { text: "Two", value: 2 },
+  //   { text: "Three", value: 3 },
+  //   { text: "Four", value: 4 },
+  //   { text: "Five", value: 5 },
+  //   { text: "Six", value: 6 },
+  //   { text: "Seven", value: 7 },
+  //   { text: "Eight", value: 8 },
+  // ];
+  // const [pageAllCar] = useState({ page: 1, perPage: 6 });
+  // const __GET_CAR = async () => setCars(await fetchCars(pageAllCar));
+  // const [getCars, setCars] = useState("");
   const navRedirect = useNavigate();
-  const dataPrice = [
-    { text: "One", value: 1 },
-    { text: "Two", value: 2 },
-    { text: "Three", value: 3 },
-    { text: "Four", value: 4 },
-    { text: "Five", value: 5 },
-    { text: "Six", value: 6 },
-    { text: "Seven", value: 7 },
-    { text: "Eight", value: 8 },
-  ];
-  const __GET_CAR = async () => setCars(await fetchCars());
-  const [getCars, setCars] = useState("");
+  const { state, setState } = useStateContext();
+  const { getAllCars, pageAllCar } = state;
 
+  const handleLoadMoreAllCar = async () => {
+    setLoadFetch(true);
+    const nextPage = { page: pageAllCar.page, perPage: pageAllCar.perPage + 6 };
+    setState((prevState) => ({
+      ...prevState,
+      pageAllCar: nextPage,
+    }));
+
+    try {
+      const allCar = await fetchCars(nextPage);
+      setState((prevState) => ({
+        ...prevState,
+        getAllCars: allCar,
+      }));
+    } catch (error) {
+      console.error("Error fetching new cars:", error);
+    }
+    setLoadFetch(false);
+  };
+  const [loadFech, setLoadFetch] = useState(false);
+
+  const [getComp, setComp] = useState("");
+  const __GET_CAR_COMP = async () => {
+    const response = await fetchCarComp();
+    setComp(response.data);
+    console.log(response.data);
+  };
+  useEffect(() => {
+    __GET_CAR_COMP();
+  }, []);
   return (
     <>
-      <div
-        className="w-full -z-10 px-20 relative top-0 overflow-hidden"
-        style={{
-          backgroundImage: `url(${bannerImg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "top",
-          backgroundSize: "cover", // Ensure the background image covers the entire container
-          height: "40vh",
-          // filter: "blur(2px)", // Apply blur effect to the image
-        }}>
-        <div className="absolute inset-0 bg-gradient-to-b flex justify-center from-transparent to-black">
-          <div className="md:p-20 p-8 md:rounded-xl">
-            <div className="text-white flex justify-center items-center align-middle">
-              <div
-                className="md:space-y-4 animate-pulse font-bold text-center align-middle flex justify-center bg-black px-10 py-4 bg-opacity-20"
-                style={{
-                  fontFamily: "'Marko One', sans-serif",
-                  width: "500px",
-                }}>
-                <div className="space-y-4">
-                  <img
-                    draggable={false}
-                    src={require("../Images/Banner/logo-tfnCopy.png")}
-                    width={300}
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="md:container mb-44 bg-white rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto">
+      <HighLightHeader />
+      <div className="md:container shadow mb-44 bg-white rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto">
         <div className="md:flex justify-center items-start align-top gap-4">
           <div className="sm:w-full md:w-1/4 md:border-r md:sticky md:top-16 md:overflow-y-auto md:pb-32 md:overflow-hidden space-y-5 sm:h-full md:h-screen pr-4">
             <div className="collapse collapse-arrow w-full bg-opacity-0 mt-4">
@@ -78,7 +81,7 @@ export const Car = () => {
                   <select
                     name="price"
                     id="price"
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-1000">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">1.000.000.000</option>
                     <option value="750.000.000">750.000.000</option>
                     <option value="500.000.000">500.000.000</option>
@@ -95,15 +98,14 @@ export const Car = () => {
                   <select
                     name="merk"
                     id="merk"
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-1000">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="Semua">Semua</option>
-                    <option value="1.000.000.000">1.000.000.000</option>
-                    <option value="750.000.000">750.000.000</option>
-                    <option value="500.000.000">500.000.000</option>
-                    <option value="300.000.000">300.000.000</option>
-                    <option value="200.000.000">200.000.000</option>
-                    <option value="150.000.000">150.000.000</option>
-                    <option value="100.000.000">100.000.000</option>
+                    {getComp &&
+                      getComp.brand.map((item, key) => (
+                        <option key={key} value={item.id}>
+                          {item.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="space-y-2">
@@ -113,15 +115,14 @@ export const Car = () => {
                   <select
                     name="model"
                     id="model"
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-1000">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
-                    <option value="1.000.000.000">1.000.000.000</option>
-                    <option value="750.000.000">750.000.000</option>
-                    <option value="500.000.000">500.000.000</option>
-                    <option value="300.000.000">300.000.000</option>
-                    <option value="200.000.000">200.000.000</option>
-                    <option value="150.000.000">150.000.000</option>
-                    <option value="100.000.000">100.000.000</option>
+                    {getComp &&
+                      getComp.model.map((item, key) => (
+                        <option key={key} value={item.id}>
+                          {item.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="space-y-2">
@@ -131,15 +132,14 @@ export const Car = () => {
                   <select
                     name="type"
                     id="type"
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-1000">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
-                    <option value="1.000.000.000">1.000.000.000</option>
-                    <option value="750.000.000">750.000.000</option>
-                    <option value="500.000.000">500.000.000</option>
-                    <option value="300.000.000">300.000.000</option>
-                    <option value="200.000.000">200.000.000</option>
-                    <option value="150.000.000">150.000.000</option>
-                    <option value="100.000.000">100.000.000</option>
+                    {getComp &&
+                      getComp.type.map((item, key) => (
+                        <option key={key} value={item.id}>
+                          {item.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="space-y-2">
@@ -149,15 +149,14 @@ export const Car = () => {
                   <select
                     name="jenis"
                     id="jenis"
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-1000">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
-                    <option value="1.000.000.000">1.000.000.000</option>
-                    <option value="750.000.000">750.000.000</option>
-                    <option value="500.000.000">500.000.000</option>
-                    <option value="300.000.000">300.000.000</option>
-                    <option value="200.000.000">200.000.000</option>
-                    <option value="150.000.000">150.000.000</option>
-                    <option value="100.000.000">100.000.000</option>
+                    {getComp &&
+                      getComp.type.map((item, key) => (
+                        <option key={key} value={item.id}>
+                          {item.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="space-y-2">
@@ -167,15 +166,14 @@ export const Car = () => {
                   <select
                     name="silinder"
                     id="silinder"
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-1000">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
-                    <option value="1.000.000.000">1.000.000.000</option>
-                    <option value="750.000.000">750.000.000</option>
-                    <option value="500.000.000">500.000.000</option>
-                    <option value="300.000.000">300.000.000</option>
-                    <option value="200.000.000">200.000.000</option>
-                    <option value="150.000.000">150.000.000</option>
-                    <option value="100.000.000">100.000.000</option>
+                    {getComp &&
+                      getComp.cylinder.map((item, key) => (
+                        <option key={key} value={item.id}>
+                          {item.volume}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="space-y-2">
@@ -185,15 +183,14 @@ export const Car = () => {
                   <select
                     name="transmisi"
                     id="transmisi"
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-1000">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
-                    <option value="1.000.000.000">1.000.000.000</option>
-                    <option value="750.000.000">750.000.000</option>
-                    <option value="500.000.000">500.000.000</option>
-                    <option value="300.000.000">300.000.000</option>
-                    <option value="200.000.000">200.000.000</option>
-                    <option value="150.000.000">150.000.000</option>
-                    <option value="100.000.000">100.000.000</option>
+                    {getComp &&
+                      getComp.transmission.map((item, key) => (
+                        <option key={key} value={item.id}>
+                          {item.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="space-y-2">
@@ -203,15 +200,14 @@ export const Car = () => {
                   <select
                     name="seri"
                     id="seri"
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-1000">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
-                    <option value="1.000.000.000">1.000.000.000</option>
-                    <option value="750.000.000">750.000.000</option>
-                    <option value="500.000.000">500.000.000</option>
-                    <option value="300.000.000">300.000.000</option>
-                    <option value="200.000.000">200.000.000</option>
-                    <option value="150.000.000">150.000.000</option>
-                    <option value="100.000.000">100.000.000</option>
+                    {getComp &&
+                      getComp.series.map((item, key) => (
+                        <option key={key} value={item.id}>
+                          {item.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="space-y-2">
@@ -221,15 +217,14 @@ export const Car = () => {
                   <select
                     name="garden"
                     id="garden"
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-1000">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
-                    <option value="1.000.000.000">1.000.000.000</option>
-                    <option value="750.000.000">750.000.000</option>
-                    <option value="500.000.000">500.000.000</option>
-                    <option value="300.000.000">300.000.000</option>
-                    <option value="200.000.000">200.000.000</option>
-                    <option value="150.000.000">150.000.000</option>
-                    <option value="100.000.000">100.000.000</option>
+                    {getComp &&
+                      getComp.gear.map((item, key) => (
+                        <option key={key} value={item.id}>
+                          {item.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="space-y-2">
@@ -239,15 +234,14 @@ export const Car = () => {
                   <select
                     name="bahan_bakar"
                     id="bahan_bakar"
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-1000">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
-                    <option value="1.000.000.000">1.000.000.000</option>
-                    <option value="750.000.000">750.000.000</option>
-                    <option value="500.000.000">500.000.000</option>
-                    <option value="300.000.000">300.000.000</option>
-                    <option value="200.000.000">200.000.000</option>
-                    <option value="150.000.000">150.000.000</option>
-                    <option value="100.000.000">100.000.000</option>
+                    {getComp &&
+                      getComp.fuel.map((item, key) => (
+                        <option key={key} value={item.id}>
+                          {item.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="space-y-2">
@@ -257,19 +251,18 @@ export const Car = () => {
                   <select
                     name="warna"
                     id="warna"
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-1000">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
-                    <option value="1.000.000.000">1.000.000.000</option>
-                    <option value="750.000.000">750.000.000</option>
-                    <option value="500.000.000">500.000.000</option>
-                    <option value="300.000.000">300.000.000</option>
-                    <option value="200.000.000">200.000.000</option>
-                    <option value="150.000.000">150.000.000</option>
-                    <option value="100.000.000">100.000.000</option>
+                    {getComp &&
+                      getComp.color.map((item, key) => (
+                        <option key={key} value={item.id}>
+                          {item.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <button className="w-full glass active:scale-95 bg-green-500 hover:bg-green-600 duration-300 p-2 rounded text-white">
+                  <button className="w-full glass active:scale-95 bg-red-700 skeleton  duration-300 p-2 rounded text-white">
                     Cari
                   </button>
                 </div>
@@ -277,12 +270,9 @@ export const Car = () => {
             </div>
           </div>
           <div className="sm:w-full md:mt-0 mt-10 md:w-3/4">
-            <h1 className="text-gray-800 font-medium border-b mb-4 pb-2">
-              Koleksi Mobil
-            </h1>
-            {getCars ? (
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                {getCars.map((item, key) => (
+            {getAllCars ? (
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:gfrid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                {getAllCars.data.map((item, key) => (
                   <div
                     onClick={() => {
                       const params = new URLSearchParams();
@@ -294,18 +284,18 @@ export const Car = () => {
                       });
                     }}
                     key={key}
-                    className="block active:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                    <div className="relative overflow-hidden bg-cover bg-no-repeat">
+                    className="block select-none border-transparent border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                    <div className="relative overflow-hidden flex justify-center bg-cover bg-no-repeat">
                       <img
-                        className="rounded-t-lg"
+                        className="rounded-t-lg h-40 object-contain"
                         src="https://www.auto88group.com/image/car/1775/20240201113209.jpg"
                         alt=""
                       />
                     </div>
                     <div className="p-6">
                       <h1 className="font-bold text-gray-800 text-sm md:text-md">
-                        {item.title.length > 55
-                          ? item.title.slice(0, 55) + "..."
+                        {item.title.length > 40
+                          ? item.title.slice(0, 40) + "..."
                           : item.title}
                       </h1>
                       <p className="text-gray-800 font-light text-xs md:text-md text-left uppercase">
