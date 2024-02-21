@@ -54,7 +54,27 @@ export const Car = () => {
   const __GET_CAR_COMP = async () => {
     const response = await fetchCarComp();
     setComp(response.data);
-    console.log(response.data);
+  };
+  const [formInput, setFormInput] = useState({
+    price: "",
+    merk: "",
+    model: "",
+    type: "",
+    kind: "",
+    cylinder: "",
+    transmission: "",
+    series: "",
+    gear: "",
+    fuel: "",
+    color: "",
+  });
+  const handleChange = (e) => {
+    e.persist();
+    setFormInput({ ...formInput, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formInput);
   };
   useEffect(() => {
     __GET_CAR_COMP();
@@ -62,7 +82,7 @@ export const Car = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="md:container shadow mb-44 bg-white rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto">
+      <div className="lg:container shadow mb-44 bg-white rounded-xl -mt-10 p-4 sm:mx-1 lg:mx-auto">
         <div className="md:flex justify-center items-start align-top gap-4">
           <div className="sm:w-full md:w-1/4 md:border-r md:sticky md:top-16 md:overflow-y-auto md:pb-32 md:overflow-hidden space-y-5 sm:h-full md:h-screen pr-4">
             <div className="collapse collapse-arrow w-full bg-opacity-0 mt-4">
@@ -81,6 +101,7 @@ export const Car = () => {
                   <select
                     name="price"
                     id="price"
+                    onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">1.000.000.000</option>
                     <option value="750.000.000">750.000.000</option>
@@ -98,6 +119,7 @@ export const Car = () => {
                   <select
                     name="merk"
                     id="merk"
+                    onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="Semua">Semua</option>
                     {getComp &&
@@ -115,6 +137,7 @@ export const Car = () => {
                   <select
                     name="model"
                     id="model"
+                    onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
                     {getComp &&
@@ -132,6 +155,7 @@ export const Car = () => {
                   <select
                     name="type"
                     id="type"
+                    onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
                     {getComp &&
@@ -143,16 +167,17 @@ export const Car = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="jenis" className="font-semibold">
+                  <label htmlFor="kind" className="font-semibold">
                     *Jenis:
                   </label>
                   <select
-                    name="jenis"
-                    id="jenis"
+                    name="kind"
+                    id="kind"
+                    onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
                     {getComp &&
-                      getComp.type.map((item, key) => (
+                      getComp.kind.map((item, key) => (
                         <option key={key} value={item.id}>
                           {item.name}
                         </option>
@@ -160,12 +185,13 @@ export const Car = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="silinder" className="font-semibold">
+                  <label htmlFor="cylinder" className="font-semibold">
                     *Silinder:
                   </label>
                   <select
-                    name="silinder"
-                    id="silinder"
+                    name="cylinder"
+                    id="cylinder"
+                    onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
                     {getComp &&
@@ -177,12 +203,13 @@ export const Car = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="transmisi" className="font-semibold">
+                  <label htmlFor="transmission" className="font-semibold">
                     *Transmisi:
                   </label>
                   <select
-                    name="transmisi"
-                    id="transmisi"
+                    name="transmission"
+                    id="transmission"
+                    onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
                     {getComp &&
@@ -194,12 +221,13 @@ export const Car = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="seri" className="font-semibold">
+                  <label htmlFor="series" className="font-semibold">
                     *Seri:
                   </label>
                   <select
-                    name="seri"
-                    id="seri"
+                    name="series"
+                    id="series"
+                    onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
                     {getComp &&
@@ -211,12 +239,13 @@ export const Car = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="garden" className="font-semibold">
+                  <label htmlFor="gear" className="font-semibold">
                     *Garden:
                   </label>
                   <select
-                    name="garden"
-                    id="garden"
+                    name="gear"
+                    id="gear"
+                    onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
                     {getComp &&
@@ -228,12 +257,13 @@ export const Car = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="bahan_bakar" className="font-semibold">
+                  <label htmlFor="fuel" className="font-semibold">
                     *Bahan Bakar:
                   </label>
                   <select
-                    name="bahan_bakar"
-                    id="bahan_bakar"
+                    name="fuel"
+                    id="fuel"
+                    onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
                     {getComp &&
@@ -245,12 +275,13 @@ export const Car = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="warna" className="font-semibold">
+                  <label htmlFor="color" className="font-semibold">
                     *Warna:
                   </label>
                   <select
-                    name="warna"
-                    id="warna"
+                    onChange={handleChange}
+                    name="color"
+                    id="color"
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
                     <option value="1.000.000.000">Semua</option>
                     {getComp &&
@@ -262,7 +293,9 @@ export const Car = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <button className="w-full glass active:scale-95 bg-red-700 skeleton  duration-300 p-2 rounded text-white">
+                  <button
+                    onClick={handleSubmit}
+                    className="w-full glass active:scale-95 bg-red-700 skeleton  duration-300 p-2 rounded text-white">
                     Cari
                   </button>
                 </div>

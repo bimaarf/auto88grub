@@ -2,8 +2,8 @@ import React from "react";
 
 export const Footer = () => {
   return (
-    <>
-      <div className="bg-black/80 md:px-20 md:py-10 rounded-t-badge">
+    <div>
+      <div className="bg-black/80 md:px-20 md:py-10 pt-4 rounded-t-badge">
         <div className="md:flex justify-between items-start md:gap-10 mx-3">
           <div className="text-white pt-2">
             <h1 className="font-medium">Alamat</h1>
@@ -69,6 +69,6 @@ export const Footer = () => {
           <p className="text-center">© Copyright 2022 CV AUTOPLAZA 88</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };

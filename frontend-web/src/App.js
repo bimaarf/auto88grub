@@ -27,6 +27,7 @@ import { Testimony } from "./Pages/Testimony";
 import { TradeIns } from "./Pages/TradeIns";
 import { Visit } from "./Pages/Visit";
 import { StateProvider } from "./Providers/StateProvider";
+import { CircleModal } from "./Pages/Context/__CircleModal";
 
 axios.defaults.baseURL = process.env.REACT_APP_API;
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
@@ -69,6 +70,7 @@ function App() {
             <Route path="/karir" element={<Career />} />
           </CustomSwitch>
           <Footer />
+          <CircleModal />
         </StateProvider>
       </Router>
     </>

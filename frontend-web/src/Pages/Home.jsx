@@ -14,8 +14,8 @@ import { ListNewCarSkeleton } from "../Components/__ListNewCarSkeleton";
 import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.jpg";
 
 import { useStateContext } from "./../Providers/StateProvider";
-import { HighLightHeader } from "./Context/__HighLightHeader";
 import { fetchNewCars } from "./Service/__FetchNewCar";
+import { HighLightHeader } from "./Context/__HighLightHeader";
 
 export const Home = () => {
   const navRedirect = useNavigate();
@@ -71,7 +71,7 @@ export const Home = () => {
           <CarouselSl />
         </div>
       </div>
-      <div className="pb-32">
+      <div className="pb-32 bg-white">
         <div className="w-11/12 mx-auto mt-10 z-30 ">
           <div className="flex justify-center">
             <div
@@ -82,7 +82,7 @@ export const Home = () => {
               </div>
             </div>
           </div>
-          <div className="flex element justify-center gap-4 bg-base-200 rounded-lg bg-opacity-20 p-4">
+          <div className="flex element justify-center gap-4 brounded-lg  p-4">
             <CarouselCarRecomen />
           </div>
         </div>
@@ -115,7 +115,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="pb-32">
+      <div className="pb-32 bg-white">
         <div className="w-11/12  mx-auto mt-10 z-30 ">
           <div className="flex justify-center">
             <div
@@ -149,7 +149,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="pb-32">
+      <div className="pb-32 bg-white">
         <div className="w-11/12  mx-auto mt-10 z-30 ">
           <div className="flex justify-center">
             <div
@@ -183,7 +183,7 @@ export const Home = () => {
           )}
         </div>
       </div>
-      <div className="pb-32">
+      <div className="pb-32 bg-white">
         <div className="mt-10 z-30 ">
           <div className="relative">
             <div

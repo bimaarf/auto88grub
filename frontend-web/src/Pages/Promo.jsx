@@ -57,7 +57,7 @@ export const Promo = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="md:container shadow mb-44 bg-white rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto">
+      <div className="md:container shadow mb-44 bg-white rounded-xl p-4 md:p-10 sm:mx-1 md:mx-auto">
         <div className="md:flex justify-center items-start align-top gap-4">
           <div className="sm:w-full md:w-1/4 md:border-r md:sticky md:top-16 md:overflow-y-auto md:pb-32 md:overflow-hidden space-y-5 sm:h-full md:h-screen pr-4">
             <div className="collapse collapse-arrow w-full bg-opacity-0 mt-4">
