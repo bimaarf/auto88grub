@@ -16,6 +16,7 @@ import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.jpg";
 import { useStateContext } from "./../Providers/StateProvider";
 import { fetchNewCars } from "./Service/__FetchNewCar";
 import { HighLightHeader } from "./Context/__HighLightHeader";
+import { Footer } from "../Components/Footer";
 
 export const Home = () => {
   const navRedirect = useNavigate();
@@ -248,6 +249,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

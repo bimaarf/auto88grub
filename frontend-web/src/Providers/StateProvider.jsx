@@ -24,6 +24,7 @@ const StateProvider = ({ children }) => {
     getNewCars: null,
     getBlog: null,
     getTestimony: null,
+    prevTestimony: null, // New state variable to hold the previous testimony data
   });
 
   const { pageNewCar, pageCarPromo, pageTestimony, pageAllCar } = state;
@@ -63,6 +64,7 @@ const StateProvider = ({ children }) => {
       console.error("Error fetching new cars:", error);
     }
   }, [pageNewCar]);
+
   const getAllCars = useCallback(async () => {
     try {
       const allCars = await fetchCars(pageAllCar);
@@ -74,17 +76,20 @@ const StateProvider = ({ children }) => {
       console.error("Error fetching new cars:", error);
     }
   }, [pageAllCar]);
+
   const getTestimony = useCallback(async () => {
     try {
-      const testimmonyData = await fetchTestimony(pageTestimony);
+      const testimonyData = await fetchTestimony(pageTestimony);
       setState((prevState) => ({
         ...prevState,
-        getTestimony: testimmonyData,
+        prevTestimony: prevState.getTestimony, // Save previous testimony data
+        getTestimony: testimonyData,
       }));
     } catch (error) {
-      console.error("Error fetching blog:", error);
+      console.error("Error fetching testimony:", error);
     }
   }, [pageTestimony]);
+
   useEffect(() => {
     const fetchData = async () => {
       await getTestimony();

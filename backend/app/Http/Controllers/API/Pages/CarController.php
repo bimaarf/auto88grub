@@ -22,22 +22,55 @@ class CarController extends Controller
     public function getComponents()
     {
         $data['brand'] = Brand::all();
-        $data['color'] = Color::all();
-        $data['cylinder'] = Cylinder::all();
-        $data['fuel'] = Fuel::all();
-        $data['gear'] = Gear::all();
-        $data['kind'] = Kind::all();
         $data['model'] = Model::all();
-        $data['series'] = Series::all();
-        $data['transmission'] = Transmission::all();
         $data['type'] = Type::all();
+        $data['kind'] = Kind::all();
+        $data['cylinder'] = Cylinder::all();
+        $data['transmission'] = Transmission::all();
+        $data['series'] = Series::all();
+        $data['gear'] = Gear::all();
+        $data['fuel'] = Fuel::all();
+        $data['color'] = Color::all();
         return response()->json(['data' => $data]);
     }
+    public function filter(Request $request)
+    {
+        $input = $request->all();
+
+        $query = Car::with([
+            'promos', 'documents', 'officials', 'originals', 'outdoors',
+            'location', 'brand', 'model', 'type' ,'cylinder', 'transmission', 'series',
+            'gear', 'fuel', 'color', 'row', 'year'
+        ]);
+
+        foreach ($input as $key => $value) {
+            if ($key === 'perPage' || $key === 'price' || empty($value)) {
+                continue;
+            }
+
+            $query->orWhere(function ($q) use ($key, $value) {
+                $q->where("car_{$key}_id", $value);
+            });
+        }
+
+        if (isset($input['price'])) {
+            $query->where('price', '<', $input['price']);
+        }
+
+        $perPage = $request->input('perPage', 10);
+        $cars = $query->paginate($perPage);
+        $cars->getCollection()->transform(function ($car) {
+            $car->title = $car->slug;
+            $car->slug = Str::slug($car->title);
+            return $car;
+        });
+        return $cars;
+    }
+
     public function getNew(Request $request)
     {
         $page = $request->query('page', 1);
         $perPage = $request->query('perPage', 10);
-
         $getCar = Car::with([
             'promos', 'documents', 'officials', 'originals', 'outdoors',
             'location', 'brand', 'model', 'type' ,'cylinder', 'transmission', 'series',
@@ -65,14 +98,11 @@ class CarController extends Controller
         ])
         ->orderBy('id', 'DESC')
         ->paginate($perPage, ['*'], 'page', $page);
-
-        // Transform the title attribute for each car to be the slug of the title
         $getCar->getCollection()->transform(function ($car) {
             $car->title = $car->slug;
             $car->slug = Str::slug($car->title);
             return $car;
         });
-
         return $getCar;
     }
 

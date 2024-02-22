@@ -47,7 +47,6 @@ function App() {
       0: "#b91c1c",
     },
   });
-
   return (
     <>
       <ToastContainer autoClose={1000} hideProgressBar={true} theme="dark" />
@@ -69,7 +68,7 @@ function App() {
             <Route path="/FAQ" element={<FAQ />} />
             <Route path="/karir" element={<Career />} />
           </CustomSwitch>
-          <Footer />
+          {/* <Footer /> */}
           <CircleModal />
         </StateProvider>
       </Router>

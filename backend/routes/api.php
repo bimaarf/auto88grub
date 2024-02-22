@@ -37,12 +37,13 @@ Route::post('login', [AuthController::class, 'login']);
     // Routes for CarController
 Route::get('car/show', [CarController::class, 'showCar']);
 Route::get('car/component/show', [CarController::class, 'getComponents']);
-Route::get('testimonial/show', [TestimonyController::class, 'show']);
 Route::get('car/new/show', [CarController::class, 'getNew']);
 Route::get('car/promo/show', [CarPromoController::class, 'showPromo']);
 Route::get('car/preview/{slug}/{carId}', [CarController::class, 'previewCar']);
+Route::post('car/filter/show', [CarController::class, 'filter']);
 Route::get('blog/show', [BlogController::class, 'viewSample']);
 Route::get('blog/sample/show', [BlogController::class, 'viewSample']);
+Route::get('testimonial/show', [TestimonyController::class, 'show']);
 
 // Routes requiring authentication with Sanctum
 Route::middleware('auth:sanctum')->group(function () {

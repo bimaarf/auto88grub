@@ -22,7 +22,7 @@ export const TestimonyList = ({ getTestimony }) => {
                       {item.name}
                     </p>
                     <p className="text-sm font-normal text-gray-700 lowercase">
-                      {item.created_at}
+                      {item.testimoni_at}
                     </p>
                   </div>
                 </div>

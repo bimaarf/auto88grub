@@ -19,8 +19,7 @@ export const Testimony = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + window.scrollY >=
-          document.body.offsetHeight - 200 &&
+        window.innerHeight + window.scrollY >= document.body.offsetHeight + 100 &&
         !loading &&
         !reachedEnd
       ) {
@@ -35,29 +34,33 @@ export const Testimony = () => {
 
   const loadMoreTestimony = async () => {
     setLoading(true);
-
     const nextPage = {
-      page: pageTestimony.page,
-      perPage: pageTestimony.perPage + 6,
+      page: pageTestimony.page + 1,
+      perPage: pageTestimony.perPage,
+      lastPage: pageTestimony.lastPage,
     };
 
     try {
       const testimonyData = await fetchTestimony(nextPage);
 
-      // Jika jumlah data yang dimuat sama dengan atau melebihi jumlah total data,
-      // tandai bahwa sudah mencapai akhir data
-      if (testimonyData.data.length >= testimonyData.total) {
-        setReachedEnd(true);
-      }
+      // Gabungkan data baru dengan data yang sudah ada
+      const updatedData = [...getTestimony.data, ...testimonyData.data];
+
+      const totalLoadedData = updatedData.length;
 
       setState((prevState) => ({
         ...prevState,
         getTestimony: {
           ...testimonyData,
-          data: [...prevState.getTestimony.data, ...testimonyData.data], // Gabungkan data baru dengan data yang sudah ada
+          data: updatedData,
+          total: totalLoadedData, // Update total data yang telah dimuat
         },
-        pageTestimony: nextPage,
+        // pageTestimony: nextPage, // Perbarui informasi halaman selanjutnya
       }));
+
+      if (totalLoadedData >= testimonyData.total) {
+        setReachedEnd(true);
+      }
     } catch (error) {
       console.error("Error fetching testimonies:", error);
     }
@@ -111,6 +114,11 @@ export const Testimony = () => {
             </>
           )}
         </div>
+        {reachedEnd && (
+          <div className="text-center text-gray-500 py-2">
+            No more testimonies to load
+          </div>
+        )}
       </div>
     </>
   );

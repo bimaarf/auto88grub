@@ -17,11 +17,11 @@ class Testimonial extends Model implements HasMedia
      * @var string
      */
     protected $table = 'car_testimonials';
-    public function getCreatedAtAttribute()
-    {
-        return \Carbon\Carbon::parse($this->attributes['created_at'])
-            ->format('d M Y - H:i');
-    }
+    // public function getTestimoniAtAttribute()
+    // {
+    //     return \Carbon\Carbon::parse($this->attributes['testimoni_at'])
+    //         ->format('d M Y - H:i');
+    // }
     public function car(): BelongsTo
     {
         return $this->belongsTo(Car::class, 'car_id');
