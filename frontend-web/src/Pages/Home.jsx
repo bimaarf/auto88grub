@@ -17,6 +17,7 @@ import { useStateContext } from "./../Providers/StateProvider";
 import { fetchNewCars } from "./Service/__FetchNewCar";
 import { HighLightHeader } from "./Context/__HighLightHeader";
 import { Footer } from "../Components/Footer";
+import { BarMenu } from "./Context/__BarMenu";
 
 export const Home = () => {
   const navRedirect = useNavigate();
@@ -87,6 +88,9 @@ export const Home = () => {
             <CarouselCarRecomen />
           </div>
         </div>
+      </div>
+      <div className="my-4">
+        <BarMenu />
       </div>
       <div
         className="w-full -z-10 md:px-20"

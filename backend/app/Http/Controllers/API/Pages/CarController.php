@@ -48,7 +48,7 @@ class CarController extends Controller
                 continue;
             }
 
-            $query->orWhere(function ($q) use ($key, $value) {
+            $query->where(function ($q) use ($key, $value) {
                 $q->where("car_{$key}_id", $value);
             });
         }

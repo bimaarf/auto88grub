@@ -61,9 +61,12 @@ export const Car = () => {
     e.persist();
     setFormInput({ ...formInput, [e.target.name]: e.target.value });
   };
+  useEffect(() => {
+    handleSubmit();
+  }, [formInput]);
   const handleSubmit = async (e) => {
     setLoadFetch(true);
-    e.preventDefault();
+    // e.preventDefault();
     const response = await reqCarFilter(formInput);
     setCarsFilter(response);
     setLoadFetch(false);
@@ -95,13 +98,25 @@ export const Car = () => {
                     id="price"
                     onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
-                    <option value="1000000000">1.000.000.000</option>
-                    <option value="750000000">750.000.000</option>
-                    <option value="500000000">500.000.000</option>
-                    <option value="300000000">300.000.000</option>
-                    <option value="200000000">200.000.000</option>
-                    <option value="150000000">150.000.000</option>
-                    <option value="100000000">100.000.000</option>
+                    <option value="">-- Semua --</option>
+                    <option value="1000000000">
+                      ≤ <CurrentFormat value={1000000000} />
+                    </option>
+                    <option value="750000000">
+                      ≤ <CurrentFormat value={750000000} />
+                    </option>
+                    <option value="500000000">
+                      ≤ <CurrentFormat value={500000000} />
+                    </option>
+                    <option value="300000000">
+                      ≤ <CurrentFormat value={300000000} />
+                    </option>
+                    <option value="150000000">
+                      ≤ <CurrentFormat value={150000000} />
+                    </option>
+                    <option value="100000000">
+                      ≤ <CurrentFormat value={100000000} />
+                    </option>
                   </select>
                 </div>
                 <div className="space-y-2">
@@ -113,7 +128,7 @@ export const Car = () => {
                     id="brand"
                     onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
-                    <option value="Semua">Semua</option>
+                    <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.brand.map((item, key) => (
                         <option key={key} value={item.id}>
@@ -131,7 +146,7 @@ export const Car = () => {
                     id="model"
                     onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
-                    <option value="">Semua</option>
+                    <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.model.map((item, key) => (
                         <option key={key} value={item.id}>
@@ -149,7 +164,7 @@ export const Car = () => {
                     id="type"
                     onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
-                    <option value="">Semua</option>
+                    <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.type.map((item, key) => (
                         <option key={key} value={item.id}>
@@ -167,7 +182,7 @@ export const Car = () => {
                     id="kind"
                     onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
-                    <option value="">Semua</option>
+                    <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.kind.map((item, key) => (
                         <option key={key} value={item.id}>
@@ -185,7 +200,7 @@ export const Car = () => {
                     id="cylinder"
                     onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
-                    <option value="">Semua</option>
+                    <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.cylinder.map((item, key) => (
                         <option key={key} value={item.id}>
@@ -203,7 +218,7 @@ export const Car = () => {
                     id="transmission"
                     onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
-                    <option value="">Semua</option>
+                    <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.transmission.map((item, key) => (
                         <option key={key} value={item.id}>
@@ -221,7 +236,7 @@ export const Car = () => {
                     id="series"
                     onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
-                    <option value="">Semua</option>
+                    <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.series.map((item, key) => (
                         <option key={key} value={item.id}>
@@ -239,7 +254,7 @@ export const Car = () => {
                     id="gear"
                     onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
-                    <option value="">Semua</option>
+                    <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.gear.map((item, key) => (
                         <option key={key} value={item.id}>
@@ -257,7 +272,7 @@ export const Car = () => {
                     id="fuel"
                     onChange={handleChange}
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
-                    <option value="">Semua</option>
+                    <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.fuel.map((item, key) => (
                         <option key={key} value={item.id}>
@@ -275,7 +290,7 @@ export const Car = () => {
                     name="color"
                     id="color"
                     className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
-                    <option value="">Semua</option>
+                    <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.color.map((item, key) => (
                         <option key={key} value={item.id}>
