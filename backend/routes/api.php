@@ -45,6 +45,7 @@ Route::post('car/filter/show', [CarController::class, 'filter']);
 Route::post('car/promo/filter/show', [CarPromoController::class, 'filter']);
 Route::get('blog/show', [BlogController::class, 'viewSample']);
 Route::get('blog/sample/show', [BlogController::class, 'viewSample']);
+
 Route::get('testimonial/show', [TestimonyController::class, 'show']);
 Route::get('highlight/show', [LandingController::class, 'hlShow']);
 Route::get('slider/show', [LandingController::class, 'sliderShow']);

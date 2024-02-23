@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { HighLightHeader } from "./Context/__HighLightHeader";
 import { useStateContext } from "../Providers/StateProvider";
+import { Footer } from "../Components/Footer";
 
 export const About = () => {
   useEffect(() => {
@@ -11,7 +12,7 @@ export const About = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto">
+      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto shadow">
         {getCompanyProfile &&
           getCompanyProfile.about.map((item, key) => (
             <>
@@ -38,6 +39,7 @@ export const About = () => {
             </>
           ))}
       </div>
+      <Footer />
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { HighLightHeader } from "./Context/__HighLightHeader";
 import { useStateContext } from "../Providers/StateProvider";
+import { Footer } from "../Components/Footer";
 
 export const TradeIns = () => {
   useEffect(() => {
@@ -11,7 +12,7 @@ export const TradeIns = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto">
+      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto shadow">
         <h1 className="text-xl md:text-5xl w-full border-b mb-6 pb-4 border-dashed font-semibold text-red-800">
           Tukar Tambah
         </h1>
@@ -39,6 +40,7 @@ export const TradeIns = () => {
             ))}
         </div>
       </div>
+      <Footer />
     </>
   );
 };

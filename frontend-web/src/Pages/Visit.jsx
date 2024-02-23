@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { HighLightHeader } from "./Context/__HighLightHeader";
+import { Footer } from "../Components/Footer";
 
 export const Visit = () => {
   useEffect(() => {
@@ -8,7 +9,7 @@ export const Visit = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-1 md:mx-auto">
+      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-1 md:mx-auto shadow">
         <h1 className="text-xl md:text-5xl m-4 w-full border-b mb-6 pb-4 border-dashed font-semibold text-gray-800">
           Lokasi Auto Show 88
         </h1>
@@ -78,6 +79,7 @@ export const Visit = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

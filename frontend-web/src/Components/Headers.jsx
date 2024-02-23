@@ -11,7 +11,7 @@ export const Headers = () => {
   return (
     <>
       <HomeMarquee />
-      <div className="p-4 lg:px-10 sticky top-0 z-50 bg-white shadow-lg backdrop-filter backdrop-blur-lg backdrop-brightness-200">
+      <div className="p-4 lg:px-10 sticky top-0 z-50 bg-white/80 shadow-lg backdrop-filter backdrop-blur-lg">
         <div className="lg:container lg:mx-auto  whitespace-nowrap">
           <div className="flex justify-between">
             <h1

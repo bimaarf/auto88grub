@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { HighLightHeader } from "./Context/__HighLightHeader";
+import { Footer } from "../Components/Footer";
 
 export const Career = () => {
   useEffect(() => {
@@ -9,7 +10,7 @@ export const Career = () => {
     <>
       <HighLightHeader />
 
-      <div className="md:container slide-in fade-in-left mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto">
+      <div className="md:container slide-in fade-in-left mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto shadow">
         <div role="tablist" className="tabs tabs-lifted">
           <input
             type="radio"
@@ -95,6 +96,7 @@ export const Career = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

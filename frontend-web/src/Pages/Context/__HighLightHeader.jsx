@@ -4,18 +4,24 @@ import axios from "axios";
 
 export const HighLightHeader = () => {
   const [getHighlight, setHighLight] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
+
   const _fetchData = async () => {
     await axios.get("sanctum/csrf-cookie");
     const response = await axios.get("api/highlight/show");
     setHighLight(response.data);
+    if (response.data[0] && response.data[0].video_url) {
+      setVideoUrl(response.data[0].video_url);
+    }
   };
+
   useEffect(() => {
     _fetchData();
   }, []);
   return (
     <>
       <div
-        className="w-full -z-10 px-20 relative top-0 overflow-hidden "
+        className="w-full -z-10 px-20 shadow-black/5 shadow-2xl relative top-0 overflow-hidden "
         style={{
           backgroundImage: `url(${bannerImg})`,
           backgroundRepeat: "no-repeat",
@@ -24,12 +30,12 @@ export const HighLightHeader = () => {
           backgroundSize: "cover",
           height: "80vh",
           marginBottom: "-60vh",
-          borderBottomLeftRadius: "30vh",
-          borderBottomRightRadius: "30vh",
+          borderBottomLeftRadius: "10vh",
+          borderBottomRightRadius: "10vh",
           // filter: "blur(2px)", // Apply blur effect to the image
         }}
       />
-      <div className="absolute inset-0 mt-10 flex justify-center">
+      <div className="absolute inset-0 mt-20 flex justify-center">
         <div className="md:p-20 p-8 md:rounded-xl">
           <div className="text-black/80 flex justify-center items-center">
             <div
@@ -47,7 +53,7 @@ export const HighLightHeader = () => {
             </div>
           </div>
           {getHighlight ? (
-            <p className="md:mt-10 mt-4 sm:text-xs md:text-lg font-medium text-black/80 text-center">
+            <p className="md:mt-10 mt-4 sm:text-xs md:text-lg font-medium text-black/80 text-center whitespace-pre-wrap">
               {getHighlight[0].subtitle}
               {/* Pencarian unit mobil dan transaksional akan kami arahkan ke mobbi.
               Kenalan dulu yuk! */}

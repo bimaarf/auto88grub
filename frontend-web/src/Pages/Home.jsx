@@ -201,19 +201,19 @@ export const Home = () => {
                 ref={carouselRef}>
                 <h1>Berita Terkini</h1>
               </div>
-              <div className="flex justify-center">
+              <div className="flex justify-center mx-4">
                 {getBlog ? (
                   <CarouselBlog getBlog={getBlog} />
                 ) : (
                   <CarouselBlogSkeleton />
                 )}
               </div>
-              <div className="text-xs mt-20 text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
+              {/* <div className="text-xs mt-20 text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
                 <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
                   <i className="fas fa-angle-down"></i>
                   <p>Selengkapnya</p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="w-full md:px-20 mt-20">

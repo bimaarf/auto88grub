@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { TECarousel, TECarouselItem } from "tw-elements-react";
 import bannerImg from "../Images/Banner/red_wavy_with_halftone_background.jpg";
 import { fetchCarPreview } from "./Service/__FetchCarPreview";
+import { Footer } from "../Components/Footer";
 
 export const CarPreview = () => {
   const location = useLocation();
@@ -268,6 +269,7 @@ export const CarPreview = () => {
           </TECarousel>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

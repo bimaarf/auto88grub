@@ -29,6 +29,7 @@ import { Visit } from "./Pages/Visit";
 import { StateProvider } from "./Providers/StateProvider";
 import { CircleModal } from "./Pages/Context/__CircleModal";
 import patterImage from "./Images/Background/pattern.png";
+import { BlogPreview } from "./Pages/BlogPreview";
 axios.defaults.baseURL = process.env.REACT_APP_API;
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 axios.defaults.headers.post["Content-Type"] =
@@ -58,6 +59,7 @@ function App() {
             <Route path="/promo" element={<Promo />} />
             <Route path="/mobil" element={<Car />} />
             <Route path="/mobil/preview" element={<CarPreview />} />
+            <Route path="/berita/preview" element={<BlogPreview />} />
             <Route path="/testimoni" element={<Testimony />} />
             <Route path="/konsultasi" element={<Consultation />} />
             <Route path="/tukar-tambah" element={<TradeIns />} />
