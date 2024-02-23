@@ -10,3 +10,13 @@ export async function reqCarFilter(data) {
     throw error;
   }
 }
+export async function reqCarPromoFilter(data) {
+  try {
+    await axios.get("sanctum/csrf-cookie");
+    const response = await axios.post("api/car/promo/filter/show", data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching car data:", error);
+    throw error;
+  }
+}

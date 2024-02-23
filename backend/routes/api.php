@@ -9,6 +9,7 @@ use App\Http\Controllers\API\Pages\BlogController;
 use App\Http\Controllers\API\Pages\CarController;
 use App\Http\Controllers\API\Pages\CarPromoController;
 use App\Http\Controllers\API\Pages\TestimonyController;
+use App\Http\Controllers\LandingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,10 +42,22 @@ Route::get('car/new/show', [CarController::class, 'getNew']);
 Route::get('car/promo/show', [CarPromoController::class, 'showPromo']);
 Route::get('car/preview/{slug}/{carId}', [CarController::class, 'previewCar']);
 Route::post('car/filter/show', [CarController::class, 'filter']);
+Route::post('car/promo/filter/show', [CarPromoController::class, 'filter']);
 Route::get('blog/show', [BlogController::class, 'viewSample']);
 Route::get('blog/sample/show', [BlogController::class, 'viewSample']);
 Route::get('testimonial/show', [TestimonyController::class, 'show']);
+Route::get('highlight/show', [LandingController::class, 'hlShow']);
+Route::get('slider/show', [LandingController::class, 'sliderShow']);
+// company
+Route::get('company/profile/show', [LandingController::class, 'getCompanyProfile']);
+// Route::get('consultation/show', [LandingController::class, 'consultation']);
+// Route::get('trade-in/show', [LandingController::class, 'tradeIn']);
+// Route::get('credit-car/show', [LandingController::class, 'creditCar']);
+// Route::get('term/show', [LandingController::class, 'term']);
+// Route::get('about/show', [LandingController::class, 'about']);
+// Route::get('visit/show', [LandingController::class, 'visit']);
 
+// company
 // Routes requiring authentication with Sanctum
 Route::middleware('auth:sanctum')->group(function () {
     // Routes for BrandController

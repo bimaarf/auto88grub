@@ -10,7 +10,7 @@ export const CarouselTestimony = ({ getTestimony }) => {
               <div
                 onClick={() => window.open(item.link, "_blank")}
                 key={key}
-                className="my-4 cursor-pointer hover:scale-95 duration-300">
+                className="my-4 fade-in-left cursor-pointer hover:scale-95 duration-300">
                 <div className="flex justify-center space-y-2">
                   <img
                     draggable={false}

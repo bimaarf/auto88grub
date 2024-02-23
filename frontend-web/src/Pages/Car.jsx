@@ -13,6 +13,7 @@ import { ListCarSkeleton } from "./Context/__ListCarSkeleton";
 export const Car = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+    __GET_CAR_COMP();
   }, []);
   const [getCarFilter, setCarsFilter] = useState("");
   const { state, setState } = useStateContext();
@@ -44,40 +45,29 @@ export const Car = () => {
     const response = await fetchCarComp();
     setComp(response.data);
   };
-  const [formInput, setFormInput] = useState({
-    price: "",
-    brand: "",
-    model: "",
-    type: "",
-    kind: "",
-    cylinder: "",
-    transmission: "",
-    series: "",
-    gear: "",
-    fuel: "",
-    color: "",
-  });
-  const handleChange = (e) => {
-    e.persist();
-    setFormInput({ ...formInput, [e.target.name]: e.target.value });
-  };
-  useEffect(() => {
-    handleSubmit();
-  }, [formInput]);
-  const handleSubmit = async (e) => {
+  const [formInput, setFormInput] = useState();
+
+  const handleSubmit = async () => {
     setLoadFetch(true);
-    // e.preventDefault();
     const response = await reqCarFilter(formInput);
     setCarsFilter(response);
     setLoadFetch(false);
   };
+  const handleChange = (e) => {
+    e.persist();
+    const { name, value } = e.target;
+    setFormInput((prevFormInput) => ({
+      ...prevFormInput,
+      [name]: value,
+    }));
+  };
   useEffect(() => {
-    __GET_CAR_COMP();
-  }, []);
+    handleSubmit();
+  }, [formInput]);
   return (
     <>
       <HighLightHeader />
-      <div className="lg:container shadow mb-44 bg-white rounded-xl -mt-10 p-4 sm:mx-1 lg:mx-auto">
+      <div className="lg:container  shadow mb-44 bg-white rounded-xl -mt-10 p-4 sm:mx-1 lg:mx-auto">
         <div className="md:flex justify-center items-start align-top gap-4">
           <div className="sm:w-full md:w-1/4 md:border-r md:sticky md:top-16  md:pb-32  space-y-5 sm:h-full  pr-4">
             <div className="collapse collapse-arrow w-full bg-opacity-0 mt-4">
@@ -97,7 +87,7 @@ export const Car = () => {
                     name="price"
                     id="price"
                     onChange={handleChange}
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:brightness-95 duration-300">
                     <option value="">-- Semua --</option>
                     <option value="1000000000">
                       ≤ <CurrentFormat value={1000000000} />
@@ -127,7 +117,7 @@ export const Car = () => {
                     name="brand"
                     id="brand"
                     onChange={handleChange}
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:brightness-95 duration-300">
                     <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.brand.map((item, key) => (
@@ -145,7 +135,7 @@ export const Car = () => {
                     name="model"
                     id="model"
                     onChange={handleChange}
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:brightness-95 duration-300">
                     <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.model.map((item, key) => (
@@ -163,7 +153,7 @@ export const Car = () => {
                     name="type"
                     id="type"
                     onChange={handleChange}
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:brightness-95 duration-300">
                     <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.type.map((item, key) => (
@@ -181,7 +171,7 @@ export const Car = () => {
                     name="kind"
                     id="kind"
                     onChange={handleChange}
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:brightness-95 duration-300">
                     <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.kind.map((item, key) => (
@@ -199,7 +189,7 @@ export const Car = () => {
                     name="cylinder"
                     id="cylinder"
                     onChange={handleChange}
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:brightness-95 duration-300">
                     <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.cylinder.map((item, key) => (
@@ -217,7 +207,7 @@ export const Car = () => {
                     name="transmission"
                     id="transmission"
                     onChange={handleChange}
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:brightness-95 duration-300">
                     <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.transmission.map((item, key) => (
@@ -235,7 +225,7 @@ export const Car = () => {
                     name="series"
                     id="series"
                     onChange={handleChange}
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:brightness-95 duration-300">
                     <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.series.map((item, key) => (
@@ -253,7 +243,7 @@ export const Car = () => {
                     name="gear"
                     id="gear"
                     onChange={handleChange}
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:brightness-95 duration-300">
                     <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.gear.map((item, key) => (
@@ -271,7 +261,7 @@ export const Car = () => {
                     name="fuel"
                     id="fuel"
                     onChange={handleChange}
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:brightness-95 duration-300">
                     <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.fuel.map((item, key) => (
@@ -289,7 +279,7 @@ export const Car = () => {
                     onChange={handleChange}
                     name="color"
                     id="color"
-                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:scale-95 duration-300">
+                    className="form-control px-2 py-2 w-full outline-none bg-base-200 bg-opacity-50 rounded active:brightness-95 duration-300">
                     <option value="">-- Semua --</option>
                     {getComp &&
                       getComp.color.map((item, key) => (
@@ -302,7 +292,7 @@ export const Car = () => {
                 <div className="space-y-2">
                   <button
                     onClick={handleSubmit}
-                    className="w-full glass active:scale-95 bg-red-700 skeleton  duration-300 p-2 rounded text-white">
+                    className="w-full glass active:brightness-95 bg-red-700 skeleton  duration-300 p-2 rounded text-white">
                     Cari
                   </button>
                 </div>

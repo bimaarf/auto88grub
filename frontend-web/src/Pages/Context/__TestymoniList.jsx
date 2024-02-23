@@ -5,7 +5,7 @@ export const TestimonyList = ({ getTestimony }) => {
     <div className="bg-white w-full border  border-gray-100 bg-opacity-10 backdrop-blur-sm p-4 pb-32">
       {getTestimony.data.map((item, key) => (
         <div key={key}>
-          <div className="collapse select-none whitespace-nowrap outline-none overflow-x-auto collapse-arrow bg-white hover:bg-gray-50 duration-300 border  mt-4">
+          <div className="collapse fade-in-left select-none whitespace-nowrap outline-none overflow-x-auto collapse-arrow bg-white hover:bg-gray-50 duration-300 border  mt-4">
             <input type="checkbox" name="my-accordion-2" id="my-wallet" />
             <div className="collapse-title text-xl font-medium">
               <div className="lg:flex space-y-4 lg:space-y-0 justify-start xl:max-w-screen-lg items-center">

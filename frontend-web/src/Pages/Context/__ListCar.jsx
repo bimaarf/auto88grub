@@ -35,9 +35,6 @@ export const ListCar = ({ getAllCars }) => {
             <p className="text-gray-800 font-light text-xs md:text-md text-left uppercase">
               {item.type.name} / {item.series.name} / {item.fuel.name}
             </p>
-            <p className="text-gray-800 text-xs md:text-md font-medium line-through text-right">
-              Rp 1x4.000.000
-            </p>
             <p className="text-gray-800 text-sm md:text-xl font-bold text-right">
               <CurrentFormat value={item.price} />
             </p>

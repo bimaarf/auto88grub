@@ -28,7 +28,7 @@ import { TradeIns } from "./Pages/TradeIns";
 import { Visit } from "./Pages/Visit";
 import { StateProvider } from "./Providers/StateProvider";
 import { CircleModal } from "./Pages/Context/__CircleModal";
-
+import patterImage from "./Images/Background/pattern.png";
 axios.defaults.baseURL = process.env.REACT_APP_API;
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 axios.defaults.headers.post["Content-Type"] =

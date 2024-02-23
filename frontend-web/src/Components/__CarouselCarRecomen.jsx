@@ -51,14 +51,13 @@ export const CarouselCarRecomen = () => {
             </svg>
           </IconButton>
         )}>
-        <div className="relative grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+        <div className="relative grid grid-cols-2 sm:grid-cols-4 gap-4">
           {(function (rows, i, len) {
             while (++i <= len) {
               rows.push(
                 <div
-                  draggable={false}
                   key={i}
-                  className="block border-transparent border hover:border-red-500 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                  className="block border-transparent border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full mb-3 max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                   <div className="relative overflow-hidden bg-cover bg-no-repeat">
                     <img
                       className="rounded-t-lg"
@@ -68,14 +67,10 @@ export const CarouselCarRecomen = () => {
                   </div>
                   <div className="p-6">
                     <h1 className="font-bold text-gray-800 text-sm md:text-md">
-                      DAIHATSU ALL NEW AYLA (WHITE) TIPE X 1.0 M/T (2023)....
+                      DAIHATSU ALL NEW AYLA (WHITE) TIP....
                     </h1>
                     <p className="text-gray-800 font-light text-xs md:text-md text-left">
                       HATCHBACK / - / PREMIUM
-                    </p>
-
-                    <p className="text-gray-800 text-xs md:text-md font-medium line-through text-right">
-                      Rp 1x4.000.000
                     </p>
                     <p className="text-gray-800 text-sm md:text-xl font-bold text-right">
                       Rp 1x4.000.000
@@ -108,15 +103,15 @@ export const CarouselCarRecomen = () => {
               // if (window.innerWidth <= 768) break;
             }
             return rows;
-          })([], 0, 6)}
+          })([], 0, 4)}
         </div>
-        <div className="relative grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+        <div className="relative grid grid-cols-2 sm:grid-cols-4 gap-4">
           {(function (rows, i, len) {
             while (++i <= len) {
               rows.push(
                 <div
                   key={i}
-                  className="block border-transparent border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                  className="block border-transparent border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full mb-3 max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                   <div className="relative overflow-hidden bg-cover bg-no-repeat">
                     <img
                       className="rounded-t-lg"
@@ -126,14 +121,10 @@ export const CarouselCarRecomen = () => {
                   </div>
                   <div className="p-6">
                     <h1 className="font-bold text-gray-800 text-sm md:text-md">
-                      DAIHATSU ALL NEW AYLA (WHITE) TIPE X 1.0 M/T (2023)....
+                      DAIHATSU ALL NEW AYLA (WHITE) TIP....
                     </h1>
                     <p className="text-gray-800 font-light text-xs md:text-md text-left">
                       HATCHBACK / - / PREMIUM
-                    </p>
-
-                    <p className="text-gray-800 text-xs md:text-md font-medium line-through text-right">
-                      Rp 1x4.000.000
                     </p>
                     <p className="text-gray-800 text-sm md:text-xl font-bold text-right">
                       Rp 1x4.000.000
@@ -166,7 +157,7 @@ export const CarouselCarRecomen = () => {
               // if (window.innerWidth <= 768) break;
             }
             return rows;
-          })([], 0, 6)}
+          })([], 0, 4)}
         </div>
       </Carousel>
     </>

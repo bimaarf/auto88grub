@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { TECarousel, TECarouselItem } from "tw-elements-react";
 import bannerImg from "../Images/Banner/red_wavy_with_halftone_background.jpg";
-import { fetchCarPreview } from "./Service/__FetchCarPreview";
+import { fetchBlogPreview } from "./Service/__FetchBlogPreview";
 
-export const CarPreview = () => {
+export const BlogPreview = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
@@ -29,7 +29,7 @@ export const CarPreview = () => {
     const id = searchParams.get("index");
 
     if (slug && id) {
-      setCars(await fetchCarPreview({ slug, id }));
+      setCars(await fetchBlogPreview({ slug, id }));
     }
   };
 

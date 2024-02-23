@@ -12,15 +12,15 @@ export const CircleModal = () => {
       <label
         onClick={() => setShowBubble(showBubble ? false : true)}
         htmlFor="my-modal-help"
-        className="fixed z-30 scale-50 lg:scale-100 bottom-0 right-20 cursor-pointer inline-block rounded-full duration-200 leading-normal text-white">
+        className="fixed z-50 scale-50 lg:scale-100 bottom-0 right-20 cursor-pointer inline-block rounded-full duration-200 leading-normal text-white">
         <div className="flex">
           <div
-            className={`chat duration-500 chat-end  relative bottom-20 right-0 mr-4 z-50 ${
-              showBubble ? "scale-100" : "scale-0"
+            className={`chat duration-500 chat-end  relative bottom-20 right-20 mr-4 z-50 ${
+              showBubble ? "scale-125" : "scale-0"
             }`}>
             <div className="chat-bubble w-96 bg-transparent">
               <div className="text-gray-800">
-                <div className="space-y-4">
+                <div className="space-y-4 scale-150">
                   <div
                     onClick={() =>
                       window.open(
@@ -66,7 +66,9 @@ export const CircleModal = () => {
           </div>
           <img
             src={require("../../Images/Icon/contact.png")}
-            className={`h-40 w-full duration-300 active:scale-95 ${showBubble && 'skeleton *:bg-black/5 bg-opacity-20'}`}
+            className={`h-40 w-full duration-300 active:scale-95 ${
+              showBubble && "skeleton *:bg-black/5 bg-opacity-20"
+            }`}
             width={100}
             alt=""
           />

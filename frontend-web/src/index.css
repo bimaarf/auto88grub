@@ -41,6 +41,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
 .blurry-background {
   position: relative;
 }
@@ -63,10 +64,30 @@ code {
 @keyframes fadeInLeft {
   from {
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translateY(50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* animate */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
   }
   to {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+/* Apply slide-in animation to elements when scrolled into view */
+.slide-in {
+  opacity: 0; /* Initially hidden */
+}
+
+.active.slide-in {
+  animation: slideIn 1s ease-out forwards;
 }

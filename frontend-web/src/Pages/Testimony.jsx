@@ -19,7 +19,8 @@ export const Testimony = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + window.scrollY >= document.body.offsetHeight + 100 &&
+        window.innerHeight + window.scrollY >=
+          document.body.offsetHeight + 100 &&
         !loading &&
         !reachedEnd
       ) {

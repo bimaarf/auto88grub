@@ -9,7 +9,7 @@ export const FAQ = () => {
     <>
       <HighLightHeader />
       <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto">
-        <div role="tablist" className="tabs tabs-lifted">
+        <div role="tablist" className="tabs tabs-lifted slide-in fade-in-left">
           <input
             checked
             type="radio"

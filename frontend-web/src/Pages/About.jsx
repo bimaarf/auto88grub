@@ -1,69 +1,42 @@
 import React, { useEffect } from "react";
 import { HighLightHeader } from "./Context/__HighLightHeader";
+import { useStateContext } from "../Providers/StateProvider";
 
 export const About = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const { state } = useStateContext();
+  const { getCompanyProfile } = state;
   return (
     <>
       <HighLightHeader />
-
-      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-1 md:mx-auto">
-        <div className="md:flex items-start gap-16 p-4">
-          <div className="sm:w-full md:w-1/2">
-            <img
-              src="https://auto88group.com/image/about-us/20230704142843.jpg"
-              alt=""
-            />
-            <p className="mt-10 pb-6 border-b border-dashed">
-              Showroom kami menjamin stok mobil bekas yang terbanyak dan
-              terlengkap di KalBar.
-            </p>
-            <p className="mt-10 pb-6 border-b border-dashed">
-              Kami menjamin unit-unit yang kami jual bukan merupakan bekas
-              rental taksi, bukan bekas banjir, dll.
-            </p>
-            <p className="mt-10 pb-6 border-b border-dashed">
-              Kami memiliki tim yang profesional dan berpengalaman untuk
-              melayani konsumen dengan baik.
-            </p>
-            <p className="mt-10 pb-6 border-b border-dashed">
-              Semua ini demi kepuasan pelanggan yang telah membeli mobil
-              berkualitas tinggi dengan kami serta tidak ragu untuk
-              merekomendasikannya.
-            </p>
-            <p className="mt-10 pb-6 border-b border-dashed">
-              Kami ada karena Anda semua dan kami akan terus melakukan perubahan
-              yang lebih baik untuk Anda.
-            </p>
-          </div>
-          {/* column 2 */}
-          <div className="sm:w-full md:w-1/2">
-            <p className="mt-10 pb-6 border-b border-dashed">
-              Kami adalah perusahaan yang bergerak dibidang penjualan mobil
-              bekas berkualitas tinggi dengan slogan kami yakni "We Bring a
-              Quality" dan berani memberi garansi hingga 2 tahun.
-            </p>
-            <p className="mt-10 pb-6 border-b border-dashed">
-              Kami telah menggeluti bidang penjualan mobil bekas hampir 10 tahun
-              di kota Pontianak. Kami sendiri melayani penjualan mobil bekas
-              berkualitas se-Kalimantan Barat maupun di Indonesia.
-            </p>
-            <p className="mt-10 pb-6 border-b border-dashed">
-              Kami menjual mobil-mobil berkualitas terbaik seperti Toyota,
-              Daihatsu, Honda, dll.
-            </p>
-            <p className="mt-10 pb-6 border-b border-dashed">
-              Dengan memiliki banyak stok dan varian untuk mempermudah Anda
-              memilih atau membeli mobil yang Anda inginkan.
-            </p>
-            <img
-              src="https://auto88group.com/image/about-us/20230704142838.jpg"
-              alt=""
-            />
-          </div>
-        </div>
+      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto">
+        {getCompanyProfile &&
+          getCompanyProfile.about.map((item, key) => (
+            <>
+              <h1 className="text-xl md:text-5xl w-full border-b mb-6 pb-4 border-dashed font-semibold text-red-800 slide-in fade-in-left">
+                {item.title}
+              </h1>
+              <div
+                className={`md:flex ${
+                  key % 2 === 1 && "flex-row-reverse"
+                } justify-start mb-10 gap-10`}>
+                <div
+                  className="md:w-1/2 prose"
+                  dangerouslySetInnerHTML={{ __html: item.body }}
+                />
+                <div className="md:w-1/2">
+                  <img
+                    draggable={false}
+                    loading="lazy"
+                    src={`${process.env.REACT_APP_API}storage/${item.image}`}
+                    alt=""
+                  />
+                </div>
+              </div>
+            </>
+          ))}
       </div>
     </>
   );

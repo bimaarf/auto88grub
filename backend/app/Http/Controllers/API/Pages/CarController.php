@@ -16,6 +16,7 @@ use App\Models\Car\Type;
 use App\Models\Main\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 
 class CarController extends Controller
 {
@@ -33,6 +34,7 @@ class CarController extends Controller
         $data['color'] = Color::all();
         return response()->json(['data' => $data]);
     }
+
     public function filter(Request $request)
     {
         $input = $request->all();
@@ -59,7 +61,8 @@ class CarController extends Controller
 
         $perPage = $request->input('perPage', 10);
         $cars = $query->paginate($perPage);
-        $cars->getCollection()->transform(function ($car) {
+        $cars->getCollection()->transform(function ($car)
+        {
             $car->title = $car->slug;
             $car->slug = Str::slug($car->title);
             return $car;

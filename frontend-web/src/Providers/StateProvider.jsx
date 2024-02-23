@@ -10,6 +10,8 @@ import { fetchCarPromos } from "../Pages/Service/__FetchCarPromos";
 import { fetchNewCars } from "../Pages/Service/__FetchNewCar";
 import { fetchTestimony } from "../Pages/Service/__FetchTestimony";
 import { fetchCars } from "../Pages/Service/__FetchCar";
+import { fetchSlider } from "../Pages/Service/__FetchSlider";
+import { fetchCompanyProfile } from "../Pages/Service/__FetchCompanyProfile";
 
 const StateContext = createContext();
 
@@ -24,11 +26,24 @@ const StateProvider = ({ children }) => {
     getNewCars: null,
     getBlog: null,
     getTestimony: null,
-    prevTestimony: null, // New state variable to hold the previous testimony data
+    prevTestimony: null,
+    getSliders: null,
+    getCompanyProfile: null,
   });
 
   const { pageNewCar, pageCarPromo, pageTestimony, pageAllCar } = state;
 
+  const getCompanyProfile = useCallback(async () => {
+    try {
+      const companyData = await fetchCompanyProfile();
+      setState((prevState) => ({
+        ...prevState,
+        getCompanyProfile: companyData,
+      }));
+    } catch (error) {
+      console.error("Error fetching company:", error);
+    }
+  }, []);
   const getCarPromos = useCallback(async () => {
     try {
       const carPromos = await fetchCarPromos(pageCarPromo);
@@ -50,6 +65,17 @@ const StateProvider = ({ children }) => {
       }));
     } catch (error) {
       console.error("Error fetching blog:", error);
+    }
+  }, []);
+  const getSliders = useCallback(async () => {
+    try {
+      const sliderData = await fetchSlider();
+      setState((prevState) => ({
+        ...prevState,
+        getSliders: sliderData,
+      }));
+    } catch (error) {
+      console.error("Error fetching slider:", error);
     }
   }, []);
 
@@ -97,10 +123,20 @@ const StateProvider = ({ children }) => {
       await getCarPromos();
       await getNewCars();
       await getAllCars();
+      await getSliders();
+      await getCompanyProfile();
     };
 
     fetchData();
-  }, [getBlog, getTestimony, getCarPromos, getNewCars, getAllCars]);
+  }, [
+    getBlog,
+    getTestimony,
+    getCarPromos,
+    getNewCars,
+    getAllCars,
+    getSliders,
+    getCompanyProfile,
+  ]);
 
   return (
     <StateContext.Provider value={{ state, setState }}>

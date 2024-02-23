@@ -1,13 +1,13 @@
 import { Carousel, IconButton } from "@material-tailwind/react";
 import React from "react";
 
-export const CarouselSl = ({ getSliders }) => {
+export const CarouselSkeleton = () => {
   return (
     <>
       <Carousel
         loop
         autoplay
-        className="rounded-xl w-full md:scale-150 mx-auto"
+        className="rounded-xl w-full md:scale-150"
         prevArrow={({ handlePrev }) => (
           <IconButton
             variant="text"
@@ -52,16 +52,13 @@ export const CarouselSl = ({ getSliders }) => {
             </svg>
           </IconButton>
         )}>
-        {getSliders.map((item, key) => (
-          <div className="relative h-full w-full">
-            <img
-              loading="eager"
-              src={`${process.env.REACT_APP_API}storage/${item.image}`}
-              alt=""
-              className="h-full w-full object-cover"
-            />
-          </div>
-        ))}
+        <div className="relative h-full w-full">
+          <img
+            src="https://placehold.co/1920x600?text=AUTO88GROUP&&font=roboto"
+            alt=""
+            className="h-full w-full object-cover"
+          />
+        </div>
       </Carousel>
 
       {/* <TECarousel showControls showIndicators ride="carousel" className="">

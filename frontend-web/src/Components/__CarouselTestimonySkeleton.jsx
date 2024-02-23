@@ -25,7 +25,7 @@ export const CarouselTestimonySkeleton = () => {
                         <i className="fas fa-spinner align-middle self-center absolute text-gray-300 animate-spin"></i>
                       </div>
                       <div className="p-6 text-center">
-                        <h1 className="skeleton h-4 w-full"></h1>
+                        <p className="skeleton h-4 w-full"></p>
                         <p className="skeleton mt-2 h-4 w-full"></p>
                         <div className="flex justify-center">
                           <p className="skeleton mt-2 h-4 w-1/2"></p>
