@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { CarouselTestimonySkeleton } from "../Components/__CarouselTestimonySkeleton";
 import { useStateContext } from "../Providers/StateProvider";
 import { HighLightHeader } from "./Context/__HighLightHeader";
 import { TestimonyList } from "./Context/__TestymoniList";
-import { fetchTestimony } from "./Service/__FetchTestimony";
 import { TestimonyListSkeleton } from "./Context/__TestymoniListSkeleton";
+import { fetchTestimony } from "./Service/__FetchTestimony";
 
 export const Testimony = () => {
   const { state, setState } = useStateContext();
@@ -15,7 +14,6 @@ export const Testimony = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -30,13 +28,15 @@ export const Testimony = () => {
 
     window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll); // Remove the event listener when the component unmounts
+    };
   }, [getTestimony, loading, reachedEnd]);
 
   const loadMoreTestimony = async () => {
     setLoading(true);
     const nextPage = {
-      page: pageTestimony.page + 1,
+      page: pageTestimony.page++,
       perPage: pageTestimony.perPage,
       lastPage: pageTestimony.lastPage,
     };
@@ -63,7 +63,7 @@ export const Testimony = () => {
         setReachedEnd(true);
       }
     } catch (error) {
-      console.error("Error fetching testimonies:", error);
+      // console.error("Error fetching testimonies:", error);
     }
 
     setLoading(false);
@@ -72,7 +72,7 @@ export const Testimony = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="md:container relative mb-44 bg-white rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto">
+      <div className="md:container max-w-lg relative mb-44 bg-white rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto">
         <ul className="menu bg-white mb-4 border lg:menu-horizontal rounded-box">
           <li>
             <p>

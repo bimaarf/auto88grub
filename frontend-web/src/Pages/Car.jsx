@@ -308,7 +308,6 @@ export const Car = () => {
               ) : (
                 <ListCarSkeleton />
               )}
-              {/* {loadFech && <ListCarSkeleton />} */}
             </div>
           </div>
         </div>

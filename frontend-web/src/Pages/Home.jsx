@@ -50,7 +50,7 @@ export const Home = () => {
   return (
     <>
       <HighLightHeader />
-      <div className=" z-40 w-11/12 md:md:container md:mx-auto md:px-40 mt-40">
+      <div className="z-40 md:w-11/12 md:container sm:mx-1 md:mx-auto md:px-40">
         <div
           className="shadow-2xl md:rounded-badge slide-in fade-in-left"
           ref={carouselRef}>
@@ -63,7 +63,7 @@ export const Home = () => {
         </div>
       </div>
       <div className="pb-32 bg-transparent md:container md:mx-auto">
-        <div className="w-11/12 mx-auto mt-10 z-30 ">
+        <div className="md:w-11/12 mx-auto mt-10 z-30 ">
           <div className="flex justify-center">
             <div
               className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"

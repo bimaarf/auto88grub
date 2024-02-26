@@ -53,7 +53,7 @@ export const CarouselSl = ({ getSliders }) => {
           </IconButton>
         )}>
         {getSliders.map((item, key) => (
-          <div className="relative h-full w-full">
+          <div key={key} className="relative h-full w-full">
             <img
               loading="eager"
               src={`${process.env.REACT_APP_API}storage/${item.image}`}

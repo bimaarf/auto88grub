@@ -56,7 +56,7 @@ class CarController extends Controller
         }
 
         if (isset($input['price'])) {
-            $query->where('price', '<', $input['price']);
+            $query->where('price', '<=', $input['price']);
         }
 
         $perPage = $request->input('perPage', 10);

@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 class FirstMenuList extends StatefulWidget {
   const FirstMenuList({
-    super.key,
-  });
+    Key? key, // Added key parameter
+  }) : super(key: key); // Added super constructor
 
   @override
   State<FirstMenuList> createState() => _FirstMenuListState();
 }
 
 class _FirstMenuListState extends State<FirstMenuList> {
-  var menu;
+  late List<Map<String, dynamic>>
+      menu; // Define menu as List<Map<String, dynamic>>
 
   @override
   void initState() {
@@ -77,59 +78,52 @@ class _FirstMenuListState extends State<FirstMenuList> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Center(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: List.generate(
-                menu.length,
-                (index) => Container(
-                  padding: const EdgeInsets.all(3),
-                  width: 80,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              menu[index]['gradient']['beginColor']!,
-                              menu[index]['gradient']['endColor']!,
-                            ],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                          ),
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Icon(
-                          menu[index]['icon'] as IconData,
-                          color: Colors.white,
-                          size: 24,
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                      Text(
-                        menu[index]['label'] as String,
-                        style: const TextStyle(
-                          color: Colors.black87,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                    ],
+    return SingleChildScrollView(
+      // Wrapped with SingleChildScrollView
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(
+          menu.length,
+          (index) => Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(19),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        menu[index]['gradient']['beginColor']!,
+                        menu[index]['gradient']['endColor']!,
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: Icon(
+                    menu[index]['icon'] as IconData,
+                    color: Colors.white,
+                    size: 24,
                   ),
                 ),
-              ),
+                const SizedBox(height: 3),
+                Text(
+                  menu[index]['label'] as String,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ],
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 }

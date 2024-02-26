@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { ListCarPromo } from "../Components/__ListCarPromo";
 
+import { CurrentFormat } from "../Components/___CurrentFormat";
 import { useStateContext } from "../Providers/StateProvider";
 import { HighLightHeader } from "./Context/__HighLightHeader";
-import { fetchCarPromos } from "./Service/__FetchCarPromos";
-import { fetchCarComp } from "./Service/__FetchCarComp";
-import { reqCarPromoFilter } from "./Service/__ReqCarFilter";
-import { CurrentFormat } from "../Components/___CurrentFormat";
 import { ListCarSkeleton } from "./Context/__ListCarSkeleton";
+import { fetchCarComp } from "./Service/__FetchCarComp";
+import { fetchCarPromos } from "./Service/__FetchCarPromos";
+import { reqCarPromoFilter } from "./Service/__ReqCarFilter";
 
 export const Promo = () => {
   useEffect(() => {

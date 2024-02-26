@@ -5,6 +5,7 @@ import { TECarousel, TECarouselItem } from "tw-elements-react";
 import bannerImg from "../Images/Banner/red_wavy_with_halftone_background.jpg";
 import { fetchCarPreview } from "./Service/__FetchCarPreview";
 import { Footer } from "../Components/Footer";
+import { CarouselCarRecomen } from "../Components/__CarouselCarRecomen";
 
 export const CarPreview = () => {
   const location = useLocation();
@@ -203,70 +204,29 @@ export const CarPreview = () => {
                 Deskripsi Kendaraan
               </h1>
               <p
-                className="whitespace-pre-wrap"
+                className="whitespace-pre-wrap prose"
                 style={{ whiteSpace: "pre-wrap" }}>
                 {getCars.description}
               </p>
             </>
           )}
 
-          <div className="flex justify-center">
-            <h1 className="sm:text-xl mt-10 md:text-4xl w-full border-b mb-6 pb-4 border-dashed font-medium text-gray-800">
-              Mobil Yang Serupa
-            </h1>
-          </div>
-          <TECarousel showControls showIndicators ride="carousel">
-            <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
-              <TECarouselItem
-                itemID={1}
-                className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
-                <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-4">
-                  {(function (rows, i, len) {
-                    while (++i <= len) {
-                      rows.push(
-                        <div
-                          key={i}
-                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                          <div className="relative overflow-hidden bg-cover bg-no-repeat">
-                            <img
-                              src="https://www.auto88group.com/image/car/1775/20240201113209.jpg"
-                              alt=""
-                            />
-                          </div>
-                        </div>
-                      );
-                      if (window.innerWidth <= 768) break;
-                    }
-                    return rows;
-                  })([], 0, 3)}
+          <div className="pb-32 bg-transparent md:container md:mx-auto">
+            <div className="w-11/12 mx-auto mt-10 z-30 ">
+              <div className="flex justify-center">
+                <div
+                  className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
+                  style={{ fontFamily: "'Marko One', sans-serif" }}>
+                  <div className="md:p-10 md:space-y-10 md:text-3xl slide-in fade-in-left">
+                    <h1 className="slide-in fade-in-left">Mobil Yang Serupa</h1>
+                  </div>
                 </div>
-              </TECarouselItem>
-              <TECarouselItem
-                itemID={2}
-                className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none">
-                <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-4">
-                  {(function (rows, i, len) {
-                    while (++i <= len) {
-                      rows.push(
-                        <div
-                          key={i}
-                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                          <div className="relative overflow-hidden bg-cover bg-no-repeat">
-                            <img
-                              src="https://www.auto88group.com/image/car/1769/320240215151846.jpg"
-                              alt=""
-                            />
-                          </div>
-                        </div>
-                      );
-                      if (window.innerWidth <= 768) break;
-                    }
-                    return rows;
-                  })([], 0, 3)}
-                </div>
-              </TECarouselItem>
+              </div>
+              <div className="flex justify-center gap-4 brounded-lg  p-4">
+                <CarouselCarRecomen />
+              </div>
             </div>
-          </TECarousel>
+          </div>
         </div>
       </div>
       <Footer />

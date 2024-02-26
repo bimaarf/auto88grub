@@ -17,7 +17,7 @@ class CardWithImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
+      color: Colors.white70.withOpacity(0.1),
       margin: const EdgeInsets.all(5),
       child: Column(
         children: [

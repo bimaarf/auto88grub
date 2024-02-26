@@ -50,7 +50,7 @@ class MobilRow extends StatelessWidget {
           'Mobil Promosi',
           textAlign: TextAlign.right,
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -125,7 +125,7 @@ class _CardCardItemState extends State<CardCardItem> {
             width: 200,
             height: 200,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.black,
               borderRadius: BorderRadius.circular(5),
             ),
             child: CardWithImage(

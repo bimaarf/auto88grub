@@ -33,13 +33,12 @@ class CarPromoController extends Controller
         }
 
         if (isset($input['price'])) {
-            $query->where('car_promos.price', '<', $input['price']);
+            $query->where('car_promos.discount', '<=', $input['price']);
         }
 
         $perPage = $request->input('perPage', 10);
         $cars = $query->paginate($perPage);
 
-        // Transform the paginated items
         $cars->getCollection()->transform(function ($car) {
             $car->title = $car->slug;
             $car->slug = Str::slug($car->title);
