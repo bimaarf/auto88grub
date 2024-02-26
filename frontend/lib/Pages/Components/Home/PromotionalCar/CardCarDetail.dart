@@ -72,7 +72,7 @@ class CardCarDetail extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      color: Colors.white,
+                      color: Colors.black45,
                       padding: const EdgeInsets.all(10),
                       width: double.infinity,
                       child: const Column(
@@ -84,13 +84,13 @@ class CardCarDetail extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.car_crash,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                   SizedBox(width: 5),
                                   Text(
                                     "MPV",
                                     style: TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -101,13 +101,13 @@ class CardCarDetail extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.settings,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                   SizedBox(width: 5),
                                   Text(
                                     "4x2",
                                     style: TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -118,13 +118,13 @@ class CardCarDetail extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.local_gas_station_sharp,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                   SizedBox(width: 5),
                                   Text(
                                     "Premium",
                                     style: TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -135,13 +135,13 @@ class CardCarDetail extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.chair,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                   SizedBox(width: 5),
                                   Text(
                                     "3 Rows",
                                     style: TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -153,7 +153,7 @@ class CardCarDetail extends StatelessWidget {
                           Text(
                             "*Deskripsi:",
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -168,13 +168,13 @@ class CardCarDetail extends StatelessWidget {
                             "- Mobil Mulus & Terawat\n"
                             "- Interior Bersih \n"
                             "- Mobil Lulus Inspeksi Dijamin Cakep & Aman",
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(color: Colors.white),
                           ),
                           SizedBox(height: 10),
                           Text(
                             "*Spesifikasi:",
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -189,13 +189,13 @@ class CardCarDetail extends StatelessWidget {
                             "- Dual SRS Airbags\n"
                             "- Pretensioner & Force Limited Seat Belt\n"
                             "- Pengereman ABS & EDB",
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(color: Colors.white),
                           ),
                           SizedBox(height: 10),
                           Text(
                             "*Keunggulan Kami:",
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -207,7 +207,7 @@ class CardCarDetail extends StatelessWidget {
                             "- Mesin Bermasalah? Tenang, kami Menyediakan Garansi Mesin\n"
                             "- Sobat bisa Free Test Drive Sepuasnya\n"
                             "- Showroom Kami Tetap Buka di Hari Minggu / Libur",
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(color: Colors.white),
                           ),
                           SizedBox(height: 10),
                           Text(
@@ -228,7 +228,7 @@ class CardCarDetail extends StatelessWidget {
                             "* Melayani kredit seluruh Indonesia (Syarat ketentuan berlaku)\n"
                             "\n"
                             "Harga tertera merupakan harga kredit",
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(color: Colors.white),
                           ),
                         ],
                       ),

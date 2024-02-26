@@ -24,7 +24,6 @@ class CardCarList extends StatelessWidget {
             itemBuilder: (context, index) {
               var item = carItem[index];
               return CardCardItem(
-                // Add 'return' here
                 carData: item,
               );
             },

@@ -28,7 +28,6 @@ class ProfileScreen extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              // do something
               const AlertDialog(
                 title: Text('asd'),
               );
