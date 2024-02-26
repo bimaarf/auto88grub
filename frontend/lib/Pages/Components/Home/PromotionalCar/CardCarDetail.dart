@@ -48,8 +48,10 @@ class CardCarDetail extends StatelessWidget {
                       child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Your main content
-                          // ...
+                          Text(
+                            'asdasdlorem asdasddasadasdasdsda,asdasd,asd,a asd, asd ,asd ,as',
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ],
                       ),
                     ),

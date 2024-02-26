@@ -44,21 +44,28 @@ class MobilRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Row(
       crossAxisAlignment: CrossAxisAlignment.baseline,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       textBaseline: TextBaseline.ideographic,
       children: [
-        Text(
-          'Mobil Promosi',
-          textAlign: TextAlign.right,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Data Mobil',
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Icon(
+              Icons.list,
+              size: 10,
+              color: Color.fromARGB(255, 247, 181, 0),
+            )
+          ],
         ),
-        Icon(
-          Icons.discount,
-          size: 10,
-          color: Color.fromARGB(255, 247, 181, 0),
-        )
       ],
     );
   }

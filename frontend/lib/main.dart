@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Pages/Cars.dart';
 import 'package:frontend/Pages/Home.dart';
 import 'package:frontend/Pages/Message.dart';
 import 'package:frontend/Pages/Profile.dart';
@@ -60,26 +61,27 @@ class _NavigationExampleState extends State<NavigationExample> {
         selectedIndex: _currentPageIndex,
         destinations: const <Widget>[
           NavigationDestination(
+            selectedIcon: Icon(Icons.car_rental_rounded, color: Colors.white),
+            icon: Icon(Icons.car_rental_rounded),
+            label: 'Cars',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.settings, color: Colors.white),
+            icon: Icon(Icons.settings),
+            label: 'Main Data',
+          ),
+          NavigationDestination(
             selectedIcon: Icon(Icons.home, color: Colors.white),
             icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
           NavigationDestination(
-            selectedIcon:
-                Icon(Icons.notifications_on_sharp, color: Colors.white),
+            selectedIcon: Icon(Icons.notifications, color: Colors.white),
             icon: Badge(
-              label: Text('21'),
-              child: Icon(Icons.notifications_active),
+              label: Text('12+'),
+              child: Icon(Icons.notifications),
             ),
-            label: 'Notifications',
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.message, color: Colors.white),
-            icon: Badge(
-              label: Text('2'),
-              child: Icon(Icons.message),
-            ),
-            label: 'Messages',
+            label: 'Notiffication',
           ),
           NavigationDestination(
             selectedIcon: Icon(Icons.person, color: Colors.white),
@@ -94,38 +96,31 @@ class _NavigationExampleState extends State<NavigationExample> {
           shadowColor: Colors.white,
           margin: EdgeInsets.zero,
           child: SizedBox.expand(
-            child: Home(theme: theme),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.all(0),
-          child: Column(
-            children: <Widget>[
-              Card(
-                child: ListTile(
-                  leading: Icon(
-                    Icons.notifications_sharp,
-                    color: Colors.white,
-                  ),
-                  title: Text('Notification 1'),
-                  subtitle: Text('This is a notification'),
-                ),
-              ),
-              Card(
-                child: ListTile(
-                  leading: Icon(
-                    Icons.notifications_sharp,
-                    color: Colors.white,
-                  ),
-                  title: Text('Notification 2'),
-                  subtitle: Text('This is a notification'),
-                ),
-              ),
-            ],
+            child: SizedBox.expand(
+              child: Cars(theme: theme),
+            ),
           ),
         ),
         MessageListView(theme: theme).build(),
-        const ProfileScreen(profileName: 'Jokowi'),
+        Card(
+          color: Colors.white,
+          shadowColor: Colors.white,
+          margin: EdgeInsets.zero,
+          child: SizedBox.expand(
+            child: Home(theme: theme),
+          ),
+        ),
+        const Card(
+          child: ListTile(
+            leading: Icon(
+              Icons.notifications_sharp,
+              color: Colors.white,
+            ),
+            title: Text('Notification 2'),
+            subtitle: Text('This is a notification'),
+          ),
+        ),
+        const ProfileScreen(),
       ][_currentPageIndex],
     );
   }

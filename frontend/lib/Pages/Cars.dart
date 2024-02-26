@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Home/FirstMenuList.dart';
+import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarList.dart';
 import 'package:frontend/Pages/Profile.dart';
 
-class Home extends StatefulWidget {
-  const Home({
-    super.key,
+class Cars extends StatefulWidget {
+  const Cars({
+    Key? key,
     required this.theme,
-  });
+  }) : super(key: key);
 
   final ThemeData theme;
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Cars> createState() => _CarsState();
 }
 
-class _HomeState extends State<Home> {
+class _CarsState extends State<Cars> {
   // Function to navigate to the profile screen
 
   var carItem;
@@ -124,19 +125,7 @@ class _HomeState extends State<Home> {
                 //     ),
                 //   ],
                 // ),
-                // CardCarList(
-                //   carItem:
-                //       carItem, // Replace with your actual list of car items
-                // ),
 
-                const Text(
-                  'Administrator',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
                 const Text(
                   'AUTO88GROUP',
                   style: TextStyle(
@@ -145,9 +134,13 @@ class _HomeState extends State<Home> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
+                CardCarList(
+                  carItem:
+                      carItem, // Replace with your actual list of car items
+                ),
+
                 Container(
                   margin: const EdgeInsets.only(top: 10, bottom: 10),
-                  padding: const EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(
                         0.1), // Set the background color here if needed

@@ -12,7 +12,8 @@ class FirstMenuList extends StatefulWidget {
 class _FirstMenuListState extends State<FirstMenuList> {
   late List<Map<String, dynamic>>
       menu; // Define menu as List<Map<String, dynamic>>
-
+  final ScrollController _scrollController =
+      ScrollController(); // Define ScrollController
   @override
   void initState() {
     super.initState();
@@ -23,7 +24,7 @@ class _FirstMenuListState extends State<FirstMenuList> {
           'beginColor': Colors.blueAccent.shade200,
           'endColor': Colors.blueAccent.shade700
         },
-        'icon': Icons.car_crash_sharp
+        'icon': Icons.car_rental
       },
       {
         'label': 'Promo',
@@ -78,49 +79,290 @@ class _FirstMenuListState extends State<FirstMenuList> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      // Wrapped with SingleChildScrollView
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: List.generate(
-          menu.length,
-          (index) => Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(19),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        menu[index]['gradient']['beginColor']!,
-                        menu[index]['gradient']['endColor']!,
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: List.generate(
+              menu.length,
+              (index) => Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(19),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            menu[index]['gradient']['beginColor']!,
+                            menu[index]['gradient']['endColor']!,
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Icon(
+                        menu[index]['icon'] as IconData,
+                        color: Colors.white,
+                        size: 24,
+                      ),
                     ),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: Icon(
-                    menu[index]['icon'] as IconData,
-                    color: Colors.white,
-                    size: 24,
-                  ),
+                    const SizedBox(height: 3),
+                    Text(
+                      menu[index]['label'] as String,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 3),
-                Text(
-                  menu[index]['label'] as String,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-              ],
+              ),
             ),
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) => DraggableScrollableSheet(
+                initialChildSize: 0.8,
+                minChildSize: 0.2,
+                maxChildSize: 1,
+                expand: false,
+                builder:
+                    (BuildContext context, ScrollController scrollController) {
+                  return Column(
+                    children: [
+                      const Icon(Icons.horizontal_rule_outlined),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
+                            child: const Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.arrow_right,
+                                      size: 20,
+                                    ),
+                                    Text(
+                                      'Operational Menu',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                OperationalMenu(),
+                                OperationalMenu(),
+                                OperationalMenu(),
+                                OperationalMenu(),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.arrow_right,
+                                      size: 20,
+                                    ),
+                                    Text(
+                                      'Main Menu',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                MainMenu(),
+                                MainMenu(),
+                                MainMenu(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            );
+          },
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Tap menu lainnya',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Colors.white,
+                ),
+              ),
+              Icon(
+                Icons.arrow_drop_up,
+                color: Colors.white,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class OperationalMenu extends StatelessWidget {
+  const OperationalMenu({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        OptItem(),
+        SizedBox(width: 4),
+        OptItem(),
+        SizedBox(width: 4),
+        OptItem(),
+        SizedBox(width: 4),
+        OptItem(),
+      ],
+    );
+  }
+}
+
+class MainMenu extends StatelessWidget {
+  const MainMenu({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      children: [
+        MainItem(),
+        SizedBox(width: 4),
+        MainItem(),
+        SizedBox(width: 4),
+        MainItem(),
+        SizedBox(width: 4),
+        MainItem(),
+      ],
+    );
+  }
+}
+
+class OptItem extends StatelessWidget {
+  const OptItem({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      width: 90,
+      height: 90,
+      child: Ink(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.04),
+          borderRadius: BorderRadius.circular(100),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0),
+              spreadRadius: 3,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: InkWell(
+          onTap: () {
+            print('tesd');
+          },
+          borderRadius: BorderRadius.circular(100),
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.settings,
+                size: 30,
+                color: Colors.blue,
+              ),
+              Text(
+                'Label',
+                style: TextStyle(
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MainItem extends StatelessWidget {
+  const MainItem({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      width: 90,
+      height: 90,
+      child: Ink(
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.04),
+          borderRadius: BorderRadius.circular(100),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0),
+              spreadRadius: 3,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: InkWell(
+          onTap: () {
+            print('main menu');
+          },
+          borderRadius: BorderRadius.circular(100),
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.settings,
+                size: 30,
+                color: Colors.green,
+              ),
+              Text(
+                'Label',
+                style: TextStyle(
+                  fontSize: 12,
+                ),
+              ),
+            ],
           ),
         ),
       ),
