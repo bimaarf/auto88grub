@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Home/FirstMenuList.dart';
 import 'package:frontend/Pages/Profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({
@@ -16,8 +17,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   // Function to navigate to the profile screen
-
   var carItem;
+  String? name;
   void _navigateToProfileScreen(String profileName) {
     // Use Navigator to push a new route
     Navigator.push(
@@ -89,6 +90,11 @@ class _HomeState extends State<Home> {
         'note': 'booet',
       },
     ];
+    SharedPreferences.getInstance().then((prefs) {
+      setState(() {
+        name = prefs.getString('name');
+      });
+    });
   }
 
   @override
@@ -395,7 +401,7 @@ class _HomeState extends State<Home> {
                               Container(
                                 padding:
                                     const EdgeInsets.fromLTRB(0, 10, 4, 10),
-                                child: const Column(
+                                child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -407,7 +413,7 @@ class _HomeState extends State<Home> {
                                           color: Colors.white),
                                     ),
                                     Text(
-                                      'Bima Arifa R.',
+                                      name ?? 'User',
                                       style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,

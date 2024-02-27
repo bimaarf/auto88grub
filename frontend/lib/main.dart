@@ -1,13 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Pages/Authentication/login_page.dart';
 import 'package:frontend/Pages/Cars.dart';
 import 'package:frontend/Pages/Home.dart';
-import 'package:frontend/Pages/Message.dart';
 import 'package:frontend/Pages/Profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(const NavigationBarApp());
+Future<String?> initializeToken() async {
+  final prefs = await SharedPreferences.getInstance();
+  final token = prefs.getString('token');
+  return token;
+}
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<String?>(
+      future: initializeToken(),
+      builder: (context, snapshot) {
+        final String? token = snapshot.data;
+        final isLoggedIn = token != null;
+        return MaterialApp(
+          theme: ThemeData(
+            brightness: Brightness.dark,
+            primaryColor: Colors.black,
+            iconTheme: const IconThemeData(
+                color: Colors.black), // Set icon theme color
+            colorScheme: const ColorScheme.dark(
+              background: Colors.black,
+            ),
+          ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            primaryColor: Colors.black,
+            iconTheme: const IconThemeData(
+                color: Colors.black), // Set icon theme color
+            colorScheme: const ColorScheme.dark(
+              background: Colors.black,
+            ),
+          ),
+          themeMode: ThemeMode.dark,
+          initialRoute: isLoggedIn ? '/home' : '/login',
+          routes: {
+            '/': (context) => NavigationBarApp(isLoggedIn: isLoggedIn),
+            '/register': (context) => LoginPage(),
+            '/home': (context) => NavigationBarApp(isLoggedIn: isLoggedIn),
+            '/profile': (context) => const ProfileScreen(),
+            '/login': (context) => LoginPage(),
+          },
+        );
+      },
+    );
+  }
+}
 
 class NavigationBarApp extends StatelessWidget {
-  const NavigationBarApp({Key? key}) : super(key: key);
+  final bool isLoggedIn;
+
+  const NavigationBarApp({Key? key, required this.isLoggedIn})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,41 +70,68 @@ class NavigationBarApp extends StatelessWidget {
         brightness: Brightness.dark,
         primaryColor: Colors.white,
         colorScheme: const ColorScheme.dark(
-          background: Color.fromARGB(185, 0, 0, 0),
+          background: Colors.black,
         ),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.white,
         colorScheme: const ColorScheme.dark(
-          background: Color.fromARGB(185, 0, 0, 0),
+          background: Colors.black,
         ),
       ),
       themeMode: ThemeMode.dark,
-      home: const NavigationExample(),
+      home: NavigationExample(isLoggedIn: isLoggedIn),
     );
   }
 }
 
 class NavigationExample extends StatefulWidget {
-  const NavigationExample({Key? key}) : super(key: key);
+  final bool isLoggedIn;
+
+  const NavigationExample({Key? key, required this.isLoggedIn})
+      : super(key: key);
 
   @override
   State<NavigationExample> createState() => _NavigationExampleState();
 }
 
 class _NavigationExampleState extends State<NavigationExample> {
-  int _currentPageIndex = 0;
+  int _currentPageIndex = 2;
 
   void _onDestinationSelected(int index) {
     setState(() {
       _currentPageIndex = index;
+      if (index == 2 && !widget.isLoggedIn) {
+        SharedPreferences.getInstance().then((prefs) {
+          prefs.setBool('isLoggedIn', true);
+        });
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context); // Define theme here
+    final ThemeData theme = Theme.of(context);
+    late Widget currentPage;
+    switch (_currentPageIndex) {
+      case 0:
+      case 1:
+      case 3:
+        currentPage = Cars(
+          theme: theme,
+        );
+        break;
+      case 2:
+        currentPage = Home(theme: theme);
+        break;
+      case 4:
+        currentPage = const ProfileScreen();
+        break;
+      default:
+        currentPage = Home(theme: theme);
+        break;
+    }
 
     return Scaffold(
       drawerScrimColor: Colors.white,
@@ -81,7 +162,7 @@ class _NavigationExampleState extends State<NavigationExample> {
               label: Text('12+'),
               child: Icon(Icons.notifications),
             ),
-            label: 'Notiffication',
+            label: 'Notification',
           ),
           NavigationDestination(
             selectedIcon: Icon(Icons.person, color: Colors.white),
@@ -90,38 +171,7 @@ class _NavigationExampleState extends State<NavigationExample> {
           ),
         ],
       ),
-      body: <Widget>[
-        Card(
-          color: Colors.white,
-          shadowColor: Colors.white,
-          margin: EdgeInsets.zero,
-          child: SizedBox.expand(
-            child: SizedBox.expand(
-              child: Cars(theme: theme),
-            ),
-          ),
-        ),
-        MessageListView(theme: theme).build(),
-        Card(
-          color: Colors.white,
-          shadowColor: Colors.white,
-          margin: EdgeInsets.zero,
-          child: SizedBox.expand(
-            child: Home(theme: theme),
-          ),
-        ),
-        const Card(
-          child: ListTile(
-            leading: Icon(
-              Icons.notifications_sharp,
-              color: Colors.white,
-            ),
-            title: Text('Notification 2'),
-            subtitle: Text('This is a notification'),
-          ),
-        ),
-        const ProfileScreen(),
-      ][_currentPageIndex],
+      body: currentPage,
     );
   }
 }

@@ -1,7 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen();
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  String token = '';
+  String email = '';
+  String username = '';
+  String role = '';
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    loadUserData();
+  }
+
+  Future<void> loadUserData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      token = prefs.getString('token') ?? '';
+      email = prefs.getString('email') ?? '';
+      username = prefs.getString('name') ?? '';
+      role = prefs.getString('role') ?? '';
+    });
+  }
+
+  Future<void> logout() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear(); // Clear all saved data
+
+    final response = await http.post(
+      Uri.parse('https://e543-27-124-95-158.ngrok-free.app/api/logout'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    setState(() {
+      isLoading = false;
+    });
+    if (response.statusCode == 200) {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        '/login',
+        (route) => false,
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Logout Gagal'),
+            content: const Text('Terjadi kesalahan saat melakukan logout.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    '/login',
+                    (route) => false,
+                  );
+                },
+                child: const Text('Tutup'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +95,22 @@ class ProfileScreen extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              // do something
-              const AlertDialog.adaptive(
-                title: Text('asd'),
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Notifications'),
+                    content: const Text('Notification settings here.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Close'),
+                      ),
+                    ],
+                  );
+                },
               );
             },
           ),
@@ -28,31 +120,51 @@ class ProfileScreen extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              const AlertDialog(
-                title: Text('asd'),
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Settings'),
+                    content: const Text('App settings here.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Close'),
+                      ),
+                    ],
+                  );
+                },
               );
             },
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          profileBox(),
-        ],
-      )),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            profileBox(
+                username, logout), // Pass the username and logout function
+          ],
+        ),
+      ),
     );
   }
 }
 
-Container profileBox() {
+Container profileBox(String username, Function() logout) {
+  // Receive the username as a parameter
   return Container(
     margin: const EdgeInsets.all(10),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GestureDetector(
+          onTap: () {
+            // Handle profile box tap
+          },
           child: Material(
             color: Colors.transparent,
             child: InkResponse(
@@ -93,23 +205,25 @@ Container profileBox() {
                             const SizedBox(width: 20),
                             Container(
                               padding: const EdgeInsets.fromLTRB(0, 10, 4, 10),
-                              child: const Column(
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Selamat Datang,',
                                     style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.normal,
-                                        color: Colors.white),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                   Text(
-                                    'Bima Arifa R.',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
+                                    username, // Display the username
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -117,12 +231,24 @@ Container profileBox() {
                           ],
                         ),
                         Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: const Icon(Icons.settings)),
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: IconButton(
+                            icon: const Icon(Icons.settings),
+                            onPressed: () {
+                              // Handle settings button tap
+                            },
+                          ),
+                        ),
                       ],
+                    ),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: logout, // Call the logout function
+                        child: const Text('Logout'),
+                      ),
                     ),
                   ],
                 ),

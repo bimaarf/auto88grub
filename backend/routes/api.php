@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Car\BrandController;
 use App\Http\Controllers\API\Pages\BlogController;
@@ -10,6 +7,7 @@ use App\Http\Controllers\API\Pages\CarController;
 use App\Http\Controllers\API\Pages\CarPromoController;
 use App\Http\Controllers\API\Pages\TestimonyController;
 use App\Http\Controllers\LandingController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +18,7 @@ use App\Http\Controllers\LandingController;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 Route::options('/sanctum/csrf-cookie', function () {
     return response('', 204)
         ->header('Access-Control-Allow-Origin', 'http://localhost:3000')
@@ -33,9 +31,8 @@ Route::post('login', [AuthController::class, 'login']);
 
 // CORS middleware to handle OPTIONS requests
 
-
 // Routes inside the CORS middleware group
-    // Routes for CarController
+// Routes for CarController
 Route::get('car/show', [CarController::class, 'showCar']);
 Route::get('car/component/show', [CarController::class, 'getComponents']);
 Route::get('car/new/show', [CarController::class, 'getNew']);
@@ -62,5 +59,6 @@ Route::get('company/profile/show', [LandingController::class, 'getCompanyProfile
 // Routes requiring authentication with Sanctum
 Route::middleware('auth:sanctum')->group(function () {
     // Routes for BrandController
+    Route::post('logout', [AuthController::class, 'logout']);
     Route::resource('brands', BrandController::class);
 });

@@ -141,6 +141,8 @@ class _FirstMenuListState extends State<FirstMenuList> {
                 builder:
                     (BuildContext context, ScrollController scrollController) {
                   return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Icon(Icons.horizontal_rule_outlined),
                       Expanded(
@@ -153,6 +155,7 @@ class _FirstMenuListState extends State<FirstMenuList> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Icon(
@@ -168,6 +171,7 @@ class _FirstMenuListState extends State<FirstMenuList> {
                                     ),
                                   ],
                                 ),
+                                OperationalMenu(),
                                 OperationalMenu(),
                                 OperationalMenu(),
                                 OperationalMenu(),
@@ -188,6 +192,8 @@ class _FirstMenuListState extends State<FirstMenuList> {
                                     ),
                                   ],
                                 ),
+                                MainMenu(),
+                                MainMenu(),
                                 MainMenu(),
                                 MainMenu(),
                                 MainMenu(),
@@ -232,6 +238,8 @@ class OperationalMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         OptItem(),
         SizedBox(width: 4),
@@ -253,6 +261,8 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         MainItem(),
         SizedBox(width: 4),

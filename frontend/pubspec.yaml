@@ -32,6 +32,7 @@ dependencies:
   flare_flutter: ^3.0.0
   cached_network_image: ^3.3.1
   font_awesome_flutter: ^10.7.0
+  shared_preferences: ^2.0.0
 
 # flutter:
 # sdk: flutter
@@ -64,7 +65,6 @@ flutter:
   assets:
     - lib/Assets/love.gif
       # - Assets/love.gif
-
 
     # - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

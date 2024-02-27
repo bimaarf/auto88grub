@@ -18,7 +18,6 @@ class CardCarDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New Arrival'),
         backgroundColor: Colors.transparent,
         actions: <Widget>[
           IconButton(
@@ -27,7 +26,6 @@ class CardCarDetail extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              // do something
               const AlertDialog.adaptive(
                 title: Text('New Arrival'),
               );

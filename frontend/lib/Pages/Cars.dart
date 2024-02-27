@@ -135,8 +135,7 @@ class _CarsState extends State<Cars> {
                   ),
                 ),
                 CardCarList(
-                  carItem:
-                      carItem, // Replace with your actual list of car items
+                  carItem: carItem,
                 ),
 
                 Container(

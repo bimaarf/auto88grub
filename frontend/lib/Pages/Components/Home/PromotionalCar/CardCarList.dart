@@ -51,17 +51,18 @@ class MobilRow extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Data Mobil',
+              'Baru ditambahkan',
               textAlign: TextAlign.right,
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(width: 4),
             Icon(
-              Icons.list,
-              size: 10,
-              color: Color.fromARGB(255, 247, 181, 0),
+              Icons.new_releases,
+              size: 14,
+              color: Colors.white,
             )
           ],
         ),
