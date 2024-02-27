@@ -52,7 +52,7 @@ export const Home = () => {
       <HighLightHeader />
       <div className="z-40 md:w-11/12 md:container sm:mx-1 md:mx-auto md:px-40">
         <div
-          className="shadow-2xl md:rounded-badge slide-in fade-in-left"
+          className="shadow-2xl md:rounded-badge fade-in-left"
           ref={carouselRef}>
           {getSliders ? (
             <CarouselSl getSliders={getSliders} />
@@ -66,14 +66,14 @@ export const Home = () => {
         <div className="md:w-11/12 mx-auto mt-10 z-30 ">
           <div className="flex justify-center">
             <div
-              className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
+              className="md:space-y-4 sm:text-xl whitespace-nowrap text-gray-800 p-4 font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
-              <div className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl slide-in fade-in-left">
-                <h1 className="slide-in fade-in-left">Mobil Rekomendasi</h1>
+              <div className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl">
+                <h1>Mobil Rekomendasi</h1>
               </div>
             </div>
           </div>
-          <div className="flex justify-center gap-4 brounded-lg  p-4">
+          <div className="flex justify-center gap-4 brounded-lg p-4">
             <CarouselCarRecomen />
           </div>
         </div>
@@ -91,7 +91,7 @@ export const Home = () => {
           height: "50vh",
         }}>
         <div
-          className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
+          className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4 font-bold text-center"
           style={{ fontFamily: "'Marko One', sans-serif" }}>
           <div
             className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element"

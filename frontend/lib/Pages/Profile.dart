@@ -13,7 +13,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String token = '';
   String email = '';
   String username = '';
-  String role = '';
+  String roles = '';
   bool isLoading = false;
 
   @override
@@ -28,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       token = prefs.getString('token') ?? '';
       email = prefs.getString('email') ?? '';
       username = prefs.getString('name') ?? '';
-      role = prefs.getString('role') ?? '';
+      roles = prefs.getString('roles') ?? '';
     });
   }
 
@@ -145,8 +145,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            profileBox(
-                username, logout), // Pass the username and logout function
+            profileBox(username, email, roles, logout),
           ],
         ),
       ),
@@ -154,109 +153,307 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-Container profileBox(String username, Function() logout) {
-  // Receive the username as a parameter
+Container profileBox(
+    String username, String email, String roles, Function() logout) {
   return Container(
     margin: const EdgeInsets.all(10),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        GestureDetector(
-          onTap: () {
-            // Handle profile box tap
-          },
-          child: Material(
-            color: Colors.transparent,
-            child: InkResponse(
-              splashColor: Colors.white.withOpacity(0.5),
-              highlightShape: BoxShape.rectangle,
-              containedInkWell: true,
-              borderRadius: BorderRadius.circular(20),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(50),
-                                child: Image.network(
-                                  'https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/17bf0771-8286-435d-a536-bf85cdffad11/width=450/4545904.jpeg',
-                                  width: 60,
+    child: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
+            onTap: () {
+              // Handle profile box tap
+            },
+            child: Material(
+              color: Colors.transparent,
+              child: InkResponse(
+                splashColor: Colors.white.withOpacity(0.5),
+                highlightShape: BoxShape.rectangle,
+                containedInkWell: true,
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(50),
+                                  child: Image.network(
+                                    'https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/17bf0771-8286-435d-a536-bf85cdffad11/width=450/4545904.jpeg',
+                                    width: 60,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(width: 20),
-                            Container(
-                              padding: const EdgeInsets.fromLTRB(0, 10, 4, 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'Selamat Datang,',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
-                                      color: Colors.white,
+                              const SizedBox(width: 20),
+                              Container(
+                                padding:
+                                    const EdgeInsets.fromLTRB(0, 10, 4, 10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'Selamat Datang,',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    username, // Display the username
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
+                                    Text(
+                                      username, // Display the username
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    Text(
+                                      email,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
+                            ],
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
                             ),
-                          ],
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
+                            child: IconButton(
+                              icon: const Icon(Icons.settings),
+                              onPressed: () {
+                                // Handle settings button tap
+                              },
+                            ),
                           ),
-                          child: IconButton(
-                            icon: const Icon(Icons.settings),
-                            onPressed: () {
-                              // Handle settings button tap
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: logout, // Call the logout function
-                        child: const Text('Logout'),
+                        ],
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 10),
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: logout,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white.withOpacity(0.1),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 24),
+                            textStyle: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          child: const Text(
+                            'Logout',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+          const SizedBox(height: 20),
+          Container(
+            padding: const EdgeInsets.only(bottom: 10),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 10),
+                Container(
+                  margin: const EdgeInsets.only(left: 29),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        '*Username',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        username, // Display the username
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  margin: const EdgeInsets.only(left: 29),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        '*Email',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        email, // Display the email
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  margin: const EdgeInsets.only(left: 29),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        '*Roles',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        roles, // Display the user's roles
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  margin: const EdgeInsets.only(left: 29),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        '*Password',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 315,
+                        height: 50,
+                        child: TextField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                              labelText: 'Enter New Password',
+                              labelStyle: TextStyle(
+                                  fontSize: 14, color: Colors.white38)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  margin: const EdgeInsets.only(left: 29),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        '*Password Confirmation',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 315,
+                        height: 50,
+                        child: TextField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                              labelText: 'Enter Confirm Password',
+                              labelStyle: TextStyle(
+                                  fontSize: 14, color: Colors.white38)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: logout,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white.withOpacity(0.1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 24),
+                      textStyle: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    child: const Text(
+                      'Update Profile',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     ),
   );
 }
