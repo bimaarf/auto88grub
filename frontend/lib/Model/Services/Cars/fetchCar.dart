@@ -11,16 +11,19 @@ class ServiceCarList {
   static Future<List<Map<String, dynamic>>> fetchCar() async {
     final String token = await getTokenFromStorage();
     final url =
-        Uri.parse('https://895e-27-124-95-158.ngrok-free.app/api/car/show');
+        Uri.parse('https://cbbb-27-124-95-158.ngrok-free.app/api/car/show');
+
     if (token.isNotEmpty) {
       final response = await http.get(
         url,
         headers: {'Authorization': 'Bearer $token'},
       );
+
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         final List<dynamic> data = jsonData['data'];
-        return List<Map<String, dynamic>>.from(data);
+        return List<Map<String, dynamic>>.from(
+            data.map((item) => item as Map<String, dynamic>));
       } else {
         throw Exception('Failed to load data');
       }

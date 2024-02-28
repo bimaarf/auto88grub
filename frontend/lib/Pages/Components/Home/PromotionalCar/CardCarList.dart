@@ -1,43 +1,91 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Model/Services/Cars/fetchCar.dart';
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarDetail.dart';
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardImage.dart';
+import 'package:intl/intl.dart';
 
-class CardCarList extends StatelessWidget {
-  final List<Map<String, String>> carItem;
-
-  const CardCarList({
-    Key? key, // Add Key type here
-    required this.carItem,
-  }) : super(key: key);
+class CardCarList extends StatefulWidget {
+  const CardCarList({Key? key}) : super(key: key);
 
   @override
+  State<CardCarList> createState() => _CardCarListState();
+}
+
+class _CardCarListState extends State<CardCarList> {
+  late List<Map<String, dynamic>> _dataCars;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final List<Map<String, dynamic>> responseData =
+          await ServiceCarList.fetchCar();
+      setState(() {
+        _dataCars = responseData;
+        _isLoading = false;
+      });
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content:
+                const Text("Failed to fetch data. Please try again later."),
+            actions: <Widget>[
+              TextButton(
+                child: const Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const MobilRow(),
-        SizedBox(
-          height: 200,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: carItem.length,
-            itemBuilder: (context, index) {
-              var item = carItem[index];
-              return CardCardItem(
-                carData: item,
-              );
-            },
-          ),
-        ),
+        _isLoading
+            ? CircularProgressIndicator()
+            : SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _dataCars.length,
+                  itemBuilder: (context, index) {
+                    var item = _dataCars[index];
+                    return CardCardItem(
+                      carData: item,
+                    );
+                  },
+                ),
+              ),
       ],
     );
   }
 }
 
 class MobilRow extends StatelessWidget {
-  const MobilRow({
-    super.key,
-  });
+  const MobilRow({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +120,7 @@ class MobilRow extends StatelessWidget {
 }
 
 class CardCardItem extends StatefulWidget {
-  final Map<String, String> carData;
+  final Map<String, dynamic> carData;
 
   const CardCardItem({Key? key, required this.carData}) : super(key: key);
 
@@ -82,26 +130,59 @@ class CardCardItem extends StatefulWidget {
 
 class _CardCardItemState extends State<CardCardItem> {
   double scaleValue = 1.0;
+  late String formattedPrice;
+
+  @override
+  void initState() {
+    super.initState();
+    _formatPrice();
+  }
+
+  void _formatPrice() {
+    int price = widget.carData['price'];
+    formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp')
+        .format(price / 100);
+  }
 
   void _navigateToDetailCar(BuildContext context) {
-    if (widget.carData['id'] != null &&
-        widget.carData['imageUrl'] != null &&
-        widget.carData['title'] != null &&
-        widget.carData['subtitle'] != null &&
-        widget.carData['note'] != null) {
+    print('Car Data: ${widget.carData}');
+    print('Keys: ${widget.carData.keys.toList()}');
+
+    if (widget.carData.containsKey('id') &&
+        widget.carData.containsKey('title') &&
+        widget.carData.containsKey('description') &&
+        widget.carData.containsKey('created_at')) {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => CardCarDetail(
-            imageUrl: widget.carData['imageUrl']!,
+            imageUrl:
+                'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
             title: widget.carData['title']!,
-            subtitle: widget.carData['subtitle']!,
-            note: widget.carData['note']!,
+            subtitle: 'Rp $formattedPrice',
+            description: widget.carData['description']!,
+            note: widget.carData['created_at']!,
           ),
         ),
       );
     } else {
-      // Handle missing data case
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content: const Text("Missing car details. Unable to navigate."),
+            actions: <Widget>[
+              TextButton(
+                child: const Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 
@@ -136,10 +217,13 @@ class _CardCardItemState extends State<CardCardItem> {
               borderRadius: BorderRadius.circular(5),
             ),
             child: CardWithImage(
-              imageUrl: widget.carData['imageUrl']!,
-              title: widget.carData['title']!,
-              subtitle: widget.carData['subtitle']!,
-              note: widget.carData['note']!,
+              imageUrl:
+                  'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
+              title: widget.carData['title']!.length > 50
+                  ? widget.carData['title']!.substring(0, 50) + '...'
+                  : widget.carData['title']!,
+              subtitle: 'Rp $formattedPrice',
+              note: widget.carData['created_at']!,
             ),
           ),
         ),

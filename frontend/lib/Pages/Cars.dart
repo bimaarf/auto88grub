@@ -134,9 +134,7 @@ class _CarsState extends State<Cars> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                CardCarList(
-                  carItem: carItem,
-                ),
+                CardCarList(),
 
                 Container(
                   margin: const EdgeInsets.only(top: 10, bottom: 10),

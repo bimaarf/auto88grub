@@ -41,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     await prefs.clear(); // Clear all saved data
 
     final response = await http.post(
-      Uri.parse('https://9222-27-124-95-158.ngrok-free.app/api/logout'),
+      Uri.parse('https://cbbb-27-124-95-158.ngrok-free.app/api/logout'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
