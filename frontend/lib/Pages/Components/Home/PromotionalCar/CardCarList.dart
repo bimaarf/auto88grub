@@ -65,7 +65,7 @@ class _CardCarListState extends State<CardCarList> {
       children: [
         const MobilRow(),
         _isLoading
-            ? CircularProgressIndicator()
+            ? Center(child: CircularProgressIndicator())
             : SizedBox(
                 height: 200,
                 child: ListView.builder(
@@ -90,12 +90,12 @@ class MobilRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Row(
-      crossAxisAlignment: CrossAxisAlignment.baseline,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       textBaseline: TextBaseline.ideographic,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
@@ -140,8 +140,8 @@ class _CardCardItemState extends State<CardCardItem> {
 
   void _formatPrice() {
     int price = widget.carData['price'];
-    formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp')
-        .format(price);
+    formattedPrice =
+        NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(price);
   }
 
   void _navigateToDetailCar(BuildContext context) {
@@ -207,8 +207,8 @@ class _CardCardItemState extends State<CardCardItem> {
           });
         },
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          transform: Matrix4.diagonal3Values(scaleValue, scaleValue, 1.0),
+          duration: const Duration(milliseconds: 500),
+          transform: Matrix4.diagonal3Values(scaleValue, scaleValue, 2.0),
           child: Container(
             width: 200,
             height: 200,

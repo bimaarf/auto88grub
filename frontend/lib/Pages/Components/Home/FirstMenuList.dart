@@ -43,7 +43,7 @@ class _FirstMenuListState extends State<FirstMenuList> {
         'icon': Icons.accessibility
       },
       {
-        'label': 'Testimonti',
+        'label': 'Testimoni',
         'gradient': {
           'beginColor': Colors.orangeAccent.shade400,
           'endColor': Colors.orangeAccent.shade700

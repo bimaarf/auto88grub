@@ -20,7 +20,7 @@ class CardCarDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -28,8 +28,22 @@ class CardCarDetail extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              AlertDialog.adaptive(
-                title: Text('New Arrival'),
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Notifications'),
+                    content: const Text('Notification settings here.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Close'),
+                      ),
+                    ],
+                  );
+                },
               );
             },
           ),
@@ -39,11 +53,25 @@ class CardCarDetail extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              AlertDialog(
-                title: Text('asd'),
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Settings'),
+                    content: const Text('App settings here.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Close'),
+                      ),
+                    ],
+                  );
+                },
               );
             },
-          )
+          ),
         ],
       ),
       body: NotificationListener<ScrollNotification>(
@@ -77,7 +105,7 @@ class CardCarDetail extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
+                          const Row(
                             children: [
                               Row(
                                 children: [
@@ -157,7 +185,7 @@ class CardCarDetail extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 5),
-                          Text(description), // Display subtitle text here
+                          Text(description),
                         ],
                       ),
                     ),

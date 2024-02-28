@@ -134,7 +134,7 @@ class _CarsState extends State<Cars> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                CardCarList(),
+                const CardCarList(),
 
                 Container(
                   margin: const EdgeInsets.only(top: 10, bottom: 10),
@@ -180,11 +180,11 @@ class _CarsState extends State<Cars> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.car_rental,
+                              Icons.discount,
                               size: 50,
                               color: Colors.blue,
                             ),
-                            Text('Mobil'),
+                            Text('Promo'),
                           ],
                         ),
                       ),
@@ -206,11 +206,11 @@ class _CarsState extends State<Cars> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.car_rental,
+                              Icons.accessibility,
                               size: 50,
                               color: Colors.blue,
                             ),
-                            Text('Mobil'),
+                            Text('Prospek'),
                           ],
                         ),
                       ),
@@ -226,11 +226,11 @@ class _CarsState extends State<Cars> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.car_rental,
+                              Icons.stars,
                               size: 50,
                               color: Colors.blue,
                             ),
-                            Text('Mobil'),
+                            Text('Testimoni'),
                           ],
                         ),
                       ),
@@ -251,11 +251,11 @@ class _CarsState extends State<Cars> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.car_rental,
+                              Icons.data_saver_on,
                               size: 50,
                               color: Colors.blue,
                             ),
-                            Text('Mobil'),
+                            Text('Data Panjar'),
                           ],
                         ),
                       ),
@@ -271,63 +271,17 @@ class _CarsState extends State<Cars> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.car_rental,
+                              Icons.data_usage,
                               size: 50,
                               color: Colors.blue,
                             ),
-                            Text('Mobil'),
+                            Text('Data Penjualan'),
                           ],
                         ),
                       ),
                     ),
                   ],
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.car_rental,
-                              size: 50,
-                              color: Colors.blue,
-                            ),
-                            Text('Mobil'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.car_rental,
-                              size: 50,
-                              color: Colors.blue,
-                            ),
-                            Text('Mobil'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                // Add more widgets inside the Column if needed
               ],
             ),
           )
