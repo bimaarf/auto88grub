@@ -222,7 +222,7 @@ class _CardCardItemState extends State<CardCardItem> {
               title: widget.carData['title']!.length > 50
                   ? widget.carData['title']!.substring(0, 50) + '...'
                   : widget.carData['title']!,
-              subtitle: 'Rp $formattedPrice',
+              subtitle: formattedPrice,
               note: widget.carData['created_at']!,
             ),
           ),
