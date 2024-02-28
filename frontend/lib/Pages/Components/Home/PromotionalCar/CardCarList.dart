@@ -141,7 +141,7 @@ class _CardCardItemState extends State<CardCardItem> {
   void _formatPrice() {
     int price = widget.carData['price'];
     formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp')
-        .format(price / 100);
+        .format(price);
   }
 
   void _navigateToDetailCar(BuildContext context) {
@@ -159,7 +159,7 @@ class _CardCardItemState extends State<CardCardItem> {
             imageUrl:
                 'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
             title: widget.carData['title']!,
-            subtitle: 'Rp $formattedPrice',
+            subtitle: formattedPrice,
             description: widget.carData['description']!,
             note: widget.carData['created_at']!,
           ),
