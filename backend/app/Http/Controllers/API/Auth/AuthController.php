@@ -58,7 +58,13 @@ class AuthController extends BaseController
     }
     public function logout(Request $request): JsonResponse
     {
-        $request->user()->currentAccessToken()->delete();
-        return response()->json(['status' => 200], 200);
+        $user = $request - user();
+        $accessToken = $user->currentAccessToken();
+        if ($accessToken) {
+            $accessToken->delete();
+            return response()->json(['status' => 200, 'message' => 'Logged out successfully'], 200);
+        } else {
+            return response()->json(['status' => 400, 'message' => 'No active token found'], 400);
+        }
     }
 }

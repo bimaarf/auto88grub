@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Model/Services/Cars/fetchCar.dart';
 import 'package:frontend/Pages/Components/Home/FirstMenuList.dart';
 import 'package:frontend/Pages/Profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,11 +17,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // Function to navigate to the profile screen
+  List<Map<String, dynamic>> _dataCars = [];
+  bool isLoading = false;
   var carItem;
+
   String? name;
-  void _navigateToProfileScreen(String profileName) {
-    // Use Navigator to push a new route
+  void _navigateToProfileScreen(String name) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -95,6 +97,43 @@ class _HomeState extends State<Home> {
         name = prefs.getString('name');
       });
     });
+    _fetchCar();
+  }
+
+  Future<void> _fetchCar() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      final List<Map<String, dynamic>> responseData =
+          await ServiceCarList.fetchCar();
+      setState(() {
+        isLoading = false;
+        _dataCars = responseData;
+      });
+    } catch (e) {
+      print('Error: $e');
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Server error'),
+            content: const Text('Data not found'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
