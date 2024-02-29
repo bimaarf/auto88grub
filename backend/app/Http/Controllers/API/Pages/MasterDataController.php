@@ -70,6 +70,27 @@ class MasterDataController extends Controller
             return response()->json(['status' => 201], 201);
         }
     }
+    public function carLocationUpdate(Request $request, $locaId)
+    {
+        try {
+            $data = Car::find($locaId);
+            if (!$data) {
+                return response()->json(['error' => 'Car location not found'], 404);
+            }
+
+            $data->name = $request->name;
+            $data->latitude = $request->latitude;
+            $data->longitude = $request->longitude;
+            $data->is_unlimited = $request->is_unlimited;
+            $data->limitation = $request->limitation;
+            $data->is_visible = $request->is_visible;
+            $data->update();
+
+            return response()->json(['status' => 200], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 500, 'error' => $th->getMessage()], 500);
+        }
+    }
     public function merkStore(Request $request)
     {
         try {
