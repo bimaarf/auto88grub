@@ -16,19 +16,12 @@ use App\Models\Car\Type;
 use App\Models\Location\Box;
 use App\Models\Location\Car;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
-use PhpParser\Node\Expr\FuncCall;
 
 class MasterDataController extends Controller
 {
     public function brankasLocationView()
     {
-        try {
-
-            return response()->json(['data' => Box::all()], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['status' => 201], 201);
-        }
+        return response()->json(['data' => Box::all()], 200);
     }
     public function brankasLocationStore(Request $request)
     {

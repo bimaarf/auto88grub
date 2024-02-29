@@ -50,15 +50,6 @@ Route::get('highlight/show', [LandingController::class, 'hlShow']);
 Route::get('slider/show', [LandingController::class, 'sliderShow']);
 // company
 Route::get('company/profile/show', [LandingController::class, 'getCompanyProfile']);
-// Route::get('consultation/show', [LandingController::class, 'consultation']);
-// Route::get('trade-in/show', [LandingController::class, 'tradeIn']);
-// Route::get('credit-car/show', [LandingController::class, 'creditCar']);
-// Route::get('term/show', [LandingController::class, 'term']);
-// Route::get('about/show', [LandingController::class, 'about']);
-// Route::get('visit/show', [LandingController::class, 'visit']);
-
-// company
-// Routes requiring authentication with Sanctum
 Route::middleware('auth:sanctum')->group(function () {
     // Routes for BrandController
     Route::post('logout', [AuthController::class, 'logout']);
