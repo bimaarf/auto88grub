@@ -58,5 +58,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('brankas/view', [MasterDataController::class, 'brankasLocationView']);
     Route::post('brankas/store', [MasterDataController::class, 'brankasLocationStore']);
     Route::post('brankas/update/{brankasId}', [MasterDataController::class, 'brankasLocationUpdate']);
+
+    Route::get('coordinate/view', [MasterDataController::class, 'carLocationView']);
 });
 Route::post('brand/store', [MasterDataController::class, 'merkStore']);

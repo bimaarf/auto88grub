@@ -55,6 +55,10 @@ class MasterDataController extends Controller
             return response()->json(['status' => 201], 201);
         }
     }
+    public function carLocationView(Request $request)
+    {
+        return response()->json(['data' => Car::all()], 200);
+    }
     public function carLocationStore(Request $request)
     {
         try {

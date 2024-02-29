@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Home/Content/Brankas/BpkbMenu.dart';
-import 'package:frontend/Pages/Components/Home/Content/Coordinat/CoordinatMenu.dart';
+import 'package:frontend/Pages/Components/Home/Content/Coordinat/CoordinateMenu.dart';
 
 class FirstMenuList extends StatefulWidget {
   const FirstMenuList({
@@ -12,10 +12,8 @@ class FirstMenuList extends StatefulWidget {
 }
 
 class _FirstMenuListState extends State<FirstMenuList> {
-  late List<Map<String, dynamic>>
-      menu; // Define menu as List<Map<String, dynamic>>
-  final ScrollController _scrollController =
-      ScrollController(); // Define ScrollController
+  late List<Map<String, dynamic>> menu;
+  final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
     super.initState();

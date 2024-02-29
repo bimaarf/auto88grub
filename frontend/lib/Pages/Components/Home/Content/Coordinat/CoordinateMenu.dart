@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Home/Content/Coordinat/CoordinatPage.dart';
+import 'package:frontend/Pages/Components/Home/Content/Coordinat/CoordinatePage.dart';
 
 class CoordinatMenuGeneral extends StatelessWidget {
   const CoordinatMenuGeneral({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class BpkbItem extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CoordinatPage(),
+        builder: (context) => CoordinatePage(),
       ),
     );
   }
