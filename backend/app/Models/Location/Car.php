@@ -16,7 +16,14 @@ class Car extends Model implements HasMedia
      * @var string
      */
     protected $table = 'car_locations';
-
+    protected $fillable = [
+        'name',
+        'latitude',
+        'longitude',
+        'is_unlimited',
+        'limitation',
+        'is_visible',
+    ];
     /**
      * @var array<string, string>
      */

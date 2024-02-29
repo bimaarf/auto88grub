@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/main.dart';
-import 'package:http/http.dart' as http; // Add this import statement
-import 'dart:convert'; // Add this import statement
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,6 +14,15 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   String _email = '';
   String _password = '';
+  late String baseUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    dotenv.load().then((_) {
+      baseUrl = dotenv.env['BASE_URL']!;
+    });
+  }
 
   void _trySubmit() async {
     final isValid = _formKey.currentState!.validate();
@@ -20,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
       _formKey.currentState!.save();
 
       final response = await http.post(
-        Uri.parse('https://cbbb-27-124-95-158.ngrok-free.app/api/login'),
+        Uri.parse('$baseUrl/api/login'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -44,12 +54,13 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => const NavigationBarApp(
-                    isLoggedIn: true,
-                  )),
+            builder: (context) => const NavigationBarApp(
+              isLoggedIn: true,
+            ),
+          ),
         );
       } else {
-        // ....
+        // Handle error
       }
     }
   }
@@ -124,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        child: const Text('Logout'),
+                        child: const Text('Login'),
                       ),
                     ),
                   ],

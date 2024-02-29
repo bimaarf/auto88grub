@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Pages/Components/Home/Content/Brankas/BpkbMenu.dart';
 
 class FirstMenuList extends StatefulWidget {
   const FirstMenuList({
@@ -192,11 +193,7 @@ class _FirstMenuListState extends State<FirstMenuList> {
                                     ),
                                   ],
                                 ),
-                                MainMenu(),
-                                MainMenu(),
-                                MainMenu(),
-                                MainMenu(),
-                                MainMenu(),
+                                BpkbMenuGeneral(),
                               ],
                             ),
                           ),
@@ -248,29 +245,6 @@ class OperationalMenu extends StatelessWidget {
         OptItem(),
         SizedBox(width: 4),
         OptItem(),
-      ],
-    );
-  }
-}
-
-class MainMenu extends StatelessWidget {
-  const MainMenu({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        MainItem(),
-        SizedBox(width: 4),
-        MainItem(),
-        SizedBox(width: 4),
-        MainItem(),
-        SizedBox(width: 4),
-        MainItem(),
       ],
     );
   }

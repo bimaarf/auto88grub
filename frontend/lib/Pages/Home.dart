@@ -235,11 +235,11 @@ class _HomeState extends State<Home> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.car_rental,
-                              size: 50,
+                              Icons.card_membership,
+                              size: 44,
                               color: Colors.blue,
                             ),
-                            Text('Mobil'),
+                            Text('Promo'),
                           ],
                         ),
                       ),
@@ -265,7 +265,7 @@ class _HomeState extends State<Home> {
                               size: 50,
                               color: Colors.blue,
                             ),
-                            Text('Mobil'),
+                            Text('Prospek'),
                           ],
                         ),
                       ),
@@ -285,52 +285,7 @@ class _HomeState extends State<Home> {
                               size: 50,
                               color: Colors.blue,
                             ),
-                            Text('Mobil'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.car_rental,
-                              size: 50,
-                              color: Colors.blue,
-                            ),
-                            Text('Mobil'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.car_rental,
-                              size: 50,
-                              color: Colors.blue,
-                            ),
-                            Text('Mobil'),
+                            Text('Testimoni'),
                           ],
                         ),
                       ),
@@ -355,7 +310,7 @@ class _HomeState extends State<Home> {
                               size: 50,
                               color: Colors.blue,
                             ),
-                            Text('Mobil'),
+                            Text('Data Panjar'),
                           ],
                         ),
                       ),
@@ -375,7 +330,52 @@ class _HomeState extends State<Home> {
                               size: 50,
                               color: Colors.blue,
                             ),
-                            Text('Mobil'),
+                            Text('Data Penjualan'),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(10)),
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
+                        child: const Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.car_rental,
+                              size: 50,
+                              color: Colors.blue,
+                            ),
+                            Text('Data Hutang'),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(10)),
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
+                        child: const Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.car_rental,
+                              size: 50,
+                              color: Colors.blue,
+                            ),
+                            Text('Data Pencairan'),
                           ],
                         ),
                       ),
@@ -401,7 +401,7 @@ class _HomeState extends State<Home> {
             child: Material(
               color: Colors.transparent,
               child: InkResponse(
-                onTap: () => _navigateToProfileScreen('Jokow'),
+                onTap: () => _navigateToProfileScreen('Jokoww'),
                 splashColor: Colors.white.withOpacity(0.5),
                 highlightShape: BoxShape.rectangle,
                 containedInkWell: true,

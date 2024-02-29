@@ -18,9 +18,14 @@ class Brand extends Model implements HasMedia
      * @var string
      */
     protected $table = 'car_brands';
-
+    protected $fillable = ['name'];
     public function models(): HasMany
     {
         return $this->hasMany(CarModel::class, 'car_brand_id');
+    }
+    public function getCreatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['created_at'])
+            ->format('d-m-Y - H:i');
     }
 }

@@ -16,4 +16,9 @@ class Box extends Model implements HasMedia
      * @var string
      */
     protected $table = 'box_locations';
+    public function getCreatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['created_at'])
+            ->format('M d, Y - H:i');
+    }
 }

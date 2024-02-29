@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen();
-
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -15,11 +15,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String username = '';
   String roles = '';
   bool isLoading = false;
+  late String baseUrl;
 
   @override
   void initState() {
     super.initState();
     loadUserData();
+    dotenv.load().then((_) {
+      baseUrl = dotenv.env['BASE_URL']!;
+    });
   }
 
   Future<void> loadUserData() async {
@@ -41,7 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     await prefs.clear(); // Clear all saved data
 
     final response = await http.post(
-      Uri.parse('https://cbbb-27-124-95-158.ngrok-free.app/api/logout'),
+      Uri.parse('$baseUrl/api/logout'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',

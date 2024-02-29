@@ -5,6 +5,7 @@ use App\Http\Controllers\API\Car\BrandController;
 use App\Http\Controllers\API\Pages\BlogController;
 use App\Http\Controllers\API\Pages\CarController;
 use App\Http\Controllers\API\Pages\CarPromoController;
+use App\Http\Controllers\API\Pages\MasterDataController;
 use App\Http\Controllers\API\Pages\TestimonyController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
  */
+
 Route::options('/sanctum/csrf-cookie', function () {
     return response('', 204)
         ->header('Access-Control-Allow-Origin', 'http://localhost:3000')
@@ -61,4 +63,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // Routes for BrandController
     Route::post('logout', [AuthController::class, 'logout']);
     Route::resource('brands', BrandController::class);
+    // master data
+    Route::get('brankas/view', [MasterDataController::class, 'brankasLocationView']);
+    Route::post('brankas/store', [MasterDataController::class, 'brankasLocationStore']);
+    Route::post('brankas/update/{brankasId}', [MasterDataController::class, 'brankasLocationUpdate']);
 });
+Route::post('brand/store', [MasterDataController::class, 'merkStore']);
