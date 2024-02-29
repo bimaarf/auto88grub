@@ -147,7 +147,7 @@ class _CarsState extends State<Cars> {
                 ),
 
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: Container(

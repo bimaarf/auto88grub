@@ -16,4 +16,5 @@ class Series extends Model implements HasMedia
      * @var string
      */
     protected $table = 'car_series';
+    protected $fillable = ['name'];
 }

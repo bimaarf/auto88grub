@@ -18,7 +18,7 @@ class Type extends EloquentModel
      * @var string
      */
     protected $table = 'car_types';
-
+    protected $fillable = ['car_brand_id', 'car_model_id', 'name'];
     /**
      * @var array<string, string>
      */

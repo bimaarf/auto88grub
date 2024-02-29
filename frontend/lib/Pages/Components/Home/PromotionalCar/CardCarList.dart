@@ -62,6 +62,7 @@ class _CardCarListState extends State<CardCarList> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const MobilRow(),
         _isLoading
@@ -90,8 +91,8 @@ class MobilRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       textBaseline: TextBaseline.ideographic,
       children: [
         Row(

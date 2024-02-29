@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Home/Content/Brankas/BpkbMenu.dart';
+import 'package:frontend/Pages/Components/Home/Content/Coordinat/CoordinatMenu.dart';
 
 class FirstMenuList extends StatefulWidget {
   const FirstMenuList({
@@ -185,7 +186,7 @@ class _FirstMenuListState extends State<FirstMenuList> {
                                       size: 20,
                                     ),
                                     Text(
-                                      'Main Menu',
+                                      'Master Data',
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.bold,
@@ -193,7 +194,13 @@ class _FirstMenuListState extends State<FirstMenuList> {
                                     ),
                                   ],
                                 ),
-                                BpkbMenuGeneral(),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    BpkbMenuGeneral(),
+                                    CoordinatMenuGeneral(),
+                                  ],
+                                ),
                               ],
                             ),
                           ),

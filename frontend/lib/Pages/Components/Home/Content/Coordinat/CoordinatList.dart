@@ -6,14 +6,14 @@ import 'package:frontend/Model/Services/MasterData/fetchBrankas.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class BrankasList extends StatefulWidget {
-  const BrankasList({Key? key}) : super(key: key);
+class CoordinatList extends StatefulWidget {
+  const CoordinatList({Key? key}) : super(key: key);
 
   @override
-  _BrankasListState createState() => _BrankasListState();
+  _CoordinatListState createState() => _CoordinatListState();
 }
 
-class _BrankasListState extends State<BrankasList> {
+class _CoordinatListState extends State<CoordinatList> {
   List<Map<String, dynamic>> _networkData = [];
   bool _isLoading = true;
   TextEditingController _nameController = TextEditingController();
@@ -83,12 +83,12 @@ class _BrankasListState extends State<BrankasList> {
           : RefreshIndicator(
               onRefresh: _fetchData,
               child:
-                  _buildBrankasList(), // Use centralized list building method
+                  _buildCoordinatList(), // Use centralized list building method
             ),
     );
   }
 
-  Widget _buildBrankasList() {
+  Widget _buildCoordinatList() {
     if (_networkData.isEmpty) {
       return const Center(
         child: Text(

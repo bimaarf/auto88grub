@@ -16,4 +16,5 @@ class Transmission extends Model implements HasMedia
      * @var string
      */
     protected $table = 'car_transmissions';
+    protected $fillable = ['name'];
 }

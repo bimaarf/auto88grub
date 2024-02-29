@@ -16,4 +16,5 @@ class Fuel extends Model implements HasMedia
      * @var string
      */
     protected $table = 'car_fuels';
+    protected $fillable = ['name'];
 }

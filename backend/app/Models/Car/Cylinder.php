@@ -16,4 +16,5 @@ class Cylinder extends Model implements HasMedia
      * @var string
      */
     protected $table = 'car_cylinders';
+    protected $fillable = ['volume'];
 }

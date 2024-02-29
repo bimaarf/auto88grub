@@ -16,4 +16,5 @@ class Gear extends Model implements HasMedia
      * @var string
      */
     protected $table = 'car_gears';
+    protected $fillable = ['name'];
 }

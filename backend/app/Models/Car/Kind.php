@@ -16,4 +16,5 @@ class Kind extends Model implements HasMedia
      * @var string
      */
     protected $table = 'car_kinds';
+    protected $fillable = ['name', 'image'];
 }
