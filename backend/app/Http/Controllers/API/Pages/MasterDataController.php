@@ -171,7 +171,22 @@ class MasterDataController extends Controller
     }
     public function typeView()
     {
-        return response()->json(['data' => Type::all()]);
+        $data = Type::with('brand', 'model')->get();
+
+        return response()->json(['data' => $data]);
+    }
+    public function typeStore(Request $request)
+    {
+        try {
+            $data = new Type();
+            $data->car_brand_id = $request->car_brand_id;
+            $data->car_model_id = $request->car_model_id;
+            $data->name         = $request->name;
+            $data->save();
+            return response()->json(['status' => 200], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201], 201);
+        }
     }
     public function typeUpdate(Request $request, $typeId)
     {
@@ -180,7 +195,7 @@ class MasterDataController extends Controller
             $data->car_brand_id = $request->car_brand_id;
             $data->car_model_id = $request->car_model_id;
             $data->name         = $request->name;
-            $data->update();
+            $data->save();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
             return response()->json(['status' => 201], 201);
