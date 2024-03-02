@@ -110,11 +110,7 @@ class _UpdateModelPageState extends State<UpdateModelPage> {
             duration: Duration(seconds: 2),
           ),
         );
-
-        // Call the onUpdate function passed from the parent widget
         widget.onUpdate();
-
-        // Pop the current screen and return 'true' to indicate success
         Navigator.pop(context, true);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -160,9 +156,8 @@ class _UpdateModelPageState extends State<UpdateModelPage> {
                         .any((brand) => brand['id'].toString() == newValue)) {
                       _selectedBrandId = newValue!;
                     } else {
-                      // Handle invalid selection or set a default value
                       _selectedBrandId =
-                          ''; // For example, set default value to empty string
+                          '';
                     }
                   });
                 },
