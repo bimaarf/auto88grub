@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Pages/Components/Home/Content/Brand/BrandMenu.dart';
 import 'package:frontend/Pages/Components/Home/Content/Brankas/BpkbMenu.dart';
 import 'package:frontend/Pages/Components/Home/Content/Coordinat/CoordinateMenu.dart';
 
@@ -197,6 +198,7 @@ class _FirstMenuListState extends State<FirstMenuList> {
                                   children: [
                                     BpkbMenuGeneral(),
                                     CoordinatMenuGeneral(),
+                                    BrandMenuGeneral(),
                                   ],
                                 ),
                               ],

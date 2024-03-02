@@ -60,9 +60,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('brankas/store', [MasterDataController::class, 'brankasLocationStore']);
     Route::post('brankas/update/{brankasId}', [MasterDataController::class, 'brankasLocationUpdate']);
 
-    Route::get('coordinate/view', [MasterDataController::class, 'carLocationView']);
-    Route::post('coordinate/store', [MasterDataController::class, 'carLocationStore']);
-    Route::post('coordinate/update/{locaId}', [MasterDataController::class, 'carLocationUpdate']);
-    Route::get('merk/view', [MasterDataController::class, 'merkView']);
-    Route::post('merk/store', [MasterDataController::class, 'merkStore']);
+    Route::group(['prefix' => 'coordinate'], function () {
+
+        Route::get('view', [MasterDataController::class, 'carLocationView']);
+        Route::post('store', [MasterDataController::class, 'carLocationStore']);
+        Route::post('update/{locaId}', [MasterDataController::class, 'carLocationUpdate']);
+    });
+    Route::group(['prefix' => 'brand'], function () {
+        Route::get('/view', [MasterDataController::class, 'brandView']);
+        Route::post('/store', [MasterDataController::class, 'brandStore']);
+        Route::post('/update/{brandId}', [MasterDataController::class, 'brandUpdate']);
+    });
 });

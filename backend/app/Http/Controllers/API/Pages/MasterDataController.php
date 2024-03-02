@@ -62,9 +62,9 @@ class MasterDataController extends Controller
     public function carLocationStore(Request $request)
     {
         try {
-            $car = $request->all();
-            $car = new Car($car);
-            $car->save();
+            $data = $request->all();
+            $data = new Car($data);
+            $data->save();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
             return response()->json(['status' => 201], 201);
@@ -90,37 +90,37 @@ class MasterDataController extends Controller
             return response()->json(['status' => 500, 'error' => $th->getMessage()], 500);
         }
     }
-    public function merkView()
+    public function brandView()
     {
         return response()->json(['data' => Brand::all()]);
     }
-    public function merkStore(Request $request)
+    public function brandStore(Request $request)
     {
         try {
-            $car = $request->all();
-            $car = new Brand($car);
-            $car->save();
+            $data = $request->all();
+            $data = new Brand($data);
+            $data->save();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
             return response()->json(['status' => 201], 201);
         }
     }
-    public function merkUpdate(Request $request, $merkId)
+    public function brandUpdate(Request $request, $brandId)
     {
         try {
-            $car = Brand::find($merkId);
-            $car->name = $request->name;
-            $car->save();
+            $data = Brand::find($brandId);
+            $data->name = $request->name;
+            $data->save();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
             return response()->json(['status' => 201], 201);
         }
     }
-    public function merkDelete($merkId)
+    public function brandDelete($brandId)
     {
         try {
-            $car = Brand::find($merkId);
-            $car->delete();
+            $data = Brand::find($brandId);
+            $data->delete();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
             return response()->json(['status' => 201], 201);

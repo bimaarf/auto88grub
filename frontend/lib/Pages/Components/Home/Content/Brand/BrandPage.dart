@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:frontend/Model/Services/MasterData/fetchCoordinate.dart';
-import 'package:frontend/Pages/Components/Home/Content/Coordinat/Context/__CoordinateList.dart';
-import 'package:frontend/Pages/Components/Home/Content/Coordinat/Context/__CoordinateStore.dart';
-import 'package:frontend/Pages/Components/Home/Content/Coordinat/Context/_CoordinateUpdate.dart';
+import 'package:frontend/Model/Services/MasterData/fetchBrand.dart';
+import 'package:frontend/Pages/Components/Home/Content/Brand/Context/__BrandList.dart';
+import 'package:frontend/Pages/Components/Home/Content/Brand/Context/__BrandStore.dart';
+import 'package:frontend/Pages/Components/Home/Content/Brand/Context/__BrandUpdate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class CoordinatePage extends StatefulWidget {
+class BrandPage extends StatefulWidget {
   @override
-  _CoordinatePageState createState() => _CoordinatePageState();
+  _BrandPageState createState() => _BrandPageState();
 }
 
-class _CoordinatePageState extends State<CoordinatePage> {
-  List<Map<String, dynamic>> coordinates = [];
+class _BrandPageState extends State<BrandPage> {
+  List<Map<String, dynamic>> brands = [];
   bool isLoading = false;
   late String baseUrl;
 
@@ -25,7 +25,7 @@ class _CoordinatePageState extends State<CoordinatePage> {
   Future<void> initializeBaseUrl() async {
     await dotenv.load();
     baseUrl = dotenv.env['BASE_URL']!;
-    await fetchCoordinate(); // Await fetchCoordinate
+    await fetchBrand(); // Await fetchBrand
   }
 
   Future<String> getTokenFromStorage() async {
@@ -33,41 +33,36 @@ class _CoordinatePageState extends State<CoordinatePage> {
     return prefs.getString('token') ?? '';
   }
 
-  Future<void> fetchCoordinate() async {
+  Future<void> fetchBrand() async {
     try {
       setState(() {
         isLoading = true;
       });
 
-      coordinates = await ServiceCoordinate.fetchCoordinates(baseUrl);
+      brands = await ServiceBrand.fetchBrands(baseUrl);
 
       setState(() {
         isLoading = false;
       });
     } catch (e) {
-      print('Error fetching coordinate data: $e');
+      print('Error fetching brand data: $e');
       setState(() {
         isLoading = false;
       });
     }
   }
 
-  void showUpdatePage(Map<String, dynamic> coordinate) {
+  void showUpdatePage(Map<String, dynamic> brand) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => UpdateCoordinatePage(
-          coordinateId: coordinate['id']?.toString() ?? '',
-          name: coordinate['name'] ?? '',
-          latitude: coordinate['latitude']?.toString() ?? '',
-          longitude: coordinate['longitude']?.toString() ?? '',
-          isUnlimited: coordinate['is_unlimited'] ?? false,
-          limitation: coordinate['limitation'] ?? 0,
-          isVisible: coordinate['is_visible'] ?? false,
+        builder: (context) => UpdateBrandPage(
+          brandId: brand['id']?.toString() ?? '',
+          name: brand['name'] ?? '',
           onUpdate: () {
-            fetchCoordinate();
+            fetchBrand();
           },
-          fetchNewData: fetchCoordinate,
+          fetchNewData: fetchBrand,
         ),
       ),
     );
@@ -77,22 +72,22 @@ class _CoordinatePageState extends State<CoordinatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Coordinates'),
+        title: const Text('Brands'),
         backgroundColor: Colors.black,
       ),
       body: RefreshIndicator(
         color: Colors.white,
-        onRefresh: fetchCoordinate,
+        onRefresh: fetchBrand,
         child: isLoading
             ? const Center(
                 child: CircularProgressIndicator(
                   color: Colors.white,
                 ),
               )
-            : CoordinateList(
-                coordinates: coordinates,
-                onUpdate: (coordinate) {
-                  showUpdatePage(coordinate);
+            : BrandList(
+                brands: brands,
+                onUpdate: (brand) {
+                  showUpdatePage(brand);
                 },
               ),
       ),
@@ -101,11 +96,11 @@ class _CoordinatePageState extends State<CoordinatePage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddCoordinatePage(),
+              builder: (context) => AddBrandPage(),
             ),
           ).then((value) {
             if (value == true) {
-              fetchCoordinate();
+              fetchBrand();
             }
           });
         },
