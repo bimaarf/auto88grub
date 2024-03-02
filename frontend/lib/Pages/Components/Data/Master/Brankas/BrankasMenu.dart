@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Data/Master/Brankas/BpkbPage.dart';
+import 'package:frontend/Pages/Components/Data/Master/Brankas/BrankasPage.dart';
 
-class BpkbMenuGeneral extends StatelessWidget {
-  const BpkbMenuGeneral({Key? key}) : super(key: key);
+class BrankasMenuGeneral extends StatelessWidget {
+  const BrankasMenuGeneral({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,20 +10,20 @@ class BpkbMenuGeneral extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        BpkbItem(),
+        BrankasItem(),
       ],
     );
   }
 }
 
-class BpkbItem extends StatelessWidget {
-  const BpkbItem({Key? key}) : super(key: key);
+class BrankasItem extends StatelessWidget {
+  const BrankasItem({Key? key}) : super(key: key);
 
   void _navigateToPage(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => BpkbPage(),
+        builder: (context) => BrankasPage(),
       ),
     );
   }
@@ -55,12 +55,12 @@ class BpkbItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                Icons.file_copy,
+                Icons.color_lens,
                 size: 30,
                 color: Colors.blue,
               ),
               Text(
-                'BPKB',
+                'Brankas',
                 style: TextStyle(
                   fontSize: 12,
                 ),

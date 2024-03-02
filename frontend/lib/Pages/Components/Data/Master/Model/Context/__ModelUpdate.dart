@@ -137,7 +137,7 @@ class _UpdateModelPageState extends State<UpdateModelPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update model'),
+        title: const Text('Update Model'),
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(

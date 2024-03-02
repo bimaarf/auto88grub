@@ -23,7 +23,7 @@ class ServiceBrand {
         final List<dynamic> data = jsonData['data'];
 
         if (data.isEmpty) {
-          return []; // Return an empty list if there's no data
+          return [];
         }
 
         return List<Map<String, dynamic>>.from(
