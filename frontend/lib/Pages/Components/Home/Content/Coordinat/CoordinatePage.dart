@@ -43,16 +43,17 @@ class _CoordinatePageState extends State<CoordinatePage> {
   }
 
   Future<void> fetchCoordinate() async {
-    setState(() {
-      isLoading = true;
-    });
-
     try {
+      setState(() {
+        isLoading = true;
+      });
+
       String token = await getTokenFromStorage();
 
       Map<String, String> headers = {
         'Authorization': 'Bearer $token',
       };
+
       final response = await http.get(
         Uri.parse('$baseUrl/api/coordinate/view'),
         headers: headers,
@@ -85,13 +86,19 @@ class _CoordinatePageState extends State<CoordinatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Coordinates'),
+        title: const Text('Coordinates'),
       ),
-      body: isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : coordinateList(),
+      body: RefreshIndicator(
+        color: Colors.white,
+        onRefresh: fetchCoordinate,
+        child: isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              )
+            : coordinateList(),
+      ),
     );
   }
 
@@ -100,21 +107,60 @@ class _CoordinatePageState extends State<CoordinatePage> {
       itemCount: coordinates.length,
       itemBuilder: (context, index) {
         final coordinate = coordinates[index];
-        return ListTile(
-          title: Text('Name: ${coordinate['name']}'),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Latitude: ${coordinate['latitude']}'),
-              Text('Longitude: ${coordinate['longitude']}'),
-              Text('Is Unlimited: ${coordinate['is_unlimited']}'),
-              Text('Limitation: ${coordinate['limitation']}'),
-              Text('Is Visible: ${coordinate['is_visible']}'),
-            ],
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 3),
+          decoration: const BoxDecoration(
+              border: Border(bottom: BorderSide(color: Colors.white10))),
+          child: ListTile(
+            title: Text(
+              coordinate['name'].toUpperCase(),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            ),
+            subtitle: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Latitude: ${coordinate['latitude']}',
+                      style:
+                          const TextStyle(fontSize: 12, color: Colors.white70),
+                    ),
+                    Text(
+                      'Longitude: ${coordinate['longitude']}',
+                      style:
+                          const TextStyle(fontSize: 12, color: Colors.white70),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Is Unlimited: ${coordinate['is_unlimited']}',
+                      style:
+                          const TextStyle(fontSize: 12, color: Colors.white70),
+                    ),
+                    Text(
+                      'Limitation: ${coordinate['limitation']}',
+                      style:
+                          const TextStyle(fontSize: 12, color: Colors.white70),
+                    ),
+                    Text(
+                      'Is Visible: ${coordinate['is_visible']}',
+                      style:
+                          const TextStyle(fontSize: 12, color: Colors.white70),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            onTap: () {
+              showUpdateModal(coordinate);
+            },
           ),
-          onTap: () {
-            showUpdateModal(coordinate);
-          },
         );
       },
     );
@@ -131,8 +177,8 @@ class _CoordinatePageState extends State<CoordinatePage> {
         TextEditingController(text: coordinate['limitation']?.toString() ?? '');
 
     // Inisialisasi nilai default radio button
-    bool? initialIsUnlimited = coordinate['is_unlimited'];
-    bool? initialIsVisible = coordinate['is_visible'];
+    isUnlimited = coordinate['is_unlimited'];
+    isVisible = coordinate['is_visible'];
 
     showDialog(
       context: context,
@@ -142,8 +188,9 @@ class _CoordinatePageState extends State<CoordinatePage> {
             return Dialog(
               insetPadding: EdgeInsets.zero,
               child: IntrinsicWidth(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                child: Container(
+                  width: double.maxFinite,
+                  margin: const EdgeInsets.all(20),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -163,7 +210,7 @@ class _CoordinatePageState extends State<CoordinatePage> {
                         ),
                         Row(
                           children: [
-                            Text('Is Unlimited:'),
+                            const Text('Is Unlimited:'),
                             Radio<bool>(
                               value: true,
                               groupValue: isUnlimited,
@@ -173,7 +220,7 @@ class _CoordinatePageState extends State<CoordinatePage> {
                                 });
                               },
                             ),
-                            Text('True'),
+                            const Text('True'),
                             Radio<bool>(
                               value: false,
                               groupValue: isUnlimited,
@@ -183,17 +230,18 @@ class _CoordinatePageState extends State<CoordinatePage> {
                                 });
                               },
                             ),
-                            Text('False'),
+                            const Text('False'),
                           ],
                         ),
                         TextFormField(
+                          keyboardType: TextInputType.number,
                           controller: limitationController,
                           decoration:
                               const InputDecoration(labelText: 'Limitation'),
                         ),
                         Row(
                           children: [
-                            Text('Is Visible:'),
+                            const Text('Is Visible:'),
                             Radio<bool>(
                               value: true,
                               groupValue: isVisible,
@@ -203,7 +251,7 @@ class _CoordinatePageState extends State<CoordinatePage> {
                                 });
                               },
                             ),
-                            Text('True'),
+                            const Text('True'),
                             Radio<bool>(
                               value: false,
                               groupValue: isVisible,
@@ -216,7 +264,7 @@ class _CoordinatePageState extends State<CoordinatePage> {
                             Text('False'),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -239,7 +287,7 @@ class _CoordinatePageState extends State<CoordinatePage> {
                                 );
                                 Navigator.of(context).pop();
                               },
-                              child: Text('Update'),
+                              child: const Text('Update'),
                             ),
                           ],
                         ),
