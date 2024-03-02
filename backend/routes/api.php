@@ -54,12 +54,15 @@ Route::middleware('auth:sanctum')->group(function () {
     // Routes for BrandController
     Route::post('logout', [AuthController::class, 'logout']);
     Route::resource('brands', BrandController::class);
+
     // master data
     Route::get('brankas/view', [MasterDataController::class, 'brankasLocationView']);
     Route::post('brankas/store', [MasterDataController::class, 'brankasLocationStore']);
     Route::post('brankas/update/{brankasId}', [MasterDataController::class, 'brankasLocationUpdate']);
 
     Route::get('coordinate/view', [MasterDataController::class, 'carLocationView']);
+    Route::post('coordinate/store', [MasterDataController::class, 'carLocationStore']);
     Route::post('coordinate/update/{locaId}', [MasterDataController::class, 'carLocationUpdate']);
+    Route::get('merk/view', [MasterDataController::class, 'merkView']);
+    Route::post('merk/store', [MasterDataController::class, 'merkStore']);
 });
-Route::post('brand/store', [MasterDataController::class, 'merkStore']);

@@ -52,12 +52,11 @@ export const Home = () => {
       <HighLightHeader />
       <div className="z-40 md:w-11/12 md:container sm:mx-1 md:mx-auto md:px-40">
         <div
-          className="shadow-2xl md:rounded-badge fade-in-left"
+          className="shadow-2xl md:rounded-badge fade-in-left mt-20"
           ref={carouselRef}>
           {getSliders ? (
             <CarouselSl getSliders={getSliders} />
           ) : (
-            // <CarouselSkeleton />
             <CarouselSkeleton />
           )}
         </div>

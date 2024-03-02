@@ -28,7 +28,7 @@ export const HighLightHeader = () => {
           backgroundAttachment: "fixed",
           backgroundPosition: "bottom right",
           backgroundSize: "cover",
-          height: "80vh", // Default height
+          height: "70vh", // Default height
           borderBottomLeftRadius: "30px",
           borderBottomRightRadius: "30px",
           // filter: "blur(2px)", // Apply blur effect to the image

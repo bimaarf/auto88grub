@@ -41,7 +41,7 @@ class CarController extends Controller
 
         $query = Car::with([
             'promos', 'documents', 'officials', 'originals', 'outdoors',
-            'location', 'brand', 'model', 'type' ,'cylinder', 'transmission', 'series',
+            'location', 'brand', 'model', 'type', 'cylinder', 'transmission', 'series',
             'gear', 'fuel', 'color', 'row', 'year'
         ]);
 
@@ -61,8 +61,7 @@ class CarController extends Controller
 
         $perPage = $request->input('perPage', 10);
         $cars = $query->paginate($perPage);
-        $cars->getCollection()->transform(function ($car)
-        {
+        $cars->getCollection()->transform(function ($car) {
             $car->title = $car->slug;
             $car->slug = Str::slug($car->title);
             return $car;
@@ -76,11 +75,11 @@ class CarController extends Controller
         $perPage = $request->query('perPage', 10);
         $getCar = Car::with([
             'promos', 'documents', 'officials', 'originals', 'outdoors',
-            'location', 'brand', 'model', 'type' ,'cylinder', 'transmission', 'series',
+            'location', 'brand', 'model', 'type', 'cylinder', 'transmission', 'series',
             'gear', 'fuel', 'color', 'row', 'year'
         ])
-        ->orderBy('id', 'DESC')
-        ->paginate($perPage, ['*'], 'page', $page);
+            ->orderBy('id', 'DESC')
+            ->paginate($perPage, ['*'], 'page', $page);
         $getCar->getCollection()->transform(function ($car) {
             $car->title = $car->slug;
             $car->slug = Str::slug($car->title);
@@ -96,11 +95,11 @@ class CarController extends Controller
 
         $getCar = Car::with([
             'promos', 'documents', 'officials', 'originals', 'outdoors',
-            'location', 'brand', 'model', 'type' ,'cylinder', 'transmission', 'series',
+            'location', 'brand', 'model', 'type', 'cylinder', 'transmission', 'series',
             'gear', 'fuel', 'color', 'row', 'year'
         ])
-        ->orderBy('id', 'DESC')
-        ->paginate($perPage, ['*'], 'page', $page);
+            ->orderBy('id', 'DESC')
+            ->paginate($perPage, ['*'], 'page', $page);
         $getCar->getCollection()->transform(function ($car) {
             $car->title = $car->slug;
             $car->slug = Str::slug($car->title);

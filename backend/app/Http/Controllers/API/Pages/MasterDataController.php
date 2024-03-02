@@ -85,11 +85,14 @@ class MasterDataController extends Controller
             $data->limitation = $request->limitation;
             $data->is_visible = $request->is_visible;
             $data->update();
-
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
             return response()->json(['status' => 500, 'error' => $th->getMessage()], 500);
         }
+    }
+    public function merkView()
+    {
+        return response()->json(['data' => Brand::all()]);
     }
     public function merkStore(Request $request)
     {
@@ -97,6 +100,27 @@ class MasterDataController extends Controller
             $car = $request->all();
             $car = new Brand($car);
             $car->save();
+            return response()->json(['status' => 200], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201], 201);
+        }
+    }
+    public function merkUpdate(Request $request, $merkId)
+    {
+        try {
+            $car = Brand::find($merkId);
+            $car->name = $request->name;
+            $car->save();
+            return response()->json(['status' => 200], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201], 201);
+        }
+    }
+    public function merkDelete($merkId)
+    {
+        try {
+            $car = Brand::find($merkId);
+            $car->delete();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
             return response()->json(['status' => 201], 201);

@@ -26,7 +26,7 @@ class _BrankasListState extends State<BrankasList> {
     dotenv.load().then((_) {
       baseUrl = dotenv.env['BASE_URL']!;
       _fetchData();
-    }); // Load baseUrl from environment
+    });
   }
 
   @override
