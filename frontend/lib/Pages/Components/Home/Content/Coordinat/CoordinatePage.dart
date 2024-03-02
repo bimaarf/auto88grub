@@ -1,15 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
-void main() {
-  runApp(MaterialApp(
-    home: CoordinatePage(),
-  ));
-}
+import 'package:frontend/Model/Services/MasterData/fetchCoordinate.dart';
+import 'package:frontend/Pages/Components/Home/Content/Coordinat/CoordinateList.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class CoordinatePage extends StatefulWidget {
   @override
@@ -21,10 +16,6 @@ class _CoordinatePageState extends State<CoordinatePage> {
   bool isLoading = false;
   late String baseUrl;
 
-  // Variable state untuk menyimpan nilai radio button
-  bool? isUnlimited;
-  bool? isVisible;
-
   @override
   void initState() {
     super.initState();
@@ -35,6 +26,9 @@ class _CoordinatePageState extends State<CoordinatePage> {
     await dotenv.load();
     baseUrl = dotenv.env['BASE_URL']!;
     fetchCoordinate();
+    dotenv.load().then((_) {
+      baseUrl = dotenv.env['BASE_URL']!;
+    });
   }
 
   Future<String> getTokenFromStorage() async {
@@ -48,32 +42,11 @@ class _CoordinatePageState extends State<CoordinatePage> {
         isLoading = true;
       });
 
-      String token = await getTokenFromStorage();
+      coordinates = await ServiceCoordinate.fetchCoordinates(baseUrl);
 
-      Map<String, String> headers = {
-        'Authorization': 'Bearer $token',
-      };
-
-      final response = await http.get(
-        Uri.parse('$baseUrl/api/coordinate/view'),
-        headers: headers,
-      );
-
-      if (response.statusCode == 200) {
-        final dynamic responseData = json.decode(response.body);
-
-        if (responseData['data'] is List<dynamic>) {
-          setState(() {
-            coordinates = List<Map<String, dynamic>>.from(responseData['data']);
-            isLoading = false;
-          });
-        } else {
-          throw Exception('Invalid response data format');
-        }
-      } else {
-        throw Exception(
-            'Failed to load coordinate data: ${response.statusCode}');
-      }
+      setState(() {
+        isLoading = false;
+      });
     } catch (e) {
       print('Error fetching coordinate data: $e');
       setState(() {
@@ -87,6 +60,7 @@ class _CoordinatePageState extends State<CoordinatePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Coordinates'),
+        backgroundColor: Colors.black,
       ),
       body: RefreshIndicator(
         color: Colors.white,
@@ -97,72 +71,13 @@ class _CoordinatePageState extends State<CoordinatePage> {
                   color: Colors.white,
                 ),
               )
-            : coordinateList(),
+            : CoordinateList(
+                coordinates: coordinates,
+                onUpdate: (coordinate) {
+                  showUpdateModal(coordinate);
+                },
+              ),
       ),
-    );
-  }
-
-  Widget coordinateList() {
-    return ListView.builder(
-      itemCount: coordinates.length,
-      itemBuilder: (context, index) {
-        final coordinate = coordinates[index];
-        return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 3),
-          decoration: const BoxDecoration(
-              border: Border(bottom: BorderSide(color: Colors.white10))),
-          child: ListTile(
-            title: Text(
-              coordinate['name'].toUpperCase(),
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-            ),
-            subtitle: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Latitude: ${coordinate['latitude']}',
-                      style:
-                          const TextStyle(fontSize: 12, color: Colors.white70),
-                    ),
-                    Text(
-                      'Longitude: ${coordinate['longitude']}',
-                      style:
-                          const TextStyle(fontSize: 12, color: Colors.white70),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Is Unlimited: ${coordinate['is_unlimited']}',
-                      style:
-                          const TextStyle(fontSize: 12, color: Colors.white70),
-                    ),
-                    Text(
-                      'Limitation: ${coordinate['limitation']}',
-                      style:
-                          const TextStyle(fontSize: 12, color: Colors.white70),
-                    ),
-                    Text(
-                      'Is Visible: ${coordinate['is_visible']}',
-                      style:
-                          const TextStyle(fontSize: 12, color: Colors.white70),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            onTap: () {
-              showUpdateModal(coordinate);
-            },
-          ),
-        );
-      },
     );
   }
 
@@ -176,9 +91,8 @@ class _CoordinatePageState extends State<CoordinatePage> {
     final TextEditingController limitationController =
         TextEditingController(text: coordinate['limitation']?.toString() ?? '');
 
-    // Inisialisasi nilai default radio button
-    isUnlimited = coordinate['is_unlimited'];
-    isVisible = coordinate['is_visible'];
+    bool? isUnlimited = coordinate['is_unlimited'];
+    bool? isVisible = coordinate['is_visible'];
 
     showDialog(
       context: context,
@@ -336,8 +250,13 @@ class _CoordinatePageState extends State<CoordinatePage> {
       );
 
       if (response.statusCode == 200) {
-        print('Coordinate updated successfully');
-        fetchCoordinate(); // Refresh coordinates after update
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Coordinate updated successfully'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+        fetchCoordinate();
       } else {
         print('Failed to update coordinate: ${response.statusCode}');
       }

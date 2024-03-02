@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           theme: ThemeData(
             brightness: Brightness.dark,
-            primaryColor: Colors.black,
+            primaryColor: Colors.white,
             iconTheme: const IconThemeData(
                 color: Colors.black), // Set icon theme color
             colorScheme: const ColorScheme.dark(
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
-            primaryColor: Colors.black,
+            primaryColor: Colors.white,
             iconTheme: const IconThemeData(
                 color: Colors.black), // Set icon theme color
             colorScheme: const ColorScheme.dark(
