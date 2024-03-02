@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Home/Content/Brankas/BpkbPage.dart';
+import 'package:frontend/Pages/Components/Data/Master/Brankas/BpkbPage.dart';
 
 class BpkbMenuGeneral extends StatelessWidget {
   const BpkbMenuGeneral({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
+      children: [
         BpkbItem(),
       ],
     );

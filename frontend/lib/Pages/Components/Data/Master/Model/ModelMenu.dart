@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Home/Content/Coordinat/CoordinatePage.dart';
+import 'package:frontend/Pages/Components/Data/Master/Model/ModelPage.dart';
 
-class CoordinatMenuGeneral extends StatelessWidget {
-  const CoordinatMenuGeneral({Key? key}) : super(key: key);
+class ModelMenuGeneral extends StatelessWidget {
+  const ModelMenuGeneral({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,20 +10,20 @@ class CoordinatMenuGeneral extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        BpkbItem(),
+        ModelItem(),
       ],
     );
   }
 }
 
-class BpkbItem extends StatelessWidget {
-  const BpkbItem({Key? key}) : super(key: key);
+class ModelItem extends StatelessWidget {
+  const ModelItem({Key? key}) : super(key: key);
 
   void _navigateToPage(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CoordinatePage(),
+        builder: (context) => ModelPage(),
       ),
     );
   }
@@ -55,12 +55,12 @@ class BpkbItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                Icons.my_location,
+                Icons.car_rental,
                 size: 30,
                 color: Colors.blue,
               ),
               Text(
-                'Koordinat',
+                'Models',
                 style: TextStyle(
                   fontSize: 12,
                 ),

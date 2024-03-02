@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class BrankasList extends StatefulWidget {
   const BrankasList({Key? key}) : super(key: key);
-
   @override
   _BrankasListState createState() => _BrankasListState();
 }
@@ -18,7 +17,7 @@ class _BrankasListState extends State<BrankasList> {
   bool _isLoading = true;
   TextEditingController _nameController = TextEditingController();
 
-  late String baseUrl; // Declare baseUrl variable
+  late String baseUrl;
 
   @override
   void initState() {
@@ -42,8 +41,7 @@ class _BrankasListState extends State<BrankasList> {
 
     try {
       final List<Map<String, dynamic>> responseData =
-          await ServiceBrankas.fetchBrankas(
-              baseUrl); // Pass baseUrl to the service method
+          await ServiceBrankas.fetchBrankas(baseUrl);
 
       setState(() {
         _networkData = responseData;
@@ -79,11 +77,10 @@ class _BrankasListState extends State<BrankasList> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
               onRefresh: _fetchData,
-              child:
-                  _buildBrankasList(), // Use centralized list building method
+              child: _buildBrankasList(),
             ),
     );
   }

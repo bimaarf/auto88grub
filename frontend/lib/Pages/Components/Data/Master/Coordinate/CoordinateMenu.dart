@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Home/Content/Brand/BrandPage.dart';
-import 'package:frontend/Pages/Components/Home/Content/Coordinat/CoordinatePage.dart';
+import 'package:frontend/Pages/Components/Data/Master/Coordinate/CoordinatePage.dart';
 
-class BrandMenuGeneral extends StatelessWidget {
-  const BrandMenuGeneral({Key? key}) : super(key: key);
+class CoordinatMenuGeneral extends StatelessWidget {
+  const CoordinatMenuGeneral({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,20 +10,20 @@ class BrandMenuGeneral extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        BrandItem(),
+        BpkbItem(),
       ],
     );
   }
 }
 
-class BrandItem extends StatelessWidget {
-  const BrandItem({Key? key}) : super(key: key);
+class BpkbItem extends StatelessWidget {
+  const BpkbItem({Key? key}) : super(key: key);
 
   void _navigateToPage(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => BrandPage(),
+        builder: (context) => CoordinatePage(),
       ),
     );
   }
@@ -56,12 +55,12 @@ class BrandItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                Icons.color_lens,
+                Icons.my_location,
                 size: 30,
                 color: Colors.blue,
               ),
               Text(
-                'Brand',
+                'Koordinat',
                 style: TextStyle(
                   fontSize: 12,
                 ),

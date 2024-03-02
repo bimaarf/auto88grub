@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Home/Content/Brand/BrandPage.dart';
-import 'package:frontend/Pages/Components/Home/Content/Coordinat/CoordinatePage.dart';
+import 'package:frontend/Pages/Components/Data/Master/Brand/BrandPage.dart';
 
 class BrandMenuGeneral extends StatelessWidget {
   const BrandMenuGeneral({Key? key}) : super(key: key);

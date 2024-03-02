@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Home/Content/Brankas/BpkbList.dart';
+import 'package:frontend/Pages/Components/Data/Master/Brankas/BpkbList.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BpkbPage extends StatefulWidget {

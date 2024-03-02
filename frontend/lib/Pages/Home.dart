@@ -444,7 +444,7 @@ class _HomeState extends State<Home> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Selamat Datang,',
                                       style: TextStyle(
                                           fontSize: 12,
@@ -453,7 +453,7 @@ class _HomeState extends State<Home> {
                                     ),
                                     Text(
                                       name ?? 'User',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white),

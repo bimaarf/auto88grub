@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Home/Content/Brand/BrandMenu.dart';
-import 'package:frontend/Pages/Components/Home/Content/Brankas/BpkbMenu.dart';
-import 'package:frontend/Pages/Components/Home/Content/Coordinat/CoordinateMenu.dart';
+import 'package:frontend/Pages/Components/Data/Master/Brand/BrandMenu.dart';
+import 'package:frontend/Pages/Components/Data/Master/Brankas/BpkbMenu.dart';
+import 'package:frontend/Pages/Components/Data/Master/Coordinate/CoordinateMenu.dart';
+import 'package:frontend/Pages/Components/Data/Master/Model/ModelMenu.dart';
 
 class FirstMenuList extends StatefulWidget {
   const FirstMenuList({
@@ -199,6 +200,7 @@ class _FirstMenuListState extends State<FirstMenuList> {
                                     BpkbMenuGeneral(),
                                     CoordinatMenuGeneral(),
                                     BrandMenuGeneral(),
+                                    ModelMenuGeneral()
                                   ],
                                 ),
                               ],

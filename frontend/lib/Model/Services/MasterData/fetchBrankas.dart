@@ -114,11 +114,11 @@ class _BrankasListState extends State<BrankasList> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
               onRefresh: _fetchData,
               child: _networkData.isEmpty
-                  ? Center(
+                  ? const Center(
                       child: Text(
                         'No data available',
                         style: TextStyle(fontSize: 18),
@@ -133,8 +133,8 @@ class _BrankasListState extends State<BrankasList> {
                             network['created_at'] as String? ?? '';
 
                         return Container(
-                          margin: EdgeInsets.symmetric(horizontal: 3),
-                          decoration: BoxDecoration(
+                          margin: const EdgeInsets.symmetric(horizontal: 3),
+                          decoration: const BoxDecoration(
                             border:
                                 Border(bottom: BorderSide(color: Colors.white)),
                           ),
@@ -149,13 +149,13 @@ class _BrankasListState extends State<BrankasList> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 IconButton(
-                                  icon: Icon(Icons.edit),
+                                  icon: const Icon(Icons.edit),
                                   onPressed: () {
                                     _showUpdateModal(context, network);
                                   },
                                 ),
                                 IconButton(
-                                  icon: Icon(Icons.delete),
+                                  icon: const Icon(Icons.delete),
                                   onPressed: () {
                                     _deleteData(network);
                                   },
@@ -179,7 +179,7 @@ class _BrankasListState extends State<BrankasList> {
         return Center(
           // Center the modal vertically
           child: Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -193,7 +193,7 @@ class _BrankasListState extends State<BrankasList> {
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _nameController,
-                  decoration: InputDecoration(labelText: 'Name'),
+                  decoration: const InputDecoration(labelText: 'Name'),
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
@@ -240,7 +240,6 @@ class _BrankasListState extends State<BrankasList> {
           showDialog(
             context: parentContext, // Use parentContext instead of context
             builder: (BuildContext context) {
-              print('err update data = ${updatedData} ${data['id']}');
               return AlertDialog(
                 title: const Text("Error"),
                 content: const Text(

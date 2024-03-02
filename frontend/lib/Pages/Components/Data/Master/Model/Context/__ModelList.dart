@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class BrandList extends StatelessWidget {
-  final List<Map<String, dynamic>> brands;
+class ModelList extends StatelessWidget {
+  final List<Map<String, dynamic>> models;
   final Function(Map<String, dynamic>) onUpdate;
 
-  const BrandList({Key? key, required this.brands, required this.onUpdate})
+  const ModelList({Key? key, required this.models, required this.onUpdate})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: brands.length,
+      itemCount: models.length,
       itemBuilder: (context, index) {
-        final brand = brands[index];
+        final model = models[index];
         return Container(
           margin: const EdgeInsets.symmetric(horizontal: 3),
           decoration: const BoxDecoration(
@@ -23,19 +23,19 @@ class BrandList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  brand['name'].toUpperCase(),
+                  model['name'].toUpperCase(),
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 15),
                 ),
                 Text(
-                  brand['created_at'].toUpperCase(),
+                  model['created_at'].toUpperCase(),
                   style: const TextStyle(color: Colors.white70, fontSize: 11),
                 ),
               ],
             ),
             trailing: const Icon(Icons.brush),
             onTap: () {
-              onUpdate(brand);
+              onUpdate(model);
             },
           ),
         );

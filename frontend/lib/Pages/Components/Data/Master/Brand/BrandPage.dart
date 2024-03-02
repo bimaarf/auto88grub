@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:frontend/Model/Services/MasterData/fetchBrand.dart';
-import 'package:frontend/Pages/Components/Home/Content/Brand/Context/__BrandList.dart';
-import 'package:frontend/Pages/Components/Home/Content/Brand/Context/__BrandStore.dart';
-import 'package:frontend/Pages/Components/Home/Content/Brand/Context/__BrandUpdate.dart';
+import 'package:frontend/Pages/Components/Data/Master/Brand/Context/__BrandList.dart';
+import 'package:frontend/Pages/Components/Data/Master/Brand/Context/__BrandStore.dart';
+import 'package:frontend/Pages/Components/Data/Master/Brand/Context/__BrandUpdate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BrandPage extends StatefulWidget {
@@ -104,7 +104,7 @@ class _BrandPageState extends State<BrandPage> {
             }
           });
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         backgroundColor: Colors.white,
       ),
     );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:frontend/Model/Services/MasterData/fetchCoordinate.dart';
-import 'package:frontend/Pages/Components/Home/Content/Coordinat/Context/__CoordinateList.dart';
-import 'package:frontend/Pages/Components/Home/Content/Coordinat/Context/__CoordinateStore.dart';
-import 'package:frontend/Pages/Components/Home/Content/Coordinat/Context/_CoordinateUpdate.dart';
+import 'package:frontend/Pages/Components/Data/Master/Coordinate/Context/__CoordinateList.dart';
+import 'package:frontend/Pages/Components/Data/Master/Coordinate/Context/__CoordinateStore.dart';
+import 'package:frontend/Pages/Components/Data/Master/Coordinate/Context/_CoordinateUpdate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CoordinatePage extends StatefulWidget {

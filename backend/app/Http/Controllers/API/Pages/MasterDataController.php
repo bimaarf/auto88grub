@@ -129,11 +129,13 @@ class MasterDataController extends Controller
     public function modelView()
     {
         try {
-            return response()->json(['data' => Model::all()], 200);
+            $data = Model::with('brand')->get();
+            return response()->json(['data' => $data], 200);
         } catch (\Throwable $th) {
-            return response()->json(['status' => 201], 201);
+            return response()->json(['status' => 500, 'error' => $th->getMessage()], 500);
         }
     }
+
     public function modelStore(Request $request)
     {
         try {
