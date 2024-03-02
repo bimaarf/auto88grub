@@ -1,10 +1,12 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:frontend/Model/Services/MasterData/fetchCoordinate.dart';
 import 'package:frontend/Pages/Components/Home/Content/Coordinat/CoordinateList.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:frontend/Pages/Components/Home/Content/Coordinat/CoordinateStore.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CoordinatePage extends StatefulWidget {
   @override
@@ -77,6 +79,23 @@ class _CoordinatePageState extends State<CoordinatePage> {
                   showUpdateModal(coordinate);
                 },
               ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddCoordinatePage(),
+            ),
+          ).then((value) {
+            if (value == true) {
+              // Refresh coordinate list if a coordinate was added successfully
+              fetchCoordinate();
+            }
+          });
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.white,
       ),
     );
   }
