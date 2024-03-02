@@ -13,7 +13,7 @@ class UpdateCoordinatePage extends StatefulWidget {
   final int limitation;
   final bool isVisible;
   final Function() onUpdate;
-  final Function() fetchNewData; // Function to fetch new data
+  final Function() fetchNewData;
 
   UpdateCoordinatePage({
     required this.coordinateId,
@@ -24,7 +24,7 @@ class UpdateCoordinatePage extends StatefulWidget {
     required this.limitation,
     required this.isVisible,
     required this.onUpdate,
-    required this.fetchNewData, // Pass function as a parameter
+    required this.fetchNewData,
   });
 
   @override
@@ -115,6 +115,7 @@ class _UpdateCoordinatePageState extends State<UpdateCoordinatePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Update Coordinate'),
+        backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -135,6 +136,7 @@ class _UpdateCoordinatePageState extends State<UpdateCoordinatePage> {
             ),
             TextFormField(
               controller: _limitationController,
+              keyboardType: TextInputType.number,
               decoration: const InputDecoration(labelText: 'Limitation'),
             ),
             const SizedBox(height: 20),

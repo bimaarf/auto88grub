@@ -65,9 +65,9 @@ class _CoordinatePageState extends State<CoordinatePage> {
           limitation: coordinate['limitation'] ?? 0,
           isVisible: coordinate['is_visible'] ?? false,
           onUpdate: () {
-            fetchCoordinate(); // Refresh the coordinate list after updating
+            fetchCoordinate();
           },
-          fetchNewData: fetchCoordinate, // Pass function as a parameter
+          fetchNewData: fetchCoordinate,
         ),
       ),
     );
@@ -105,7 +105,6 @@ class _CoordinatePageState extends State<CoordinatePage> {
             ),
           ).then((value) {
             if (value == true) {
-              // Refresh coordinate list if a coordinate was added successfully
               fetchCoordinate();
             }
           });
