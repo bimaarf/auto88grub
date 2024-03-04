@@ -32,4 +32,9 @@ class Type extends EloquentModel
     {
         return $this->belongsTo(CarModel::class, 'car_model_id');
     }
+    public function getCreatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['created_at'])
+            ->format('d-m-Y - H:i');
+    }
 }

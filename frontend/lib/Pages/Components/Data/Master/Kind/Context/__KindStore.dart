@@ -5,13 +5,16 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AddBrandPage extends StatefulWidget {
+class AddKindPage extends StatefulWidget {
   @override
-  _AddBrandPageState createState() => _AddBrandPageState();
+  _AddKindPageState createState() => _AddKindPageState();
 }
 
-class _AddBrandPageState extends State<AddBrandPage> {
+class _AddKindPageState extends State<AddKindPage> {
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController latitudeController = TextEditingController();
+  final TextEditingController longitudeController = TextEditingController();
+  final TextEditingController limitationController = TextEditingController();
 
   bool isUnlimited = false;
   bool isVisible = true;
@@ -45,10 +48,12 @@ class _AddBrandPageState extends State<AddBrandPage> {
 
       Map<String, dynamic> data = {
         'name': nameController.text,
+        'limitation': limitationController.text,
+        'is_visible': isVisible,
       };
 
       final response = await http.post(
-        Uri.parse('$baseUrl/api/brand/store'),
+        Uri.parse('$baseUrl/api/coordinate/store'),
         headers: headers,
         body: jsonEncode(data),
       );
@@ -85,6 +90,50 @@ class _AddBrandPageState extends State<AddBrandPage> {
               TextFormField(
                 controller: nameController,
                 decoration: const InputDecoration(labelText: 'Name'),
+              ),
+              const SizedBox(height: 10),
+              TextFormField(
+                controller: latitudeController,
+                decoration: const InputDecoration(labelText: 'Latitude'),
+              ),
+              const SizedBox(height: 10),
+              TextFormField(
+                controller: longitudeController,
+                decoration: const InputDecoration(labelText: 'Longitude'),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  const Text('Is Unlimited:'),
+                  Checkbox(
+                    value: isUnlimited,
+                    onChanged: (value) {
+                      setState(() {
+                        isUnlimited = value!;
+                      });
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              TextFormField(
+                controller: limitationController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(labelText: 'Limitation'),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  const Text('Is Visible:'),
+                  Checkbox(
+                    value: isVisible,
+                    onChanged: (value) {
+                      setState(() {
+                        isVisible = value!;
+                      });
+                    },
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               ElevatedButton(
