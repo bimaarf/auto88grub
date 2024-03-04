@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Data/Master/Brand/BrandPage.dart';
+import 'package:frontend/Pages/Components/Data/Master/Kind/KindPage.dart';
 
-class BrandMenuGeneral extends StatelessWidget {
-  const BrandMenuGeneral({Key? key}) : super(key: key);
+class KindMenuGeneral extends StatelessWidget {
+  const KindMenuGeneral({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,20 +10,20 @@ class BrandMenuGeneral extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        BrandItem(),
+        KindItem(),
       ],
     );
   }
 }
 
-class BrandItem extends StatelessWidget {
-  const BrandItem({Key? key}) : super(key: key);
+class KindItem extends StatelessWidget {
+  const KindItem({Key? key}) : super(key: key);
 
   void _navigateToPage(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => BrandPage(),
+        builder: (context) => KindPage(),
       ),
     );
   }
@@ -60,7 +60,7 @@ class BrandItem extends StatelessWidget {
                 color: Colors.blue,
               ),
               Text(
-                'Brand',
+                'Kind',
                 style: TextStyle(
                   fontSize: 12,
                 ),

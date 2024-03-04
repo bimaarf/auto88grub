@@ -12,10 +12,6 @@ class AddBrandPage extends StatefulWidget {
 
 class _AddBrandPageState extends State<AddBrandPage> {
   final TextEditingController nameController = TextEditingController();
-
-  bool isUnlimited = false;
-  bool isVisible = true;
-
   late String baseUrl;
 
   @override

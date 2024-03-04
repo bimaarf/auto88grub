@@ -1,29 +1,34 @@
 import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UpdateBrandPage extends StatefulWidget {
-  final String brandId;
+class UpdateKindPage extends StatefulWidget {
+  final String kindId;
   final String name;
   final Function() onUpdate;
   final Function() fetchNewData;
 
-  UpdateBrandPage({
-    required this.brandId,
+  UpdateKindPage({
+    required this.kindId,
     required this.name,
     required this.onUpdate,
     required this.fetchNewData,
   });
 
   @override
-  _UpdateBrandPageState createState() => _UpdateBrandPageState();
+  _UpdateKindPageState createState() => _UpdateKindPageState();
 }
 
-class _UpdateBrandPageState extends State<UpdateBrandPage> {
+class _UpdateKindPageState extends State<UpdateKindPage> {
   TextEditingController _nameController = TextEditingController();
   String _token = '';
+  File? _image;
+
   @override
   void initState() {
     super.initState();
@@ -38,10 +43,20 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
     });
   }
 
-  Future<void> updateBrand() async {
+  Future<void> _pickImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
+
+  Future<void> updateKind() async {
     try {
       String baseUrl = dotenv.env['BASE_URL']!;
-      String token = 'Bearer $_token'; // Add your token retrieval logic here
+      String token = 'Bearer $_token';
 
       Map<String, String> headers = {
         'Authorization': 'Bearer $token',
@@ -52,8 +67,14 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
         'name': _nameController.text,
       };
 
+      if (_image != null) {
+        // Jika gambar dipilih, tambahkan gambar ke permintaan
+        String base64Image = base64Encode(_image!.readAsBytesSync());
+        data['image'] = base64Image;
+      }
+
       final response = await http.post(
-        Uri.parse('$baseUrl/api/brand/update/${widget.brandId}'),
+        Uri.parse('$baseUrl/api/kind/update/${widget.kindId}'),
         headers: headers,
         body: jsonEncode(data),
       );
@@ -61,27 +82,26 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Brand updated successfully'),
+            content: Text('Kind updated successfully'),
             duration: Duration(seconds: 2),
           ),
         );
 
-        // Call the function to fetch new data
-
+        // Panggil fungsi untuk mengambil data baru
         widget.onUpdate();
         Navigator.pop(context, true);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Brand updated err'),
+            content: Text('Failed to update kind'),
             duration: Duration(seconds: 2),
           ),
         );
-        print('Failed to update brand: ${response.statusCode}');
+        print('Failed to update kind: ${response.statusCode}');
       }
     } catch (e) {
-      // Error updating brand
-      print('Error updating brand: $e');
+      // Tangani kesalahan saat memperbarui jenis
+      print('Error updating kind: $e');
     }
   }
 
@@ -89,7 +109,7 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update brand'),
+        title: const Text('Update kind'),
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
@@ -104,10 +124,16 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Call the updateBrand function when the button is pressed
-                updateBrand();
+                updateKind();
               },
               child: const Text('Update'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                _pickImage();
+              },
+              child: const Text('Pick Image'),
             ),
           ],
         ),

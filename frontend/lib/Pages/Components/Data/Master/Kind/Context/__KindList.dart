@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class BrandList extends StatelessWidget {
-  final List<Map<String, dynamic>> brands;
+class KindList extends StatelessWidget {
+  final List<Map<String, dynamic>> kinds;
   final Function(Map<String, dynamic>) onUpdate;
 
-  const BrandList({Key? key, required this.brands, required this.onUpdate})
+  const KindList({Key? key, required this.kinds, required this.onUpdate})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: brands.length,
+      itemCount: kinds.length,
       itemBuilder: (context, index) {
-        final brand = brands[index];
+        final brand = kinds[index];
         return Container(
           margin: const EdgeInsets.symmetric(horizontal: 3),
           decoration: const BoxDecoration(

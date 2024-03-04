@@ -76,10 +76,10 @@ class KindResource extends Resource
                     ->before(function ($record) {
                         Storage::disk('public')->delete($record->image);
                     })
-                ]);
-            // ->groupedBulkActions([
-            //     Tables\Actions\DeleteBulkAction::make(),
-            // ]);
+            ]);
+        // ->groupedBulkActions([
+        //     Tables\Actions\DeleteBulkAction::make(),
+        // ]);
     }
 
     public static function infolist(Infolist $infolist): Infolist

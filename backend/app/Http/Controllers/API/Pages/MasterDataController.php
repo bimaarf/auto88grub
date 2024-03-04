@@ -16,6 +16,7 @@ use App\Models\Car\Type;
 use App\Models\Location\Box;
 use App\Models\Location\Car;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MasterDataController extends Controller
 {
@@ -215,30 +216,41 @@ class MasterDataController extends Controller
     {
         return response()->json(['data' => Kind::all()]);
     }
-    // public function kindStore(Request $request)
-    // {
-    //     try {
-    //         $data = new Kind();
-    //         $data->name  = $request->name;
-    //         $data->image = $request->image;
-    //         $data->save();
-    //         return response()->json(['status' => 200], 200);
-    //     } catch (\Throwable $th) {
-    //         return response()->json(['status' => 201], 201);
-    //     }
-    // }
-    // public function kindUpdate(Request $request, $kindId)
-    // {
-    //     try {
-    //         $data = Kind::find($kindId);
-    //         $data->name  = $request->name;
-    //         $data->image = $request->image;
-    //         $data->update();
-    //         return response()->json(['status' => 200], 200);
-    //     } catch (\Throwable $th) {
-    //         return response()->json(['status' => 201], 201);
-    //     }
-    // }
+    public function kindStore(Request $request)
+    {
+        try {
+            $data = new Kind();
+            $data->name  = $request->name;
+            $data->image = $request->image;
+            $data->save();
+            return response()->json(['status' => 200], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201], 201);
+        }
+    }
+    public function kindUpdate(Request $request, $kindId)
+    {
+        try {
+            $data = Kind::find($kindId);
+            $data->name  = $request->name;
+
+            if ($request->hasFile('image')) {
+                if ($data->image) {
+                    Storage::delete($data->image);
+                }
+
+                $file = $request->file('image');
+                $filename = time() . '-' . $file->getClientOriginalName();
+                $filePath = $file->storeAs('car-kind-attachments', $filename);
+                $data->image = $filePath;
+            }
+            $data->save(); 
+            return response()->json(['status' => 200], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201], 201);
+        }
+    }
+
     public function kindDelete($kindId)
     {
         try {

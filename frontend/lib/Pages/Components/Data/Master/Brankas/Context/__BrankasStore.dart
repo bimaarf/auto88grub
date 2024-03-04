@@ -56,7 +56,7 @@ class _AddBrankasPageState extends State<AddBrankasPage> {
       };
 
       final response = await http.post(
-        Uri.parse('$baseUrl/api/Brankas/store'),
+        Uri.parse('$baseUrl/api/brankas/store'),
         headers: headers,
         body: jsonEncode(data),
       );

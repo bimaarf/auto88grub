@@ -84,6 +84,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/store', [MasterDataController::class, 'typeStore']);
         Route::post('/update/{typeId}', [MasterDataController::class, 'typeUpdate']);
     });
+    Route::group(['prefix' => 'kind'], function () {
+        Route::get('/view', [MasterDataController::class, 'kindView']);
+        Route::post('/store', [MasterDataController::class, 'kindStore']);
+        Route::post('/update/{kindId}', [MasterDataController::class, 'kindUpdate']);
+    });
 });
 Route::get('/modelq/view', [MasterDataController::class, 'modelView']);
 Route::get('/typeq/view', [MasterDataController::class, 'typeView']);

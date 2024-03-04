@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:frontend/Model/Services/MasterData/fetchBrand.dart';
-import 'package:frontend/Pages/Components/Data/Master/Brand/Context/__BrandList.dart';
-import 'package:frontend/Pages/Components/Data/Master/Brand/Context/__BrandStore.dart';
-import 'package:frontend/Pages/Components/Data/Master/Brand/Context/__BrandUpdate.dart';
+import 'package:frontend/Model/Services/MasterData/fetchKind.dart';
+import 'package:frontend/Pages/Components/Data/Master/Kind/Context/__KindList.dart';
+import 'package:frontend/Pages/Components/Data/Master/Kind/Context/__KindStore.dart';
+import 'package:frontend/Pages/Components/Data/Master/Kind/Context/__KindUpdate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class BrandPage extends StatefulWidget {
+class KindPage extends StatefulWidget {
   @override
-  _BrandPageState createState() => _BrandPageState();
+  _KindPageState createState() => _KindPageState();
 }
 
-class _BrandPageState extends State<BrandPage> {
-  List<Map<String, dynamic>> brands = [];
+class _KindPageState extends State<KindPage> {
+  List<Map<String, dynamic>> kinds = [];
   bool isLoading = false;
   late String baseUrl;
 
@@ -25,7 +25,7 @@ class _BrandPageState extends State<BrandPage> {
   Future<void> initializeBaseUrl() async {
     await dotenv.load();
     baseUrl = dotenv.env['BASE_URL']!;
-    await fetchBrand(); // Await fetchBrand
+    await fetchKind(); // Await fetchKind
   }
 
   Future<String> getTokenFromStorage() async {
@@ -33,13 +33,13 @@ class _BrandPageState extends State<BrandPage> {
     return prefs.getString('token') ?? '';
   }
 
-  Future<void> fetchBrand() async {
+  Future<void> fetchKind() async {
     try {
       setState(() {
         isLoading = true;
       });
 
-      brands = await ServiceBrand.fetchBrands(baseUrl);
+      kinds = await ServiceKind.fetchKind(baseUrl);
 
       setState(() {
         isLoading = false;
@@ -56,13 +56,13 @@ class _BrandPageState extends State<BrandPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => UpdateBrandPage(
-          brandId: brand['id']?.toString() ?? '',
+        builder: (context) => UpdateKindPage(
+          kindId: brand['id']?.toString() ?? '',
           name: brand['name'] ?? '',
           onUpdate: () {
-            fetchBrand();
+            fetchKind();
           },
-          fetchNewData: fetchBrand,
+          fetchNewData: fetchKind,
         ),
       ),
     );
@@ -72,20 +72,20 @@ class _BrandPageState extends State<BrandPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Brands'),
+        title: const Text('kinds'),
         backgroundColor: Colors.black,
       ),
       body: RefreshIndicator(
         color: Colors.white,
-        onRefresh: fetchBrand,
+        onRefresh: fetchKind,
         child: isLoading
             ? const Center(
                 child: CircularProgressIndicator(
                   color: Colors.white,
                 ),
               )
-            : BrandList(
-                brands: brands,
+            : KindList(
+                kinds: kinds,
                 onUpdate: (brand) {
                   showUpdatePage(brand);
                 },
@@ -96,11 +96,11 @@ class _BrandPageState extends State<BrandPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddBrandPage(),
+              builder: (context) => AddKindPage(),
             ),
           ).then((value) {
             if (value == true) {
-              fetchBrand();
+              fetchKind();
             }
           });
         },
