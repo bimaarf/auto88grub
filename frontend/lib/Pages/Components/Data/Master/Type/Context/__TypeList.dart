@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 class TypeList extends StatelessWidget {
-  final List<Map<String, dynamic>> models;
+  final List<Map<String, dynamic>> types;
   final Function(Map<String, dynamic>) onUpdate;
 
-  const TypeList({Key? key, required this.models, required this.onUpdate})
+  const TypeList({Key? key, required this.types, required this.onUpdate})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: models.length,
+      itemCount: types.length,
       itemBuilder: (context, index) {
-        final model = models[index];
+        final type = types[index];
         return Container(
           margin: const EdgeInsets.symmetric(horizontal: 3),
           decoration: const BoxDecoration(
@@ -23,19 +23,19 @@ class TypeList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  model['name'].toUpperCase(),
+                  type['name'].toUpperCase(),
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 15),
                 ),
                 Text(
-                  model['created_at'].toUpperCase(),
+                  type['created_at'].toUpperCase(),
                   style: const TextStyle(color: Colors.white70, fontSize: 11),
                 ),
               ],
             ),
             trailing: const Icon(Icons.brush),
             onTap: () {
-              onUpdate(model);
+              onUpdate(type);
             },
           ),
         );

@@ -56,6 +56,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('brands', BrandController::class);
 
     // master data
+    // Route::controller(MasterDataController::class)->group(function () {
+    // });
     Route::group(['prefix' => 'brankas'], function () {
         Route::get('/view', [MasterDataController::class, 'brankasLocationView']);
         Route::post('/store', [MasterDataController::class, 'brankasLocationStore']);

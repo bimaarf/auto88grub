@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:frontend/Model/Services/MasterData/fetchType.dart';
-import 'package:frontend/Pages/Components/Data/Master/Model/Context/__ModelList.dart';
+import 'package:frontend/Pages/Components/Data/Master/Type/Context/__TypeList.dart';
 import 'package:frontend/Pages/Components/Data/Master/Type/Context/__TypeStore.dart';
 import 'package:frontend/Pages/Components/Data/Master/Type/Context/__TypeUpdate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +12,7 @@ class TypePage extends StatefulWidget {
 }
 
 class _TypePageState extends State<TypePage> {
-  List<Map<String, dynamic>> models = [];
+  List<Map<String, dynamic>> types = [];
   bool isLoading = false;
   late String baseUrl;
 
@@ -25,7 +25,7 @@ class _TypePageState extends State<TypePage> {
   Future<void> initializeBaseUrl() async {
     await dotenv.load();
     baseUrl = dotenv.env['BASE_URL']!;
-    await fetchModel(); // Await fetchModel
+    await fetchType(); // Await fetchType
   }
 
   Future<String> getTokenFromStorage() async {
@@ -33,46 +33,57 @@ class _TypePageState extends State<TypePage> {
     return prefs.getString('token') ?? '';
   }
 
-  Future<void> fetchModel() async {
+  Future<void> fetchType() async {
     try {
       setState(() {
         isLoading = true;
       });
 
-      models = await ServiceType.fetchType(baseUrl);
+      types = await ServiceType.fetchType(baseUrl);
 
       setState(() {
         isLoading = false;
       });
     } catch (e) {
-      print('Error fetching model data: $e');
+      print('Error fetching type data: $e');
       setState(() {
         isLoading = false;
       });
     }
   }
 
-  void showUpdatePage(Map<String, dynamic> model) async {
+  void showUpdatePage(BuildContext context, Map<String, dynamic> type,
+      List<Map<String, dynamic>> types) async {
     try {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => UpdateTypePage(
-            typeId: model['id']?.toString() ?? '',
-            name: model['name'] ?? '',
-            brandId: model['brand']['id'].toString(),
-            brandName: model['brand']['name'],
-            brands:
-                models.map<Map<String, dynamic>>((e) => e['brand']).toList(),
-            onUpdate: () {
-              fetchModel();
-            },
-            fetchNewData: fetchModel,
+      if (type.containsKey('id') &&
+          type.containsKey('name') &&
+          type.containsKey('brand') &&
+          type.containsKey('model')) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => UpdateTypePage(
+              typeId: type['id']?.toString() ?? '',
+              name: type['name'] ?? '',
+              brandId: type['brand']['id'].toString(),
+              brandName: type['brand']['name'],
+              brands:
+                  types.map<Map<String, dynamic>>((e) => e['brand']).toList(),
+              modelId: type['model']['id'].toString(),
+              modelName: type['model']['name'],
+              onUpdate: () {
+                fetchType();
+              },
+              fetchNewData: fetchType,
+            ),
           ),
-        ),
-      );
+        );
+      } else {
+        throw Exception("Model data is incomplete or malformed.");
+      }
     } catch (e) {
-      print('Error fetching brand data: $e');
+      print('Error showing update page: $e');
+      // Handle the error as needed
     }
   }
 
@@ -85,17 +96,18 @@ class _TypePageState extends State<TypePage> {
       ),
       body: RefreshIndicator(
         color: Colors.white,
-        onRefresh: fetchModel,
+        onRefresh: fetchType,
         child: isLoading
             ? const Center(
                 child: CircularProgressIndicator(
                   color: Colors.white,
                 ),
               )
-            : ModelList(
-                models: models,
-                onUpdate: (model) {
-                  showUpdatePage(model);
+            : TypeList(
+                types: types,
+                onUpdate: (type) {
+                  showUpdatePage(
+                      context, type, types); // Pass context and types
                 },
               ),
       ),
@@ -108,7 +120,7 @@ class _TypePageState extends State<TypePage> {
             ),
           ).then((value) {
             if (value == true) {
-              fetchModel();
+              fetchType();
             }
           });
         },
