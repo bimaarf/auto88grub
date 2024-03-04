@@ -17,4 +17,9 @@ class Cylinder extends Model implements HasMedia
      */
     protected $table = 'car_cylinders';
     protected $fillable = ['volume'];
+    public function getCreatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['created_at'])
+            ->format('d-m-Y - H:i');
+    }
 }

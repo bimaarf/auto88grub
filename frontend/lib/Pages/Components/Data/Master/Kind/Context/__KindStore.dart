@@ -1,8 +1,8 @@
-import 'dart:io'; // Tambahkan ini untuk menggunakan File
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart'; // Perbaiki import untuk menggunakan ImagePicker
+import 'package:file_picker/file_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddKindPage extends StatefulWidget {
@@ -13,7 +13,7 @@ class AddKindPage extends StatefulWidget {
 class _AddKindPageState extends State<AddKindPage> {
   final TextEditingController nameController = TextEditingController();
   late String baseUrl;
-  File? _image; // Ubah tipe variabel menjadi File
+  File? _image; // Tipe variabel diubah menjadi File
 
   @override
   void initState() {
@@ -35,41 +35,23 @@ class _AddKindPageState extends State<AddKindPage> {
     try {
       String token = await getTokenFromStorage();
 
-      // Hapus variabel headers karena tidak digunakan
-      // Map<String, String> headers = {
-      //   'Authorization': 'Bearer $token',
-      //   'Content-Type': 'application/json',
-      // };
-
-      Map<String, dynamic> data = {
-        'name': nameController.text,
-      };
-
-      // Membuat request multipart untuk mengirim gambar bersamaan dengan data
       var request = http.MultipartRequest(
         'POST',
         Uri.parse('$baseUrl/api/kind/store'),
       );
 
-      // Menambahkan token ke header
       request.headers['Authorization'] = 'Bearer $token';
-
-      // Menambahkan data teks ke dalam request
       request.fields['name'] = nameController.text;
 
-      // Menambahkan gambar ke dalam request jika ada
       if (_image != null) {
         request.files.add(
-          http.MultipartFile(
+          await http.MultipartFile.fromPath(
             'image',
-            _image!.readAsBytes().asStream(),
-            _image!.lengthSync(),
-            filename: _image!.path.split('/').last,
+            _image!.path,
           ),
         );
       }
 
-      // Mengirim request
       var streamedResponse = await request.send();
       var response = await http.Response.fromStream(streamedResponse);
 
@@ -80,7 +62,7 @@ class _AddKindPageState extends State<AddKindPage> {
             duration: Duration(seconds: 2),
           ),
         );
-        Navigator.pop(context, true); // Pop page with success signal
+        Navigator.pop(context, true);
       } else {
         print('Failed to add Kind: ${response.statusCode}');
       }
@@ -90,11 +72,14 @@ class _AddKindPageState extends State<AddKindPage> {
   }
 
   Future<void> _pickImage() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+
+    if (result != null) {
       setState(() {
-        _image = File(pickedFile.path);
+        _image = File(result.files.single.path!);
       });
     }
   }
@@ -117,18 +102,19 @@ class _AddKindPageState extends State<AddKindPage> {
                 decoration: const InputDecoration(labelText: 'Name'),
               ),
               const SizedBox(height: 20),
-              // Tombol untuk memilih gambar dari galeri
-              ElevatedButton(
-                onPressed: () {
-                  _pickImage(); // Ubah pemanggilan metode sesuai dengan yang benar
-                },
-                child: const Text('Choose Image'),
-              ),
               // Widget untuk menampilkan gambar yang dipilih
               if (_image != null) ...[
                 Image.file(_image!),
                 const SizedBox(height: 20),
               ],
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  _pickImage(); // Panggil metode untuk memilih gambar
+                },
+                child: const Text('Choose Image'),
+              ),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   addKind();

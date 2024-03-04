@@ -5,13 +5,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AddBrandPage extends StatefulWidget {
+class AddCylinderPage extends StatefulWidget {
   @override
-  _AddBrandPageState createState() => _AddBrandPageState();
+  _AddCylinderPageState createState() => _AddCylinderPageState();
 }
 
-class _AddBrandPageState extends State<AddBrandPage> {
-  final TextEditingController nameController = TextEditingController();
+class _AddCylinderPageState extends State<AddCylinderPage> {
+  final TextEditingController volumeController = TextEditingController();
   late String baseUrl;
 
   @override
@@ -30,7 +30,7 @@ class _AddBrandPageState extends State<AddBrandPage> {
     return prefs.getString('token') ?? '';
   }
 
-  Future<void> addBrand() async {
+  Future<void> addCylinder() async {
     try {
       String token = await getTokenFromStorage();
 
@@ -39,12 +39,24 @@ class _AddBrandPageState extends State<AddBrandPage> {
         'Content-Type': 'application/json',
       };
 
+      // Periksa apakah nilai volume adalah angka
+      if (volumeController.text.isEmpty ||
+          int.tryParse(volumeController.text) == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please enter a valid volume'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+        return;
+      }
+
       Map<String, dynamic> data = {
-        'name': nameController.text,
+        'volume': int.parse(volumeController.text),
       };
 
       final response = await http.post(
-        Uri.parse('$baseUrl/api/brand/store'),
+        Uri.parse('$baseUrl/api/cylinder/store'),
         headers: headers,
         body: jsonEncode(data),
       );
@@ -52,16 +64,16 @@ class _AddBrandPageState extends State<AddBrandPage> {
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Brand added successfully'),
+            content: Text('Cylinder added successfully'),
             duration: Duration(seconds: 2),
           ),
         );
-        Navigator.pop(context, true); // Pop page with success signal
+        Navigator.pop(context, true);
       } else {
-        print('Failed to add Brand: ${response.statusCode}');
+        print('Failed to add Cylinder: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error adding Brand: $e');
+      print('Error adding Cylinder: $e');
     }
   }
 
@@ -69,7 +81,7 @@ class _AddBrandPageState extends State<AddBrandPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Brand'),
+        title: const Text('Add Cylinder'),
         backgroundColor: Colors.black,
       ),
       body: Padding(
@@ -79,15 +91,17 @@ class _AddBrandPageState extends State<AddBrandPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
-                controller: nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
+                controller: volumeController,
+                keyboardType: TextInputType
+                    .number, // Tambahkan keyboard type untuk membatasi input menjadi angka
+                decoration: const InputDecoration(labelText: 'Volume'),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  addBrand();
+                  addCylinder();
                 },
-                child: const Text('Add Brand'),
+                child: const Text('Add Cylinder'),
               ),
             ],
           ),

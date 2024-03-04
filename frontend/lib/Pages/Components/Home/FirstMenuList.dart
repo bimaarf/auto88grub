@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Data/Master/Brand/BrandMenu.dart';
 import 'package:frontend/Pages/Components/Data/Master/Brankas/BrankasMenu.dart';
 import 'package:frontend/Pages/Components/Data/Master/Coordinate/CoordinateMenu.dart';
+import 'package:frontend/Pages/Components/Data/Master/Cylinder/CylinderMenu.dart';
 import 'package:frontend/Pages/Components/Data/Master/Kind/KindMenu.dart';
 import 'package:frontend/Pages/Components/Data/Master/Model/ModelMenu.dart';
 import 'package:frontend/Pages/Components/Data/Master/Type/TypeMenu.dart';
@@ -210,6 +211,7 @@ class _FirstMenuListState extends State<FirstMenuList> {
                                   children: [
                                     TypeMenuGeneral(),
                                     KindMenuGeneral(),
+                                    CylinderMenuGeneral(),
                                   ],
                                 ),
                               ],

@@ -232,7 +232,7 @@ class MasterDataController extends Controller
     {
         try {
             $data = Kind::find($kindId);
-            $data->name  = $request->name;
+            $data->name = $request->name;
 
             if ($request->hasFile('image')) {
                 if ($data->image) {
@@ -241,12 +241,14 @@ class MasterDataController extends Controller
 
                 $file = $request->file('image');
                 $filename = time() . '-' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('car-kind-attachments', $filename);
-                $data->image = $filePath;
+                $directory = 'car-kind-attachments';
+                // $filePath = $file->storeAs($directory, $filename);
+                $file->move(storage_path($directory), $filename);
+                $data->image = 'car-kind-attachments/' + $filename;
             }
-            $data->save(); 
+            $data->save();
             return response()->json(['status' => 200], 200);
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             return response()->json(['status' => 201], 201);
         }
     }

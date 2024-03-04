@@ -81,7 +81,7 @@ class _AddBrankasPageState extends State<AddBrankasPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Brankas'),
+        title: const Text('Tambah Brankas'),
         backgroundColor: Colors.black,
       ),
       body: Padding(
