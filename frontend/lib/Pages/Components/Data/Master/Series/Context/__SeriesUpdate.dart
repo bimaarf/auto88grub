@@ -4,24 +4,24 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UpdateBrandPage extends StatefulWidget {
-  final String brandId;
+class UpdateSeriesPage extends StatefulWidget {
+  final String seriesId;
   final String name;
   final Function() onUpdate;
   final Function() fetchNewData;
 
-  UpdateBrandPage({
-    required this.brandId,
+  UpdateSeriesPage({
+    required this.seriesId,
     required this.name,
     required this.onUpdate,
     required this.fetchNewData,
   });
 
   @override
-  _UpdateBrandPageState createState() => _UpdateBrandPageState();
+  _UpdateSeriesPageState createState() => _UpdateSeriesPageState();
 }
 
-class _UpdateBrandPageState extends State<UpdateBrandPage> {
+class _UpdateSeriesPageState extends State<UpdateSeriesPage> {
   TextEditingController _nameController = TextEditingController();
   String _token = '';
   bool _isLoading = false;
@@ -39,7 +39,7 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
     });
   }
 
-  Future<void> updateBrand() async {
+  Future<void> updateSeries() async {
     setState(() {
       _isLoading = true;
     });
@@ -57,7 +57,7 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
       };
 
       final response = await http.post(
-        Uri.parse('$baseUrl/api/brand/update/${widget.brandId}'),
+        Uri.parse('$baseUrl/api/series/update/${widget.seriesId}'),
         headers: headers,
         body: jsonEncode(data),
       );
@@ -65,7 +65,7 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Brand updated successfully'),
+            content: Text('Series updated successfully'),
             duration: Duration(seconds: 2),
           ),
         );
@@ -74,15 +74,15 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Brand updated err'),
+            content: Text('Series updated err'),
             duration: Duration(seconds: 2),
           ),
         );
-        print('Failed to update brand: ${response.statusCode}');
+        print('Failed to update Series: ${response.statusCode}');
       }
     } catch (e) {
-      // Error updating brand
-      print('Error updating brand: $e');
+      // Error updating Series
+      print('Error updating Series: $e');
     } finally {
       setState(() {
         _isLoading:
@@ -95,7 +95,7 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update brand'),
+        title: const Text('Update Series'),
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
@@ -109,7 +109,7 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _isLoading ? null : updateBrand,
+              onPressed: _isLoading ? null : updateSeries,
               child: const Text('Update'),
             ),
           ],

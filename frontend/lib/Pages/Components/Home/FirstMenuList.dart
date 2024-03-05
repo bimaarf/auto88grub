@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Data/Master/Brand/BrandMenu.dart';
 import 'package:frontend/Pages/Components/Data/Master/Brankas/BrankasMenu.dart';
+import 'package:frontend/Pages/Components/Data/Master/Color/ColorMenu.dart';
 import 'package:frontend/Pages/Components/Data/Master/Coordinate/CoordinateMenu.dart';
 import 'package:frontend/Pages/Components/Data/Master/Cylinder/CylinderMenu.dart';
+import 'package:frontend/Pages/Components/Data/Master/Fuel/FuelMenu.dart';
+import 'package:frontend/Pages/Components/Data/Master/Gear/GearMenu.dart';
 import 'package:frontend/Pages/Components/Data/Master/Kind/KindMenu.dart';
 import 'package:frontend/Pages/Components/Data/Master/Model/ModelMenu.dart';
+import 'package:frontend/Pages/Components/Data/Master/Series/SeriesMenu.dart';
+import 'package:frontend/Pages/Components/Data/Master/Transmission/TransmissionMenu.dart';
 import 'package:frontend/Pages/Components/Data/Master/Type/TypeMenu.dart';
 
 class FirstMenuList extends StatefulWidget {
@@ -212,6 +217,16 @@ class _FirstMenuListState extends State<FirstMenuList> {
                                     TypeMenuGeneral(),
                                     KindMenuGeneral(),
                                     CylinderMenuGeneral(),
+                                    TransmissionMenuGeneral(),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SeriesMenuGeneral(),
+                                    GearMenuGeneral(),
+                                    FuelMenuGeneral(),
+                                    ColorMenuGeneral(),
                                   ],
                                 ),
                               ],

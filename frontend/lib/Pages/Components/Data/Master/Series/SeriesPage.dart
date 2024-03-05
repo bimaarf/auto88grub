@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:frontend/Model/Services/MasterData/fetchKind.dart';
-import 'package:frontend/Pages/Components/Data/Master/Kind/Context/__KindList.dart';
-import 'package:frontend/Pages/Components/Data/Master/Kind/Context/__KindStore.dart';
-import 'package:frontend/Pages/Components/Data/Master/Kind/Context/__KindUpdate.dart';
+import 'package:frontend/Model/Services/MasterData/fetchSeries.dart';
+import 'package:frontend/Pages/Components/Data/Master/Series/Context/__SeriesList.dart';
+import 'package:frontend/Pages/Components/Data/Master/Series/Context/__SeriesStore.dart';
+import 'package:frontend/Pages/Components/Data/Master/Series/Context/__SeriesUpdate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class KindPage extends StatefulWidget {
+class SeriesPage extends StatefulWidget {
   @override
-  _KindPageState createState() => _KindPageState();
+  _SeriesPageState createState() => _SeriesPageState();
 }
 
-class _KindPageState extends State<KindPage> {
-  List<Map<String, dynamic>> kinds = [];
+class _SeriesPageState extends State<SeriesPage> {
+  List<Map<String, dynamic>> series = [];
   bool isLoading = false;
   late String baseUrl;
 
@@ -25,7 +25,7 @@ class _KindPageState extends State<KindPage> {
   Future<void> initializeBaseUrl() async {
     await dotenv.load();
     baseUrl = dotenv.env['BASE_URL']!;
-    await fetchKind(); // Await fetchKind
+    await fetchSeries();
   }
 
   Future<String> getTokenFromStorage() async {
@@ -33,38 +33,36 @@ class _KindPageState extends State<KindPage> {
     return prefs.getString('token') ?? '';
   }
 
-  Future<void> fetchKind() async {
+  Future<void> fetchSeries() async {
     try {
       setState(() {
         isLoading = true;
       });
 
-      kinds = await ServiceKind.fetchKind(baseUrl);
+      series = await ServiceSeries.fetchSeries(baseUrl);
 
       setState(() {
         isLoading = false;
       });
     } catch (e) {
-      print('Error fetching kind data: $e');
+      print('Error fetching brand data: $e');
       setState(() {
         isLoading = false;
       });
     }
   }
 
-  void showUpdatePage(Map<String, dynamic> kind) {
+  void showUpdatePage(Map<String, dynamic> brand) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => UpdateKindPage(
-          baseUrl: baseUrl,
-          imageUrl: kind['image'],
-          kindId: kind['id']?.toString() ?? '',
-          name: kind['name'] ?? '',
+        builder: (context) => UpdateSeriesPage(
+          seriesId: brand['id']?.toString() ?? '',
+          name: brand['name'] ?? '',
           onUpdate: () {
-            fetchKind();
+            fetchSeries();
           },
-          fetchNewData: fetchKind,
+          fetchNewData: fetchSeries,
         ),
       ),
     );
@@ -74,23 +72,22 @@ class _KindPageState extends State<KindPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('kinds'),
+        title: const Text('series'),
         backgroundColor: Colors.black,
       ),
       body: RefreshIndicator(
         color: Colors.white,
-        onRefresh: fetchKind,
+        onRefresh: fetchSeries,
         child: isLoading
             ? const Center(
                 child: CircularProgressIndicator(
                   color: Colors.white,
                 ),
               )
-            : KindList(
-                baseUrl: baseUrl,
-                kinds: kinds,
-                onUpdate: (kind) {
-                  showUpdatePage(kind);
+            : SeriesList(
+                seriess: series,
+                onUpdate: (brand) {
+                  showUpdatePage(brand);
                 },
               ),
       ),
@@ -99,11 +96,11 @@ class _KindPageState extends State<KindPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddKindPage(),
+              builder: (context) => AddSeriesPage(),
             ),
           ).then((value) {
             if (value == true) {
-              fetchKind();
+              fetchSeries();
             }
           });
         },

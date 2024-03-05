@@ -44,6 +44,7 @@ class _UpdateTypePageState extends State<UpdateTypePage> {
 
   bool _isLoadingBrand = false;
   bool _isLoadingModel = false;
+  bool _isLoading = false;
   late String baseUrl;
 
   @override
@@ -114,6 +115,9 @@ class _UpdateTypePageState extends State<UpdateTypePage> {
   }
 
   Future<void> updateType() async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       String token = 'Bearer $_token';
       Map<String, String> headers = {
@@ -160,6 +164,10 @@ class _UpdateTypePageState extends State<UpdateTypePage> {
         ),
       );
       print('Error updating Type: $e');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -221,9 +229,7 @@ class _UpdateTypePageState extends State<UpdateTypePage> {
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {
-                      updateType();
-                    },
+                    onPressed: _isLoading ? null : updateType,
                     child: const Text('Update'),
                   ),
                 ],

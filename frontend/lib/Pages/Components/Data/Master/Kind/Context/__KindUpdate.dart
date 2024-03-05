@@ -5,18 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:file_picker/file_picker.dart';
 
 class UpdateKindPage extends StatefulWidget {
   final String kindId;
   final String name;
+  final String? imageUrl;
   final Function() onUpdate;
   final Function() fetchNewData;
+  final String baseUrl; // Add baseUrl parameter
 
   UpdateKindPage({
     required this.kindId,
     required this.name,
     required this.onUpdate,
     required this.fetchNewData,
+    required this.baseUrl, // Add baseUrl parameter
+    this.imageUrl,
   });
 
   @override
@@ -27,12 +32,15 @@ class _UpdateKindPageState extends State<UpdateKindPage> {
   TextEditingController _nameController = TextEditingController();
   String _token = '';
   File? _image;
+  late String _imageUrl;
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
     _nameController.text = widget.name;
     _loadToken();
+    _imageUrl = widget.imageUrl ?? '';
   }
 
   Future<void> _loadToken() async {
@@ -43,32 +51,39 @@ class _UpdateKindPageState extends State<UpdateKindPage> {
   }
 
   Future<void> _updateKind() async {
+    setState(() {
+      _isLoading =
+          true; // Set isLoading menjadi true saat proses pembaruan dimulai
+    });
+
     try {
-      String baseUrl = dotenv.env['BASE_URL']!;
       String token = 'Bearer $_token';
 
-      Map<String, String> headers = {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      };
-
-      Map<String, dynamic> data = {
-        'name': _nameController.text,
-      };
-
+      // Buat FormData
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse('${widget.baseUrl}/api/kind/update/${widget.kindId}'),
+      );
+      request.headers['Authorization'] = token;
+      // Tambahkan nama ke FormData
+      request.fields['name'] = _nameController.text;
+      // Jika ada gambar yang dipilih, tambahkan ke FormData
       if (_image != null) {
-        // Jika gambar dipilih, tambahkan gambar ke permintaan
-        String base64Image = base64Encode(_image!.readAsBytesSync());
-        data['image'] = base64Image;
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            'image',
+            _image!.path,
+            filename: 'image.jpg',
+          ),
+        );
       }
 
-      final response = await http.post(
-        Uri.parse('$baseUrl/api/kind/update/${widget.kindId}'),
-        headers: headers,
-        body: jsonEncode(data),
-      );
+      // Kirim request
+      var response = await request.send();
 
+      // Periksa kode status respons
       if (response.statusCode == 200) {
+        // Handle jika berhasil
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Kind updated successfully'),
@@ -76,7 +91,6 @@ class _UpdateKindPageState extends State<UpdateKindPage> {
           ),
         );
 
-        // Panggil fungsi untuk mengambil data baru
         widget.onUpdate();
         Navigator.pop(context, true);
       } else {
@@ -89,8 +103,30 @@ class _UpdateKindPageState extends State<UpdateKindPage> {
         print('Failed to update kind: ${response.statusCode}');
       }
     } catch (e) {
-      // Tangani kesalahan saat memperbarui jenis
       print('Error updating kind: $e');
+    } finally {
+      // Setelah pembaruan selesai, atur kembali isLoading menjadi false
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  Future<void> _pickImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: false,
+    );
+
+    if (result != null) {
+      setState(() {
+        _image = File(result.files.single.path!);
+        _imageUrl =
+            ''; // Menghapus imageUrl yang sudah ada karena akan diganti dengan gambar yang baru dipilih
+      });
+
+      // Tambahkan pemanggilan _updateKind() untuk mengirim data pembaruan ke server
+      // await _updateKind();
     }
   }
 
@@ -111,18 +147,35 @@ class _UpdateKindPageState extends State<UpdateKindPage> {
               decoration: const InputDecoration(labelText: 'Name'),
             ),
             const SizedBox(height: 20),
+            if (_imageUrl
+                .isNotEmpty) // Display the previously selected image (if any)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  '${widget.baseUrl}/storage/$_imageUrl',
+                  width: 200,
+                  height: 200,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            if (_image != null)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.file(
+                  _image!,
+                  width: 200,
+                  height: 200,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ElevatedButton(
-              onPressed: () {
-                _updateKind();
-              },
-              child: const Text('Update'),
+              onPressed: _isLoading ? null : _pickImage,
+              child: const Text('Choose Image'),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Tambahkan logika untuk memilih gambar dari galeri di sini
-              },
-              child: const Text('Pick Image'),
+              onPressed: _isLoading ? null : _updateKind,
+              child: const Text('Update'),
             ),
           ],
         ),

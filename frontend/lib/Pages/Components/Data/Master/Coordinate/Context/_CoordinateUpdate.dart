@@ -39,6 +39,7 @@ class _UpdateCoordinatePageState extends State<UpdateCoordinatePage> {
   late bool _isUnlimited;
   late bool _isVisible;
   String _token = '';
+  bool _isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -59,6 +60,9 @@ class _UpdateCoordinatePageState extends State<UpdateCoordinatePage> {
   }
 
   Future<void> updateCoordinate() async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       String baseUrl = dotenv.env['BASE_URL']!;
       String token = 'Bearer $_token'; // Add your token retrieval logic here
@@ -107,6 +111,10 @@ class _UpdateCoordinatePageState extends State<UpdateCoordinatePage> {
     } catch (e) {
       // Error updating coordinate
       print('Error updating coordinate: $e');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -169,10 +177,7 @@ class _UpdateCoordinatePageState extends State<UpdateCoordinatePage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Call the updateCoordinate function when the button is pressed
-                updateCoordinate();
-              },
+              onPressed: _isLoading ? null : updateCoordinate,
               child: const Text('Update'),
             ),
           ],

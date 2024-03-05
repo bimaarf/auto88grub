@@ -13,7 +13,7 @@ class AddBrandPage extends StatefulWidget {
 class _AddBrandPageState extends State<AddBrandPage> {
   final TextEditingController nameController = TextEditingController();
   late String baseUrl;
-
+  bool _isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -31,6 +31,9 @@ class _AddBrandPageState extends State<AddBrandPage> {
   }
 
   Future<void> addBrand() async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       String token = await getTokenFromStorage();
 
@@ -62,6 +65,10 @@ class _AddBrandPageState extends State<AddBrandPage> {
       }
     } catch (e) {
       print('Error adding Brand: $e');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -84,10 +91,8 @@ class _AddBrandPageState extends State<AddBrandPage> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  addBrand();
-                },
-                child: const Text('Add Brand'),
+                onPressed: _isLoading ? null : addBrand,
+                child: const Text('Tambah Brand'),
               ),
             ],
           ),

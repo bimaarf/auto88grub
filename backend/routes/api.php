@@ -94,6 +94,37 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/store', [MasterDataController::class, 'cylinderStore']);
         Route::post('/update/{cylinderId}', [MasterDataController::class, 'cylinderUpdate']);
     });
+    Route::group(['prefix' => 'transmission'], function () {
+        Route::get('/view', [MasterDataController::class, 'transmissionView']);
+        Route::post('/store', [MasterDataController::class, 'transmissionStore']);
+        Route::post('/update/{transmissionId}', [MasterDataController::class, 'transmissionUpdate']);
+    });
+    Route::group(['prefix' => 'series'], function () {
+        Route::get('/view', [MasterDataController::class, 'seriesView']);
+        Route::post('/store', [MasterDataController::class, 'seriesStore']);
+        Route::post('/update/{seriesId}', [MasterDataController::class, 'seriesUpdate']);
+    });
+    Route::group(['prefix' => 'gear'], function () {
+        Route::get('/view', [MasterDataController::class, 'gearView']);
+        Route::post('/store', [MasterDataController::class, 'gearStore']);
+        Route::post('/update/{gearId}', [MasterDataController::class, 'gearUpdate']);
+    });
+    Route::group(['prefix' => 'fuel'], function () {
+        Route::get('/view', [MasterDataController::class, 'fuelView']);
+        Route::post('/store', [MasterDataController::class, 'fuelStore']);
+        Route::post('/update/{fuelId}', [MasterDataController::class, 'fuelUpdate']);
+    });
+    Route::group(['prefix' => 'color'], function () {
+        Route::get('/view', [MasterDataController::class, 'colorView']);
+        Route::post('/store', [MasterDataController::class, 'colorStore']);
+        Route::post('/update/{colorId}', [MasterDataController::class, 'colorUpdate']);
+    });
 });
 Route::get('/modelq/view', [MasterDataController::class, 'modelView']);
 Route::get('/typeq/view', [MasterDataController::class, 'typeView']);
+Route::get('/kindq/view', [MasterDataController::class, 'kindView']);
+Route::get('/transmissionq/view', [MasterDataController::class, 'transmissionView']);
+Route::get('/seriesq/view', [MasterDataController::class, 'seriesView']);
+Route::get('/gearq/view', [MasterDataController::class, 'gearView']);
+Route::get('/fuelq/view', [MasterDataController::class, 'fuelView']);
+Route::get('/colorq/view', [MasterDataController::class, 'colorView']);

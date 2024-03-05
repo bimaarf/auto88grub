@@ -24,6 +24,7 @@ class UpdateBrankasPage extends StatefulWidget {
 class _UpdateBrankasPageState extends State<UpdateBrankasPage> {
   TextEditingController _nameController = TextEditingController();
   String _token = '';
+  bool _isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -39,6 +40,9 @@ class _UpdateBrankasPageState extends State<UpdateBrankasPage> {
   }
 
   Future<void> updateBrankas() async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       String baseUrl = dotenv.env['BASE_URL']!;
       String token = 'Bearer $_token'; // Add your token retrieval logic here
@@ -65,9 +69,6 @@ class _UpdateBrankasPageState extends State<UpdateBrankasPage> {
             duration: Duration(seconds: 2),
           ),
         );
-
-        // Call the function to fetch new data
-
         widget.onUpdate();
         Navigator.pop(context, true);
       } else {
@@ -82,6 +83,10 @@ class _UpdateBrankasPageState extends State<UpdateBrankasPage> {
     } catch (e) {
       // Error updating Brankas
       print('Error updating brankas: $e');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -103,10 +108,7 @@ class _UpdateBrankasPageState extends State<UpdateBrankasPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Call the updatebrankas function when the button is pressed
-                updateBrankas();
-              },
+              onPressed: _isLoading ? null : updateBrankas,
               child: const Text('Update'),
             ),
           ],

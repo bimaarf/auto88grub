@@ -4,24 +4,24 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UpdateBrandPage extends StatefulWidget {
-  final String brandId;
+class UpdateGearPage extends StatefulWidget {
+  final String gearId;
   final String name;
   final Function() onUpdate;
   final Function() fetchNewData;
 
-  UpdateBrandPage({
-    required this.brandId,
+  UpdateGearPage({
+    required this.gearId,
     required this.name,
     required this.onUpdate,
     required this.fetchNewData,
   });
 
   @override
-  _UpdateBrandPageState createState() => _UpdateBrandPageState();
+  _UpdateGearPageState createState() => _UpdateGearPageState();
 }
 
-class _UpdateBrandPageState extends State<UpdateBrandPage> {
+class _UpdateGearPageState extends State<UpdateGearPage> {
   TextEditingController _nameController = TextEditingController();
   String _token = '';
   bool _isLoading = false;
@@ -39,7 +39,7 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
     });
   }
 
-  Future<void> updateBrand() async {
+  Future<void> updateGear() async {
     setState(() {
       _isLoading = true;
     });
@@ -57,7 +57,7 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
       };
 
       final response = await http.post(
-        Uri.parse('$baseUrl/api/brand/update/${widget.brandId}'),
+        Uri.parse('$baseUrl/api/gear/update/${widget.gearId}'),
         headers: headers,
         body: jsonEncode(data),
       );
@@ -65,7 +65,7 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Brand updated successfully'),
+            content: Text('Gear updated successfully'),
             duration: Duration(seconds: 2),
           ),
         );
@@ -74,15 +74,15 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Brand updated err'),
+            content: Text('Gear updated err'),
             duration: Duration(seconds: 2),
           ),
         );
-        print('Failed to update brand: ${response.statusCode}');
+        print('Failed to update Gear: ${response.statusCode}');
       }
     } catch (e) {
-      // Error updating brand
-      print('Error updating brand: $e');
+      // Error updating Gear
+      print('Error updating Gear: $e');
     } finally {
       setState(() {
         _isLoading:
@@ -95,7 +95,7 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update brand'),
+        title: const Text('Update Gear'),
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
@@ -109,7 +109,7 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _isLoading ? null : updateBrand,
+              onPressed: _isLoading ? null : updateGear,
               child: const Text('Update'),
             ),
           ],

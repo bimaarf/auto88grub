@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UpdateCylinderPage extends StatefulWidget {
   final String cylinderId;
-  final int volume; // Ubah tipe data volume menjadi int
+  final int volume;
   final Function() onUpdate;
   final Function() fetchNewData;
 
@@ -24,12 +24,11 @@ class UpdateCylinderPage extends StatefulWidget {
 class _UpdateCylinderPageState extends State<UpdateCylinderPage> {
   TextEditingController _volumeController = TextEditingController();
   String _token = '';
-
+  bool _isLoading = false;
   @override
   void initState() {
     super.initState();
-    _volumeController.text = widget.volume
-        .toString(); // Konversi volume ke String saat mengatur nilai awal
+    _volumeController.text = widget.volume.toString();
     _loadToken();
   }
 
@@ -41,6 +40,9 @@ class _UpdateCylinderPageState extends State<UpdateCylinderPage> {
   }
 
   Future<void> updateCylinder() async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       String baseUrl = dotenv.env['BASE_URL']!;
       String token = 'Bearer $_token';
@@ -92,6 +94,10 @@ class _UpdateCylinderPageState extends State<UpdateCylinderPage> {
       }
     } catch (e) {
       print('Error updating Cylinder: $e');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -109,15 +115,12 @@ class _UpdateCylinderPageState extends State<UpdateCylinderPage> {
           children: [
             TextFormField(
               controller: _volumeController,
-              keyboardType: TextInputType
-                  .number, // Tambahkan keyboard type untuk membatasi input menjadi angka
+              keyboardType: TextInputType.number,
               decoration: const InputDecoration(labelText: 'Volume'),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                updateCylinder();
-              },
+              onPressed: _isLoading ? null : updateCylinder,
               child: const Text('Update'),
             ),
           ],

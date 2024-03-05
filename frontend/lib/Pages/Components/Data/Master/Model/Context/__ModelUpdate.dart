@@ -84,6 +84,9 @@ class _UpdateModelPageState extends State<UpdateModelPage> {
   }
 
   Future<void> updateModel() async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       String baseUrl = dotenv.env['BASE_URL']!;
       String token = 'Bearer $_token';
@@ -130,6 +133,10 @@ class _UpdateModelPageState extends State<UpdateModelPage> {
         ),
       );
       print('Error updating Model: $e');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -156,8 +163,7 @@ class _UpdateModelPageState extends State<UpdateModelPage> {
                         .any((brand) => brand['id'].toString() == newValue)) {
                       _selectedBrandId = newValue!;
                     } else {
-                      _selectedBrandId =
-                          '';
+                      _selectedBrandId = '';
                     }
                   });
                 },
@@ -175,9 +181,7 @@ class _UpdateModelPageState extends State<UpdateModelPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                updateModel();
-              },
+              onPressed: _isLoading ? null : updateModel,
               child: const Text('Update'),
             ),
           ],

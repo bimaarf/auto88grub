@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:frontend/Model/Services/MasterData/fetchKind.dart';
-import 'package:frontend/Pages/Components/Data/Master/Kind/Context/__KindList.dart';
-import 'package:frontend/Pages/Components/Data/Master/Kind/Context/__KindStore.dart';
-import 'package:frontend/Pages/Components/Data/Master/Kind/Context/__KindUpdate.dart';
+import 'package:frontend/Model/Services/MasterData/fetchColor.dart';
+import 'package:frontend/Pages/Components/Data/Master/Color/Context/__ColorList.dart';
+import 'package:frontend/Pages/Components/Data/Master/Color/Context/__ColorStore.dart';
+import 'package:frontend/Pages/Components/Data/Master/Color/Context/__ColorUpdate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class KindPage extends StatefulWidget {
+class ColorPage extends StatefulWidget {
   @override
-  _KindPageState createState() => _KindPageState();
+  _ColorPageState createState() => _ColorPageState();
 }
 
-class _KindPageState extends State<KindPage> {
-  List<Map<String, dynamic>> kinds = [];
+class _ColorPageState extends State<ColorPage> {
+  List<Map<String, dynamic>> colors = [];
   bool isLoading = false;
   late String baseUrl;
 
@@ -25,7 +25,7 @@ class _KindPageState extends State<KindPage> {
   Future<void> initializeBaseUrl() async {
     await dotenv.load();
     baseUrl = dotenv.env['BASE_URL']!;
-    await fetchKind(); // Await fetchKind
+    await fetchColor(); // Await fetchColor
   }
 
   Future<String> getTokenFromStorage() async {
@@ -33,38 +33,36 @@ class _KindPageState extends State<KindPage> {
     return prefs.getString('token') ?? '';
   }
 
-  Future<void> fetchKind() async {
+  Future<void> fetchColor() async {
     try {
       setState(() {
         isLoading = true;
       });
 
-      kinds = await ServiceKind.fetchKind(baseUrl);
+      colors = await ServiceColor.fetchColor(baseUrl);
 
       setState(() {
         isLoading = false;
       });
     } catch (e) {
-      print('Error fetching kind data: $e');
+      print('Error fetching color data: $e');
       setState(() {
         isLoading = false;
       });
     }
   }
 
-  void showUpdatePage(Map<String, dynamic> kind) {
+  void showUpdatePage(Map<String, dynamic> color) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => UpdateKindPage(
-          baseUrl: baseUrl,
-          imageUrl: kind['image'],
-          kindId: kind['id']?.toString() ?? '',
-          name: kind['name'] ?? '',
+        builder: (context) => UpdateColorPage(
+          colorId: color['id']?.toString() ?? '',
+          name: color['name'] ?? '',
           onUpdate: () {
-            fetchKind();
+            fetchColor();
           },
-          fetchNewData: fetchKind,
+          fetchNewData: fetchColor,
         ),
       ),
     );
@@ -74,23 +72,22 @@ class _KindPageState extends State<KindPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('kinds'),
+        title: const Text('Colors'),
         backgroundColor: Colors.black,
       ),
       body: RefreshIndicator(
         color: Colors.white,
-        onRefresh: fetchKind,
+        onRefresh: fetchColor,
         child: isLoading
             ? const Center(
                 child: CircularProgressIndicator(
                   color: Colors.white,
                 ),
               )
-            : KindList(
-                baseUrl: baseUrl,
-                kinds: kinds,
-                onUpdate: (kind) {
-                  showUpdatePage(kind);
+            : ColorList(
+                colors: colors,
+                onUpdate: (color) {
+                  showUpdatePage(color);
                 },
               ),
       ),
@@ -99,11 +96,11 @@ class _KindPageState extends State<KindPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddKindPage(),
+              builder: (context) => AddColorPage(),
             ),
           ).then((value) {
             if (value == true) {
-              fetchKind();
+              fetchColor();
             }
           });
         },

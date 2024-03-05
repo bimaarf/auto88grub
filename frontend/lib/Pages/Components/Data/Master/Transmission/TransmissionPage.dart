@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:frontend/Model/Services/MasterData/fetchKind.dart';
-import 'package:frontend/Pages/Components/Data/Master/Kind/Context/__KindList.dart';
-import 'package:frontend/Pages/Components/Data/Master/Kind/Context/__KindStore.dart';
-import 'package:frontend/Pages/Components/Data/Master/Kind/Context/__KindUpdate.dart';
+import 'package:frontend/Model/Services/MasterData/fetchTransmission.dart';
+import 'package:frontend/Pages/Components/Data/Master/Transmission/Context/__TransmissionList.dart';
+import 'package:frontend/Pages/Components/Data/Master/Transmission/Context/__TransmissionStore.dart';
+import 'package:frontend/Pages/Components/Data/Master/Transmission/Context/__TransmissionUpdate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class KindPage extends StatefulWidget {
+class TransmissionPage extends StatefulWidget {
   @override
-  _KindPageState createState() => _KindPageState();
+  _TransmissionPageState createState() => _TransmissionPageState();
 }
 
-class _KindPageState extends State<KindPage> {
-  List<Map<String, dynamic>> kinds = [];
+class _TransmissionPageState extends State<TransmissionPage> {
+  List<Map<String, dynamic>> transmissions = [];
   bool isLoading = false;
   late String baseUrl;
 
@@ -25,7 +25,7 @@ class _KindPageState extends State<KindPage> {
   Future<void> initializeBaseUrl() async {
     await dotenv.load();
     baseUrl = dotenv.env['BASE_URL']!;
-    await fetchKind(); // Await fetchKind
+    await fetchTransmission(); // Await fetchTransmission
   }
 
   Future<String> getTokenFromStorage() async {
@@ -33,38 +33,36 @@ class _KindPageState extends State<KindPage> {
     return prefs.getString('token') ?? '';
   }
 
-  Future<void> fetchKind() async {
+  Future<void> fetchTransmission() async {
     try {
       setState(() {
         isLoading = true;
       });
 
-      kinds = await ServiceKind.fetchKind(baseUrl);
+      transmissions = await ServiceTransmission.fetchTransmission(baseUrl);
 
       setState(() {
         isLoading = false;
       });
     } catch (e) {
-      print('Error fetching kind data: $e');
+      print('Error fetching transmission data: $e');
       setState(() {
         isLoading = false;
       });
     }
   }
 
-  void showUpdatePage(Map<String, dynamic> kind) {
+  void showUpdatePage(Map<String, dynamic> transmission) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => UpdateKindPage(
-          baseUrl: baseUrl,
-          imageUrl: kind['image'],
-          kindId: kind['id']?.toString() ?? '',
-          name: kind['name'] ?? '',
+        builder: (context) => UpdateTransmissionPage(
+          transmissionId: transmission['id']?.toString() ?? '',
+          name: transmission['name'] ?? '',
           onUpdate: () {
-            fetchKind();
+            fetchTransmission();
           },
-          fetchNewData: fetchKind,
+          fetchNewData: fetchTransmission,
         ),
       ),
     );
@@ -74,23 +72,22 @@ class _KindPageState extends State<KindPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('kinds'),
+        title: const Text('Transmissions'),
         backgroundColor: Colors.black,
       ),
       body: RefreshIndicator(
         color: Colors.white,
-        onRefresh: fetchKind,
+        onRefresh: fetchTransmission,
         child: isLoading
             ? const Center(
                 child: CircularProgressIndicator(
                   color: Colors.white,
                 ),
               )
-            : KindList(
-                baseUrl: baseUrl,
-                kinds: kinds,
-                onUpdate: (kind) {
-                  showUpdatePage(kind);
+            : TransmissionList(
+                transmissions: transmissions,
+                onUpdate: (transmission) {
+                  showUpdatePage(transmission);
                 },
               ),
       ),
@@ -99,11 +96,11 @@ class _KindPageState extends State<KindPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddKindPage(),
+              builder: (context) => AddTransmissionPage(),
             ),
           ).then((value) {
             if (value == true) {
-              fetchKind();
+              fetchTransmission();
             }
           });
         },

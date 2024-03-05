@@ -12,13 +12,10 @@ class AddBrankasPage extends StatefulWidget {
 
 class _AddBrankasPageState extends State<AddBrankasPage> {
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController latitudeController = TextEditingController();
-  final TextEditingController longitudeController = TextEditingController();
-  final TextEditingController limitationController = TextEditingController();
 
   bool isUnlimited = false;
   bool isVisible = true;
-
+  bool _isLoading = false;
   late String baseUrl;
 
   @override
@@ -38,6 +35,9 @@ class _AddBrankasPageState extends State<AddBrankasPage> {
   }
 
   Future<void> addBrankas() async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       String token = await getTokenFromStorage();
 
@@ -48,11 +48,6 @@ class _AddBrankasPageState extends State<AddBrankasPage> {
 
       Map<String, dynamic> data = {
         'name': nameController.text,
-        'latitude': latitudeController.text,
-        'longitude': longitudeController.text,
-        'is_unlimited': isUnlimited,
-        'limitation': limitationController.text,
-        'is_visible': isVisible,
       };
 
       final response = await http.post(
@@ -74,6 +69,10 @@ class _AddBrankasPageState extends State<AddBrankasPage> {
       }
     } catch (e) {
       print('Error adding Brankas: $e');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -94,55 +93,9 @@ class _AddBrankasPageState extends State<AddBrankasPage> {
                 controller: nameController,
                 decoration: const InputDecoration(labelText: 'Name'),
               ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: latitudeController,
-                decoration: const InputDecoration(labelText: 'Latitude'),
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: longitudeController,
-                decoration: const InputDecoration(labelText: 'Longitude'),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  const Text('Is Unlimited:'),
-                  Checkbox(
-                    value: isUnlimited,
-                    onChanged: (value) {
-                      setState(() {
-                        isUnlimited = value!;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: limitationController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Limitation'),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  const Text('Is Visible:'),
-                  Checkbox(
-                    value: isVisible,
-                    onChanged: (value) {
-                      setState(() {
-                        isVisible = value!;
-                      });
-                    },
-                  ),
-                ],
-              ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  addBrankas();
-                },
+                onPressed: _isLoading ? null : addBrankas,
                 child: const Text('Add Brankas'),
               ),
             ],

@@ -83,6 +83,9 @@ class _AddTypePageState extends State<AddTypePage> {
   }
 
   Future<void> addType() async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       String token = await getTokenFromStorage();
 
@@ -112,10 +115,14 @@ class _AddTypePageState extends State<AddTypePage> {
         );
         Navigator.pop(context, true); // Pop page with success signal
       } else {
-        print('Failed to add Type: ${response.statusCode}');
+        print('Failed to Add Type: ${response.statusCode}');
       }
     } catch (e) {
       print('Error adding Type: $e');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -173,9 +180,7 @@ class _AddTypePageState extends State<AddTypePage> {
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: () {
-                        addType();
-                      },
+                      onPressed: _isLoading ? null : addType,
                       child: const Text('Add Type'),
                     ),
                   ],

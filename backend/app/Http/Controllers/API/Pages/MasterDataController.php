@@ -221,7 +221,13 @@ class MasterDataController extends Controller
         try {
             $data = new Kind();
             $data->name  = $request->name;
-            $data->image = $request->image;
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $filename = time() . '-' . $file->getClientOriginalName();
+                $directory = 'app/public/car-kind-attachments';
+                $file->move(storage_path($directory), $filename);
+                $data->image = 'car-kind-attachments/' . $filename;
+            }
             $data->save();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
@@ -235,16 +241,18 @@ class MasterDataController extends Controller
             $data->name = $request->name;
 
             if ($request->hasFile('image')) {
+                $directory = 'app/public/car-kind-attachments/';
                 if ($data->image) {
-                    Storage::delete($data->image);
+                    $imagePath = storage_path($directory . $data->image);
+                    if (file_exists($imagePath)) {
+                        // unlink($imagePath);
+                        Storage::delete($data->image);
+                    }
                 }
-
                 $file = $request->file('image');
                 $filename = time() . '-' . $file->getClientOriginalName();
-                $directory = 'car-kind-attachments';
-                // $filePath = $file->storeAs($directory, $filename);
                 $file->move(storage_path($directory), $filename);
-                $data->image = 'car-kind-attachments/' + $filename;
+                $data->image = 'car-kind-attachments/' . $filename;
             }
             $data->save();
             return response()->json(['status' => 200], 200);
@@ -299,11 +307,11 @@ class MasterDataController extends Controller
             return response()->json(['status' => 201], 201);
         }
     }
-    public function transmitionView()
+    public function transmissionView()
     {
         return response()->json(['data' => Transmission::all()]);
     }
-    public function transmitionStore(Request $request)
+    public function transmissionStore(Request $request)
     {
         try {
             $data = new Transmission();
@@ -314,7 +322,7 @@ class MasterDataController extends Controller
             return response()->json(['status' => 201], 201);
         }
     }
-    public function transmitionUpdate(Request $request, $transId)
+    public function transmissionUpdate(Request $request, $transId)
     {
         try {
             $data = Transmission::find($transId);
@@ -325,7 +333,7 @@ class MasterDataController extends Controller
             return response()->json(['status' => 201], 201);
         }
     }
-    public function transmitionDelete($transId)
+    public function transmissionDelete($transId)
     {
         try {
             $data = Transmission::find($transId);
@@ -409,7 +417,7 @@ class MasterDataController extends Controller
     }
     public function fuelView()
     {
-        return response()->json(['status' => 200], 200);
+        return response()->json(['data' => Fuel::all()], 200);
     }
     public function fuelStore(Request $request)
     {

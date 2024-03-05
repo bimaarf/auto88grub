@@ -13,7 +13,7 @@ class AddCylinderPage extends StatefulWidget {
 class _AddCylinderPageState extends State<AddCylinderPage> {
   final TextEditingController volumeController = TextEditingController();
   late String baseUrl;
-
+  bool _isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -31,6 +31,9 @@ class _AddCylinderPageState extends State<AddCylinderPage> {
   }
 
   Future<void> addCylinder() async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       String token = await getTokenFromStorage();
 
@@ -74,6 +77,10 @@ class _AddCylinderPageState extends State<AddCylinderPage> {
       }
     } catch (e) {
       print('Error adding Cylinder: $e');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -98,9 +105,7 @@ class _AddCylinderPageState extends State<AddCylinderPage> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  addCylinder();
-                },
+                onPressed: _isLoading ? null : addCylinder,
                 child: const Text('Add Cylinder'),
               ),
             ],

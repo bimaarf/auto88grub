@@ -13,8 +13,8 @@ class AddKindPage extends StatefulWidget {
 class _AddKindPageState extends State<AddKindPage> {
   final TextEditingController nameController = TextEditingController();
   late String baseUrl;
-  File? _image; // Tipe variabel diubah menjadi File
-
+  File? _image;
+  bool _isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -32,6 +32,10 @@ class _AddKindPageState extends State<AddKindPage> {
   }
 
   Future<void> addKind() async {
+    setState(() {
+      _isLoading =
+          true; // Set isLoading menjadi true saat proses pembaruan dimulai
+    });
     try {
       String token = await getTokenFromStorage();
 
@@ -68,6 +72,11 @@ class _AddKindPageState extends State<AddKindPage> {
       }
     } catch (e) {
       print('Error adding Kind: $e');
+    } finally {
+      setState(() {
+        _isLoading =
+            false; // Set isLoading menjadi true saat proses pembaruan dimulai
+      });
     }
   }
 
@@ -102,23 +111,18 @@ class _AddKindPageState extends State<AddKindPage> {
                 decoration: const InputDecoration(labelText: 'Name'),
               ),
               const SizedBox(height: 20),
-              // Widget untuk menampilkan gambar yang dipilih
               if (_image != null) ...[
                 Image.file(_image!),
                 const SizedBox(height: 20),
               ],
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  _pickImage(); // Panggil metode untuk memilih gambar
-                },
+                onPressed: _isLoading ? null : _pickImage,
                 child: const Text('Choose Image'),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  addKind();
-                },
+                onPressed: _isLoading ? null : addKind,
                 child: const Text('Add Kind'),
               ),
             ],

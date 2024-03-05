@@ -18,7 +18,7 @@ class _AddCoordinatePageState extends State<AddCoordinatePage> {
 
   bool isUnlimited = false;
   bool isVisible = true;
-
+  bool _isLoading = false;
   late String baseUrl;
 
   @override
@@ -38,6 +38,9 @@ class _AddCoordinatePageState extends State<AddCoordinatePage> {
   }
 
   Future<void> addCoordinate() async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       String token = await getTokenFromStorage();
 
@@ -74,6 +77,10 @@ class _AddCoordinatePageState extends State<AddCoordinatePage> {
       }
     } catch (e) {
       print('Error adding coordinate: $e');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 

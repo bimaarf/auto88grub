@@ -15,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   String _email = '';
   String _password = '';
   late String baseUrl;
-
+  bool _isLoading = false;
   @override
   void initState() {
     super.initState();
@@ -25,6 +25,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _trySubmit() async {
+    setState(() {
+      _isLoading = true;
+    });
     final isValid = _formKey.currentState!.validate();
     if (isValid) {
       _formKey.currentState!.save();
@@ -59,8 +62,19 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         );
+        setState(() {
+          _isLoading = false;
+        });
       } else {
-        // Handle error
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Server error'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
   }
