@@ -55,7 +55,7 @@ class TransmissionItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                Icons.color_lens,
+                Icons.tune,
                 size: 30,
                 color: Colors.blue,
               ),

@@ -55,7 +55,7 @@ class GearItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                Icons.color_lens,
+                Icons.settings,
                 size: 30,
                 color: Colors.blue,
               ),

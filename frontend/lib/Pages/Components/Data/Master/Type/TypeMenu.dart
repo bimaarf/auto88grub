@@ -55,7 +55,7 @@ class TypeItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                Icons.car_rental,
+                Icons.merge_type_outlined,
                 size: 30,
                 color: Colors.blue,
               ),

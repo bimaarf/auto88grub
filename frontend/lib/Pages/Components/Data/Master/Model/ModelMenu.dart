@@ -55,7 +55,7 @@ class ModelItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                Icons.car_rental,
+                Icons.sync,
                 size: 30,
                 color: Colors.blue,
               ),

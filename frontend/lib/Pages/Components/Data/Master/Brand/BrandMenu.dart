@@ -55,7 +55,7 @@ class BrandItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                Icons.color_lens,
+                Icons.account_balance,
                 size: 30,
                 color: Colors.blue,
               ),

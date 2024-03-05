@@ -55,7 +55,7 @@ class SeriesItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                Icons.color_lens,
+                Icons.safety_check,
                 size: 30,
                 color: Colors.blue,
               ),

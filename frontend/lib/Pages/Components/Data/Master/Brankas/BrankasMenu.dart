@@ -55,7 +55,7 @@ class BrankasItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                Icons.color_lens,
+                Icons.data_saver_off,
                 size: 30,
                 color: Colors.blue,
               ),
