@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Http\Controllers\API\Car;
+
+use App\Http\Controllers\Controller;
+use App\Models\Car\Kind;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class KindController extends Controller
+{
+
+    public function view()
+    {
+        return response()->json(['data' => Kind::all()]);
+    }
+    public function store(Request $request)
+    {
+        try {
+            $data = new Kind();
+            $data->name  = $request->name;
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $filename = time() . '-' . $file->getClientOriginalName();
+                $directory = 'app/public/car-kind-attachments';
+                $file->move(storage_path($directory), $filename);
+                $data->image = 'car-kind-attachments/' . $filename;
+            }
+            $data->save();
+            return response()->json(['status' => 200], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201], 201);
+        }
+    }
+    public function update(Request $request, $kindId)
+    {
+        try {
+            $data = Kind::find($kindId);
+            $data->name = $request->name;
+
+            if ($request->hasFile('image')) {
+                $directory = 'app/public/car-kind-attachments/';
+                if ($data->image) {
+                    $imagePath = storage_path($directory . $data->image);
+                    if (file_exists($imagePath)) {
+                        // unlink($imagePath);
+                        Storage::delete($data->image);
+                    }
+                }
+                $file = $request->file('image');
+                $filename = time() . '-' . $file->getClientOriginalName();
+                $file->move(storage_path($directory), $filename);
+                $data->image = 'car-kind-attachments/' . $filename;
+            }
+            $data->save();
+            return response()->json(['status' => 200], 200);
+        } catch (\Exception $e) {
+            return response()->json(['status' => 201], 201);
+        }
+    }
+
+    public function delete($kindId)
+    {
+        try {
+            $data = Kind::find($kindId);
+            $data->delete();
+            return response()->json(['status' => 200], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201], 201);
+        }
+    }
+}

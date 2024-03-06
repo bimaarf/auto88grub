@@ -13,6 +13,7 @@ Future<String?> initializeToken() async {
 }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
   runApp(MyApp());
 }
@@ -137,7 +138,7 @@ class _NavigationExampleState extends State<NavigationExample> {
 
     return Scaffold(
       drawerScrimColor: Colors.black,
-      backgroundColor: Colors.black, // Set background color to black
+      backgroundColor: Colors.black,
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: _onDestinationSelected,
         backgroundColor: Colors.black,

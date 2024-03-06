@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Home/Context/__ListDataMaster.dart';
+import 'package:frontend/Pages/Components/Home/Context/List/__FirstMenuList.dart';
+import 'package:frontend/Pages/Components/Home/Context/List/__ListDataMaster.dart';
+import 'package:frontend/Pages/Components/Home/Context/List/__ListDataSite.dart';
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarList.dart';
 import 'package:frontend/Pages/Profile.dart';
 
@@ -16,8 +18,11 @@ class Cars extends StatefulWidget {
 }
 
 class _CarsState extends State<Cars> {
+  // Function to navigate to the profile screen
+
   var carItem;
   void _navigateToProfileScreen(String profileName) {
+    // Use Navigator to push a new route
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -110,7 +115,7 @@ class _CarsState extends State<Cars> {
             color: Colors.black,
             padding: const EdgeInsets.all(10),
             width: double.infinity,
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Stack(
@@ -123,7 +128,7 @@ class _CarsState extends State<Cars> {
                 //   ],
                 // ),
 
-                Text(
+                const Text(
                   'AUTO88GROUP',
                   style: TextStyle(
                     color: Colors.red,
@@ -131,9 +136,19 @@ class _CarsState extends State<Cars> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                CardCarList(),
+                const CardCarList(),
 
-                ListDataMaster(),
+                Container(
+                  margin: const EdgeInsets.only(top: 10, bottom: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const FirstMenuList(),
+                ),
+
+                const ListDataSite(),
+                const ListDataMaster(),
               ],
             ),
           )

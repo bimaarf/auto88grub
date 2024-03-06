@@ -66,7 +66,7 @@ class _CardCarListState extends State<CardCarList> {
       children: [
         const MobilRow(),
         _isLoading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : SizedBox(
                 height: 200,
                 child: ListView.builder(

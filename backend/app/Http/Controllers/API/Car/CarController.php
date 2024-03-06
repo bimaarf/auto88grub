@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Pages;
+namespace App\Http\Controllers\API\Car;
 
 use App\Http\Controllers\Controller;
 use App\Models\Car\Brand;

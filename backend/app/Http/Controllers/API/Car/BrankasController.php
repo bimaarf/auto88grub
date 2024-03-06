@@ -3,42 +3,42 @@
 namespace App\Http\Controllers\API\Car;
 
 use App\Http\Controllers\Controller;
-use App\Models\Car\Brand;
+use App\Models\Location\Box;
 use Illuminate\Http\Request;
 
-class BrandController extends Controller
+class BrankasController extends Controller
 {
     public function view()
     {
-        return response()->json(['data' => Brand::all()]);
+        return response()->json(['data' => Box::all()], 200);
     }
     public function store(Request $request)
     {
         try {
-            $data = $request->all();
-            $data = new Brand($data);   
-            $data->save();
+            $box = new Box();
+            $box->name = $request->name;
+            $box->save();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
             return response()->json(['status' => 201], 201);
         }
     }
-    public function update(Request $request, $brandId)
+    public function update(Request $request, $brankasId)
     {
         try {
-            $data = Brand::find($brandId);
-            $data->name = $request->name;
-            $data->save();
+            $box =  Box::find($brankasId);
+            $box->name = $request->name;
+            $box->update();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
             return response()->json(['status' => 201], 201);
         }
     }
-    public function delete($brandId)
+    public function delete($brankasId)
     {
         try {
-            $data = Brand::find($brandId);
-            $data->delete();
+            $box =  Box::find($brankasId);
+            $box->delete();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
             return response()->json(['status' => 201], 201);

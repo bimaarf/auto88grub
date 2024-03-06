@@ -3,30 +3,19 @@
 namespace App\Http\Controllers\API\Car;
 
 use App\Http\Controllers\Controller;
-use App\Models\Car\Brand;
+use App\Models\Car\Fuel;
 use Illuminate\Http\Request;
 
-class BrandController extends Controller
+class FuelController extends Controller
 {
     public function view()
     {
-        return response()->json(['data' => Brand::all()]);
+        return response()->json(['data' => Fuel::all()], 200);
     }
     public function store(Request $request)
     {
         try {
-            $data = $request->all();
-            $data = new Brand($data);   
-            $data->save();
-            return response()->json(['status' => 200], 200);
-        } catch (\Throwable $th) {
-            return response()->json(['status' => 201], 201);
-        }
-    }
-    public function update(Request $request, $brandId)
-    {
-        try {
-            $data = Brand::find($brandId);
+            $data = new Fuel();
             $data->name = $request->name;
             $data->save();
             return response()->json(['status' => 200], 200);
@@ -34,10 +23,21 @@ class BrandController extends Controller
             return response()->json(['status' => 201], 201);
         }
     }
-    public function delete($brandId)
+    public function update(Request $request, $fuelId)
     {
         try {
-            $data = Brand::find($brandId);
+            $data = Fuel::find($fuelId);
+            $data->name = $request->name;
+            $data->save();
+            return response()->json(['status' => 200], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 201], 201);
+        }
+    }
+    public function delete($fuelId)
+    {
+        try {
+            $data = Fuel::find($fuelId);
             $data->delete();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
