@@ -21,7 +21,7 @@ export const HighLightHeader = () => {
   return (
     <>
       <div
-        className="w-full -z-10 px-20 -mb-96 shadow-black/5 shadow-2xl relative top-0 overflow-hidden"
+        className="w-full -z-10 px-20 -mb-96 shadow-red-900 shadow-xl relative top-0 overflow-hidden"
         style={{
           backgroundImage: `url(${bannerImg})`,
           backgroundRepeat: "no-repeat",
@@ -31,7 +31,7 @@ export const HighLightHeader = () => {
           height: "70vh", // Default height
           borderBottomLeftRadius: "30px",
           borderBottomRightRadius: "30px",
-          // filter: "blur(2px)", // Apply blur effect to the image
+          // filter: "blur(10px)", // Apply blur effect to the image
         }}
       />
 

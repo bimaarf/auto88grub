@@ -29,7 +29,7 @@ export const Testimony = () => {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll); // Remove the event listener when the component unmounts
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [getTestimony, loading, reachedEnd]);
 
@@ -43,8 +43,6 @@ export const Testimony = () => {
 
     try {
       const testimonyData = await fetchTestimony(nextPage);
-
-      // Gabungkan data baru dengan data yang sudah ada
       const updatedData = [...getTestimony.data, ...testimonyData.data];
 
       const totalLoadedData = updatedData.length;
@@ -54,9 +52,8 @@ export const Testimony = () => {
         getTestimony: {
           ...testimonyData,
           data: updatedData,
-          total: totalLoadedData, // Update total data yang telah dimuat
+          total: totalLoadedData,
         },
-        // pageTestimony: nextPage, // Perbarui informasi halaman selanjutnya
       }));
 
       if (totalLoadedData >= testimonyData.total) {
@@ -72,7 +69,7 @@ export const Testimony = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="md:container max-w-lg relative mb-44 bg-white rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto">
+      <div className="md:container mx-auto relative mb-44 bg-white rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto testimonial-content  ">
         <ul className="menu bg-white mb-4 border lg:menu-horizontal rounded-box">
           <li>
             <p>
@@ -96,7 +93,7 @@ export const Testimony = () => {
         {loading && <TestimonyListSkeleton />}
         <div className="text-xs text-red-600 cursor-pointer mt-2 font-bold flex justify-center items-center gap-1">
           {loading ? (
-            <div className="flex justify-center skeleton items-center gap-1 w-fit border-b  duration-300 bg-black/5 p-3">
+            <div className="flex justify-center items-center gap-1 w-fit border-b  duration-300 p-3">
               <i className="fas fa-spinner animate-spin"></i>
               <p>Loading</p>
             </div>

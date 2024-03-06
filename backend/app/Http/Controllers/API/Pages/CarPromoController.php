@@ -16,6 +16,7 @@ class CarPromoController extends Controller
 
         $query = Promo::with('car')
             ->join('cars', 'cars.id', 'car_promos.car_id')
+            ->where('car_promos.is_pinned', 1)
             ->with([
                 'car.documents', 'car.officials', 'car.originals', 'car.outdoors',
                 'car.location', 'car.brand', 'car.model', 'car.type', 'car.cylinder', 'car.transmission', 'car.series',
@@ -53,12 +54,14 @@ class CarPromoController extends Controller
         $page = $request->query('page', 1);
         $perPage = $request->query('perPage', 10);
         $getData = Promo::with('car')
-                        ->join('cars', 'cars.id', 'car_promos.car_id')
-                        ->with(['car.documents', 'car.officials', 'car.originals', 'car.outdoors',
-                            'car.location', 'car.brand', 'car.model', 'car.type', 'car.cylinder', 'car.transmission', 'car.series',
-                            'car.gear', 'car.fuel', 'car.color', 'car.row', 'car.year'
-                        ])
-                        ->paginate($perPage, ['car_promos.*', 'cars.slug', 'cars.description'], 'page', $page);
+            ->join('cars', 'cars.id', 'car_promos.car_id')
+            ->where('car_promos.is_pinned', 1)
+            ->with([
+                'car.documents', 'car.officials', 'car.originals', 'car.outdoors',
+                'car.location', 'car.brand', 'car.model', 'car.type', 'car.cylinder', 'car.transmission', 'car.series',
+                'car.gear', 'car.fuel', 'car.color', 'car.row', 'car.year'
+            ])
+            ->paginate($perPage, ['car_promos.*', 'cars.slug', 'cars.description'], 'page', $page);
 
         $getData->transform(function ($promo) {
             $promo->title = $promo->slug;

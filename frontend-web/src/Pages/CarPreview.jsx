@@ -222,7 +222,7 @@ export const CarPreview = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-center gap-4 brounded-lg  p-4">
+              <div className="flex justify-center gap-4 brounded-lg p-4">
                 <CarouselCarRecomen />
               </div>
             </div>

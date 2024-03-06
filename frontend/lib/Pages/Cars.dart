@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Home/FirstMenuList.dart';
+import 'package:frontend/Pages/Components/Home/Context/__ListDataMaster.dart';
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarList.dart';
 import 'package:frontend/Pages/Profile.dart';
 
@@ -16,11 +16,8 @@ class Cars extends StatefulWidget {
 }
 
 class _CarsState extends State<Cars> {
-  // Function to navigate to the profile screen
-
   var carItem;
   void _navigateToProfileScreen(String profileName) {
-    // Use Navigator to push a new route
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -113,7 +110,7 @@ class _CarsState extends State<Cars> {
             color: Colors.black,
             padding: const EdgeInsets.all(10),
             width: double.infinity,
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Stack(
@@ -126,7 +123,7 @@ class _CarsState extends State<Cars> {
                 //   ],
                 // ),
 
-                const Text(
+                Text(
                   'AUTO88GROUP',
                   style: TextStyle(
                     color: Colors.red,
@@ -134,154 +131,9 @@ class _CarsState extends State<Cars> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const CardCarList(),
+                CardCarList(),
 
-                Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(
-                        0.1), // Set the background color here if needed
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const FirstMenuList(),
-                ),
-
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.car_rental,
-                              size: 50,
-                              color: Colors.blue,
-                            ),
-                            Text('Mobil'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.discount,
-                              size: 50,
-                              color: Colors.blue,
-                            ),
-                            Text('Promo'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.accessibility,
-                              size: 50,
-                              color: Colors.blue,
-                            ),
-                            Text('Prospek'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.stars,
-                              size: 50,
-                              color: Colors.blue,
-                            ),
-                            Text('Testimoni'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.data_saver_on,
-                              size: 50,
-                              color: Colors.blue,
-                            ),
-                            Text('Data Panjar'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.all(10),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.data_usage,
-                              size: 50,
-                              color: Colors.blue,
-                            ),
-                            Text('Data Penjualan'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                ListDataMaster(),
               ],
             ),
           )

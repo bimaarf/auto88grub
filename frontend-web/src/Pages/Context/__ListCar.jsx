@@ -1,6 +1,7 @@
 import React from "react";
 import { CurrentFormat } from "../../Components/___CurrentFormat";
 import { useNavigate } from "react-router-dom";
+import { CurrentXFormat } from "../../Components/___CurrentXFormat";
 
 export const ListCar = ({ getAllCars }) => {
   const navRedirect = useNavigate();
@@ -36,7 +37,7 @@ export const ListCar = ({ getAllCars }) => {
               {item.type.name} / {item.series.name} / {item.fuel.name}
             </p>
             <p className="text-gray-800 text-sm md:text-xl font-bold text-right">
-              <CurrentFormat value={item.price} />
+              <CurrentXFormat value={item.price} />
             </p>
             <div className="flex justify-between">
               <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">

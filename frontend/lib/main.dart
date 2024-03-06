@@ -136,7 +136,7 @@ class _NavigationExampleState extends State<NavigationExample> {
     }
 
     return Scaffold(
-      drawerScrimColor: Colors.white,
+      drawerScrimColor: Colors.black,
       backgroundColor: Colors.black, // Set background color to black
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: _onDestinationSelected,
@@ -151,7 +151,7 @@ class _NavigationExampleState extends State<NavigationExample> {
           NavigationDestination(
             selectedIcon: Icon(Icons.settings, color: Colors.white),
             icon: Icon(Icons.settings),
-            label: 'Main Data',
+            label: 'Master Data',
           ),
           NavigationDestination(
             selectedIcon: Icon(Icons.home, color: Colors.white),

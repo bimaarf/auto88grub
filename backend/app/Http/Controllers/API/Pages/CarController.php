@@ -14,6 +14,7 @@ use App\Models\Car\Series;
 use App\Models\Car\Transmission;
 use App\Models\Car\Type;
 use App\Models\Main\Car;
+use App\Models\Main\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
@@ -33,6 +34,41 @@ class CarController extends Controller
         $data['fuel'] = Fuel::all();
         $data['color'] = Color::all();
         return response()->json(['data' => $data]);
+    }
+    public function getRecomended()
+    {
+        $testimonials = Testimonial::join('cars', 'cars.id', 'car_testimonials.car_id')
+            ->select('car_testimonials.*', 'cars.car_brand_id')
+            ->get();
+
+        $soldCarsByBrand = [];
+        foreach ($testimonials as $testimonial) {
+            $brandId = $testimonial->car_brand_id;
+
+            if (array_key_exists($brandId, $soldCarsByBrand)) {
+                $soldCarsByBrand[$brandId]++;
+            } else {
+                $soldCarsByBrand[$brandId] = 1;
+            }
+        }
+
+        $maxSoldCars = max($soldCarsByBrand);
+        $hotBrands = array_keys($soldCarsByBrand, $maxSoldCars);
+        $getCarRecomended = Car::with([
+            'promos', 'documents', 'officials', 'originals', 'outdoors',
+            'location', 'brand', 'model', 'type', 'cylinder', 'transmission', 'series',
+            'gear', 'fuel', 'color', 'row', 'year'
+        ])
+            ->whereIn('car_brand_id', $hotBrands)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        $getCarRecomended->transform(function ($car) {
+            $car->title = $car->slug;
+            $car->slug = Str::slug($car->title);
+            return $car;
+        });
+        return $hotBrands;
     }
 
     public function filter(Request $request)

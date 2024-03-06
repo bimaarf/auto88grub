@@ -51,7 +51,7 @@ export const CarouselCarRecomen = () => {
             </svg>
           </IconButton>
         )}>
-        <div className="relative grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="relative grid grid-cols-2 md:grid-cols-3 gap-4">
           {(function (rows, i, len) {
             while (++i <= len) {
               rows.push(
@@ -103,9 +103,9 @@ export const CarouselCarRecomen = () => {
               // if (window.innerWidth <= 768) break;
             }
             return rows;
-          })([], 0, 4)}
+          })([], 0, 3)}
         </div>
-        <div className="relative grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="relative grid grid-cols-2 md:grid-cols-3 gap-4">
           {(function (rows, i, len) {
             while (++i <= len) {
               rows.push(
@@ -157,7 +157,7 @@ export const CarouselCarRecomen = () => {
               // if (window.innerWidth <= 768) break;
             }
             return rows;
-          })([], 0, 4)}
+          })([], 0, 3)}
         </div>
       </Carousel>
     </>

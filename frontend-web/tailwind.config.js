@@ -12,7 +12,11 @@ module.exports = withMT({
   theme: {
     container: {
       padding: {
-        DEFAULT: "1rem",
+        DEFAULT: "4rem",
+        sm: '4rem',
+        lg: '5rem',
+        xl: '6rem',
+        '2xl': '6rem',
       },
     },
     extend: {
