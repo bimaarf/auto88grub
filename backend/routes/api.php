@@ -15,6 +15,7 @@ use App\Http\Controllers\API\Car\SeriesController;
 use App\Http\Controllers\API\Car\TransmissionController;
 use App\Http\Controllers\API\Car\TypeController;
 use App\Http\Controllers\API\Pages\BlogController;
+use App\Http\Controllers\API\Pages\CareerController;
 use App\Http\Controllers\API\Pages\CarPromoController;
 use App\Http\Controllers\API\Pages\FAQController;
 use App\Http\Controllers\API\Pages\SliderController;
@@ -92,6 +93,15 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::group(['prefix' => 'question'], function () {
         Route::controller(FAQController::class)->group(function () {
+            Route::get('/category/view', 'categView');
+            Route::get('/view', 'view');
+            Route::post('/store', 'store');
+            Route::post('/update/{questId}', 'update');
+        });
+    });
+
+    Route::group(['prefix' => 'vacancy'], function () {
+        Route::controller(CareerController::class)->group(function () {
             Route::get('/category/view', 'categView');
             Route::get('/view', 'view');
             Route::post('/store', 'store');

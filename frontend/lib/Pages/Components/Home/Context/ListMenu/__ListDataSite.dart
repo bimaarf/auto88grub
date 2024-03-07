@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Data/Master/Brand/BrandPage.dart';
 import 'package:frontend/Pages/Components/Home/Context/SiteDataBox/QuestionMenu.dart';
 import 'package:frontend/Pages/Components/Home/Context/SiteDataBox/SliderMenu.dart';
+import 'package:frontend/Pages/Components/Home/Context/SiteDataBox/VacancyMenu.dart';
 
 class ListDataSite extends StatelessWidget {
   const ListDataSite({Key? key}) : super(key: key);
@@ -47,6 +48,14 @@ class ListDataSite extends StatelessWidget {
             Expanded(child: SliderMenu()),
             SizedBox(width: 10),
             Expanded(child: FaqMenu()),
+          ],
+        ),
+        SizedBox(height: 8),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(child: VacancyMenu()),
+            SizedBox(width: 10),
           ],
         ),
         SizedBox(height: 8),

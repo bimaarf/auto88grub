@@ -106,6 +106,7 @@ class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
         headers: headers,
         body: jsonEncode(data),
       );
+
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -158,8 +159,8 @@ class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
                 value: _selectedCategoryId,
                 onChanged: (String? newValue) {
                   setState(() {
-                    if (_category.any(
-                        (category) => category['id'].toString() == newValue)) {
+                    if (_category.any((category) =>
+                        category['faq_category_id'].toString() == newValue)) {
                       _selectedCategoryId = newValue!;
                     } else {
                       _selectedCategoryId = '';

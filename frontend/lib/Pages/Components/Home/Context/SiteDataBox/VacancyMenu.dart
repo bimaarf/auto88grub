@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Data/Site/Question/QuestionPage.dart';
+import 'package:frontend/Pages/Components/Data/Site/Vacancy/VacancyPage.dart';
 
-class FaqMenu extends StatelessWidget {
-  const FaqMenu({Key? key}) : super(key: key);
+class VacancyMenu extends StatelessWidget {
+  const VacancyMenu({Key? key}) : super(key: key);
 
   void _navigateToPage(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => QuestionPage(),
+        builder: (context) => VacancyPage(),
       ),
     );
   }
@@ -44,13 +44,13 @@ class FaqMenu extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.image_aspect_ratio,
+                    Icons.work,
                     size: 50,
                     color: Colors.amber,
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'FAQ',
+                    'Vacancy',
                     style: TextStyle(color: Colors.white),
                   ),
                 ],
