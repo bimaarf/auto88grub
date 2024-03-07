@@ -85,8 +85,7 @@ class _UpdateBrandPageState extends State<UpdateBrandPage> {
       print('Error updating brand: $e');
     } finally {
       setState(() {
-        _isLoading:
-        false;
+        _isLoading = false;
       });
     }
   }

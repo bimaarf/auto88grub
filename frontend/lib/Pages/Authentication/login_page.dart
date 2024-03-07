@@ -135,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 16),
                     Center(
                       child: ElevatedButton(
-                        onPressed: _trySubmit,
+                        onPressed: _isLoading ? null : _trySubmit,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white.withOpacity(0.1),
                           foregroundColor: Colors.white,

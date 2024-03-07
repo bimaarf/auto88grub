@@ -16,7 +16,7 @@ export const HighLightHeader = () => {
   };
 
   useEffect(() => {
-    _fetchData();
+    _fetchData(); 
   }, []);
   return (
     <>

@@ -9,7 +9,7 @@ use App\Http\Resources\Car\BrandResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 
-class BrandController extends BaseController
+class BrandControllerTemp extends BaseController
 {
     /**
      * Display a listing of the resource.

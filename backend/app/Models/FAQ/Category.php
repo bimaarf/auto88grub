@@ -17,7 +17,7 @@ class Category extends Model implements HasMedia
      * @var string
      */
     protected $table = 'faq_categories';
-
+    protected $fillable = ['name'];
     /**
      * @var array<string, string>
      */

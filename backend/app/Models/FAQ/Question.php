@@ -17,7 +17,6 @@ class Question extends Model implements HasMedia
      * @var string
      */
     protected $table = 'faq_questions';
-
     /**
      * @var array<string, string>
      */

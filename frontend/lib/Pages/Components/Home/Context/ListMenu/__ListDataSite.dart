@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Data/Master/Brand/BrandPage.dart';
-import 'package:frontend/Pages/Components/Home/Context/MasterDataBox/CoordinateMenu.dart';
+import 'package:frontend/Pages/Components/Home/Context/SiteDataBox/QuestionMenu.dart';
 import 'package:frontend/Pages/Components/Home/Context/SiteDataBox/SliderMenu.dart';
 
 class ListDataSite extends StatelessWidget {
@@ -46,7 +46,7 @@ class ListDataSite extends StatelessWidget {
           children: [
             Expanded(child: SliderMenu()),
             SizedBox(width: 10),
-            Expanded(child: CoordinateMenu()),
+            Expanded(child: FaqMenu()),
           ],
         ),
         SizedBox(height: 8),

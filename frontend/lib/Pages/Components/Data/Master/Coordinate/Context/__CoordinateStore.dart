@@ -147,9 +147,7 @@ class _AddCoordinatePageState extends State<AddCoordinatePage> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  addCoordinate();
-                },
+                onPressed: _isLoading ? null : addCoordinate,
                 child: const Text('Add Coordinate'),
               ),
             ],

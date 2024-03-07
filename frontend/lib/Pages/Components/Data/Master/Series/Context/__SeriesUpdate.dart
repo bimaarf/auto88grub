@@ -85,8 +85,7 @@ class _UpdateSeriesPageState extends State<UpdateSeriesPage> {
       print('Error updating Series: $e');
     } finally {
       setState(() {
-        _isLoading:
-        false;
+        _isLoading = false;
       });
     }
   }

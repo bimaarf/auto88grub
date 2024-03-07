@@ -85,8 +85,7 @@ class _UpdateFuelPageState extends State<UpdateFuelPage> {
       print('Error updating Fuel: $e');
     } finally {
       setState(() {
-        _isLoading:
-        false;
+        _isLoading = false;
       });
     }
   }

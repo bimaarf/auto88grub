@@ -16,6 +16,7 @@ use App\Http\Controllers\API\Car\TransmissionController;
 use App\Http\Controllers\API\Car\TypeController;
 use App\Http\Controllers\API\Pages\BlogController;
 use App\Http\Controllers\API\Pages\CarPromoController;
+use App\Http\Controllers\API\Pages\FAQController;
 use App\Http\Controllers\API\Pages\SliderController;
 use App\Http\Controllers\API\Pages\TestimonyController;
 use App\Http\Controllers\LandingController;
@@ -87,6 +88,14 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/view', 'view');
             Route::post('/store', 'store');
             Route::post('/update/{sliderId}', 'update');
+        });
+    });
+    Route::group(['prefix' => 'question'], function () {
+        Route::controller(FAQController::class)->group(function () {
+            Route::get('/category/view', 'categView');
+            Route::get('/view', 'view');
+            Route::post('/store', 'store');
+            Route::post('/update/{questId}', 'update');
         });
     });
     Route::group(['prefix' => 'brankas'], function () {

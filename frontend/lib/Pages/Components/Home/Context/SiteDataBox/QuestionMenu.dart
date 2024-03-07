@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Pages/Components/Data/Site/Question/QuestionPage.dart';
 import 'package:frontend/Pages/Components/Data/Site/Sliders/SliderPage.dart';
 
-class SliderMenu extends StatelessWidget {
-  const SliderMenu({Key? key}) : super(key: key);
+class FaqMenu extends StatelessWidget {
+  const FaqMenu({Key? key}) : super(key: key);
 
   void _navigateToPage(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SliderPage(),
+        builder: (context) => QuestionPage(),
       ),
     );
   }
@@ -50,7 +51,7 @@ class SliderMenu extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Sliders',
+                    'FAQ',
                     style: TextStyle(color: Colors.white),
                   ),
                 ],

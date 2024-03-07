@@ -85,8 +85,7 @@ class _UpdateColorPageState extends State<UpdateColorPage> {
       print('Error updating Color: $e');
     } finally {
       setState(() {
-        _isLoading:
-        false;
+        _isLoading = false;
       });
     }
   }

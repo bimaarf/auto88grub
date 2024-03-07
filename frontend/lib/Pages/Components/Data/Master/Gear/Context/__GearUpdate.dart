@@ -85,8 +85,7 @@ class _UpdateGearPageState extends State<UpdateGearPage> {
       print('Error updating Gear: $e');
     } finally {
       setState(() {
-        _isLoading:
-        false;
+        _isLoading = false;
       });
     }
   }

@@ -85,8 +85,7 @@ class _UpdateTransmissionPageState extends State<UpdateTransmissionPage> {
       print('Error updating Transmission: $e');
     } finally {
       setState(() {
-        _isLoading:
-        false;
+        _isLoading = false;
       });
     }
   }
