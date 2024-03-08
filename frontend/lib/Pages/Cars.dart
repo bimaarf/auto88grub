@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Home/Context/ListMenu/__FirstMenuList.dart';
+import 'package:frontend/Pages/Components/Home/Context/ListMenu/__ListDataCar.dart';
 import 'package:frontend/Pages/Components/Home/Context/ListMenu/__ListDataMaster.dart';
 import 'package:frontend/Pages/Components/Home/Context/ListMenu/__ListDataSite.dart';
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarList.dart';
@@ -20,7 +21,6 @@ class Cars extends StatefulWidget {
 class _CarsState extends State<Cars> {
   // Function to navigate to the profile screen
 
-  var carItem;
   void _navigateToProfileScreen(String profileName) {
     // Use Navigator to push a new route
     Navigator.push(
@@ -34,64 +34,6 @@ class _CarsState extends State<Cars> {
   @override
   void initState() {
     super.initState();
-    carItem = [
-      {
-        'id': '1',
-        'imageUrl':
-            'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-        'title': 'DAIHATSU GRANMAX (GREY) TIPE BOX 1.5 M/T (2018)',
-        'subtitle': 'Rp 1x9.000.000',
-        'note': 'booet',
-      },
-      {
-        'id': '2',
-        'imageUrl':
-            'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-        'title': 'DAIHATSU GRANMAX (RED) TIPE BOX 1.5 M/T (2018)',
-        'subtitle': 'Rp 2x9.000.000',
-        'note': 'booet',
-      },
-      {
-        'id': '3',
-        'imageUrl':
-            'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-        'title': 'DAIHATSU GRANMAX (BLACK) TIPE BOX 1.5 M/T (2018)',
-        'subtitle': 'Rp 3x9.000.000',
-        'note': 'booet',
-      },
-      {
-        'id': '4',
-        'imageUrl':
-            'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-        'title': 'DAIHATSU GRANMAX (YELLOW) TIPE BOX 1.5 M/T (2018)',
-        'subtitle': 'Rp 4x9.000.000',
-        'note': 'booet',
-      },
-      {
-        'id': '5',
-        'imageUrl':
-            'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-        'title': 'DAIHATSU GRANMAX (PINK) TIPE BOX 1.5 M/T (2018) ',
-        'subtitle': 'Rp 5x9.000.000',
-        'note': 'booet',
-      },
-      {
-        'id': '6',
-        'imageUrl':
-            'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-        'title': 'DAIHATSU GRANMAX (BLACK) TIPE BOX 1.5 M/T (2018)',
-        'subtitle': 'Rp 3x9.000.000',
-        'note': 'booet',
-      },
-      {
-        'id': '7',
-        'imageUrl':
-            'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-        'title': 'DAIHATSU GRANMAX (RED) TIPE BOX 1.5 M/T (2018)',
-        'subtitle': 'Rp 2x9.000.000',
-        'note': 'booet',
-      },
-    ];
   }
 
   @override
@@ -147,6 +89,7 @@ class _CarsState extends State<Cars> {
                   child: const FirstMenuList(),
                 ),
 
+                const ListDataCar(),
                 const ListDataSite(),
                 const ListDataMaster(),
               ],

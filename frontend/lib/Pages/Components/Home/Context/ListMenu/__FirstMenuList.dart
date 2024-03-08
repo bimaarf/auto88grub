@@ -23,7 +23,6 @@ class FirstMenuList extends StatefulWidget {
 
 class _FirstMenuListState extends State<FirstMenuList> {
   late List<Map<String, dynamic>> menu;
-  final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
     super.initState();

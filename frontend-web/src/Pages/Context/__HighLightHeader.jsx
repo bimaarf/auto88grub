@@ -16,21 +16,18 @@ export const HighLightHeader = () => {
   };
 
   useEffect(() => {
-    _fetchData(); 
+    _fetchData();
   }, []);
   return (
     <>
       <div
-        className="w-full -z-10 px-20 -mb-96 shadow-red-900 shadow-xl relative top-0 overflow-hidden"
+        className="w-full -z-10 px-20 shadow-red-900 shadow-xl relative top-0 overflow-hidden h-highlight"
         style={{
           backgroundImage: `url(${bannerImg})`,
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
           backgroundPosition: "bottom right",
           backgroundSize: "cover",
-          height: "70vh", // Default height
-          borderBottomLeftRadius: "30px",
-          borderBottomRightRadius: "30px",
           // filter: "blur(10px)", // Apply blur effect to the image
         }}
       />
@@ -42,7 +39,9 @@ export const HighLightHeader = () => {
               className="md:space-y-4 text-3xl sm:text-4xl md:text-5xl font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
               {getHighlight ? (
-                <h1>{getHighlight[0].title}</h1>
+                <h1 className="font-extrabold md:text-6xl text-black/25">
+                  {getHighlight[0].title}
+                </h1>
               ) : (
                 <div className="md:container w-screen md:mx-auto space-y-3">
                   <div className="flex justify-center">

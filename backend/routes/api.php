@@ -41,10 +41,10 @@ Route::options('/sanctum/csrf-cookie', function () {
         ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 });
 
-Route::controller(AuthController::class)->group(function () {
-    Route::post('register',  'register');
-    Route::post('login', 'login');
-});
+Route::post('login', [AuthController::class, 'login']);
+// Route::controller(AuthController::class)->group(function () {
+//     Route::post('register',  'register');
+// });
 
 Route::group(['prefix' => 'car'], function () {
     Route::controller(CarController::class)->group(function () {

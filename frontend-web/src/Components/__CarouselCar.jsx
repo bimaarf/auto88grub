@@ -57,11 +57,14 @@ export const CarouselCar = () => {
             while (++i <= len) {
               rows.push(
                 <div key={i} className="flex justify-center">
-                  <img
-                    className="hover:scale-95 duration-300 cursor-pointer"
-                    src="https://www.auto88group.com/image/kind/20230704093137.png"
-                    alt=""
-                  />
+                  <div>
+                    <img
+                      className="hover:scale-95 duration-300 cursor-pointer"
+                      src="https://www.auto88group.com/image/kind/20230704093137.png"
+                      alt=""
+                    />
+                    <p>1</p>
+                  </div>
                 </div>
               );
               // if (window.innerWidth <= 768) break;

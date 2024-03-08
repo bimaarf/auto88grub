@@ -1,6 +1,7 @@
 import React from "react";
-import { CurrentFormat } from "./___CurrentFormat";
+import { CurrentXFormat } from "./___CurrentXFormat";
 import { useNavigate } from "react-router-dom";
+import { CurrentFormat } from "./___CurrentFormat";
 
 export const ListNewCar = ({ getNewCars }) => {
   const navRedirect = useNavigate();
@@ -26,7 +27,7 @@ export const ListNewCar = ({ getNewCars }) => {
               alt=""
             />
           </div>
-          <div className="p-6">
+          <div className="p-3">
             <h1 className="font-bold text-gray-800 text-sm md:text-md">
               {item.title.length > 40
                 ? item.title.slice(0, 40) + "..."
@@ -36,10 +37,7 @@ export const ListNewCar = ({ getNewCars }) => {
               {item.type.name} / {item.series.name} / {item.fuel.name}
             </p>
             <p className="text-gray-800 text-xs md:text-md font-medium line-through text-right">
-              <CurrentFormat value={item.price} />
-            </p>
-            <p className="text-gray-800 text-sm md:text-xl font-bold text-right">
-              <CurrentFormat value={item.discount} />
+              <CurrentXFormat value={item.price} />
             </p>
             <div className="flex justify-between">
               <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-gray-600">

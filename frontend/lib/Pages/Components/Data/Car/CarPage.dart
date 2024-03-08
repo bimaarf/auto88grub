@@ -4,17 +4,16 @@ import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarDetail.dart
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardImage.dart';
 import 'package:intl/intl.dart';
 
-class CardCarList extends StatefulWidget {
-  const CardCarList({Key? key}) : super(key: key);
+class CarPage extends StatefulWidget {
+  const CarPage({Key? key}) : super(key: key);
 
   @override
-  State<CardCarList> createState() => _CardCarListState();
+  State<CarPage> createState() => _CarPageState();
 }
 
-class _CardCarListState extends State<CardCarList> {
+class _CarPageState extends State<CarPage> {
   late List<Map<String, dynamic>> _dataCars;
   bool _isLoading = true;
-  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -60,63 +59,72 @@ class _CardCarListState extends State<CardCarList> {
   }
 
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const MobilRow(),
-        _isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : SizedBox(
-                height: 240,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _dataCars.length,
-                  controller: _scrollController,
-                  itemBuilder: (BuildContext context, int index) {
-                    var item = _dataCars[index];
-                    return CardCardItem(
-                      carData: item,
-                    );
-                  },
-                ),
-              ),
-      ],
-    );
-  }
-}
-
-class MobilRow extends StatelessWidget {
-  const MobilRow({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      textBaseline: TextBaseline.ideographic,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Baru ditambahkan',
-              textAlign: TextAlign.right,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(width: 4),
-            Icon(
-              Icons.new_releases,
-              size: 14,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Car'),
+        backgroundColor: Colors.black,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.notifications,
               color: Colors.white,
-            )
-          ],
-        ),
-      ],
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Notifications'),
+                    content: const Text('Notification settings here.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Close'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Settings'),
+                    content: const Text('App settings here.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Close'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: _dataCars.length,
+              itemBuilder: (BuildContext context, int index) {
+                final carData = _dataCars[index];
+                return CardCardItem(carData: carData);
+              },
+            ),
     );
   }
 }
@@ -190,43 +198,41 @@ class _CardCardItemState extends State<CardCardItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTapDown: (_) {
-          setState(() {
-            scaleValue = 0.98;
-          });
-        },
-        onTapUp: (_) {
-          setState(() {
-            scaleValue = 1.0;
-          });
-          _navigateToDetailCar(context);
-        },
-        onTapCancel: () {
-          setState(() {
-            scaleValue = 1.0;
-          });
-        },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 500),
-          transform: Matrix4.diagonal3Values(scaleValue, scaleValue, 2.0),
-          child: Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: CardWithImage(
-              imageUrl:
-                  'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-              title: widget.carData['title']!.length > 50
-                  ? widget.carData['title']!.substring(0, 50) + '...'
-                  : widget.carData['title']!,
-              subtitle: formattedPrice,
-              note: widget.carData['created_at']!,
-            ),
+    return GestureDetector(
+      onTapDown: (_) {
+        setState(() {
+          scaleValue = 0.98;
+        });
+      },
+      onTapUp: (_) {
+        setState(() {
+          scaleValue = 1.0;
+        });
+        _navigateToDetailCar(context);
+      },
+      onTapCancel: () {
+        setState(() {
+          scaleValue = 1.0;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 500),
+        transform: Matrix4.diagonal3Values(scaleValue, scaleValue, 2.0),
+        child: Container(
+          width: 200,
+          height: 200,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: CardWithImage(
+            imageUrl:
+                'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
+            title: widget.carData['title']!.length > 50
+                ? widget.carData['title']!.substring(0, 50) + '...'
+                : widget.carData['title']!,
+            subtitle: formattedPrice,
+            note: widget.carData['created_at']!,
           ),
         ),
       ),

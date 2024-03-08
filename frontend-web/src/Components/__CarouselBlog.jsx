@@ -81,19 +81,19 @@ export const CarouselBlog = ({ getBlog }) => {
                         loading="lazy"
                         alt=""
                         src={item.thumbnail}
-                        className="max-w-xs w-80 hover:opacity-60 opacity-70 transition duration-300 ease-in-out hover:scale-105 object-cover h-40 w-object-left-top"
+                        className="max-w-xs w-80 hover:opacity-60 opacity-70 transition duration-300 ease-in-out hover:scale-105 object-cover h-44 w-object-left-top"
                       />
                     </div>
                   </div>
-                  <div className="pt-5 px-7 bg-white shadow-sm">
+                  <div className="pt-5 px-7 bg-white shadow-sm h-32">
                     <h1 className="font-bold whitespace-pre-wrap text-start text-gray-800 text-sm">
                       {item.title.length > 30
                         ? item.title.slice(0, 30) + "..."
                         : item.title}
                     </h1>
                     <p className="text-gray-800 font-medium text-xs whitespace-pre-wrap text-start">
-                      {item.description.length > 50
-                        ? item.description.slice(0, 50) + "..."
+                      {item.description.length > 100
+                        ? item.description.slice(0, 100) + "..."
                         : item.description}
                     </p>
 

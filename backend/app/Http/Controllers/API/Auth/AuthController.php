@@ -64,7 +64,7 @@ class AuthController extends BaseController
             $accessToken->delete();
             return response()->json(['status' => 200, 'message' => 'Logged out successfully'], 200);
         } else {
-            return response()->json(['status' => 200, 'message' => 'No active token found'], 200);
+            return response()->json(['status' => 500, 'message' => 'No active token found'], 500);
         }
     }
 }

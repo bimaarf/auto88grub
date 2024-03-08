@@ -24,7 +24,7 @@ export const CarCredit = () => {
                 <div className="flex justify-center slide-in fade-in-left">
                   <img
                     draggable={false}
-                    loading="lazy"
+                    loading="eager"
                     src={`${process.env.REACT_APP_API}storage/${item.image}`}
                     alt=""
                   />

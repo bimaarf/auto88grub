@@ -24,6 +24,7 @@ export const Home = () => {
   const { state } = useStateContext();
   const { getNewCars, getCarPromos, getBlog, getTestimony, getSliders } = state;
   const carouselRef = useRef(null);
+
   useEffect(() => {
     const handleIntersection = (entries, observer) => {
       entries.forEach((entry) => {
@@ -50,7 +51,7 @@ export const Home = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="z-40 xl:w-11/12 lg:container sm:mx-1 lg:mx-auto mx-3 md:px-40">
+      <div className="z-40 md:w-11/12 md:container sm:mx-1 md:mx-auto mt-40 md:px-40">
         <div
           className="shadow-2xl md:rounded-badge fade-in-left mt-20"
           ref={carouselRef}>
@@ -61,7 +62,7 @@ export const Home = () => {
           )}
         </div>
       </div>
-      <div className="pb-32 bg-transparent md:container-lg md:mx-auto">
+      <div className="pb-32 bg-slate-100 md:container md:mx-auto md:mb-10">
         <div className="md:w-11/12 mx-auto mt-10 z-30 ">
           <div className="flex justify-center">
             <div
@@ -76,9 +77,9 @@ export const Home = () => {
             <CarouselCarRecomen />
           </div>
         </div>
-        <div className="my-4">
-          <BarMenu />
-        </div>
+      </div>
+    <div className="md:container overflow-hidden mb-10">
+        <div className="overflow-x-auto pb-2 w-full">{/* <BarMenu /> */}</div>
       </div>
       <div
         className="w-full -z-10 md:px-20"
@@ -110,7 +111,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="pb-32 bg-transparent md:container md:mx-auto">
+      <div className="pb-32 bg-slate-100 md:container md:mx-auto">
         <div className="w-11/12 mx-auto mt-10 z-30 ">
           <div className="flex justify-center">
             <div
@@ -144,8 +145,8 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="pb-32 bg-transparent md:container md:mx-auto">
-        <div className="w-11/12  mx-auto mt-10 z-30 ">
+      <div className="pb-32 bg-slate-100 md:container md:mx-auto">
+        <div className="mx-auto mt-10 z-30 ">
           <div className="flex justify-center">
             <div
               className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
@@ -157,7 +158,7 @@ export const Home = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-center gap-4 mt-10">
+          <div className="flex justify-center gap-4">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {getNewCars ? (
                 <ListNewCar getNewCars={getNewCars} />
@@ -178,7 +179,7 @@ export const Home = () => {
           )}
         </div>
       </div>
-      <div className="pb-32 bg-transparent">
+      <div className="pb-32 bg-slate-100">
         <div className="mt-10 z-30 ">
           <div className="relative">
             <div
@@ -196,7 +197,7 @@ export const Home = () => {
               className="md:space-y-4 text-xl whitespace-nowrap md:text-3xl text-gray-800 p- font-bold text-center"
               style={{ fontFamily: "Marko One', sans-serif" }}>
               <div
-                className="md:p-10 fade-in-left md:space-y-10 md:text-4xl lg:text-4xl element"
+                className="fade-in-left md:space-y-10 md:text-4xl lg:text-4xl element"
                 ref={carouselRef}>
                 <h1>Berita Terkini</h1>
               </div>
@@ -230,7 +231,7 @@ export const Home = () => {
                 <div className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl ">
                   <div className="flex justify-center">
                     {getTestimony ? (
-                      <CarouselTestimony getTestimony={getTestimony} />
+                      <CarouselTestimony />
                     ) : (
                       <CarouselTestimonySkeleton />
                     )}
@@ -240,7 +241,7 @@ export const Home = () => {
                       onClick={() => navRedirect("/testimoni")}
                       className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
                       <i className="fas fa-angle-down"></i>
-                      <p>Selanjutnya</p>{" "}
+                      <p>Lihat Lebih</p>{" "}
                     </div>
                   </div>
                 </div>

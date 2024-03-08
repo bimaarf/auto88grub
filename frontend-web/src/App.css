@@ -64,7 +64,20 @@
 .testimonial-content {
   width: 800px;
 }
+.h-highlight {
+  height: 70vh;
+  margin-bottom: -420px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
 @media only screen and (max-width: 600px) {
+  .h-highlight {
+    height: 25vh;
+    margin-bottom: -200px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  
+  }
   .testimonial-content {
     width: 100%;
   }
