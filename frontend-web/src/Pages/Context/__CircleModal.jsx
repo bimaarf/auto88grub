@@ -46,7 +46,7 @@ export const CircleModal = () => {
           !showBubble && setShuffledNames(shuffleArray([...data]));
           setShowBubble((prev) => !prev);
         }}
-        className="fixed z-30 scale-50 lg:scale-100 bottom-0 sm:right-0 md:right-10 cursor-pointer inline-block rounded-full duration-200 leading-normal text-white">
+        className="fixed z-30 scale-50 lg:scale-100 bottom-0 right-0 md:right-10 cursor-pointer inline-block rounded-full duration-200 leading-normal text-white">
         <div className="flex">
           <div
             className={`chat duration-500 scale-110 chat-end absolute right-10 z-30 ${

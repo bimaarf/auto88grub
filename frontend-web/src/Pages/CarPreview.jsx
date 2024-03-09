@@ -99,71 +99,71 @@ export const CarPreview = () => {
           </TECarousel>
           {getCars && (
             <>
-              <div className="border-b py-4 mt-20 w-full flex justify-between">
+              <div className="border-b border-base-300 py-4 mt-20 w-full flex justify-between">
                 <p className="font-medium text-xl">Video</p>
                 <p className="font-bold text-blue-600 text-xl">
                   Klick untuk menonton
                 </p>
               </div>
-              <div className="border-b py-4 w-full flex justify-between">
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
                 <p className="font-medium text-xl">Merk</p>
                 <p className="font-bold text-xl uppercase">
                   {getCars.brand.name}
                 </p>
               </div>
-              <div className="border-b py-4 w-full flex justify-between">
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
                 <p className="font-medium text-xl">Model</p>
                 <p className="font-bold text-xl uppercase">
                   {getCars.model.name}
                 </p>
               </div>
-              <div className="border-b py-4 w-full flex justify-between">
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
                 <p className="font-medium text-xl">Tipe</p>
                 <p className="font-bold text-xl uppercase">-</p>
               </div>
-              <div className="border-b py-4 w-full flex justify-between">
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
                 <p className="font-medium text-xl">Jenis</p>
                 <p className="font-bold text-xl uppercase">
                   {getCars.type.name}
                 </p>
               </div>
-              <div className="border-b py-4 w-full flex justify-between">
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
                 <p className="font-medium text-xl">Silinder</p>
                 <p className="font-bold text-xl uppercase">
                   {getCars.cylinder.volume}
                 </p>
               </div>
-              <div className="border-b py-4 w-full flex justify-between">
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
                 <p className="font-medium text-xl">Transmisi</p>
                 <p className="font-bold text-xl uppercase">
                   {getCars.transmission.name}
                 </p>
               </div>
-              <div className="border-b py-4 w-full flex justify-between">
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
                 <p className="font-medium text-xl">Seri</p>
                 <p className="font-bold text-xl uppercase">
                   {getCars.series.name}
                 </p>
               </div>
-              <div className="border-b py-4 w-full flex justify-between">
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
                 <p className="font-medium text-xl">Gardan</p>
                 <p className="font-bold text-xl uppercase">
                   {getCars.gear.name}
                 </p>
               </div>
-              <div className="border-b py-4 w-full flex justify-between">
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
                 <p className="font-medium text-xl">Bahan Bakar</p>
                 <p className="font-bold text-xl uppercase">
                   {getCars.fuel.name}
                 </p>
               </div>
-              <div className="border-b py-4 w-full flex justify-between">
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
                 <p className="font-medium text-xl">Warna</p>
                 <p className="font-bold text-xl uppercase">
                   {getCars.color.name}
                 </p>
               </div>
-              <h1 className="sm:text-xl mt-10 md:text-4xl w-full border-b mb-6 pb-4 border-dashed font-medium text-pretty">
+              <h1 className="sm:text-xl mt-10 md:text-4xl w-full border-b border-base-300 mb-6 pb-4 border-dashed font-medium text-pretty">
                 Deskripsi Kendaraan
               </h1>
               <p

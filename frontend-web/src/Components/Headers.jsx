@@ -207,7 +207,7 @@ export const Headers = ({ setTheme, theme }) => {
             <p></p>
             <button
               onClick={() => setNavTogleBtn(navTogleBtn ? false : true)}
-              className="py-2  px-4 fas fa-bars md:hidden rounded active:scale-95 hover:bg-gray-300 hover:bg-opacity-20 duration-300 bg-white bg-opacity-10"></button>
+              className="py-2  px-4 fas fa-bars md:hidden rounded active:scale-95  hover:bg-opacity-20 duration-300 bg-basae-300 hover:bg-base-200 bg-opacity-10"></button>
           </div>
         </div>
       </div>
