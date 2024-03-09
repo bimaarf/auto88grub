@@ -4,7 +4,28 @@ export const CircleModal = () => {
   const [showBubble, setShowBubble] = useState(false);
   const [shuffledNames, setShuffledNames] = useState([]);
 
-  const names = ["Eliana", "Dea", "Lestari", "Zulfa"];
+  const data = [
+    {
+      id: 1,
+      name: "Eliana",
+      no_telp: "6281347923588",
+    },
+    {
+      id: 2,
+      name: "Dea",
+      no_telp: "6281226032288",
+    },
+    {
+      id: 3,
+      name: "Lestari",
+      no_telp: "6281344386688",
+    },
+    {
+      id: 4,
+      name: "Zulfa",
+      no_telp: "6281344393388",
+    },
+  ];
 
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -22,7 +43,7 @@ export const CircleModal = () => {
         }`}></div>
       <label
         onClick={() => {
-          !showBubble && setShuffledNames(shuffleArray([...names]));
+          !showBubble && setShuffledNames(shuffleArray([...data]));
           setShowBubble((prev) => !prev);
         }}
         className="fixed z-30 scale-50 lg:scale-100 bottom-0 sm:right-0 md:right-10 cursor-pointer inline-block rounded-full duration-200 leading-normal text-white">
@@ -52,18 +73,18 @@ export const CircleModal = () => {
                         showBubble ? "rotate-0 " : "animate-spin"
                       } duration-100 text-white text-2xl bg-green-600 p-2 rounded-full px-3`}></i>
                   </div>
-                  {shuffledNames.map((name) => (
+                  {shuffledNames.map((item, key) => (
                     <div
-                      key={name}
+                      key={key}
                       onClick={() =>
                         window.open(
-                          `https://api.whatsapp.com/send/?phone=6281347923588&text=Halo+${name}%2C+Saya+melihat+dari+website+untuk+mobil+&type=phone_number&app_absent=0`,
+                          `https://api.whatsapp.com/send/?phone=${item.no_telp}&text=Halo+${item.name}%2C+Saya+melihat+dari+website+untuk+mobil+&type=phone_number&app_absent=0`,
                           "_blank"
                         )
                       }
                       className="flex justify-end items-center gap-2 hover:scale-95 duration-300">
                       <p className="whitespace-nowrap gap-4 skeleton bg-orange-800/85 text-white px-2 rounded text-md font-medium">
-                        {name}
+                        {item.name}
                       </p>
                       <i className="fa-brands fa-whatsapp text-green-500 text-2xl"></i>
                     </div>
