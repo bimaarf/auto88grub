@@ -22,14 +22,16 @@ export const CircleModal = () => {
         }`}></div>
       <label
         onClick={() => {
-          setShuffledNames(shuffleArray([...names]));
+          !showBubble && setShuffledNames(shuffleArray([...names]));
           setShowBubble((prev) => !prev);
         }}
         className="fixed z-30 scale-50 lg:scale-100 bottom-0 sm:right-0 md:right-10 cursor-pointer inline-block rounded-full duration-200 leading-normal text-white">
         <div className="flex">
           <div
-            className={`chat duration-500 chat-end relative bottom-72 -right-32 z-30 ${
-              showBubble ? "opacity-125" : " opacity-0"
+            className={`chat duration-500 scale-110 chat-end absolute right-10 z-30 ${
+              showBubble
+                ? "opacity-125 bottom-64 "
+                : " opacity-0 -bottom-72 scale-y-0"
             }`}>
             <div className="chat-bubble w-96 bg-transparent">
               <div className="text-gray-700">

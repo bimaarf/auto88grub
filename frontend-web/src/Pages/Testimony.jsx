@@ -20,7 +20,8 @@ export const Testimony = () => {
         window.innerHeight + window.scrollY >=
           document.body.offsetHeight + 100 &&
         !loading &&
-        !reachedEnd
+        !reachedEnd &&
+        getTestimony
       ) {
         loadMoreTestimony();
       }
@@ -69,8 +70,8 @@ export const Testimony = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="md:container mx-auto relative mb-44 bg-white rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto testimonial-content  ">
-        <ul className="menu bg-white mb-4 border lg:menu-horizontal rounded-box">
+      <div className="md:container mx-auto relative mb-44 bg-base-300/40 rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto testimonial-content  ">
+        <ul className="menu bg-base-300/40 mb-4 border border-base-300 lg:menu-horizontal rounded-box">
           <li>
             <p>
               <i className="fa-solid fa-credit-card"></i>

@@ -51,7 +51,7 @@ export const Home = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="z-40 md:w-11/12 md:container sm:mx-1 md:mx-auto mt-40 md:px-40">
+      <div className="z-40 md:w-11/12 md:container sm:mx-1 md:mx-auto mt-40 md:px-40 bg-transparent">
         <div
           className="shadow-2xl md:rounded-badge fade-in-left mt-20"
           ref={carouselRef}>
@@ -62,11 +62,11 @@ export const Home = () => {
           )}
         </div>
       </div>
-      <div className="pb-32 bg-slate-100 md:container md:mx-auto md:mb-10">
+      <div className="pb-32 bg-base-300/20 mt-40 rounded-t-xl md:container md:mx-auto md:mb-10">
         <div className="md:w-11/12 mx-auto mt-10 z-30 ">
           <div className="flex justify-center">
             <div
-              className="md:space-y-4 sm:text-xl whitespace-nowrap text-gray-800 p-4 font-bold text-center"
+              className="md:space-y-4 sm:text-xl whitespace-nowrap p-4 font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
               <div className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl">
                 <h1>Mobil Rekomendasi</h1>
@@ -78,10 +78,10 @@ export const Home = () => {
           </div>
         </div>
       </div>
-    <div className="md:container overflow-hidden mb-10">
+      <div className="md:container overflow-hidden mb-10">
         <div className="overflow-x-auto pb-2 w-full">{/* <BarMenu /> */}</div>
       </div>
-      <div
+      {/* <div
         className="w-full -z-10 md:px-20"
         style={{
           backgroundImage: `url(${bannerImg})`,
@@ -89,33 +89,33 @@ export const Home = () => {
           backgroundPosition: "top",
           backgroundSize: "cover",
           height: "50vh",
-        }}>
+        }}></div> */}
+
+      <div
+        className="md:space-y-4 sm:text-xl whitespace-nowrap md:container md:mx-auto p-4 font-bold text-center"
+        style={{ fontFamily: "'Marko One', sans-serif" }}>
         <div
-          className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4 font-bold text-center"
-          style={{ fontFamily: "'Marko One', sans-serif" }}>
-          <div
-            className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element"
-            ref={carouselRef}>
-            <h1>Mobil Berdasarkan Jenis</h1>
-          </div>
-          <div className="grid grid-cols-1 gap-4">
-            <CarouselCar />
-          </div>
-          <div
-            onClick={() => navRedirect("/mobil")}
-            className="text-xs text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
-            <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
-              <i className="fas fa-angle-down"></i>
-              <p>Selengkapnya</p>
-            </div>
+          className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element"
+          ref={carouselRef}>
+          <h1>Mobil Berdasarkan Jenis</h1>
+        </div>
+        <div className="grid grid-cols-1 gap-4">
+          <CarouselCar />
+        </div>
+        <div
+          onClick={() => navRedirect("/mobil")}
+          className="text-xs text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1">
+          <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
+            <i className="fas fa-angle-down"></i>
+            <p>Selengkapnya</p>
           </div>
         </div>
       </div>
-      <div className="pb-32 bg-slate-100 md:container md:mx-auto">
-        <div className="w-11/12 mx-auto mt-10 z-30 ">
+      <div className="pb-32 bg-base-100">
+        <div className="w-11/12 mx-auto mt-10 z-30 slate-100 md:container md:mx-auto">
           <div className="flex justify-center">
             <div
-              className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
+              className="md:space-y-4 sm:text-xl whitespace-nowrap  p-4  font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
               <div
                 className="md:p-10 slide-in fade-in-left md:space-y-10 md:text-4xl lg:text-4xl element"
@@ -145,11 +145,11 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="pb-32 bg-slate-100 md:container md:mx-auto">
-        <div className="mx-auto mt-10 z-30 ">
+      <div className="pb-32 bg-base-300/20 w-full">
+        <div className="md:mx-auto sm:mx-2 mt-10 z-30 slate-100 md:container">
           <div className="flex justify-center">
             <div
-              className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
+              className="md:space-y-4 sm:text-xl whitespace-nowrap  p-4  font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
               <div
                 className="md:p-10 slide-in fade-in-left md:space-y-10 md:text-4xl lg:text-4xl element"
@@ -179,70 +179,66 @@ export const Home = () => {
           )}
         </div>
       </div>
-      <div className="pb-32 bg-slate-100">
-        <div className="mt-10 z-30 ">
-          <div className="relative">
+      <div className="z-30 bg-base-300/20">
+        <div className="relative">
+          {/* <div
+            className="w-full md:p-20 sm:p-2"
+            style={{
+              backgroundImage: `url(${bannerImg})`,
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "top",
+              backgroundSize: "cover",
+              height: "50vh",
+            }}></div> */}
+
+          <div
+            ref={carouselRef}
+            className="md:space-y-4 md:container md:mx-auto text-xl whitespace-nowrap md:text-3xl font-bold text-center mb-10"
+            style={{ fontFamily: "Marko One', sans-serif" }}>
             <div
-              className="w-ful md:px-20 px-2 mt-10 -mb-80"
-              style={{
-                backgroundImage: `url(${bannerImg})`,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "top",
-                backgroundSize: "cover",
-                height: "40vh",
-              }}
-            />
-            <div
-              ref={carouselRef}
-              className="md:space-y-4 text-xl whitespace-nowrap md:text-3xl text-gray-800 p- font-bold text-center"
-              style={{ fontFamily: "Marko One', sans-serif" }}>
-              <div
-                className="fade-in-left md:space-y-10 md:text-4xl lg:text-4xl element"
-                ref={carouselRef}>
-                <h1>Berita Terkini</h1>
-              </div>
-              <div className="flex justify-center mx-4">
-                {getBlog ? (
-                  <CarouselBlog getBlog={getBlog} />
-                ) : (
-                  <CarouselBlogSkeleton />
-                )}
-              </div>
-              {/* <div className="text-xs mt-20 text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
+              className="fade-in-left md:space-y-10 md:text-4xl lg:text-4xl element"
+              ref={carouselRef}>
+              <h1>Berita Terkini</h1>
+            </div>
+            <div className="flex justify-center">
+              {getBlog ? (
+                <CarouselBlog getBlog={getBlog} />
+              ) : (
+                <CarouselBlogSkeleton />
+              )}
+            </div>
+            {/* <div className="text-xs mt-20 text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1 ">
                 <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
                   <i className="fas fa-angle-down"></i>
                   <p>Selengkapnya</p>
                 </div>
               </div> */}
-            </div>
           </div>
-          <div className="w-full md:px-20 mt-20">
+          <div className="w-full md:px-20 bg-base-100">
             <div
               ref={carouselRef}
               s
-              className="md:space-y-4 sm:text-xl whitespace-nowrap md:text-4xl text-gray-800 p-4 lg:text-4xl font-bold text-center"
+              className="md:space-y-4 md:container md:mx-auto sm:text-xl whitespace-nowrap md:text-4xl p-4 lg:text-4xl font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
-              <div className="md:p-10 md:space-y-10">
-                <div
-                  className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element"
-                  ref={carouselRef}>
-                  <h1>Testimoni</h1>
+              <div
+                className="md:p-10 md:text-4xl lg:text-4xl element"
+                ref={carouselRef}>
+                <h1>Testimoni</h1>
+              </div>
+              <div className="md:space-y-10 md:text-4xl lg:text-4xl ">
+                <div className="flex justify-center">
+                  {getTestimony ? (
+                    <CarouselTestimony />
+                  ) : (
+                    <CarouselTestimonySkeleton />
+                  )}
                 </div>
-                <div className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl ">
-                  <div className="flex justify-center">
-                    {getTestimony ? (
-                      <CarouselTestimony />
-                    ) : (
-                      <CarouselTestimonySkeleton />
-                    )}
-                  </div>
-                  <div className="text-xs text-red-600 cursor-pointer mt-2 font-bold flex justify-center items-center gap-1">
-                    <div
-                      onClick={() => navRedirect("/testimoni")}
-                      className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
-                      <i className="fas fa-angle-down"></i>
-                      <p>Lihat Lebih</p>{" "}
-                    </div>
+                <div className="text-xs text-red-600 cursor-pointer mt-2 font-bold flex justify-center items-center gap-1">
+                  <div
+                    onClick={() => navRedirect("/testimoni")}
+                    className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
+                    <i className="fas fa-angle-down"></i>
+                    <p>Lihat Lebih</p>{" "}
                   </div>
                 </div>
               </div>

@@ -6,7 +6,7 @@ export const ListCarPromoSkeleton = () => {
       {Array.from({ length: window.innerWidth <= 768 ? 2 : 6 }, (_, index) => (
         <div
           key={index}
-          className="block active:scale-90 hover:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+          className="block active:scale-90 hover:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-base-200 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
           <div className="overflow-hidden bg-cover bg-no-repeat">
             <div className="overflow-hidden bg-cover flex bg-no-repeat justify-center items-center">
               <img
@@ -27,7 +27,7 @@ export const ListCarPromoSkeleton = () => {
               <p className="skeleton h-2 w-1/2 mt-2"></p>
             </div>
             <div className="flex justify-between">
-              <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium text-gray-600">
+              <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium text-pretty">
                 <div className="flex justify-start text-xs col-span-2 items-center gap-2">
                   <p className="skeleton h-2 w-4 mt-2"></p>
                   <p className="skeleton h-2 w-10 mt-2"></p>
@@ -37,7 +37,7 @@ export const ListCarPromoSkeleton = () => {
                   <p className="skeleton h-2 w-10 mt-2"></p>
                 </div>
               </div>
-              <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium text-gray-600">
+              <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium text-pretty">
                 <div className="flex justify-start text-xs col-span-2 items-center gap-2">
                   <p className="skeleton h-2 w-4 mt-2"></p>
                   <p className="skeleton h-2 w-10 mt-2"></p>

@@ -3,7 +3,7 @@ import React from "react";
 export const Footer = () => {
   return (
     <div>
-      <div className="bg-black/80 md:px-20 md:py-10 pt-4 rounded-t-badge">
+      <div className="bg-black/90 md:px-20 md:py-10 pt-4 rounded-t-badge">
         <div className="md:flex justify-between items-start md:gap-10 mx-3">
           <div className="text-white pt-2">
             <h1 className="font-medium">Alamat</h1>

@@ -57,7 +57,7 @@ export const CarouselCarRecomen = () => {
               rows.push(
                 <div
                   key={i}
-                  className="block border-transparent border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full mb-3 max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                  className="block border-transparent border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full mb-3 max-w-[32rem] rounded-lg bg-base-300 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                   <div className="relative overflow-hidden bg-cover bg-no-repeat">
                     <img
                       className="rounded-t-lg"
@@ -66,13 +66,13 @@ export const CarouselCarRecomen = () => {
                     />
                   </div>
                   <div className="p-6">
-                    <h1 className="font-bold text-gray-800 text-sm md:text-md">
+                    <h1 className="font-bold text-pretty text-sm md:text-md">
                       DAIHATSU ALL NEW AYLA (WHITE) TIP....
                     </h1>
-                    <p className="text-gray-800 font-light text-xs md:text-md text-left">
+                    <p className="text-pretty font-light text-xs md:text-md text-left">
                       HATCHBACK / - / PREMIUM
                     </p>
-                    <p className="text-gray-800 text-sm md:text-xl font-bold text-right">
+                    <p className="text-pretty text-sm md:text-xl font-bold text-right">
                       Rp 1x4.000.000
                     </p>
                     <div className="flex justify-between">
@@ -111,7 +111,7 @@ export const CarouselCarRecomen = () => {
               rows.push(
                 <div
                   key={i}
-                  className="block border-transparent border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full mb-3 max-w-[32rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                  className="block border-transparent border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full mb-3 max-w-[32rem] rounded-lg bg-base-300 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                   <div className="relative overflow-hidden bg-cover bg-no-repeat">
                     <img
                       className="rounded-t-lg"
@@ -120,13 +120,13 @@ export const CarouselCarRecomen = () => {
                     />
                   </div>
                   <div className="p-6">
-                    <h1 className="font-bold text-gray-800 text-sm md:text-md">
+                    <h1 className="font-bold text-pretty text-sm md:text-md">
                       DAIHATSU ALL NEW AYLA (WHITE) TIP....
                     </h1>
-                    <p className="text-gray-800 font-light text-xs md:text-md text-left">
+                    <p className="text-pretty font-light text-xs md:text-md text-left">
                       HATCHBACK / - / PREMIUM
                     </p>
-                    <p className="text-gray-800 text-sm md:text-xl font-bold text-right">
+                    <p className="text-pretty text-sm md:text-xl font-bold text-right">
                       Rp 1x4.000.000
                     </p>
                     <div className="flex justify-between">

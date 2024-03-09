@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import bannerImg from "../../Images/Banner/red_wavy_with_halftone_background.jpg";
+import bgDark from "../../Images/Background/automobile_.jpg";
+import bgLight from "../../Images/Background/abstract-blue-geometric-shapes-background.jpg";
 import axios from "axios";
 
-export const HighLightHeader = () => {
+export const HighLightHeader = ({ theme }) => {
   const [getHighlight, setHighLight] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
 
@@ -21,25 +22,25 @@ export const HighLightHeader = () => {
   return (
     <>
       <div
-        className="w-full -z-10 px-20 shadow-red-900 shadow-xl relative top-0 overflow-hidden h-highlight"
+        className="w-full -z-10 px-20 relative top-0 overflow-hidden h-highlight"
         style={{
-          backgroundImage: `url(${bannerImg})`,
+          backgroundImage: `url(${theme && theme === "black" && bgDark})`,
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
-          backgroundPosition: "bottom right",
+          backgroundPosition: "top left",
           backgroundSize: "cover",
-          // filter: "blur(10px)", // Apply blur effect to the image
+          // filter: "blur(1px)", // Apply blur effect to the image
         }}
       />
 
       <div className="absolute inset-0 mt-20 flex justify-center">
         <div className="md:p-20 p-8 md:rounded-xl">
-          <div className="text-black/80 flex justify-center items-center">
+          <div className="flex justify-center items-center">
             <div
               className="md:space-y-4 text-3xl sm:text-4xl md:text-5xl font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
               {getHighlight ? (
-                <h1 className="font-extrabold md:text-6xl text-black/25">
+                <h1 className="font-extrabold md:text-6xl text-pretty opacity-25">
                   {getHighlight[0].title}
                 </h1>
               ) : (
@@ -52,7 +53,7 @@ export const HighLightHeader = () => {
             </div>
           </div>
           {getHighlight ? (
-            <p className="md:mt-10 mt-4 sm:text-xs md:text-lg font-medium text-black/80 text-center whitespace-pre-wrap">
+            <p className="md:mt-10 mt-4 sm:text-xs md:text-xl font-medium text-pretty opacity-80 text-center whitespace-pre-wrap">
               {getHighlight[0].subtitle}
               {/* Pencarian unit mobil dan transaksional akan kami arahkan ke mobbi.
               Kenalan dulu yuk! */}

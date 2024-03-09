@@ -9,8 +9,8 @@ export const Visit = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-1 md:mx-auto shadow">
-        <h1 className="text-xl md:text-5xl m-4 w-full border-b mb-6 pb-4 border-dashed font-semibold text-gray-800">
+      <div className="md:container mb-44 bg-base-200/40 rounded-xl -mt-20 p-10 md:p-20 sm:mx-1 md:mx-auto shadow">
+        <h1 className="text-xl md:text-5xl m-4 w-full border-b mb-6 pb-4 border-dashed font-semibold text-pretty">
           Lokasi Auto Show 88
         </h1>
         <div className="md:flex items-start gap-16 p-4">
@@ -32,7 +32,7 @@ export const Visit = () => {
             </p>
           </div>
         </div>
-        <h1 className="text-xl md:text-5xl m-4 w-full border-b mb-6 pb-4 border-dashed font-semibold text-gray-800">
+        <h1 className="text-xl md:text-5xl m-4 w-full border-b mb-6 pb-4 border-dashed font-semibold text-pretty">
           Lokasi Auto Mobil88
         </h1>
         <div className="md:flex items-start gap-16 p-4">
@@ -55,7 +55,7 @@ export const Visit = () => {
           </div>
           {/* column 2 */}
         </div>
-        <h1 className="text-xl md:text-5xl m-4 w-full border-b mb-6 pb-4 border-dashed font-semibold text-gray-800">
+        <h1 className="text-xl md:text-5xl m-4 w-full border-b mb-6 pb-4 border-dashed font-semibold text-pretty">
           Lokasi Autoplaza 88
         </h1>
         <div className="md:flex items-start gap-16 p-4">

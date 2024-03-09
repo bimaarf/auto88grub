@@ -12,8 +12,8 @@ export const TradeIns = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto shadow">
-        <h1 className="text-xl md:text-5xl w-full border-b mb-6 pb-4 border-dashed font-semibold text-red-800">
+      <div className="md:container mb-44 bg-base-200/40 rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto shadow">
+        <h1 className="w-full border-b mb-6 pb-2 border-dashed font-semibold text-red-800">
           Tukar Tambah
         </h1>
         <div className="grid sm:grid-cols-1 space-y-40 md:space-y-0 md:grid-cols-4">

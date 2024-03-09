@@ -12,7 +12,7 @@ export const Terms = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="md:container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto shadow">
+      <div className="md:container mb-44 bg-base-200/40 rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto shadow">
         {getCompanyProfile &&
           getCompanyProfile.term.map((item, key) => (
             <>

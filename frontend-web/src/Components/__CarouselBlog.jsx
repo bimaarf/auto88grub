@@ -62,8 +62,8 @@ export const CarouselBlog = ({ getBlog }) => {
                 <div
                   key={key}
                   onClick={() => window.open(item.link)}
-                  className="block active:scale-95 cursor-pointer duration-300 rounded  max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                  <div className="flex justify-center mt-4">
+                  className="block active:scale-95 cursor-pointer duration-300 rounded  max-w-[32rem] bg-base-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                  <div className="flex justify-center ">
                     <div className="relative bg-fixed rounded bg-gradient-to-r from-black bg-black max-w-xs overflow-hidden bg-cover bg-no-repeat">
                       <div className="z-10 absolute m-2">
                         <div className="flex w-full justify-start items-center gap-2 bg-gradient-to-r from-black bg-black/25 bg-opacity-50 p-1 rounded-xl">
@@ -81,19 +81,19 @@ export const CarouselBlog = ({ getBlog }) => {
                         loading="lazy"
                         alt=""
                         src={item.thumbnail}
-                        className="max-w-xs w-80 hover:opacity-60 opacity-70 transition duration-300 ease-in-out hover:scale-105 object-cover h-44 w-object-left-top"
+                        className="max-w-xs w-60 hover:opacity-60 opacity-70 transition duration-300 ease-in-out hover:scale-105 object-cover h-28 w-object-left-top"
                       />
                     </div>
                   </div>
-                  <div className="pt-5 px-7 bg-white shadow-sm h-32">
-                    <h1 className="font-bold whitespace-pre-wrap text-start text-gray-800 text-sm">
+                  <div className="pt-5 px-7 bg-base-100 rounded shadow-sm h-28">
+                    <h1 className="font-bold whitespace-pre-wrap text-start text-pretty text-sm">
                       {item.title.length > 30
                         ? item.title.slice(0, 30) + "..."
                         : item.title}
                     </h1>
-                    <p className="text-gray-800 font-medium text-xs whitespace-pre-wrap text-start">
-                      {item.description.length > 100
-                        ? item.description.slice(0, 100) + "..."
+                    <p className="text-pretty font-medium text-xs whitespace-pre-wrap text-start">
+                      {item.description.length > 50
+                        ? item.description.slice(0, 50) + "..."
                         : item.description}
                     </p>
 

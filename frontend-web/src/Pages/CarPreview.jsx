@@ -6,6 +6,7 @@ import bannerImg from "../Images/Banner/red_wavy_with_halftone_background.jpg";
 import { fetchCarPreview } from "./Service/__FetchCarPreview";
 import { Footer } from "../Components/Footer";
 import { CarouselCarRecomen } from "../Components/__CarouselCarRecomen";
+import { HighLightHeader } from "./Context/__HighLightHeader";
 
 export const CarPreview = () => {
   const location = useLocation();
@@ -41,47 +42,9 @@ export const CarPreview = () => {
   }, []);
   return (
     <>
-      <div
-        className="w-full -z-10 px-20 relative top-0 overflow-hidden "
-        style={{
-          backgroundImage: `url(${bannerImg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "bottom right",
-          backgroundSize: "cover",
-          height: "60vh",
-          marginBottom: "-17vh",
-          // filter: "blur(2px)", // Apply blur effect to the image
-        }}>
-        <div className="absolute inset-0 mt-10 flex justify-center">
-          <div className="md:p-20 p-8 md:rounded-xl">
-            <div className="text-black/80 flex justify-center items-center">
-              <div
-                className="md:space-y-4 text-3xl sm:text-4xl md:text-5xl font-bold text-center"
-                style={{ fontFamily: "'Marko One', sans-serif" }}>
-                {getCars.title ? (
-                  <h1>{getCars.title}</h1>
-                ) : (
-                  <div className="container w-screen mx-auto space-y-3">
-                    <div className="flex justify-center">
-                      <p className="h-6 w-10/12 skeleton bg-opacity-50"></p>
-                    </div>
-                    <div className="flex justify-center">
-                      <p className="h-6 w-96 skeleton bg-opacity-50"></p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-            <p className="md:mt-10 mt-4 sm:text-xs md:text-lg font-medium text-black/80 text-center">
-              Pencarian unit mobil dan transaksional akan kami arahkan ke mobbi.
-              Kenalan dulu yuk!
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="bg-white pb-32 md:container sm:mx-2 md:mx-auto">
-        <div className="w-11/12  mx-auto mt-10 z-30 relative">
+      <HighLightHeader />
+      <div className="bg-base-200/40 py-20 rounded-xl mb-10 md:container sm:mx-2 md:mx-auto">
+        <div className="w-11/12 mx-auto mt-10 z-30 relative">
           <TECarousel showControls showIndicators ride="carousel">
             <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
               <TECarouselItem
@@ -93,7 +56,7 @@ export const CarPreview = () => {
                       rows.push(
                         <div
                           key={i}
-                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-base-200/40 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                           <div className="relative overflow-hidden bg-cover bg-no-repeat">
                             <img
                               src="https://www.auto88group.com/image/car/1775/20240201113209.jpg"
@@ -117,7 +80,7 @@ export const CarPreview = () => {
                       rows.push(
                         <div
                           key={i}
-                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-base-200/40 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                           <div className="relative overflow-hidden bg-cover bg-no-repeat">
                             <img
                               src="https://www.auto88group.com/image/car/1775/20240201113209.jpg"
@@ -200,11 +163,11 @@ export const CarPreview = () => {
                   {getCars.color.name}
                 </p>
               </div>
-              <h1 className="sm:text-xl mt-10 md:text-4xl w-full border-b mb-6 pb-4 border-dashed font-medium text-gray-800">
+              <h1 className="sm:text-xl mt-10 md:text-4xl w-full border-b mb-6 pb-4 border-dashed font-medium text-pretty">
                 Deskripsi Kendaraan
               </h1>
               <p
-                className="whitespace-pre-wrap prose"
+                className="whitespace-pre-wrap prose text-pretty"
                 style={{ whiteSpace: "pre-wrap" }}>
                 {getCars.description}
               </p>
@@ -215,7 +178,7 @@ export const CarPreview = () => {
             <div className="w-11/12 mx-auto mt-10 z-30 ">
               <div className="flex justify-center">
                 <div
-                  className="md:space-y-4 sm:text-xl whitespace-nowrap  text-gray-800 p-4  font-bold text-center"
+                  className="md:space-y-4 sm:text-xl whitespace-nowrap  text-pretty p-4  font-bold text-center"
                   style={{ fontFamily: "'Marko One', sans-serif" }}>
                   <div className="md:p-10 md:space-y-10 md:text-3xl slide-in fade-in-left">
                     <h1 className="slide-in fade-in-left">Mobil Yang Serupa</h1>

@@ -5,7 +5,30 @@ import { Carousel, IconButton } from "@material-tailwind/react";
 export const CarouselCar = () => {
   return (
     <>
-      <Carousel
+      <div className="carousel rounded-box w-full">
+        {(function (rows, i, len) {
+          while (++i <= len) {
+            rows.push(
+              <div
+                key={i}
+                className="flex select-none justify-center carousel-item w-2/12 gap-2">
+                <div className="mx-2">
+                  <img
+                    draggable={false}
+                    className="hover:scale-95 duration-300 cursor-pointer"
+                    src="https://www.auto88group.com/image/kind/20230704093137.png"
+                    alt=""
+                  />
+                  <p className="bg-base-300 rounded font-medium">S-Cors</p>
+                </div>
+              </div>
+            );
+            // if (window.innerWidth <= 768) break;
+          }
+          return rows;
+        })([], 0, 10)}
+      </div>
+      {/* <Carousel
         loop
         autoplay
         prevArrow={({ handlePrev }) => (
@@ -63,7 +86,7 @@ export const CarouselCar = () => {
                       src="https://www.auto88group.com/image/kind/20230704093137.png"
                       alt=""
                     />
-                    <p>1</p>
+                    <p className="bg-black/10 rounded text-gray-800">S-Cors</p>
                   </div>
                 </div>
               );
@@ -72,16 +95,19 @@ export const CarouselCar = () => {
             return rows;
           })([], 0, 6)}
         </div>
-        <div className="relative grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+        <div className="relative overflow-hidden grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
           {(function (rows, i, len) {
             while (++i <= len) {
               rows.push(
                 <div key={i} className="flex justify-center">
-                  <img
-                    className="hover:scale-95 duration-300 cursor-pointer"
-                    src="https://www.auto88group.com/image/kind/20230704093137.png"
-                    alt=""
-                  />
+                  <div>
+                    <img
+                      className="hover:scale-95 duration-300 cursor-pointer"
+                      src="https://www.auto88group.com/image/kind/20230704093137.png"
+                      alt=""
+                    />
+                    <p className="bg-black/10 rounded text-gray-800">S-Cors</p>
+                  </div>
                 </div>
               );
               // if (window.innerWidth <= 768) break;
@@ -89,7 +115,7 @@ export const CarouselCar = () => {
             return rows;
           })([], 0, 6)}
         </div>
-      </Carousel>
+      </Carousel> */}
     </>
   );
 };

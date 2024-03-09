@@ -11,14 +11,15 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TopBarProgress from "react-topbar-progress-indicator";
 import "./App.css";
-import { Footer } from "./Components/Footer";
 import { Headers } from "./Components/Headers";
 import { About } from "./Pages/About";
+import { BlogPreview } from "./Pages/BlogPreview";
 import { Car } from "./Pages/Car";
 import { CarCredit } from "./Pages/CarCredit";
 import { CarPreview } from "./Pages/CarPreview";
 import { Career } from "./Pages/Career";
 import { Consultation } from "./Pages/Consultation";
+import { CircleModal } from "./Pages/Context/__CircleModal";
 import { FAQ } from "./Pages/FAQ";
 import { Home } from "./Pages/Home";
 import { Promo } from "./Pages/Promo";
@@ -27,9 +28,6 @@ import { Testimony } from "./Pages/Testimony";
 import { TradeIns } from "./Pages/TradeIns";
 import { Visit } from "./Pages/Visit";
 import { StateProvider } from "./Providers/StateProvider";
-import { CircleModal } from "./Pages/Context/__CircleModal";
-import patterImage from "./Images/Background/pattern.png";
-import { BlogPreview } from "./Pages/BlogPreview";
 axios.defaults.baseURL = process.env.REACT_APP_API;
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 axios.defaults.headers.post["Content-Type"] =
@@ -48,12 +46,17 @@ function App() {
       0: "#b91c1c",
     },
   });
+  const [theme, setTheme] = useState(
+    secureLocalStorage.getItem("theme")
+      ? secureLocalStorage.getItem("theme")
+      : "black"
+  );
   return (
     <>
       <ToastContainer autoClose={1000} hideProgressBar={true} theme="dark" />
       <Router>
         <StateProvider>
-          <Headers />
+          <Headers setTheme={setTheme} theme={theme} />
           <CustomSwitch>
             <Route path="/" exact element={<Home />} />
             <Route path="/promo" element={<Promo />} />

@@ -12,8 +12,8 @@ export const Consultation = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="container mb-44 bg-white rounded-xl -mt-20 p-10 md:p-20 mx-auto shadow">
-        <h1 className="text-gray-800 font-medium border-b mb-4 pb-2">
+      <div className="container mb-44 bg-base-200/40 rounded-xl -mt-20 p-10 md:p-20 mx-auto shadow">
+        <h1 className="w-full border-b mb-6 pb-2 border-dashed font-semibold text-red-800">
           Panduan Konsultasi
         </h1>
 
