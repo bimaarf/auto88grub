@@ -40,6 +40,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Company\Term' => 'App\Policies\Company\TermPolicy',
         'App\Models\Company\TradeIn' => 'App\Policies\Company\TradeInPolicy',
         'App\Models\Company\VisitUs' => 'App\Policies\Company\VisitUsPolicy',
+        'App\Models\Company\PrivacyPolicy' => 'App\Policies\Company\PrivacyPolicyPolicy',
 
         'App\Models\Description\Category' => 'App\Policies\Description\CategoryPolicy',
         'App\Models\Description\Detail' => 'App\Policies\Description\DetailPolicy',

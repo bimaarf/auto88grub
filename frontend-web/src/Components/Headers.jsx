@@ -182,6 +182,14 @@ export const Headers = ({ setTheme, theme }) => {
                       <p className="whitespace-nowrap">Kunjungi Kami</p>
                     </div>
                   </li>
+                  <li>
+                    <div
+                      onClick={() => navRedirect("/kebijakan-privasi")}
+                      className="flex justify-start items-center gap-1   hover:text-red-700 font-medium text-sm">
+                      <i className="fas fa-shield"></i>
+                      <p className="whitespace-nowrap">Kebijakan Privasi</p>
+                    </div>
+                  </li>
                 </ul>
               </div>
               <div

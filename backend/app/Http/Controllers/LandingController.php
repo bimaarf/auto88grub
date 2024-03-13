@@ -9,6 +9,7 @@ use App\Models\Company\Credit;
 use App\Models\Company\Term;
 use App\Models\Company\TradeIn;
 use App\Models\Company\VisitUs;
+use App\Models\Company\PrivacyPolicy;
 use App\Models\Gallery\Slider;
 use App\Models\HighLight;
 use Illuminate\Http\Request;
@@ -48,6 +49,10 @@ class LandingController extends Controller
     {
         return VisitUs::all();
     }
+    private function privacyPolicy()
+    {
+        return PrivacyPolicy::all();
+    }
     public function background(Request $request) {
         $validator = Validator::make($request->all(), [
             'image' => 'required|image|mimes:jpeg,jpg,png,webp',
@@ -83,6 +88,7 @@ class LandingController extends Controller
         $result['term'] = $this->term();
         $result['about'] = $this->about();
         $result['visit'] = $this->visit();
+        $result['privacy_policy'] = $this->privacyPolicy();
         return $result;
     }
 
