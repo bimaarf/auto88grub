@@ -1,3 +1,4 @@
+// StateProvider.js
 import React, {
   createContext,
   useCallback,
@@ -96,6 +97,7 @@ const StateProvider = ({ children }) => {
       const allCars = await fetchCars(pageAllCar);
       setState((prevState) => ({
         ...prevState,
+        prevCars: prevState.getAllCars,
         getAllCars: allCars,
       }));
     } catch (error) {
@@ -108,7 +110,7 @@ const StateProvider = ({ children }) => {
       const testimonyData = await fetchTestimony(pageTestimony);
       setState((prevState) => ({
         ...prevState,
-        prevTestimony: prevState.getTestimony, // Save previous testimony data
+        prevTestimony: prevState.getTestimony,
         getTestimony: testimonyData,
       }));
     } catch (error) {

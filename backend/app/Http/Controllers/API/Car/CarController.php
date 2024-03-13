@@ -71,6 +71,7 @@ class CarController extends Controller
         return $hotBrands;
     }
 
+
     public function filter(Request $request)
     {
         $input = $request->all();
@@ -95,13 +96,19 @@ class CarController extends Controller
             $query->where('price', '<=', $input['price']);
         }
 
+        // Get the perPage value from the request, default to 10 if not provided
         $perPage = $request->input('perPage', 10);
+
+        // Use Laravel's paginate method to paginate the results
         $cars = $query->paginate($perPage);
+
+        // Transform the collection if needed
         $cars->getCollection()->transform(function ($car) {
             $car->title = $car->slug;
             $car->slug = Str::slug($car->title);
             return $car;
         });
+
         return $cars;
     }
 

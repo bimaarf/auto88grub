@@ -26,11 +26,11 @@ export const Career = () => {
           <div
             id="tabpanel1"
             role="tabpanel"
-            className="tab-content bg-base-100 border-base-300 rounded-box p-6">
+            className="tab-content bg-base-100 border-b border-base-300ase-300 rounded-box p-6">
             <div className="collapse bg-base-200 bg-opacity-20">
               <input defaultChecked type="checkbox" />
               <div className="collapse-title text-md font-medium">
-                <p className=" border-b pb-2">Admin Keuangan</p>
+                <p className=" border-b border-base-300 pb-2">Admin Keuangan</p>
               </div>
               <div className="collapse-content text-sky-700">
                 <div className="md:flex sm:space-y-4 md:space-y-0 justify-start items-center gap-10">
@@ -52,7 +52,7 @@ export const Career = () => {
             <div className="collapse bg-base-200 bg-opacity-20 mt-4">
               <input defaultChecked type="checkbox" />
               <div className="collapse-title text-md font-medium">
-                <p className=" border-b pb-2">Operator Cuci & Salon Mobil</p>
+                <p className=" border-b border-base-300 pb-2">Operator Cuci & Salon Mobil</p>
               </div>
               <div className="collapse-content text-sky-700">
                 <div className="md:flex sm:space-y-4 md:space-y-0 justify-start items-center gap-10">
@@ -74,7 +74,7 @@ export const Career = () => {
             <div className="collapse bg-base-200 bg-opacity-20 mt-4">
               <input defaultChecked type="checkbox" />
               <div className="collapse-title text-md font-medium">
-                <p className=" border-b pb-2">Marketing</p>
+                <p className=" border-b border-base-300 pb-2">Marketing</p>
               </div>
               <div className="collapse-content text-sky-700">
                 <div className="md:flex sm:space-y-4 md:space-y-0 justify-start items-center gap-10">

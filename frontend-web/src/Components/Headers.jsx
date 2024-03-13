@@ -3,6 +3,7 @@ import { SidebarMenu } from "./__SidebarMenu";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HomeMarquee } from "../Pages/Context/__HomeMarquee";
 import secureLocalStorage from "react-secure-storage";
+import { BottomNav } from "./__BottomNav";
 
 export const Headers = ({ setTheme, theme }) => {
   const [navTogleBtn, setNavTogleBtn] = useState(false);
@@ -23,8 +24,11 @@ export const Headers = ({ setTheme, theme }) => {
   return (
     <>
       <HomeMarquee />
-      <div className="p-4 lg:px-10 sticky top-0 z-50 *:backdrop-blur-0 even:backdrop:shadow-lg backdrop-contrast-200 backdrop-filter backdrop-opacity-0">
-        <div className="lg:container lg:mx-auto bg-base-100 whitespace-nowrap">
+      <div
+        className={`p-4 lg:px-10 sticky top-0 z-50 bg-base-100 odd:shadow-lg ${
+          theme === "black" && "border-b border-base-200"
+        } *:backdrop-blur-0 even:backdrop:shadow-lg backdrop-contrast-200 backdrop-filter backdrop-opacity-0`}>
+        <div className="lg:container lg:mx-auto whitespace-nowrap">
           <div className="flex justify-between items-center">
             <label className="swap swap-rotate hover:bg-pink-600 hover:bg-opacity-25 rounded-xl p-1 scale-75 active:scale-90 duration-200">
               <input
@@ -110,7 +114,7 @@ export const Headers = ({ setTheme, theme }) => {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="dropdown-content z-[1] menu p-2 shadow-xl bg-white text-gray-700  rounded-box w-52">
+                  className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-300 text-pre rounded-box w-52">
                   <li>
                     <div
                       onClick={() => navRedirect("/konsultasi")}
@@ -153,7 +157,7 @@ export const Headers = ({ setTheme, theme }) => {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="dropdown-content z-[1] menu p-2 shadow-xl bg-white text-gray-700  rounded-box w-52">
+                  className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-300 text-pre rounded-box w-52">
                   <li>
                     <div
                       onClick={() => navRedirect("/syarat-dan-ketentuan")}
@@ -211,6 +215,13 @@ export const Headers = ({ setTheme, theme }) => {
           </div>
         </div>
       </div>
+      <BottomNav
+        handleTheme={handleTheme}
+        theme={theme}
+        navTogleBtn={navTogleBtn}
+        setNavTogleBtn={setNavTogleBtn}
+        navRedirect={navRedirect}
+      />
     </>
   );
 };

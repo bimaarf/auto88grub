@@ -22,7 +22,7 @@ export const HighLightHeader = ({ theme }) => {
   return (
     <>
       <div
-        className="w-full -z-10 px-20 relative top-0 overflow-hidden h-highlight"
+        className="w-full -z-40 px-20 relative top-0 overflow-hidden h-highlight"
         style={{
           backgroundImage: `url(${theme && theme === "black" && bgDark})`,
           backgroundRepeat: "no-repeat",

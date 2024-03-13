@@ -8,8 +8,8 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
   return (
     <>
       <div
-        className={`fixed overflow-y-auto lg:hidden top-10  h-screen z-50 p-4 duration-300 ease-in-out bg-base-100 shadow-xl xl:w-64
-        ${navTogleBtn ? "left-0" : "-left-80   overflow-hidden"}
+        className={`fixed overflow-y-auto lg:hidden top-10 h-screen z-40 p-4 duration-300 ease-in-out bg-base-100 shadow-xl xl:w-64
+        ${navTogleBtn ? "-left-4" : "-left-80   overflow-hidden"}
         `}>
         <div className="xl:fixed left-5 h-full space-y-3">
           <div
@@ -17,7 +17,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
               navRedirect("/");
               setNavTogleBtn(false);
             }}
-            className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+            className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
             <div className="w-1/12">
               <i className="fas fa-home"></i>
             </div>
@@ -33,7 +33,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
               navRedirect("/promo");
               setNavTogleBtn(false);
             }}
-            className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+            className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
             <div className="w-1/12">
               <i className="fas fa-percentage"></i>
             </div>
@@ -49,7 +49,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
               navRedirect("/mobil");
               setNavTogleBtn(false);
             }}
-            className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+            className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
             <div className="w-1/12">
               <i className="fas fa-car"></i>
             </div>
@@ -65,7 +65,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
               navRedirect("/testimoni");
               setNavTogleBtn(false);
             }}
-            className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+            className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
             <div className="w-1/12">
               <i className="fas fa-car"></i>
             </div>
@@ -97,7 +97,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                   navRedirect("/testimoni");
                   setNavTogleBtn(false);
                 }}
-                className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+                className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
                 <div className="w-1/12">
                   <i className="fas fa-book"></i>
                 </div>
@@ -113,7 +113,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                   navRedirect("/tukar-tambah");
                   setNavTogleBtn(false);
                 }}
-                className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+                className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
                 <div className="w-1/12">
                   <i className="fas fa-book"></i>
                 </div>
@@ -129,7 +129,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                   navRedirect("/kredit-mobil");
                   setNavTogleBtn(false);
                 }}
-                className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+                className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
                 <div className="w-1/12">
                   <i className="fas fa-book"></i>
                 </div>
@@ -156,7 +156,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                   navRedirect("/syarat-dan-ketentuan");
                   setNavTogleBtn(false);
                 }}
-                className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+                className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
                 <div className="w-1/12">
                   <i className="fas fa-book"></i>
                 </div>
@@ -172,7 +172,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                   navRedirect("/tentang-kami");
                   setNavTogleBtn(false);
                 }}
-                className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+                className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
                 <div className="w-1/12">
                   <i className="fas fa-building"></i>
                 </div>
@@ -188,7 +188,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                   navRedirect("/kunjungi-kami");
                   setNavTogleBtn(false);
                 }}
-                className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+                className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
                 <div className="w-1/12">
                   <i className="fas fa-phone"></i>
                 </div>
@@ -205,7 +205,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                 navRedirect("/FAQ");
                 setNavTogleBtn(false);
               }}
-              className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+              className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
               <div className="w-1/12">
                 <i className="fas fa-question"></i>
               </div>
@@ -221,7 +221,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                 navRedirect("/karir");
                 setNavTogleBtn(false);
               }}
-              className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+              className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
               <div className="w-1/12">
                 <i className="fas fa-link"></i>
               </div>
@@ -235,7 +235,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
           </div>
           {/* {secureLocalStorage.getItem("auth_token") && (
             <>
-              <div className="text-pretty w-52 mt-10 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+              <div className="text-pretty w-52 mt-10 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
                 <div className="w-1/12">
                   <i className="fa-solid fa-user-gear"></i>
                 </div>
@@ -246,7 +246,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                   Author
                 </h1>
               </div>
-              <div className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+              <div className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
                 <div className="w-1/12"></div>
                 <div
                   onClick={() => navRedirect("/author/profile")}
@@ -257,7 +257,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                   <p>Akun Saya</p>
                 </div>
               </div>
-              <div className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+              <div className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
                 <div className="w-1/12"></div>
                 <div
                   onClick={() => navRedirect("/author/category")}
@@ -268,7 +268,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                   <p className="-ml-1">Kelola Kategori</p>
                 </div>
               </div>
-              <div className="text-pretty w-52 hover:bg-neutral-300 hover:bg-opacity-20 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+              <div className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
                 <div className="w-1/12"></div>
                 <div
                   onClick={() => navRedirect("/author/post")}

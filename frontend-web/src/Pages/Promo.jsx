@@ -79,7 +79,10 @@ export const Promo = () => {
                   <p>Filter Mobil</p>
                 </div>
               </div>
-              <input type="checkbox" defaultChecked />
+              <input
+                type="checkbox"
+                defaultChecked={window.innerWidth <= 768 ? false : true}
+              />
               <div className="collapse-content  space-y-4">
                 <div className="space-y-2">
                   {/* <TESelect data={dataPrice} /> */}

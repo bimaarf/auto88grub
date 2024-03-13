@@ -45,6 +45,7 @@ export const Home = () => {
     const elements = document.querySelectorAll(".slide-in");
     elements.forEach((element) => observer.observe(element));
 
+    // window.scrollTo(0, 0);
     return () => observer.disconnect();
   }, []);
 
@@ -62,7 +63,7 @@ export const Home = () => {
           )}
         </div>
       </div>
-      <div className="pb-32 bg-base-300/20 mt-40 rounded-t-xl md:container md:mx-auto md:mb-10">
+      <div className="bg-base-300/20 mt-40 rounded-t-xl md:container md:mx-auto">
         <div className="md:w-11/12 mx-auto mt-10 z-30 ">
           <div className="flex justify-center">
             <div
@@ -111,7 +112,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="pb-32 bg-base-100">
+      <div className="mb-10 bg-base-100">
         <div className="w-11/12 mx-auto mt-10 z-30 slate-100 md:container md:mx-auto">
           <div className="flex justify-center">
             <div
@@ -145,7 +146,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="pb-32 bg-base-300/20 w-full">
+      <div className="mb-10 bg-base-300/20 w-full">
         <div className="md:mx-auto sm:mx-2 mt-10 z-30 slate-100 md:container">
           <div className="flex justify-center">
             <div

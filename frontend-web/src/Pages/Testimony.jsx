@@ -14,6 +14,7 @@ export const Testimony = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -37,7 +38,7 @@ export const Testimony = () => {
   const loadMoreTestimony = async () => {
     setLoading(true);
     const nextPage = {
-      page: pageTestimony.page++,
+      page: pageTestimony.page + 1,
       perPage: pageTestimony.perPage,
       lastPage: pageTestimony.lastPage,
     };
@@ -61,17 +62,17 @@ export const Testimony = () => {
         setReachedEnd(true);
       }
     } catch (error) {
-      // console.error("Error fetching testimonies:", error);
+      // Handle error
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
     <>
       <HighLightHeader />
-      <div className="md:container mx-auto relative mb-44 bg-base-300/40 rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto testimonial-content  ">
-        <ul className="menu bg-base-300/40 mb-4 border border-base-300 lg:menu-horizontal rounded-box">
+      <div className="md:container mx-auto relative mb-44 bg-base-200/40 rounded-xl -mt-10 p-4 md:p-10 sm:mx-1 md:mx-auto testimonial-content">
+        <ul className="menu bg-base-200/40 mb-4 border border-base-300 lg:menu-horizontal rounded-box">
           <li>
             <p>
               <i className="fa-solid fa-credit-card"></i>
@@ -83,9 +84,7 @@ export const Testimony = () => {
           </li>
         </ul>
         {getTestimony ? (
-          <>
-            <TestimonyList getTestimony={getTestimony} />
-          </>
+          <TestimonyList getTestimony={getTestimony} />
         ) : (
           <div className="flex justify-center">
             <TestimonyListSkeleton />
@@ -94,30 +93,29 @@ export const Testimony = () => {
         {loading && <TestimonyListSkeleton />}
         <div className="text-xs text-red-600 cursor-pointer mt-2 font-bold flex justify-center items-center gap-1">
           {loading ? (
-            <div className="flex justify-center items-center gap-1 w-fit border-b  duration-300 p-3">
+            <div className="flex justify-center items-center gap-1 w-fit border-b duration-300 p-3">
               <i className="fas fa-spinner animate-spin"></i>
               <p>Loading</p>
             </div>
           ) : (
             <>
               {getTestimony &&
-                getTestimony.data &&
-                getTestimony.data.length < getTestimony.total && (
-                  <div
-                    onClick={loadMoreTestimony}
-                    className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
-                    <i className="fas fa-angle-down"></i>
-                    <p>Selanjutnya</p>
-                  </div>
-                )}
+              getTestimony.data &&
+              getTestimony.data.length < getTestimony.total ? (
+                <div
+                  onClick={loadMoreTestimony}
+                  className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
+                  <i className="fas fa-angle-down"></i>
+                  <p>Selanjutnya</p>
+                </div>
+              ) : (
+                <div className="text-center text-gray-500 py-2">
+                  No more testimonies to load
+                </div>
+              )}
             </>
           )}
         </div>
-        {reachedEnd && (
-          <div className="text-center text-gray-500 py-2">
-            No more testimonies to load
-          </div>
-        )}
       </div>
     </>
   );
