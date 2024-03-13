@@ -1,88 +1,86 @@
 import React, { useEffect, useState } from "react";
-
-import { useLocation } from "react-router-dom";
-import { TECarousel, TECarouselItem } from "tw-elements-react";
-import bannerImg from "../Images/Banner/red_wavy_with_halftone_background.jpg";
-import { fetchBlogPreview } from "./Service/__FetchBlogPreview";
+import { HighLightHeader } from "./Context/__HighLightHeader";
 import { Footer } from "../Components/Footer";
+import { useStateContext } from "../Providers/StateProvider";
+import { useLocation, useNavigate } from "react-router-dom";
+import { fetchDetailVacancy } from "./Service/__FetchDetailVacancy";
 
 export const CareerPreview = () => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-
-  const fadeInOnScroll = (ref) => {
-    const element = ref.current;
-    if (element) {
-      const elementTop = element.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-      if (elementTop < windowHeight) {
-        element.classList.add("fade-in-visible");
-      } else {
-        element.classList.remove("fade-in-visible");
-      }
-    }
-  };
-  const [getPost, setPost] = useState("");
-
-  const __GET_BLOG = async () => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const slug = searchParams.get("slug");
-
-    if (slug) {
-      setPost(await fetchBlogPreview(slug));
-    }
-  };
-
   useEffect(() => {
     window.scrollTo(0, 0);
-    __GET_BLOG();
+  }, []);
+  const location = useLocation();
+  const { state } = useStateContext();
+  const { getCompanyProfile } = state;
+  const navRedirect = useNavigate();
+  const [getData, setData] = useState("");
+  const __GET_DATA_ = async () => {
+    try {
+      const response = await fetchDetailVacancy(location.search.split("=")[1]);
+      console.log(response);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    __GET_DATA_();
   }, []);
   return (
     <>
-      <div
-        className="w-full -z-10 px-20 relative top-0 overflow-hidden "
-        style={{
-          backgroundImage: `url(${bannerImg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "bottom right",
-          backgroundSize: "cover",
-          height: "60vh",
-          marginBottom: "-17vh",
-          // filter: "blur(2px)", // Apply blur effect to the image
-        }}>
-        <div className="absolute inset-0 mt-10 flex justify-center">
-          <div className="md:p-20 p-8 md:rounded-xl">
-            <div className="text-black/80 flex justify-center items-center">
-              <div
-                className="md:space-y-4 text-3xl sm:text-4xl md:text-5xl font-bold text-center"
-                style={{ fontFamily: "'Marko One', sans-serif" }}>
-                {getPost.title ? (
-                  <h1>{getPost.title}</h1>
-                ) : (
-                  <div className="container w-screen mx-auto space-y-3">
-                    <div className="flex justify-center">
-                      <p className="h-6 w-10/12 skeleton bg-opacity-50"></p>
-                    </div>
-                    <div className="flex justify-center">
-                      <p className="h-6 w-96 skeleton bg-opacity-50"></p>
+      <HighLightHeader />
+      <div className="md:container slide-in fade-in-left mb-44 bg-base-100 border border-base-300  rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto">
+        <div role="tablist" className="tabs tabs-lifted">
+          <input
+            type="radio"
+            name="my_tabs_1"
+            id="tab1"
+            role="tab"
+            className="tab"
+            aria-controls="tabpanel1"
+            aria-label="Umum"
+            checked
+            onChange={(e) => e.preventDefault()}
+          />
+          <div
+            id="tabpanel1"
+            role="tabpanel"
+            className="tab-content bg-base-100 border-b border-base-300 space-y-2 rounded-box p-6">
+            {getCompanyProfile &&
+              getCompanyProfile.vacancies.map((item, key) => (
+                <div
+                  key={key}
+                  className="collapse bg-base-200/40 bg-opacity-20">
+                  <input defaultChecked type="checkbox" />
+                  <div className="collapse-title text-md font-medium">
+                    <p className=" border-b border-base-300 pb-2">
+                      {item.name}
+                    </p>
+                  </div>
+                  <div className="collapse-content">
+                    <div className="md:flex space-y-4 md:space-y-0 justify-start items-center gap-10">
+                      <div className="flex w-1/4 justify-start text-sky-700 text-sm whitespace-nowrap items-center gap-4">
+                        <i className="fas w-1/12 fa-shopping-bag"></i>
+                        <p className="w-3/4">{item.department}</p>
+                      </div>
+                      <div className="flex w-1/4 justify-start text-sky-700 text-sm whitespace-nowrap items-center gap-4">
+                        <i className="fas w-1/12 fa-signal "></i>
+                        <p className="w-3/4">{item.experience}</p>
+                      </div>
+                      <div className="flex w-1/4 justify-start text-sky-700 text-sm whitespace-nowrap items-center gap-4">
+                        <i className="fas w-1/12 fa-map-marker-alt"></i>
+                        <p className="w-3/4">{item.placement}</p>
+                      </div>
+                      <div
+                        onClick={() =>
+                          navRedirect("/karir/preview?uid=" + item.id)
+                        }
+                        className="flex glass bg-base-200 w-fit float-right text-pretty active:scale-95 duration-300 px-4 py-2 rounded cursor-pointer justify-start text-sm whitespace-nowrap items-center gap-4">
+                        <i className="fas w-1/12 fa-paper-plane"></i>
+                        <p className="w-3/4">Apply</p>
+                      </div>
                     </div>
                   </div>
-                )}
-              </div>
-            </div>
-            <p className="md:mt-10 mt-4 sm:text-xs md:text-lg font-medium text-black/80 text-center">
-              Pencarian unit mobil dan transaksional akan kami arahkan ke mobbi.
-              Kenalan dulu yuk!
-            </p>
+                </div>
+              ))}
           </div>
-        </div>
-      </div>
-      <div className="bg-white pb-32 md:container sm:mx-2 md:mx-auto shadow mb-10">
-        <div className="w-11/12 mx-auto mt-10 z-30 relative p-20">
-          {getPost && (
-            <div className="prose whitespace-pre-line">{getPost.content}</div>
-          )}
         </div>
       </div>
       <Footer />

@@ -20,6 +20,7 @@ use App\Http\Controllers\API\Pages\CarPromoController;
 use App\Http\Controllers\API\Pages\FAQController;
 use App\Http\Controllers\API\Pages\SliderController;
 use App\Http\Controllers\API\Pages\TestimonyController;
+use App\Http\Controllers\API\Pages\VacancyController;
 use App\Http\Controllers\LandingController;
 use Illuminate\Support\Facades\Route;
 
@@ -73,7 +74,9 @@ Route::group(['prefix' => 'blog'], function () {
 Route::controller(TestimonyController::class)->group(function () {
     Route::get('testimonial/show', 'show');
 });
-
+Route::controller(VacancyController::class)->group(function () {
+    Route::get('vacancy/show/{jobId}', 'show');
+});
 Route::controller(LandingController::class)->group(function () {
     Route::get('highlight/show', 'hlShow');
     Route::get('slider/show', 'sliderShow');

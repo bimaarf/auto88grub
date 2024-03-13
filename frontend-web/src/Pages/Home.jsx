@@ -63,7 +63,7 @@ export const Home = () => {
           )}
         </div>
       </div>
-      <div className="bg-base-300/20 mt-40 rounded-t-xl md:container md:mx-auto">
+      <div className="mt-40 rounded-t-xl md:container md:mx-auto">
         <div className="md:w-11/12 mx-auto mt-10 z-30 ">
           <div className="flex justify-center">
             <div
@@ -91,24 +91,25 @@ export const Home = () => {
           backgroundSize: "cover",
           height: "50vh",
         }}></div> */}
-
-      <div
-        className="md:space-y-4 sm:text-xl whitespace-nowrap md:container md:mx-auto p-4 font-bold text-center"
-        style={{ fontFamily: "'Marko One', sans-serif" }}>
+      <div className="bg-base-300/10">
         <div
-          className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element"
-          ref={carouselRef}>
-          <h1>Mobil Berdasarkan Jenis</h1>
-        </div>
-        <div className="grid grid-cols-1 gap-4">
-          <CarouselCar />
-        </div>
-        <div
-          onClick={() => navRedirect("/mobil")}
-          className="text-xs text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1">
-          <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
-            <i className="fas fa-angle-down"></i>
-            <p>Selengkapnya</p>
+          className="md:space-y-4 sm:text-xl whitespace-nowrap md:container md:mx-auto p-4 font-bold text-center"
+          style={{ fontFamily: "'Marko One', sans-serif" }}>
+          <div
+            className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl element"
+            ref={carouselRef}>
+            <h1>Mobil Berdasarkan Jenis</h1>
+          </div>
+          <div className="grid grid-cols-1 gap-4">
+            <CarouselCar />
+          </div>
+          <div
+            onClick={() => navRedirect("/mobil")}
+            className="text-xs text-red-600 cursor-pointer font-bold flex justify-center items-center gap-1">
+            <div className="flex justify-center items-center gap-1 w-fit border-b hover:text-red-700 duration-300 hover:bg-black hover:bg-opacity-5 p-3">
+              <i className="fas fa-angle-down"></i>
+              <p>Selengkapnya</p>
+            </div>
           </div>
         </div>
       </div>
@@ -146,7 +147,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <div className="mb-10 bg-base-300/20 w-full">
+      <div className="mb-10 bg-base-300/10 w-full">
         <div className="md:mx-auto sm:mx-2 mt-10 z-30 slate-100 md:container">
           <div className="flex justify-center">
             <div
@@ -180,7 +181,7 @@ export const Home = () => {
           )}
         </div>
       </div>
-      <div className="z-30 bg-base-300/20">
+      <div className="z-30 bg-base-300/10">
         <div className="relative">
           {/* <div
             className="w-full md:p-20 sm:p-2"

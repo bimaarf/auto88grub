@@ -10,6 +10,7 @@ use App\Models\Company\Term;
 use App\Models\Company\TradeIn;
 use App\Models\Company\VisitUs;
 use App\Models\Company\PrivacyPolicy;
+use App\Models\Job\Vacancy;
 use App\Models\Gallery\Slider;
 use App\Models\HighLight;
 use Illuminate\Http\Request;
@@ -44,6 +45,10 @@ class LandingController extends Controller
     private function about()
     {
         return AboutUs::all();
+    }
+    private function vacancy()
+    {
+        return Vacancy::all();
     }
     private function visit()
     {
@@ -89,6 +94,7 @@ class LandingController extends Controller
         $result['about'] = $this->about();
         $result['visit'] = $this->visit();
         $result['privacy_policy'] = $this->privacyPolicy();
+        $result['vacancies'] = $this->vacancy();
         return $result;
     }
 

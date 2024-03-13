@@ -29,6 +29,7 @@ import { TradeIns } from "./Pages/TradeIns";
 import { Visit } from "./Pages/Visit";
 import { StateProvider } from "./Providers/StateProvider";
 import { PrivacyPolicy } from "./Pages/PrivacyPolicy";
+import { CareerPreview } from "./Pages/CareerPreview";
 axios.defaults.baseURL = process.env.REACT_APP_API;
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 axios.defaults.headers.post["Content-Type"] =
@@ -73,6 +74,7 @@ function App() {
             <Route path="/kunjungi-kami" element={<Visit />} />
             <Route path="/FAQ" element={<FAQ />} />
             <Route path="/karir" element={<Career />} />
+            <Route path="/karir/preview" element={<CareerPreview />} />
             <Route path="/kebijakan-privasi" element={<PrivacyPolicy />} />
           </CustomSwitch>
           {/* <Footer /> */}

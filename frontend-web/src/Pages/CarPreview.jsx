@@ -43,7 +43,7 @@ export const CarPreview = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="bg-base-200/40 py-20 rounded-xl mb-10 md:container sm:mx-2 md:mx-auto">
+      <div className="bg-base-200/10 py-20 rounded-xl mb-10 md:container sm:mx-2 md:mx-auto">
         <div className="w-11/12 mx-auto mt-10 z-30 relative">
           <TECarousel showControls showIndicators ride="carousel">
             <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">

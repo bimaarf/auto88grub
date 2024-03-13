@@ -49,17 +49,14 @@ class VacancyResource extends Resource
                     ->unique(Vacancy::class, 'experience', ignoreRecord: true),
 
                 Forms\Components\TextInput::make('placement')
-                    ->required()
-                    ->unique(Vacancy::class, 'placement', ignoreRecord: true),
+                    ->required(),
 
                 Forms\Components\RichEditor::make('description')
                     ->required()
-                    ->unique(Vacancy::class, 'description', ignoreRecord: true)
                     ->columnSpan(2),
 
                 Forms\Components\RichEditor::make('condition')
                     ->required()
-                    ->unique(Vacancy::class, 'condition', ignoreRecord: true)
                     ->columnSpan(2),
             ])->columns(2);
     }

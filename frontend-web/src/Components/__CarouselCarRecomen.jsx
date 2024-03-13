@@ -57,7 +57,7 @@ export const CarouselCarRecomen = () => {
               rows.push(
                 <div
                   key={i}
-                  className="block border-transparent border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full mb-3 max-w-[32rem] rounded-lg bg-base-300/100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                  className="block border-base-200 border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full mb-3 max-w-[32rem] rounded-lg bg-base-300/10 border-base-200">
                   <div className="relative overflow-hidden bg-cover bg-no-repeat">
                     <img
                       className="rounded-t-lg h-32 w-full object-cover"
@@ -111,7 +111,7 @@ export const CarouselCarRecomen = () => {
               rows.push(
                 <div
                   key={i}
-                  className="block border-transparent border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full mb-3 max-w-[32rem] rounded-lg bg-base-300/100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                  className="block border-base-200 border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full mb-3 max-w-[32rem] rounded-lg bg-base-300/10 border-base-200">
                   <div className="relative overflow-hidden bg-cover bg-no-repeat">
                     <img
                       className="rounded-t-lg h-32 w-full object-cover"

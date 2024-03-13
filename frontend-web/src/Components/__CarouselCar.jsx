@@ -19,7 +19,7 @@ export const CarouselCar = () => {
                     src="https://www.auto88group.com/image/kind/20230704093137.png"
                     alt=""
                   />
-                  <p className="bg-base-300 rounded font-medium">S-Cors</p>
+                  <p className="bg-base-200 rounded font-medium">S-Cors</p>
                 </div>
               </div>
             );
