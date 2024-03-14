@@ -5,8 +5,10 @@ import { HighLightHeader } from "./Context/__HighLightHeader";
 import { fetchDetailVacancy } from "./Service/__FetchDetailVacancy";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { LoadingScreen } from "../Components/___LoadingScreen";
 
 export const CareerPreview = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const [getData, setData] = useState({});
   const [imageFormat, setImageFormat] = useState(null);
@@ -53,7 +55,6 @@ export const CareerPreview = () => {
 
   const handleStore = async (e) => {
     e.preventDefault();
-
     if (typeof formInput.fresh_graduate !== "boolean") {
       toast.error("The fresh graduate field must be true or false.");
       return;
@@ -79,6 +80,7 @@ export const CareerPreview = () => {
     data.append("file", fileInput);
 
     try {
+      setIsLoading(true);
       const jobId = location.search.split("=")[1];
       await axios.get("sanctum/csrf-cookie");
       const response = await axios.post(
@@ -90,11 +92,14 @@ export const CareerPreview = () => {
     } catch (error) {
       console.error("Error sending data:", error);
       toast.error("Server error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
+      {isLoading && <LoadingScreen />}
       <HighLightHeader />
       <div className="md:container slide-in fade-in-left mb-44 bg-base-100 border border-base-300 rounded-xl -mt-20 p-4 md:p-20 sm:mx-2 md:mx-auto">
         <div className="flex justify-between items-start">

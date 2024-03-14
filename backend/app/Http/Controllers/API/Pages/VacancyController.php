@@ -41,7 +41,7 @@ class VacancyController extends Controller
         if ($request->hasFile('file')) {
             $_file = $request->file('file');
             $_filename = time() . '-' . $_file->getClientOriginalName();
-            $_directory = 'app/public/gallery-sliders-attachments';
+            $_directory = 'app/public/job-vacancy-application';
             $_file->move(storage_path($_directory), $_filename);
             $_data->file = 'job-vacancy-application/' . $_filename;
         }
