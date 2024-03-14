@@ -8,7 +8,7 @@ export const FAQ = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="md:container mb-44 bg-base-200/40 rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto shadow">
+      <div className="md:container mb-44 bg-base-200/40 rounded-xl -mt-20 p-4 md:p-20 sm:mx-2 md:mx-auto shadow">
         <div role="tablist" className="tabs tabs-lifted slide-in fade-in-left">
           <input
             checked

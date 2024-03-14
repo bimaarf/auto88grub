@@ -76,6 +76,7 @@ Route::controller(TestimonyController::class)->group(function () {
 });
 Route::controller(VacancyController::class)->group(function () {
     Route::get('vacancy/show/{jobId}', 'show');
+    Route::post('vacancy/application/{applyId}', 'apply');
 });
 Route::controller(LandingController::class)->group(function () {
     Route::get('highlight/show', 'hlShow');
