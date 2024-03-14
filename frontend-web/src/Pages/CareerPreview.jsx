@@ -90,8 +90,7 @@ export const CareerPreview = () => {
       );
       if (response.status === 200) toast.success("Successfully submitted");
     } catch (error) {
-      console.error("Error sending data:", error);
-      toast.error("Server error");
+      toast.error("Masukkan data dengan benar");
     } finally {
       setIsLoading(false);
     }
@@ -101,7 +100,7 @@ export const CareerPreview = () => {
     <>
       {isLoading && <LoadingScreen />}
       <HighLightHeader />
-      <div className="md:container slide-in fade-in-left mb-44 bg-base-100 border border-base-300 rounded-xl -mt-20 p-4 md:p-20 sm:mx-2 md:mx-auto">
+      <div className="md:container slide-in fade-in-left mb-44 bg-base-200 border border-base-300 rounded-xl -mt-20 p-4 md:p-20 sm:mx-2 md:mx-auto">
         <div className="flex justify-between items-start">
           <div role="tablist" className="tabs tabs-lifted md:w-2/3">
             <input
@@ -158,7 +157,7 @@ export const CareerPreview = () => {
                   name="name"
                   id="name"
                   placeholder="e.g. Tiara Hanifa, S.H"
-                  className="form-control px-2 py-2 w-full outline-none border border-base-200 focus:border-sky-500 rounded"
+                  className="form-control bg-base-200 px-2 py-2 w-full outline-none border border-base-200 focus:border-sky-500 rounded"
                 />
               </div>
               <div className="space-y-2">
@@ -170,7 +169,7 @@ export const CareerPreview = () => {
                   name="phone_number"
                   id="phone_number"
                   placeholder="e.g. 08XXXXXXXX"
-                  className="form-control px-2 py-2 w-full outline-none border border-base-200 focus:border-sky-500 rounded"
+                  className="form-control bg-base-200 px-2 py-2 w-full outline-none border border-base-200 focus:border-sky-500 rounded"
                 />
               </div>
               <div className="space-y-2">
@@ -182,7 +181,7 @@ export const CareerPreview = () => {
                   name="email"
                   id="email"
                   placeholder="e.g. example@gmail.com"
-                  className="form-control px-2 py-2 w-full outline-none border border-base-200 focus:border-sky-500 rounded"
+                  className="form-control bg-base-200 px-2 py-2 w-full outline-none border border-base-200 focus:border-sky-500 rounded"
                 />
               </div>
               <div className="space-y-2">
@@ -196,7 +195,7 @@ export const CareerPreview = () => {
                   name="domicile"
                   id="domicile"
                   placeholder="e.g. Pontianak"
-                  className="form-control px-2 py-2 w-full outline-none border border-base-200 focus:border-sky-500 rounded"
+                  className="form-control bg-base-200 px-2 py-2 w-full outline-none border border-base-200 focus:border-sky-500 rounded"
                 />
               </div>
               <div className="space-y-2">
@@ -208,7 +207,7 @@ export const CareerPreview = () => {
                   name="education"
                   id="education"
                   placeholder="e.g. D3"
-                  className="form-control px-2 py-2 w-full outline-none border border-base-200 focus:border-sky-500 rounded"
+                  className="form-control bg-base-200 px-2 py-2 w-full outline-none border border-base-200 focus:border-sky-500 rounded"
                 />
               </div>
               <div className="space-y-2">
@@ -220,7 +219,7 @@ export const CareerPreview = () => {
                   name="major"
                   id="major"
                   placeholder="e.g. Akuntansi / Sistem Informasi / Dll"
-                  className="form-control px-2 py-2 w-full outline-none border border-base-200 focus:border-sky-500 rounded"
+                  className="form-control bg-base-200 px-2 py-2 w-full outline-none border border-base-200 focus:border-sky-500 rounded"
                 />
               </div>
               <div className="space-y-2 flex items-baseline flex-row-reverse gap-2">

@@ -11,9 +11,9 @@ export const Headers = ({ setTheme, theme }) => {
   const location = useLocation();
   const handleTheme = (e) => {
     if (e.target.checked) {
-      setTheme("black");
+      setTheme("sunset");
     } else {
-      setTheme("emerald");
+      setTheme("pastel");
     }
   };
   useEffect(() => {
@@ -26,7 +26,7 @@ export const Headers = ({ setTheme, theme }) => {
       <HomeMarquee />
       <div
         className={`p-4 lg:px-10 sticky top-0 z-50 bg-base-100 odd:shadow-lg ${
-          theme === "black" && "border-b border-base-200"
+          theme === "sunset" && "border-b border-base-200"
         } *:backdrop-blur-0 even:backdrop:shadow-lg backdrop-contrast-200 backdrop-filter backdrop-opacity-0`}>
         <div className="lg:container lg:mx-auto whitespace-nowrap">
           <div className="flex justify-between items-center">
@@ -34,7 +34,7 @@ export const Headers = ({ setTheme, theme }) => {
               <input
                 onChange={handleTheme}
                 type="checkbox"
-                checked={theme === "black" ? true : false}
+                checked={theme === "sunset" ? true : false}
               />
               {/* sun icon */}
               <svg

@@ -21,7 +21,7 @@ export const Car = () => {
 
   const handleLoadMoreAllCar = async () => {
     setLoadFetch(true);
-    const nextPage = { page: pageAllCar.page, perPage: pageAllCar.perPage + 6 };
+    const nextPage = { page: pageAllCar.page + 1, perPage: pageAllCar.perPage };
     setState((prevState) => ({
       ...prevState,
       pageAllCar: nextPage,
@@ -314,6 +314,7 @@ export const Car = () => {
             </div>
           </div>
         </div>
+        <button onClick={handleLoadMoreAllCar}>ANJENG</button>
       </div>
     </>
   );

@@ -103,7 +103,7 @@ const StateProvider = ({ children }) => {
     } catch (error) {
       console.error("Error fetching new cars:", error);
     }
-  }, [pageAllCar]);
+  }, [pageAllCar, setState]);
 
   const getTestimony = useCallback(async () => {
     try {
@@ -120,13 +120,13 @@ const StateProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await getTestimony();
-      await getBlog();
-      await getCarPromos();
-      await getNewCars();
-      await getAllCars();
       await getSliders();
       await getCompanyProfile();
+      await getAllCars();
+      await getBlog();
+      await getTestimony();
+      await getCarPromos();
+      await getNewCars();
     };
 
     fetchData();
