@@ -68,6 +68,7 @@ export const Promo = () => {
       await GET_ALL_CAR();
     }
     fetchData();
+    window.scrollTo(0, 0);
   }, []);
 
   const GET_ALL_CAR = async () => {

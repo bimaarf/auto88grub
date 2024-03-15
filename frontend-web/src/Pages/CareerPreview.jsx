@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Footer } from "../Components/Footer";
 import { HighLightHeader } from "./Context/__HighLightHeader";
@@ -6,6 +6,7 @@ import { fetchDetailVacancy } from "./Service/__FetchDetailVacancy";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { LoadingScreen } from "../Components/___LoadingScreen";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export const CareerPreview = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -95,6 +96,12 @@ export const CareerPreview = () => {
       setIsLoading(false);
     }
   };
+  const [veriCapcha, setVeriCapcha] = useState(false);
+
+  const verifyCallback = (e) => {
+    setVeriCapcha(true);
+  };
+  const recaptchaRef = useRef(null);
 
   return (
     <>
@@ -271,10 +278,22 @@ export const CareerPreview = () => {
                   onChange={handleInputFile}
                 />
               </div>
+              <div className="flex justify-end items-center w-full">
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  className="m-2 grecaptcha-badge"
+                  sitekey="6LcarQQiAAAAAE36V_8MOsw4zM-BIfAMdHLKZDoa"
+                  onChange={verifyCallback}
+                  render="explicit"
+                />
+              </div>
               <div className="flex justify-end">
                 <button
+                  disabled={isLoading || !veriCapcha ? true : false}
                   onClick={handleStore}
-                  className="flex justify-center items-center gap-1 text-white bg-green-700 hover:brightness-90 duration-300 px-6 py-2.5 rounded">
+                  className={`flex justify-center items-center gap-1 text-white bg-green-700 ${
+                    !veriCapcha ? "brightness-50" : "hover:brightness-90"
+                  } duration-300 px-6 py-4 rounded`}>
                   <i className="fas fa-paper-plane"></i>
                   <span>Apply Now</span>
                 </button>

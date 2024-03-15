@@ -90,9 +90,7 @@ export const Home = () => {
         </div>
       </div>
       <div className="md:container overflow-hidden mb-10">
-        <div className="overflow-x-auto pb-2 w-full">
-          {/* <BarMenu /> */}
-        </div>
+        <div className="overflow-x-auto pb-2 w-full">{/* <BarMenu /> */}</div>
       </div>
 
       <div className="bg-base-300/10">

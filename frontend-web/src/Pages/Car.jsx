@@ -25,16 +25,6 @@ export const Car = () => {
 
   const [filterChanged, setFilterChanged] = useState(false);
 
-  const handleInfiniteScroll = () => {
-    if (loadFetch) return;
-
-    if (formInput.price || formInput.brand || formInput.model) {
-      handleLoadMoreFilteredCar();
-    } else {
-      handleLoadMoreAllCar();
-    }
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -66,7 +56,9 @@ export const Car = () => {
       await GET_CAR_COMP();
       await GET_ALL_CAR();
     }
+
     fetchData();
+    window.scrollTo(0, 0);
   }, []);
 
   const GET_ALL_CAR = async () => {
