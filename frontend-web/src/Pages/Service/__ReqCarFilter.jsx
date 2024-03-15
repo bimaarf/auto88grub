@@ -1,9 +1,12 @@
 import axios from "axios";
 
-export async function reqCarFilter(data) {
+export async function reqCarFilter(page, perPage, data) {
   try {
     await axios.get("sanctum/csrf-cookie");
-    const response = await axios.post("api/car/filter/show", data);
+    const response = await axios.post(
+      `api/car/filter/show?page=${page}&&perPage=${perPage}`,
+      data
+    );
     return response.data;
   } catch (error) {
     console.error("Error fetching car data:", error);

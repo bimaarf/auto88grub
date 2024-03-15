@@ -31,9 +31,9 @@ const StateProvider = ({ children }) => {
     getSliders: null,
     getCompanyProfile: null,
   });
-
+  
   const { pageNewCar, pageCarPromo, pageTestimony, pageAllCar } = state;
-
+  
   const getCompanyProfile = useCallback(async () => {
     try {
       const companyData = await fetchCompanyProfile();

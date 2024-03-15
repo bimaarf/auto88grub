@@ -1,45 +1,75 @@
 import React, { useEffect, useState } from "react";
 import { CurrentFormat } from "../Components/___CurrentFormat";
-
-import { useStateContext } from "../Providers/StateProvider";
-import { HighLightHeader } from "./Context/__HighLightHeader";
 import { fetchCars } from "./Service/__FetchCar";
 import { fetchCarComp } from "./Service/__FetchCarComp";
 import { reqCarFilter } from "./Service/__ReqCarFilter";
 import { ListCar } from "./Context/__ListCar";
 import { ListCarSkeleton } from "./Context/__ListCarSkeleton";
+import { HighLightHeader } from "./Context/__HighLightHeader";
 
 export const Car = () => {
+  const [allCars, setAllCars] = useState(null);
+  const [getComp, setComp] = useState(null);
+  const [loadFetch, setLoadFetch] = useState(false);
+  const [reachedEnd, setReachedEnd] = useState(false);
+  const [formInput, setFormInput] = useState({});
+  const [pageAllCar, setPageAllCar] = useState({
+    page: 1,
+    perPage: 6,
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    __GET_CAR_COMP();
+    async function fetchData() {
+      await GET_CAR_COMP();
+      await GET_ALL_CAR();
+    }
+    fetchData();
   }, []);
 
-  const [getCarFilter, setCarsFilter] = useState("");
-  const { state, setState } = useStateContext();
-  const { getAllCars, pageAllCar } = state;
-  const [loadFetch, setLoadFetch] = useState(false);
-  const [getComp, setComp] = useState("");
-  const [formInput, setFormInput] = useState();
+  const GET_ALL_CAR = async () => {
+    try {
+      const response = await fetchCars(pageAllCar);
+      setAllCars((prevData) => ({
+        ...response.data,
+        data: [...(prevData ? prevData.data : []), ...response.data.data],
+      }));
+    } catch (error) {
+      console.error("Error fetching cars:", error);
+    }
+  };
 
-  const __GET_CAR_COMP = async () => {
-    const response = await fetchCarComp();
-    setComp(response.data);
+  const GET_CAR_COMP = async () => {
+    try {
+      const response = await fetchCarComp();
+      setComp(response.data);
+    } catch (error) {
+      console.error("Error fetching car components:", error);
+    }
   };
 
   const handleLoadMoreAllCar = async () => {
+    if (reachedEnd || loadFetch) return;
     setLoadFetch(true);
-    const nextPage = { page: pageAllCar.page + 1, perPage: pageAllCar.perPage };
+    const nextPage = {
+      page: pageAllCar.page + 1,
+      perPage: pageAllCar.perPage,
+    };
 
+    setPageAllCar(nextPage);
     try {
-      const allCar = await fetchCars(nextPage);
-      setState((prevState) => ({
-        ...prevState,
-        pageAllCar: nextPage,
-        getAllCars: Array.isArray(prevState.getAllCars)
-          ? [...prevState.getAllCars, ...(allCar || [])]
-          : allCar || [],
+      const response = await fetchCars(nextPage);
+      setAllCars((prevData) => ({
+        ...response.data,
+        data: [...(prevData ? prevData.data : []), ...response.data.data],
       }));
+
+      if (
+        response.data.data.length === 0 ||
+        nextPage.page === response.data.lastPage
+      ) {
+        setReachedEnd(true);
+      }
     } catch (error) {
       console.error("Error fetching new cars:", error);
     } finally {
@@ -49,9 +79,14 @@ export const Car = () => {
 
   const handleSubmit = async () => {
     setLoadFetch(true);
-    const response = await reqCarFilter(formInput);
-    setCarsFilter(response);
-    setLoadFetch(false);
+    try {
+      const response = await reqCarFilter(formInput);
+      setAllCars(response);
+    } catch (error) {
+      console.error("Error fetching filtered cars:", error);
+    } finally {
+      setLoadFetch(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -64,25 +99,22 @@ export const Car = () => {
   };
 
   useEffect(() => {
-    handleSubmit();
-  }, [formInput]);
-
-  useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + document.documentElement.scrollTop !==
-        document.documentElement.offsetHeight
+        window.innerHeight + document.documentElement.scrollTop >=
+          document.documentElement.scrollHeight &&
+        !loadFetch &&
+        !reachedEnd &&
+        allCars
       ) {
-        return;
+        handleLoadMoreAllCar();
       }
-      handleLoadMoreAllCar();
     };
 
     window.addEventListener("scroll", handleScroll);
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+  }, [loadFetch, reachedEnd, allCars]);
   return (
     <>
       <HighLightHeader />
@@ -323,17 +355,24 @@ export const Car = () => {
           </div>
           <div className="sm:w-full md:mt-0 mt-10 md:w-3/4">
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {getAllCars && !loadFetch ? (
-                <ListCar
-                  getAllCars={getCarFilter ? getCarFilter : getAllCars}
-                />
-              ) : (
-                <ListCarSkeleton />
+              {allCars && <ListCar getAllCars={allCars} />}
+              {loadFetch && <ListCarSkeleton />}
+              {allCars && (
+                <div className="sm:w-full md:mt-0 mt-10 md:w-3/4">
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                    <ListCar allCars={allCars} />
+                    {loadFetch && <ListCarSkeleton />}
+                  </div>
+                </div>
               )}
             </div>
+              {reachedEnd && (
+                <div className="text-center flex justify-center w-full text-gray-500 py-2">
+                  <p>No more cars to load</p>
+                </div>
+              )}
           </div>
         </div>
-        <button onClick={handleLoadMoreAllCar}>ANJENG</button>
       </div>
     </>
   );

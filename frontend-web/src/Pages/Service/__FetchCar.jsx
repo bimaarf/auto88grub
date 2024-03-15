@@ -6,7 +6,7 @@ export async function fetchCars(pageAllCar) {
     const response = await axios.get(
       `api/car/show?page=${pageAllCar.page}&&perPage=${pageAllCar.perPage}`
     );
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error fetching car data:", error);
     throw error;

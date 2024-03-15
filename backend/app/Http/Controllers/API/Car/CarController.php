@@ -54,21 +54,23 @@ class CarController extends Controller
 
         $maxSoldCars = max($soldCarsByBrand);
         $hotBrands = array_keys($soldCarsByBrand, $maxSoldCars);
-        $getCarRecomended = Car::with([
+        $getCarRecomen = Car::with([
             'promos', 'documents', 'officials', 'originals', 'outdoors',
             'location', 'brand', 'model', 'type', 'cylinder', 'transmission', 'series',
             'gear', 'fuel', 'color', 'row', 'year'
         ])
             ->whereIn('car_brand_id', $hotBrands)
+            ->take(3)
             ->orderBy('id', 'DESC')
             ->get();
 
-        $getCarRecomended->transform(function ($car) {
+        $getCarRecomen->transform(function ($car) {
             $car->title = $car->slug;
             $car->slug = Str::slug($car->title);
             return $car;
         });
-        return $hotBrands;
+
+        return response()->json(['data' => $getCarRecomen]);
     }
 
 
@@ -83,7 +85,7 @@ class CarController extends Controller
         ]);
 
         foreach ($input as $key => $value) {
-            if ($key === 'perPage' || $key === 'price' || empty($value)) {
+            if ($key === 'perPage' || $key === 'page' || $key === 'price' || empty($value)) {
                 continue;
             }
 
@@ -96,13 +98,10 @@ class CarController extends Controller
             $query->where('price', '<=', $input['price']);
         }
 
-        // Get the perPage value from the request, default to 10 if not provided
         $perPage = $request->input('perPage', 10);
 
-        // Use Laravel's paginate method to paginate the results
         $cars = $query->paginate($perPage);
 
-        // Transform the collection if needed
         $cars->getCollection()->transform(function ($car) {
             $car->title = $car->slug;
             $car->slug = Str::slug($car->title);
