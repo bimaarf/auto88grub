@@ -13,6 +13,8 @@ import { fetchTestimony } from "../Pages/Service/__FetchTestimony";
 import { fetchCars } from "../Pages/Service/__FetchCar";
 import { fetchSlider } from "../Pages/Service/__FetchSlider";
 import { fetchCompanyProfile } from "../Pages/Service/__FetchCompanyProfile";
+import { fetchRecCars } from "../Pages/Service/__FetchRecCaar";
+import { fetchKind } from "../Pages/Service/__FetchKind";
 
 const StateContext = createContext();
 
@@ -25,15 +27,17 @@ const StateProvider = ({ children }) => {
     getCarPromos: null,
     getAllCars: null,
     getNewCars: null,
+    getRecCars: null,
+    getKind: null,
     getBlog: null,
     getTestimony: null,
     prevTestimony: null,
     getSliders: null,
     getCompanyProfile: null,
   });
-  
+
   const { pageNewCar, pageCarPromo, pageTestimony, pageAllCar } = state;
-  
+
   const getCompanyProfile = useCallback(async () => {
     try {
       const companyData = await fetchCompanyProfile();
@@ -50,7 +54,7 @@ const StateProvider = ({ children }) => {
       const carPromos = await fetchCarPromos(pageCarPromo);
       setState((prevState) => ({
         ...prevState,
-        getCarPromos: carPromos,
+        getCarPromos: carPromos.data,
       }));
     } catch (error) {
       console.error("Error fetching car promos:", error);
@@ -79,7 +83,29 @@ const StateProvider = ({ children }) => {
       console.error("Error fetching slider:", error);
     }
   }, []);
+  const getKind = useCallback(async () => {
+    try {
+      const kindData = await fetchKind();
+      setState((prevState) => ({
+        ...prevState,
+        getKind: kindData,
+      }));
+    } catch (error) {
+      console.error("Error fetching slider:", error);
+    }
+  }, []);
 
+  const getRecCars = useCallback(async () => {
+    try {
+      const recCars = await fetchRecCars(pageNewCar);
+      setState((prevState) => ({
+        ...prevState,
+        getRecCars: recCars,
+      }));
+    } catch (error) {
+      console.error("Error fetching rec cars:", error);
+    }
+  }, [pageNewCar]);
   const getNewCars = useCallback(async () => {
     try {
       const newCars = await fetchNewCars(pageNewCar);
@@ -123,10 +149,12 @@ const StateProvider = ({ children }) => {
       await getSliders();
       await getCompanyProfile();
       await getAllCars();
+      await getKind();
       await getBlog();
       await getTestimony();
       await getCarPromos();
       await getNewCars();
+      await getRecCars();
     };
 
     fetchData();
@@ -137,7 +165,9 @@ const StateProvider = ({ children }) => {
     getNewCars,
     getAllCars,
     getSliders,
+    getKind,
     getCompanyProfile,
+    getRecCars,
   ]);
 
   return (

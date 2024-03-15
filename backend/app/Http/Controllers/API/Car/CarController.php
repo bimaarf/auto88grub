@@ -60,7 +60,7 @@ class CarController extends Controller
             'gear', 'fuel', 'color', 'row', 'year'
         ])
             ->whereIn('car_brand_id', $hotBrands)
-            ->take(3)
+            ->take(8)
             ->orderBy('id', 'DESC')
             ->get();
 
@@ -120,7 +120,7 @@ class CarController extends Controller
             'location', 'brand', 'model', 'type', 'cylinder', 'transmission', 'series',
             'gear', 'fuel', 'color', 'row', 'year'
         ])
-            ->orderBy('id', 'DESC')
+            ->orderBy('created_at', 'DESC')
             ->paginate($perPage, ['*'], 'page', $page);
         $getCar->getCollection()->transform(function ($car) {
             $car->title = $car->slug;

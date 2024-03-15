@@ -6,6 +6,7 @@ import { HighLightHeader } from "./Context/__HighLightHeader";
 import { fetchCarComp } from "./Service/__FetchCarComp";
 import { fetchCarPromos } from "./Service/__FetchCarPromos";
 import { reqCarPromoFilter } from "./Service/__ReqCarFilter";
+import { ListCarSkeleton } from "./Context/__ListCarSkeleton";
 
 export const Promo = () => {
   const [allCars, setAllCars] = useState(null);
@@ -465,6 +466,8 @@ export const Promo = () => {
               {!allCars && filteredCars && (
                 <ListCarPromo getCarPromos={filteredCars} />
               )}
+              {loadFetch && <ListCarSkeleton />}
+
               {reachedEnd && (
                 <div className="text-start w-full text-gray-500 py-2">
                   <p className="text-sm">No more cars to load</p>

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { HighLightHeader } from "./Context/__HighLightHeader";
 import { useStateContext } from "../Providers/StateProvider";
 import { Footer } from "../Components/Footer";
+import { SkeletonConsultation } from "./Components/__SkeletonConsultation";
 
 export const Consultation = () => {
   useEffect(() => {
@@ -17,8 +18,8 @@ export const Consultation = () => {
           Panduan Konsultasi
         </h1>
 
-        <div className="grid sm:grid-cols-1 space-y-40 md:space-y-0 md:grid-cols-4">
-          {getCompanyProfile &&
+        <div className="grid sm:grid-cols-1 gap-4 space-y-40 md:space-y-0 md:grid-cols-4">
+          {getCompanyProfile ? (
             getCompanyProfile.consultation.map((item, key) => (
               <div key={key}>
                 <div className="flex justify-center slide-in fade-in-left">
@@ -38,7 +39,10 @@ export const Consultation = () => {
                   </article>
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <SkeletonConsultation />
+          )}
         </div>
       </div>
       <Footer />

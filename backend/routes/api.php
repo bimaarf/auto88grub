@@ -48,6 +48,9 @@ Route::post('login', [AuthController::class, 'login']);
 // });
 
 Route::group(['prefix' => 'car'], function () {
+    Route::controller(KindController::class)->group(function () {
+        Route::get('/kind/show/', 'view');
+    });
     Route::controller(CarController::class)->group(function () {
         Route::get('/show', 'showCar');
         Route::get('/recomended/show', 'getRecomended');

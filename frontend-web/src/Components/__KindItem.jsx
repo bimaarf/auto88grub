@@ -2,10 +2,21 @@ import React from "react";
 import { TECarousel, TECarouselItem } from "tw-elements-react";
 import { Carousel, IconButton } from "@material-tailwind/react";
 
-export const CarouselCar = () => {
+export const KindItem = ({ getKind }) => {
   return (
     <>
-      <div className="carousel rounded-box w-full">
+      {getKind.data.map((item, key) => (
+        <div key={key} className="min-w-40">
+          <div className="flex justify-center">
+            <img
+              src={`${process.env.REACT_APP_API}storage/${item.image}`}
+              alt=""
+            />
+          </div>
+          <p>{item.name}</p>
+        </div>
+      ))}
+      {/* <div className="carousel rounded-box w-full">
         {(function (rows, i, len) {
           while (++i <= len) {
             rows.push(
@@ -27,7 +38,7 @@ export const CarouselCar = () => {
           }
           return rows;
         })([], 0, 10)}
-      </div>
+      </div> */}
       {/* <Carousel
         loop
         autoplay
