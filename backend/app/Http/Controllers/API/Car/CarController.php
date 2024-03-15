@@ -146,6 +146,7 @@ class CarController extends Controller
         ->paginate($perPage, ['*'], 'page', $page);
 
         $getCar->getCollection()->transform(function ($car) {
+            $car->title = $car->slug;
             $car->slug = Str::slug($car->title);
             return $car;
         });
