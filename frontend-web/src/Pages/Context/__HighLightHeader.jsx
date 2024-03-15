@@ -39,7 +39,7 @@ export const HighLightHeader = ({ theme }) => {
             <div
               className="md:space-y-4 text-3xl sm:text-4xl md:text-5xl font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
-              <div className="font-extrabold md:text-6xl opacity-25">
+              <div className="font-extrabold md:text-6xl opacity-75">
                 <span className="text-pretty">AUTO</span>
                 <span className="text-red-500">88</span>
                 <span className="text-pretty">GROUP</span>

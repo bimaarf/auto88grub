@@ -10,6 +10,8 @@ use App\Models\Company\Term;
 use App\Models\Company\TradeIn;
 use App\Models\Company\VisitUs;
 use App\Models\Company\PrivacyPolicy;
+use App\Models\FAQ\Category;
+use App\Models\FAQ\Question;
 use App\Models\Job\Vacancy;
 use App\Models\Gallery\Slider;
 use App\Models\HighLight;
@@ -58,6 +60,10 @@ class LandingController extends Controller
     {
         return PrivacyPolicy::all();
     }
+    private function FAQ()
+    {
+        return Category::with('questions')->get();
+    }
     public function background(Request $request) {
         $validator = Validator::make($request->all(), [
             'image' => 'required|image|mimes:jpeg,jpg,png,webp',
@@ -95,6 +101,7 @@ class LandingController extends Controller
         $result['visit'] = $this->visit();
         $result['privacy_policy'] = $this->privacyPolicy();
         $result['vacancies'] = $this->vacancy();
+        $result['faq'] = $this->FAQ();
         return $result;
     }
 

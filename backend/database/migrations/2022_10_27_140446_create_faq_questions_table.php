@@ -17,7 +17,8 @@ return new class() extends Migration
             $table->id();
             $table->unsignedBigInteger('faq_category_id');
             $table->foreign('faq_category_id')->references('id')->on('faq_categories');
-            $table->string('name');
+            $table->string('question');
+            $table->string('answer');
             $table->timestamps();
         });
     }

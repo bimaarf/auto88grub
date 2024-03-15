@@ -38,9 +38,12 @@ class QuestionResource extends Resource
                     ->options(Category::limit(10)->pluck('name', 'id'))
                     ->required(),
 
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('question')
                     ->required()
-                    ->unique(Question::class, 'name', ignoreRecord: true),
+                    ->unique(Question::class, 'question', ignoreRecord: true),
+                Forms\Components\TextInput::make('answer')
+                    ->required()
+                    ->unique(Question::class, 'answer', ignoreRecord: true),
             ]);
     }
 
@@ -52,7 +55,10 @@ class QuestionResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('question')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('answer')
                     ->searchable()
                     ->sortable(),
 
@@ -78,7 +84,8 @@ class QuestionResource extends Resource
                 Components\Section::make()
                     ->schema([
                         TextEntry::make('category.name'),
-                        TextEntry::make('name'),
+                        TextEntry::make('question'),
+                        TextEntry::make('answer'),
                         TextEntry::make('updated_at')
                             ->dateTime(),
                     ])
