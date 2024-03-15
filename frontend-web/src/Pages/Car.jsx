@@ -1,45 +1,128 @@
 import React, { useEffect, useState } from "react";
 import { CurrentFormat } from "../Components/___CurrentFormat";
-
-import { useStateContext } from "../Providers/StateProvider";
-import { HighLightHeader } from "./Context/__HighLightHeader";
 import { fetchCars } from "./Service/__FetchCar";
 import { fetchCarComp } from "./Service/__FetchCarComp";
 import { reqCarFilter } from "./Service/__ReqCarFilter";
 import { ListCar } from "./Context/__ListCar";
 import { ListCarSkeleton } from "./Context/__ListCarSkeleton";
+import { HighLightHeader } from "./Context/__HighLightHeader";
 
 export const Car = () => {
+  const [allCars, setAllCars] = useState(null);
+  const [getComp, setComp] = useState(null);
+  const [loadFetch, setLoadFetch] = useState(false);
+  const [reachedEnd, setReachedEnd] = useState(false);
+  const [formInput, setFormInput] = useState({});
+  const [filteredCars, setFilteredCars] = useState(null);
+  const [pageAllCar, setPageAllCar] = useState({
+    page: 1,
+    perPage: 8,
+  });
+  const [pageFilteredCar, setPageFilteredCar] = useState({
+    page: 1,
+    perPage: 8,
+  });
+
+  const [filterChanged, setFilterChanged] = useState(false);
+
   useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+          document.documentElement.scrollHeight &&
+        !loadFetch &&
+        !reachedEnd &&
+        ((!formInput.price &&
+          !formInput.brand &&
+          !formInput.model &&
+          allCars?.data.length > 0) ||
+          filteredCars?.data.length > 0)
+      ) {
+        if (formInput.price || formInput.brand || formInput.model) {
+          handleLoadMoreFilteredCar();
+        } else {
+          handleLoadMoreAllCar();
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [loadFetch, reachedEnd, allCars, filteredCars, formInput]);
+
+  useEffect(() => {
+    async function fetchData() {
+      await GET_CAR_COMP();
+      await GET_ALL_CAR();
+    }
+
+    fetchData();
     window.scrollTo(0, 0);
-    __GET_CAR_COMP();
   }, []);
 
-  const [getCarFilter, setCarsFilter] = useState("");
-  const { state, setState } = useStateContext();
-  const { getAllCars, pageAllCar } = state;
-  const [loadFetch, setLoadFetch] = useState(false);
-  const [getComp, setComp] = useState("");
-  const [formInput, setFormInput] = useState();
+  const GET_ALL_CAR = async () => {
+    try {
+      setLoadFetch(true);
+      const response = await fetchCars(pageAllCar);
+      setAllCars((prevData) => ({
+        ...response.data,
+        data: [...(prevData ? prevData.data : []), ...response.data.data],
+      }));
+    } catch (error) {
+      console.error("Error fetching cars:", error);
+    } finally {
+      setLoadFetch(false);
+    }
+  };
 
-  const __GET_CAR_COMP = async () => {
-    const response = await fetchCarComp();
-    setComp(response.data);
+  const GET_CAR_COMP = async () => {
+    try {
+      const response = await fetchCarComp();
+      setComp(response.data);
+    } catch (error) {
+      console.error("Error fetching car components:", error);
+    }
+  };
+
+  const fetchFilteredCars = async () => {
+    setLoadFetch(true);
+    try {
+      const response = await reqCarFilter(
+        pageFilteredCar.page,
+        pageFilteredCar.perPage,
+        formInput
+      );
+      setFilteredCars(response.data); // Simpan hasil filter ke dalam state
+    } catch (error) {
+      console.error("Error fetching filtered cars:", error);
+    } finally {
+      setLoadFetch(false);
+    }
   };
 
   const handleLoadMoreAllCar = async () => {
+    if (reachedEnd || loadFetch) return;
     setLoadFetch(true);
-    const nextPage = { page: pageAllCar.page + 1, perPage: pageAllCar.perPage };
+    const nextPage = {
+      page: pageAllCar.page + 1,
+      perPage: pageAllCar.perPage,
+    };
 
+    setPageAllCar(nextPage);
     try {
-      const allCar = await fetchCars(nextPage);
-      setState((prevState) => ({
-        ...prevState,
-        pageAllCar: nextPage,
-        getAllCars: Array.isArray(prevState.getAllCars)
-          ? [...prevState.getAllCars, ...(allCar || [])]
-          : allCar || [],
+      const response = await fetchCars(nextPage);
+      setAllCars((prevData) => ({
+        ...response.data,
+        data: [...(prevData ? prevData.data : []), ...response.data.data],
       }));
+
+      if (
+        response.data.data.length === 0 ||
+        nextPage.page === response.data.lastPage
+      ) {
+        setReachedEnd(true);
+      }
     } catch (error) {
       console.error("Error fetching new cars:", error);
     } finally {
@@ -47,48 +130,93 @@ export const Car = () => {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleLoadMoreFilteredCar = async () => {
+    if (reachedEnd || loadFetch) return;
     setLoadFetch(true);
-    const response = await reqCarFilter(formInput);
-    setCarsFilter(response);
-    setLoadFetch(false);
+    const nextPage = {
+      page: pageFilteredCar.page + 1,
+      perPage: pageFilteredCar.perPage,
+    };
+
+    setPageFilteredCar(nextPage);
+    try {
+      const response = await reqCarFilter(
+        nextPage.page,
+        nextPage.perPage,
+        formInput
+      );
+      if (response.data.data.length > 0) {
+        setFilteredCars((prevData) => ({
+          ...response.data,
+          data: [...(prevData ? prevData.data : []), ...response.data.data],
+        }));
+      } else {
+        setReachedEnd(true);
+      }
+    } catch (error) {
+      console.error("Error fetching new filtered cars:", error);
+    } finally {
+      setLoadFetch(false);
+    }
   };
 
-  const handleChange = (e) => {
+  const handleSubmit = async () => {
+    setPageFilteredCar({ page: 1, perPage: 8 }); // Setel ulang halaman ke 1 saat pengiriman filter baru
+    setLoadFetch(true);
+    try {
+      await fetchFilteredCars();
+    } catch (error) {
+      console.error("Error fetching filtered cars:", error);
+    } finally {
+      setLoadFetch(false);
+    }
+  };
+  const handleChange = async (e) => {
     e.persist();
     const { name, value } = e.target;
     setFormInput((prevFormInput) => ({
       ...prevFormInput,
       [name]: value,
     }));
+
+    // Set filterChanged ke true setiap kali ada perubahan input
+    setFilterChanged(true);
+
+    // Reset state yang lain seperti yang Anda lakukan sebelumnya
+    setAllCars(null);
+    setFilteredCars(null);
+    setReachedEnd(false);
+    setPageAllCar({
+      page: 1,
+      perPage: 8,
+    });
+    setPageFilteredCar({
+      page: 1,
+      perPage: 8,
+    });
   };
 
   useEffect(() => {
-    handleSubmit();
-  }, [formInput]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop !==
-        document.documentElement.offsetHeight
-      ) {
-        return;
+    const fetchData = async () => {
+      try {
+        await fetchFilteredCars();
+      } catch (error) {
+        console.error("Error fetching filtered cars:", error);
       }
-      handleLoadMoreAllCar();
     };
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+    // Memanggil fetchFilteredCars setiap kali ada perubahan pada formInput
+    if (filterChanged) {
+      fetchData();
+      setFilterChanged(false); // Reset filterChanged setelah diproses
+    }
+  }, [formInput, filterChanged]);
   return (
     <>
       <HighLightHeader />
       <div className="lg:container  shadow mb-44 bg-base-100 rounded-xl -mt-10 p-4 sm:mx-1 lg:mx-auto">
         <div className="md:flex justify-center items-start align-top gap-4">
-          <div className="sm:w-full md:w-1/4 md:border-r md:sticky md:top-16  md:pb-32  space-y-5 sm:h-full  pr-4">
+          <div className="sm:w-full md:w-1/4 md:border-r md:sticky md:top-16  md:pb-32  space-y-5 overflow-y-scroll pr-4">
             <div className="collapse collapse-arrow w-full bg-opacity-0 mt-4">
               <div className="collapse-title">
                 <div className="text-md font-medium pb-2 w-full border-b border-dashed mb-4">
@@ -323,17 +451,27 @@ export const Car = () => {
           </div>
           <div className="sm:w-full md:mt-0 mt-10 md:w-3/4">
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {getAllCars && !loadFetch ? (
-                <ListCar
-                  getAllCars={getCarFilter ? getCarFilter : getAllCars}
-                />
-              ) : (
-                <ListCarSkeleton />
+              {allCars && !filteredCars && <ListCar getAllCars={allCars} />}
+              {!allCars && filteredCars && (
+                <ListCar getAllCars={filteredCars} />
+              )}
+              {loadFetch && <ListCarSkeleton />}
+              {allCars && (
+                <div className="sm:w-full md:mt-0 mt-10 md:w-3/4">
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                    <ListCar allCars={allCars} />
+                    {loadFetch && <ListCarSkeleton />}
+                  </div>
+                </div>
               )}
             </div>
+            {reachedEnd && (
+              <div className="text-start w-full text-gray-500 py-2">
+                <p className="text-sm">No more cars to load</p>
+              </div>
+            )}
           </div>
         </div>
-        <button onClick={handleLoadMoreAllCar}>ANJENG</button>
       </div>
     </>
   );

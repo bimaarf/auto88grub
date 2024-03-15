@@ -3,26 +3,31 @@ import { useNavigate } from "react-router-dom";
 import { CarouselSl } from "../Components/__Carousel";
 import { CarouselBlog } from "../Components/__CarouselBlog";
 import { CarouselBlogSkeleton } from "../Components/__CarouselBlogSkeleton";
-import { CarouselCar } from "../Components/__CarouselCar";
-import { CarouselCarRecomen } from "../Components/__CarouselCarRecomen";
 import { CarouselTestimony } from "../Components/__CarouselTestimony";
 import { CarouselTestimonySkeleton } from "../Components/__CarouselTestimonySkeleton";
 import { ListCarPromo } from "../Components/__ListCarPromo";
 import { ListCarPromoSkeleton } from "../Components/__ListCarPromoSkeleton";
 import { ListNewCar } from "../Components/__ListNewCar";
 import { ListNewCarSkeleton } from "../Components/__ListNewCarSkeleton";
-import bannerImg from "../Images/Banner/flag-red-white-indonesia_1912698.jpg";
 
 import { Footer } from "../Components/Footer";
-import { useStateContext } from "./../Providers/StateProvider";
-import { BarMenu } from "./Context/__BarMenu";
-import { HighLightHeader } from "./Context/__HighLightHeader";
 import { CarouselSkeleton } from "../Components/__CarouselSkeleton";
+import { useStateContext } from "./../Providers/StateProvider";
+import { HighLightHeader } from "./Context/__HighLightHeader";
+import { KindItem } from "../Components/__KindItem";
 
 export const Home = () => {
   const navRedirect = useNavigate();
   const { state } = useStateContext();
-  const { getNewCars, getCarPromos, getBlog, getTestimony, getSliders } = state;
+  const {
+    getNewCars,
+    getCarPromos,
+    getBlog,
+    getTestimony,
+    getSliders,
+    getRecCars,
+    getKind,
+  } = state;
   const carouselRef = useRef(null);
 
   useEffect(() => {
@@ -44,7 +49,6 @@ export const Home = () => {
 
     const elements = document.querySelectorAll(".slide-in");
     elements.forEach((element) => observer.observe(element));
-
     // window.scrollTo(0, 0);
     return () => observer.disconnect();
   }, []);
@@ -75,22 +79,20 @@ export const Home = () => {
             </div>
           </div>
           <div className="flex justify-center gap-4 brounded-lg p-4">
-            <CarouselCarRecomen />
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {getRecCars ? (
+                <ListNewCar getNewCars={getRecCars.data} />
+              ) : (
+                <ListNewCarSkeleton />
+              )}
+            </div>
           </div>
         </div>
       </div>
       <div className="md:container overflow-hidden mb-10">
         <div className="overflow-x-auto pb-2 w-full">{/* <BarMenu /> */}</div>
       </div>
-      {/* <div
-        className="w-full -z-10 md:px-20"
-        style={{
-          backgroundImage: `url(${bannerImg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "top",
-          backgroundSize: "cover",
-          height: "50vh",
-        }}></div> */}
+
       <div className="bg-base-300/10">
         <div
           className="md:space-y-4 sm:text-xl whitespace-nowrap md:container md:mx-auto p-4 font-bold text-center"
@@ -100,8 +102,8 @@ export const Home = () => {
             ref={carouselRef}>
             <h1>Mobil Berdasarkan Jenis</h1>
           </div>
-          <div className="grid grid-cols-1 gap-4">
-            <CarouselCar />
+          <div className="flex justify-center items-center gap-4 overflow-x-auto">
+            {getKind && <KindItem getKind={getKind} />}
           </div>
           <div
             onClick={() => navRedirect("/mobil")}

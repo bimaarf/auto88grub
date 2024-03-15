@@ -24,7 +24,7 @@ class CarPromoController extends Controller
             ]);
 
         foreach ($input as $key => $value) {
-            if ($key === 'perPage' || $key === 'price' || empty($value)) {
+            if ($key === 'perPage' || $key === 'page' || $key === 'price' || empty($value)) {
                 continue;
             }
 
@@ -52,7 +52,7 @@ class CarPromoController extends Controller
     public function showPromo(Request $request)
     {
         $page = $request->query('page', 1);
-        $perPage = $request->query('perPage', 10);
+        $perPage = $request->query('perPage', 6);
         $getData = Promo::with('car')
             ->join('cars', 'cars.id', 'car_promos.car_id')
             ->where('car_promos.is_pinned', 1)
@@ -61,7 +61,9 @@ class CarPromoController extends Controller
                 'car.location', 'car.brand', 'car.model', 'car.type', 'car.cylinder', 'car.transmission', 'car.series',
                 'car.gear', 'car.fuel', 'car.color', 'car.row', 'car.year'
             ])
-            ->paginate($perPage, ['car_promos.*', 'cars.slug', 'cars.description'], 'page', $page);
+            ->select(['car_promos.*', 'cars.slug', 'cars.description'])
+            ->orderBy('id', 'DESC')
+            ->paginate($perPage, ['*'], 'page', $page);
 
         $getData->transform(function ($promo) {
             $promo->title = $promo->slug;

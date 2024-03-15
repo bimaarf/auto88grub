@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 
 import { useLocation } from "react-router-dom";
 import { TECarousel, TECarouselItem } from "tw-elements-react";
-import bannerImg from "../Images/Banner/red_wavy_with_halftone_background.jpg";
-import { fetchCarPreview } from "./Service/__FetchCarPreview";
 import { Footer } from "../Components/Footer";
-import { CarouselCarRecomen } from "../Components/__CarouselCarRecomen";
+import { ListNewCar } from "../Components/__ListNewCar";
+import { ListNewCarSkeleton } from "../Components/__ListNewCarSkeleton";
+import { useStateContext } from "../Providers/StateProvider";
 import { HighLightHeader } from "./Context/__HighLightHeader";
+import { fetchCarPreview } from "./Service/__FetchCarPreview";
 
 export const CarPreview = () => {
+  const { state } = useStateContext();
+  const { getRecCars } = state;
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
@@ -174,19 +177,25 @@ export const CarPreview = () => {
             </>
           )}
 
-          <div className="pb-32 bg-transparent md:container md:mx-auto">
-            <div className="w-11/12 mx-auto mt-10 z-30 ">
+          <div className="pb-32 mt-20 bg-transparent border-t border-dashed">
+            <div className="mt-10 z-30 ">
               <div className="flex justify-center">
                 <div
                   className="md:space-y-4 sm:text-xl whitespace-nowrap  text-pretty p-4  font-bold text-center"
                   style={{ fontFamily: "'Marko One', sans-serif" }}>
-                  <div className="md:p-10 md:space-y-10 md:text-3xl slide-in fade-in-left">
-                    <h1 className="slide-in fade-in-left">Mobil Yang Serupa</h1>
+                  <div className="md:space-y-10 md:text-3xl slide-in fade-in-left">
+                    <h1 className="slide-in fade-in-left">Mobil Rekomendasi</h1>
                   </div>
                 </div>
               </div>
               <div className="flex justify-center gap-4 brounded-lg p-4">
-                <CarouselCarRecomen />
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  {getRecCars ? (
+                    <ListNewCar getNewCars={getRecCars.data} />
+                  ) : (
+                    <ListNewCarSkeleton />
+                  )}
+                </div>
               </div>
             </div>
           </div>

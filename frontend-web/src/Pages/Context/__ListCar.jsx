@@ -32,11 +32,11 @@ export const ListCar = ({ getAllCars }) => {
               />
             </div>
             <div className="p-6">
-              {/* <h1 className="font-bold text-pretty text-sm md:text-md">
+              <h1 className="font-bold text-pretty text-sm md:text-md">
                 {item.title.length > 40
                   ? item.title.slice(0, 40) + "..."
                   : item.title}
-              </h1> */}
+              </h1>
               <p className="text-pretty font-light text-xs md:text-md text-left uppercase">
                 {item.type.name} / {item.series.name} / {item.fuel.name}
               </p>

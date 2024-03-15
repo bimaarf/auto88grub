@@ -13,7 +13,6 @@ export const CarouselTestimony = () => {
     await axios.get("sanctum/csrf-cookie");
     const response = await fetchTestimony(pageTestimony);
     setTestimony(response);
-    console.log(response);
   };
   useEffect(() => {
     __GET_TESTIMONIAL_API();

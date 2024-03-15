@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { HighLightHeader } from "./Context/__HighLightHeader";
+import { useNavigate } from "react-router-dom";
 import { Footer } from "../Components/Footer";
 import { useStateContext } from "../Providers/StateProvider";
-import { useNavigate } from "react-router-dom";
+import { HighLightHeader } from "./Context/__HighLightHeader";
 
 export const Career = () => {
   useEffect(() => {
@@ -11,11 +11,12 @@ export const Career = () => {
   const { state } = useStateContext();
   const { getCompanyProfile } = state;
   const navRedirect = useNavigate();
+
   return (
     <>
       <HighLightHeader />
 
-      <div className="md:container slide-in fade-in-left mb-44 bg-base-100 border border-base-300  rounded-xl -mt-20 p-10 md:p-20 sm:mx-2 md:mx-auto">
+      <div className="md:container mb-44 bg-base-200/40 rounded-xl -mt-20 p-4 md:p-20 sm:mx-2 md:mx-auto shadow">
         <div role="tablist" className="tabs tabs-lifted">
           <input
             type="radio"

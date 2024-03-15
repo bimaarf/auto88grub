@@ -51,7 +51,7 @@ export const CircleModal = () => {
           <div
             className={`chat duration-500 scale-110 chat-end absolute right-10 z-30 ${
               showBubble
-                ? "opacity-125 bottom-64 "
+                ? "opacity-125 bottom-44"
                 : " opacity-0 -bottom-72 scale-y-0"
             }`}>
             <div className="chat-bubble w-96 bg-transparent">
