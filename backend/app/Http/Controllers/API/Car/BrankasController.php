@@ -20,7 +20,7 @@ class BrankasController extends Controller
             $box->save();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
-            return response()->json(['status' => 201], 201);
+            return response()->json(['status' => 500], 500);
         }
     }
     public function update(Request $request, $brankasId)
@@ -31,7 +31,7 @@ class BrankasController extends Controller
             $box->update();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
-            return response()->json(['status' => 201], 201);
+            return response()->json(['status' => 500], 500);
         }
     }
     public function delete($brankasId)
@@ -41,7 +41,7 @@ class BrankasController extends Controller
             $box->delete();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
-            return response()->json(['status' => 201], 201);
+            return response()->json(['status' => 500], 500);
         }
     }
 }

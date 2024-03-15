@@ -20,7 +20,7 @@ class CylinderController extends Controller
             $data->save();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
-            return response()->json(['status' => 201], 201);
+            return response()->json(['status' => 500], 500);
         }
     }
     public function update(Request $request, $cylinderId)
@@ -31,7 +31,7 @@ class CylinderController extends Controller
             $data->update();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
-            return response()->json(['status' => 201], 201);
+            return response()->json(['status' => 500], 500);
         }
     }
     public function delete($cylinderId)
@@ -41,7 +41,7 @@ class CylinderController extends Controller
             $data->delete();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {
-            return response()->json(['status' => 201], 201);
+            return response()->json(['status' => 500], 500);
         }
     }
 }
