@@ -102,7 +102,7 @@ export const Home = () => {
             ref={carouselRef}>
             <h1>Mobil Berdasarkan Jenis</h1>
           </div>
-          <div className="flex justify-center items-center gap-4 overflow-x-auto">
+          <div className="flex justify-start items-center gap-4 overflow-x-auto">
             {getKind && <KindItem getKind={getKind} />}
           </div>
           <div
