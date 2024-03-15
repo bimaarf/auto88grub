@@ -25,7 +25,7 @@ class VacancyController extends Controller
             'domicile' => 'required|string',
             'education' => 'required|string',
             'major' => 'required|string',
-            'file' => 'nullable|mimes:pdf',
+            'file' => 'nullable|mimes:pdf|max:2048', // Max file size is 2MB
         ]);
 
         $_data = new Application();
@@ -40,6 +40,12 @@ class VacancyController extends Controller
 
         if ($request->hasFile('file')) {
             $_file = $request->file('file');
+
+            // Check if the file size is less than 2MB (2048 kilobytes)
+            if ($_file->getSize() > 2048 * 1024) {
+                return response()->json(['error' => 'File size cannot exceed 2MB.'], 400);
+            }
+
             $_filename = time() . '-' . $_file->getClientOriginalName();
             $_directory = 'app/public/job-vacancy-application';
             $_file->move(storage_path($_directory), $_filename);

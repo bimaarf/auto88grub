@@ -30,6 +30,7 @@ import { Visit } from "./Pages/Visit";
 import { StateProvider } from "./Providers/StateProvider";
 import { PrivacyPolicy } from "./Pages/PrivacyPolicy";
 import { CareerPreview } from "./Pages/CareerPreview";
+import { PopupBanner } from "./Pages/Context/__PopupBanner";
 axios.defaults.baseURL = process.env.REACT_APP_API;
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 axios.defaults.headers.post["Content-Type"] =
@@ -58,6 +59,7 @@ function App() {
       <ToastContainer autoClose={1000} hideProgressBar={true} theme="dark" />
       <Router>
         <StateProvider>
+          <PopupBanner />
           <Headers setTheme={setTheme} theme={theme} />
           <CustomSwitch>
             <Route path="/" exact element={<Home />} />
