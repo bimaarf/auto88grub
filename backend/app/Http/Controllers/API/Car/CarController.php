@@ -89,9 +89,7 @@ class CarController extends Controller
                 continue;
             }
 
-            $query->where(function ($q) use ($key, $value) {
-                $q->where("car_{$key}_id", $value);
-            });
+            $query->where("car_{$key}_id", $value);
         }
 
         if (isset($input['price'])) {
@@ -102,7 +100,7 @@ class CarController extends Controller
 
         $cars = $query->paginate($perPage);
 
-        $cars->getCollection()->transform(function ($car) {
+        $cars->getCollection()->map(function ($car) {
             $car->title = $car->slug;
             $car->slug = Str::slug($car->title);
             return $car;

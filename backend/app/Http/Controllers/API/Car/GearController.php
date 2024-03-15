@@ -20,7 +20,7 @@ class GearController extends Controller
             $data->save();
             return response()->json(['stauts' => 200], 200);
         } catch (\Throwable $th) {
-            return response()->json(['stauts' => 201], 201);
+            return response()->json(['stauts' => 500], 500);
         }
     }
     public function update(Request $request, $gearId)
@@ -31,7 +31,7 @@ class GearController extends Controller
             $data->save();
             return response()->json(['stauts' => 200], 200);
         } catch (\Throwable $th) {
-            return response()->json(['stauts' => 201], 201);
+            return response()->json(['stauts' => 500], 500);
         }
     }
     public function delete($gearId)
@@ -41,7 +41,7 @@ class GearController extends Controller
             $data->delete();
             return response()->json(['stauts' => 200], 200);
         } catch (\Throwable $th) {
-            return response()->json(['stauts' => 201], 201);
+            return response()->json(['stauts' => 500], 500);
         }
     }
 }
