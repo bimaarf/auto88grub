@@ -51,7 +51,7 @@ function App() {
   const [theme, setTheme] = useState(
     secureLocalStorage.getItem("theme")
       ? secureLocalStorage.getItem("theme")
-      : "black"
+      : "sunset"
   );
   return (
     <>
