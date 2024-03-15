@@ -15,6 +15,7 @@ use App\Models\FAQ\Question;
 use App\Models\Job\Vacancy;
 use App\Models\Gallery\Slider;
 use App\Models\HighLight;
+use App\Models\Other\CustomerService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -60,6 +61,10 @@ class LandingController extends Controller
     {
         return PrivacyPolicy::all();
     }
+    private function customerService()
+    {
+        return CustomerService::all();
+    }
     private function FAQ()
     {
         return Category::with('questions')->get();
@@ -102,6 +107,7 @@ class LandingController extends Controller
         $result['privacy_policy'] = $this->privacyPolicy();
         $result['vacancies'] = $this->vacancy();
         $result['faq'] = $this->FAQ();
+        $result['customer_service'] = $this->customerService();
         return $result;
     }
 

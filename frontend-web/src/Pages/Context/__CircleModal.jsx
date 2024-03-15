@@ -1,31 +1,11 @@
 import React, { useState } from "react";
+import { useStateContext } from "../../Providers/StateProvider";
 
 export const CircleModal = () => {
+  const { state } = useStateContext();
+  const { getCompanyProfile } = state;
   const [showBubble, setShowBubble] = useState(false);
   const [shuffledNames, setShuffledNames] = useState([]);
-
-  const data = [
-    {
-      id: 1,
-      name: "Eliana",
-      no_telp: "6281347923588",
-    },
-    {
-      id: 2,
-      name: "Dea",
-      no_telp: "6281226032288",
-    },
-    {
-      id: 3,
-      name: "Lestari",
-      no_telp: "6281344386688",
-    },
-    {
-      id: 4,
-      name: "Zulfa",
-      no_telp: "6281344393388",
-    },
-  ];
 
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -43,7 +23,11 @@ export const CircleModal = () => {
         }`}></div>
       <label
         onClick={() => {
-          !showBubble && setShuffledNames(shuffleArray([...data]));
+          if (!showBubble) {
+            setShuffledNames(
+              shuffleArray([...getCompanyProfile.customer_service])
+            );
+          }
           setShowBubble((prev) => !prev);
         }}
         className="fixed z-30 scale-50 lg:scale-100 sm:bottom-10 md:bottom-0 right-0 md:right-10 cursor-pointer inline-block rounded-full duration-200 leading-normal text-white">
@@ -60,12 +44,15 @@ export const CircleModal = () => {
                   <div
                     onClick={() =>
                       window.open(
-                        `https://api.whatsapp.com/send/?phone=6281347923588&text=Halo+%2C+Saya+melihat+dari+website+untuk+mobil+&type=phone_number&app_absent=0`,
+                        `https://api.whatsapp.com/send/?phone=${
+                          shuffleArray(getCompanyProfile.customer_service)[0]
+                            .phone_number
+                        }&text=Halo+%2C+Saya+melihat+dari+website+untuk+mobil+&type=phone_number&app_absent=0`,
                         "_blank"
                       )
                     }
                     className="flex justify-end items-center gap-2 hover:scale-95 duration-300">
-                    <p className="whitespace-nowrap gap-4 skeleton bg-green-900/70 text-white px-2 rounded text-md font-medium">
+                    <p className="whitespace-nowrap gap-4 bg-green-900/70 text-white px-2 rounded text-md font-medium">
                       Telepon Sekarang
                     </p>
                     <i
@@ -78,15 +65,15 @@ export const CircleModal = () => {
                       key={key}
                       onClick={() =>
                         window.open(
-                          `https://api.whatsapp.com/send/?phone=${item.no_telp}&text=Halo+${item.name}%2C+Saya+melihat+dari+website+untuk+mobil+&type=phone_number&app_absent=0`,
+                          `https://api.whatsapp.com/send/?phone=${item.phone_number}&text=Halo+${item.name}%2C+Saya+melihat+dari+website+untuk+mobil+&type=phone_number&app_absent=0`,
                           "_blank"
                         )
                       }
                       className="flex justify-end items-center gap-2 hover:scale-95 duration-300">
-                      <p className="whitespace-nowrap gap-4 skeleton bg-orange-800/85 text-white px-2 rounded text-md font-medium">
+                      <p className="whitespace-nowrap gap-4 bg-orange-800/85 text-white px-2 rounded text-md font-medium">
                         {item.name}
                       </p>
-                      <i className="fa-brands fa-whatsapp text-green-500 text-2xl"></i>
+                      <i className="fab fa-whatsapp text-green-500 text-2xl"></i>
                     </div>
                   ))}
                 </div>
@@ -96,7 +83,7 @@ export const CircleModal = () => {
           <img
             src={require("../../Images/Icon/contact.png")}
             className={`h-40 w-40 duration-300 active:scale-95 ${
-              showBubble && "skeleton *:bg-black/5 bg-opacity-20"
+              showBubble && "*:bg-black/5 bg-opacity-20"
             }`}
             width={100}
             alt=""
