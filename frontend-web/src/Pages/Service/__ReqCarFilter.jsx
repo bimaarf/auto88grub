@@ -7,7 +7,7 @@ export async function reqCarFilter(page, perPage, data) {
       `api/car/filter/show?page=${page}&&perPage=${perPage}`,
       data
     );
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error fetching car data:", error);
     throw error;
