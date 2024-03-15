@@ -22,7 +22,8 @@ class FAQController extends Controller
     {
         try {
             $data = new Question();
-            $data->name        = $request->name;
+            $data->question        = $request->question;
+            $data->answer          = $request->answer;
             $data->faq_category_id = $request->category_id;
             $data->save();
             return response()->json(['status' => 200], 200);
@@ -35,7 +36,8 @@ class FAQController extends Controller
         try {
             $data = Question::find($questId);
             $data->faq_category_id = $request->category_id;
-            $data->name        = $request->name;
+            $data->question        = $request->question;
+            $data->answer          = $request->answer;
             $data->save();
             return response()->json(['status' => 200], 200);
         } catch (\Throwable $th) {

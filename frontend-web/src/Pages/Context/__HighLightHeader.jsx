@@ -39,7 +39,12 @@ export const HighLightHeader = ({ theme }) => {
             <div
               className="md:space-y-4 text-3xl sm:text-4xl md:text-5xl font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
-              {getHighlight ? (
+              <div className="font-extrabold md:text-6xl opacity-75">
+                <span className="text-pretty">AUTO</span>
+                <span className="text-red-500">88</span>
+                <span className="text-pretty">GROUP</span>
+              </div>
+              {/* {getHighlight ? (
                 <h1 className="font-extrabold md:text-6xl text-pretty opacity-25">
                   {getHighlight[0].title}
                 </h1>
@@ -49,7 +54,7 @@ export const HighLightHeader = ({ theme }) => {
                     <p className="h-6 w-96 skeleton bg-opacity-50"></p>
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
           {getHighlight ? (

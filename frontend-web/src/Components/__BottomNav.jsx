@@ -128,7 +128,7 @@ export const BottomNav = ({
                   <input
                     onChange={handleTheme}
                     type="checkbox"
-                    checked={theme === "black" ? true : false}
+                    checked={theme === "sunset" ? true : false}
                   />
                   {/* sun icon */}
                   <svg
