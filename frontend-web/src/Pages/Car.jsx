@@ -474,8 +474,8 @@ export const Car = () => {
               )}
             </div>
             {reachedEnd && (
-              <div className="text-center flex justify-center w-full text-gray-500 py-2">
-                <p>No more cars to load</p>
+              <div className="text-start w-full text-gray-500 py-2">
+                <p className="text-sm">No more cars to load</p>
               </div>
             )}
           </div>

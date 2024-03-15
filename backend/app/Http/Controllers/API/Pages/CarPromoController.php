@@ -55,7 +55,7 @@ class CarPromoController extends Controller
         $perPage = $request->query('perPage', 6);
         $getData = Promo::with('car')
             ->join('cars', 'cars.id', 'car_promos.car_id')
-            // ->where('car_promos.is_pinned', 1)
+            ->where('car_promos.is_pinned', 1)
             ->with([
                 'car.documents', 'car.officials', 'car.originals', 'car.outdoors',
                 'car.location', 'car.brand', 'car.model', 'car.type', 'car.cylinder', 'car.transmission', 'car.series',
