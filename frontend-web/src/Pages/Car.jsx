@@ -16,11 +16,11 @@ export const Car = () => {
   const [filteredCars, setFilteredCars] = useState(null);
   const [pageAllCar, setPageAllCar] = useState({
     page: 1,
-    perPage: 6,
+    perPage: 8,
   });
   const [pageFilteredCar, setPageFilteredCar] = useState({
     page: 1,
-    perPage: 6,
+    perPage: 8,
   });
 
   const [filterChanged, setFilterChanged] = useState(false);
@@ -71,6 +71,7 @@ export const Car = () => {
 
   const GET_ALL_CAR = async () => {
     try {
+      setLoadFetch(true);
       const response = await fetchCars(pageAllCar);
       setAllCars((prevData) => ({
         ...response.data,
@@ -78,6 +79,8 @@ export const Car = () => {
       }));
     } catch (error) {
       console.error("Error fetching cars:", error);
+    } finally {
+      setLoadFetch(false);
     }
   };
 
@@ -166,7 +169,7 @@ export const Car = () => {
   };
 
   const handleSubmit = async () => {
-    setPageFilteredCar({ page: 1, perPage: 6 }); // Setel ulang halaman ke 1 saat pengiriman filter baru
+    setPageFilteredCar({ page: 1, perPage: 8 }); // Setel ulang halaman ke 1 saat pengiriman filter baru
     setLoadFetch(true);
     try {
       await fetchFilteredCars();
@@ -176,7 +179,6 @@ export const Car = () => {
       setLoadFetch(false);
     }
   };
-
   const handleChange = async (e) => {
     e.persist();
     const { name, value } = e.target;
@@ -185,23 +187,38 @@ export const Car = () => {
       [name]: value,
     }));
 
-    // Reset the data and reachedEnd state when filters are changed
+    // Set filterChanged ke true setiap kali ada perubahan input
+    setFilterChanged(true);
+
+    // Reset state yang lain seperti yang Anda lakukan sebelumnya
     setAllCars(null);
     setFilteredCars(null);
     setReachedEnd(false);
     setPageAllCar({
       page: 1,
-      perPage: 6,
+      perPage: 8,
     });
     setPageFilteredCar({
       page: 1,
-      perPage: 6,
+      perPage: 8,
     });
-    // Fetch filtered cars
   };
+
   useEffect(() => {
-    handleSubmit();
-  }, [formInput]);
+    const fetchData = async () => {
+      try {
+        await fetchFilteredCars();
+      } catch (error) {
+        console.error("Error fetching filtered cars:", error);
+      }
+    };
+
+    // Memanggil fetchFilteredCars setiap kali ada perubahan pada formInput
+    if (filterChanged) {
+      fetchData();
+      setFilterChanged(false); // Reset filterChanged setelah diproses
+    }
+  }, [formInput, filterChanged]);
   return (
     <>
       <HighLightHeader />
