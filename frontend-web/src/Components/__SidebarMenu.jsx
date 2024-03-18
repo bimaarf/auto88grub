@@ -1,9 +1,14 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
+export const SidebarMenu = ({
+  setNavTogleBtn,
+  navTogleBtn,
+  theme,
+  setTheme,
+  dataTheme,
+}) => {
   const navRedirect = useNavigate();
-  const location = useLocation();
   return (
     <>
       <div
@@ -139,6 +144,46 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                   <p className="whitespace-nowrap">Kredit Mobil</p>
                 </h1>
               </div>
+            </div>
+          </div>
+          <div
+            className="collapse bg-transparent"
+            style={{ marginTop: "", marginLeft: "-2px" }}>
+            <input type="checkbox" />
+            <div className="collapse-title">
+              <div className="text-pretty w-52 bg-transparent bg-opacity-0 rounded-lg cursor-pointer flex justify-start items-center gap-2 text-sm">
+                <i className="fas fa-caret-down w-3.5"></i>
+                <p
+                  className={`${
+                    navTogleBtn ? "block" : "hidden"
+                  } font-normal w-11/12`}>
+                  Theme
+                </p>
+              </div>
+            </div>
+            <div className="collapse-content">
+              {dataTheme &&
+                dataTheme.map((item, key) => (
+                  <div
+                    key={key}
+                    onClick={() => {
+                      document
+                        .querySelector("html")
+                        .setAttribute("data-theme", item.themeList);
+                      setTheme(item.themeList);
+                    }}
+                    className="text-pretty w-52 hover:bg-base-300 rounded-lg cursor-pointer p-3 flex justify-start items-center gap-2 text-sm">
+                    <div className="w-1/12">
+                      <i className="fas fa-snowflake"></i>
+                    </div>
+                    <h1
+                      className={`${
+                        navTogleBtn ? "block" : "hidden"
+                      } font-normal w-11/12`}>
+                      <p className="whitespace-nowrap">{item.themeList}</p>
+                    </h1>
+                  </div>
+                ))}
             </div>
           </div>
           <div
