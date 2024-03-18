@@ -50,7 +50,7 @@ class CarMenu extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Cars',
+                    'Mobil',
                     style: TextStyle(color: Colors.white),
                   ),
                 ],

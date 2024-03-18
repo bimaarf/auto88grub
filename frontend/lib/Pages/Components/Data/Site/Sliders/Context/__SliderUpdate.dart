@@ -32,6 +32,7 @@ class _UpdateSliderPageState extends State<UpdateSliderPage> {
   File? _image;
   late String _imageUrl;
   bool _isLoading = false;
+  String _selectedCategory = '';
 
   @override
   void initState() {
@@ -61,7 +62,7 @@ class _UpdateSliderPageState extends State<UpdateSliderPage> {
         Uri.parse('${widget.baseUrl}/api/slider/update/${widget.sliderId}'),
       );
       request.headers['Authorization'] = token;
-      request.fields['category'] = _categoryController.text;
+      request.fields['category'] = _selectedCategory;
       if (_image != null) {
         request.files.add(
           await http.MultipartFile.fromPath(
@@ -126,9 +127,23 @@ class _UpdateSliderPageState extends State<UpdateSliderPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextFormField(
-              controller: _categoryController,
-              decoration: const InputDecoration(labelText: 'category'),
+            DropdownButtonFormField<String>(
+              value: _selectedCategory.isNotEmpty
+                  ? _selectedCategory
+                  : widget.category,
+              decoration: const InputDecoration(labelText: 'Category'),
+              items: ['banner', 'popup']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (String? value) {
+                setState(() {
+                  _selectedCategory = value ?? '';
+                });
+              },
             ),
             const SizedBox(height: 20),
             if (_imageUrl.isNotEmpty)

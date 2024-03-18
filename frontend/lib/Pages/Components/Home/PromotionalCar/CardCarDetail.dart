@@ -76,7 +76,7 @@ class CardCarDetail extends StatelessWidget {
       ),
       body: NotificationListener<ScrollNotification>(
         onNotification: (scrollNotification) {
-          return false;
+          return true;
         },
         child: Stack(
           children: [
@@ -106,6 +106,7 @@ class CardCarDetail extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [
@@ -176,15 +177,15 @@ class CardCarDetail extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 10),
-                          Text(
+                          const SizedBox(height: 10),
+                          const Text(
                             "*Deskripsi:",
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           Text(description),
                         ],
                       ),

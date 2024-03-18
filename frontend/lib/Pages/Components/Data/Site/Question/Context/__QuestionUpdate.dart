@@ -8,7 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UpdateQuestionPage extends StatefulWidget {
   final String questionId;
-  final String name;
+  final String question;
+  final String answer;
   final String categoryId;
   final String categoryName;
   final List<Map<String, dynamic>> categories;
@@ -17,7 +18,8 @@ class UpdateQuestionPage extends StatefulWidget {
 
   UpdateQuestionPage({
     required this.questionId,
-    required this.name,
+    required this.question,
+    required this.answer,
     required this.categoryId,
     required this.categoryName,
     required this.categories,
@@ -30,7 +32,8 @@ class UpdateQuestionPage extends StatefulWidget {
 }
 
 class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
-  TextEditingController _nameController = TextEditingController();
+  TextEditingController _questionController = TextEditingController();
+  TextEditingController _answerController = TextEditingController();
   String _token = '';
   List<Map<String, dynamic>> _category = [];
   String _selectedCategoryId = '';
@@ -40,7 +43,8 @@ class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
   @override
   void initState() {
     super.initState();
-    _nameController.text = widget.name;
+    _questionController.text = widget.question;
+    _answerController.text = widget.answer;
     _selectedCategoryId = widget.categoryId;
     _category = widget.categories;
     _loadToken();
@@ -98,7 +102,8 @@ class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
 
       Map<String, dynamic> data = {
         'category_id': _selectedCategoryId,
-        'name': _nameController.text,
+        'question': _questionController.text,
+        'answer': _answerController.text,
       };
 
       final response = await http.post(
@@ -159,12 +164,8 @@ class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
                 value: _selectedCategoryId,
                 onChanged: (String? newValue) {
                   setState(() {
-                    if (_category.any((category) =>
-                        category['faq_category_id'].toString() == newValue)) {
-                      _selectedCategoryId = newValue!;
-                    } else {
-                      _selectedCategoryId = '';
-                    }
+                    _selectedCategoryId =
+                        newValue ?? ''; // Update selected category ID
                   });
                 },
                 items: _category.map<DropdownMenuItem<String>>((category) {
@@ -176,8 +177,12 @@ class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
                 decoration: const InputDecoration(labelText: 'Category'),
               ),
             TextFormField(
-              controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Name'),
+              controller: _questionController,
+              decoration: const InputDecoration(labelText: 'Question'),
+            ),
+            TextFormField(
+              controller: _answerController,
+              decoration: const InputDecoration(labelText: 'Answer'),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
