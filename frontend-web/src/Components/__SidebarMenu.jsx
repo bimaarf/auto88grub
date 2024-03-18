@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import secureLocalStorage from "react-secure-storage";
 
 export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
   const navRedirect = useNavigate();
@@ -8,10 +7,10 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
   return (
     <>
       <div
-        className={`fixed overflow-y-auto lg:hidden top-10 h-screen z-40 p-4 duration-300 ease-in-out bg-base-100 shadow-xl xl:w-64
+        className={`fixed overflow-y-scroll h-screen lg:hidden top-10 z-40 p-4 duration-300 ease-in-out bg-base-100 shadow-xl xl:w-64
         ${navTogleBtn ? "-left-4" : "-left-80   overflow-hidden"}
         `}>
-        <div className="xl:fixed left-5 h-full space-y-3">
+        <div className="space-y-3">
           <div
             onClick={() => {
               navRedirect("/");
@@ -76,13 +75,13 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
               Testimoni
             </h1>
           </div>
-          <div className="collapse bg-transparent -mt-2">
+          <div
+            className="collapse bg-transparent"
+            style={{ marginTop: "", marginLeft: "-2px" }}>
             <input type="checkbox" defaultChecked />
             <div className="collapse-title">
               <div className="text-pretty w-52 bg-transparent bg-opacity-0 rounded-lg cursor-pointer flex justify-start items-center gap-2 text-sm">
-                <div className="w-1/12">
-                  <i className="fas fa-caret-down"></i>
-                </div>
+                <i className="fas fa-caret-down w-3.5"></i>
                 <p
                   className={`${
                     navTogleBtn ? "block" : "hidden"
@@ -142,11 +141,13 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
               </div>
             </div>
           </div>
-          <div className="collapse bg-transparent -mt-4">
+          <div
+            className="collapse bg-transparent"
+            style={{ marginTop: "-1.5px", marginLeft: "-2px" }}>
             <input type="checkbox" defaultChecked />
             <div className="collapse-title">
               <div className="text-pretty w-52 bg-transparent bg-opacity-0 rounded-lg cursor-pointer flex justify-start items-center gap-2 text-sm">
-                <i className="fas fa-caret-down"></i>
+                <i className="fas fa-caret-down w-3.5"></i>
                 <p>Lihat Lebih</p>
               </div>
             </div>
@@ -232,6 +233,7 @@ export const SidebarMenu = ({ setNavTogleBtn, navTogleBtn }) => {
                 Karir
               </h1>
             </div>
+            <div className="h-32"></div>
           </div>
           {/* {secureLocalStorage.getItem("auth_token") && (
             <>

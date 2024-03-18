@@ -5,7 +5,7 @@ export const Footer = () => {
     <div>
       <div className="bg-black/90 md:px-20 md:py-10 pt-4 p-10 rounded-t-3xl">
         {/* <div className="md:flex justify-between items-start md:gap-10 mx-3">
-          <div className="text-white pt-2">
+          <div className="text-pretty pt-2">
             <h1 className="font-medium">Alamat</h1>
             <p className="mt-4 ml-2 w-2/3">
               Auto Mobil88 (Depan Raja Uduk / Bank Danamon Serdam / 350m dari
@@ -14,7 +14,7 @@ export const Footer = () => {
             </p>
           </div>
         </div> */}
-        <div className="md:flex justify-center items-center gap-10">
+        <div className="md:flex justify-center items-center text-white gap-10">
           <div>
             <h1 className="mt-4 font-medium">Instagram</h1>
             <div className="mt-4 flex items-center gap-2">

@@ -30,17 +30,21 @@
 
 body {
   margin: 0;
+  /* font-family: "Roboto", "Oxygen", "Segoe UI", sans-serif, -apple-system; */
+  /* 
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+    sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-code {
+.text-shadow {
+  text-shadow: 3px 3px 3px #ababab;
+}
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
+} */
 
 .blurry-background {
   position: relative;

@@ -27,7 +27,7 @@ export const CarouselTestimony = () => {
                 <div
                   onClick={() => window.open(item.link, "_blank")}
                   key={key}
-                  className="my-4 p-3 bg-base-300/50 shadow-lg hover:brightness-125 fade-in-left cursor-pointer duration-300">
+                  className="my-4 p-3 text-shadow bg-base-300/50 shadow-lg hover:brightness-125 fade-in-left cursor-pointer duration-300">
                   <div className="flex justify-center space-y-2">
                     <img
                       draggable={false}

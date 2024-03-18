@@ -84,6 +84,7 @@ Route::controller(VacancyController::class)->group(function () {
 Route::controller(LandingController::class)->group(function () {
     Route::get('highlight/show', 'hlShow');
     Route::get('slider/show', 'sliderShow');
+    Route::get('popup/show', 'popupShow');
     Route::get('company/profile/show', 'getCompanyProfile');
 });
 
@@ -93,6 +94,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::group(['prefix' => 'slider'], function () {
         Route::controller(SliderController::class)->group(function () {
             Route::get('/category/view', 'categView');
+            Route::get('/view', 'view');
             Route::get('/view', 'view');
             Route::post('/store', 'store');
             Route::post('/update/{sliderId}', 'update');

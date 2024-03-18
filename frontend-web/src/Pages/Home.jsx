@@ -56,7 +56,7 @@ export const Home = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="z-40 md:w-11/12 md:container sm:mx-1 md:mx-auto mt-40 md:px-40 bg-transparent">
+      <div className="z-40 w-11/12 md:container sm:mx-1 mx-auto md:px-40 bg-transparent">
         <div
           className="shadow-2xl md:rounded-badge fade-in-left mt-20"
           ref={carouselRef}>
@@ -67,7 +67,7 @@ export const Home = () => {
           )}
         </div>
       </div>
-      <div className="mt-40 rounded-t-xl md:container md:mx-auto">
+      <div className="md:mt-40 rounded-t-xl md:container md:mx-auto">
         <div className="md:w-11/12 mx-auto mt-10 z-30 ">
           <div className="flex justify-center">
             <div
@@ -78,7 +78,7 @@ export const Home = () => {
               </div>
             </div>
           </div>
-          <div className="flex justify-center gap-4 brounded-lg p-4">
+          <div className="flex justify-center gap-4 rounded-lg p-4">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {getRecCars ? (
                 <ListNewCar getNewCars={getRecCars.data} />
@@ -153,16 +153,14 @@ export const Home = () => {
         <div className="md:mx-auto sm:mx-2 mt-10 z-30 slate-100 md:container">
           <div className="flex justify-center">
             <div
-              className="md:space-y-4 sm:text-xl whitespace-nowrap  p-4  font-bold text-center"
+              className="md:space-y-4 sm:text-xl whitespace-nowrap p-4 font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
-              <div
-                className="md:p-10 slide-in fade-in-left md:space-y-10 md:text-4xl lg:text-4xl element"
-                ref={carouselRef}>
-                <h1 className="slide-in fade-in-left">Mobil Terbaru</h1>
+              <div className="md:p-10 md:space-y-10 md:text-4xl lg:text-4xl">
+                <h1>Mobil Terbaru</h1>
               </div>
             </div>
           </div>
-          <div className="flex justify-center gap-4">
+          <div className="flex justify-center gap-4 rounded-lg p-4">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {getNewCars ? (
                 <ListNewCar getNewCars={getNewCars} />

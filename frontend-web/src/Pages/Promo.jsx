@@ -215,19 +215,18 @@ export const Promo = () => {
       }
     };
 
-    // Memanggil fetchFilteredCars setiap kali ada perubahan pada formInput
     if (filterChanged) {
       fetchData();
-      setFilterChanged(false); // Reset filterChanged setelah diproses
+      setFilterChanged(false);
     }
   }, [formInput, filterChanged]);
   return (
     <>
       <HighLightHeader />
-      <div className="lg:container shadow bg-base-100 rounded-xl -mt-10 p-4 sm:mx-1 lg:mx-auto">
+      <div className="lg:container shadow bg-base-100 rounded-xl p-4 sm:mx-1 lg:mx-auto">
         <div className="md:flex justify-center items-start align-top gap-4">
-          <div className="sm:w-full md:w-1/4 md:border-r md:sticky md:top-16 md:pb-32 space-y-5 overflow-y-scroll max-h-screen pr-4">
-            <div className="collapse collapse-arrow w-full bg-opacity-0 mt-4">
+          <div className="sm:w-full md:w-1/4 md:border-r md:sticky md:top-16 md:pb-32 space-y-5 overflow-y-auto pr-4">
+            <div className="collapse collapse-arrow top-0 w-full bg-opacity-0 mt-4">
               <div className="collapse-title">
                 <div className="text-md font-medium pb-2 w-full border-b border-dashed mb-4">
                   <p>Filter Mobil</p>
@@ -237,7 +236,7 @@ export const Promo = () => {
                 type="checkbox"
                 defaultChecked={window.innerWidth <= 768 ? false : true}
               />
-              <div className="collapse-content  space-y-4">
+              <div className="collapse-content space-y-4">
                 <div className="space-y-2">
                   {/* <TESelect data={dataPrice} /> */}
                   <label htmlFor="price" className="font-semibold">
