@@ -91,6 +91,9 @@ export const Headers = ({ setTheme, theme }) => {
               GROUP
             </h1>
             <SidebarMenu
+              theme={theme}
+              setTheme={setTheme}
+              dataTheme={dataTheme}
               navTogleBtn={navTogleBtn}
               setNavTogleBtn={setNavTogleBtn}
             />
