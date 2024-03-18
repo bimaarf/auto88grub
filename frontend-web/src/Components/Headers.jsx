@@ -13,7 +13,7 @@ export const Headers = ({ setTheme, theme }) => {
     if (e.target.checked) {
       setTheme("sunset");
     } else {
-      setTheme("luxury");
+      setTheme("pastel");
     }
   };
   useEffect(() => {

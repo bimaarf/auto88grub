@@ -40,6 +40,7 @@ class _UpdateVacancyPageState extends State<UpdateVacancyPage> {
   TextEditingController _conditionController = TextEditingController();
   String _token = '';
   bool _isLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -65,7 +66,7 @@ class _UpdateVacancyPageState extends State<UpdateVacancyPage> {
     });
     try {
       String baseUrl = dotenv.env['BASE_URL']!;
-      String token = 'Bearer $_token'; // Add your token retrieval logic here
+      String token = 'Bearer $_token';
 
       Map<String, String> headers = {
         'Authorization': 'Bearer $token',
@@ -90,7 +91,7 @@ class _UpdateVacancyPageState extends State<UpdateVacancyPage> {
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('vacancy updated successfully'),
+            content: Text('Vacancy updated successfully'),
             duration: Duration(seconds: 2),
           ),
         );
@@ -99,14 +100,13 @@ class _UpdateVacancyPageState extends State<UpdateVacancyPage> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('vacancy updated err'),
+            content: Text('Failed to update vacancy'),
             duration: Duration(seconds: 2),
           ),
         );
         print('Failed to update vacancy: ${response.statusCode}');
       }
     } catch (e) {
-      // Error updating vacancy
       print('Error updating vacancy: $e');
     } finally {
       setState(() {
@@ -119,7 +119,7 @@ class _UpdateVacancyPageState extends State<UpdateVacancyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update vacancy'),
+        title: const Text('Update Vacancy'),
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
@@ -129,27 +129,53 @@ class _UpdateVacancyPageState extends State<UpdateVacancyPage> {
           children: [
             TextFormField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Name'),
+              decoration: const InputDecoration(
+                labelText: 'Name',
+              ),
             ),
             TextFormField(
               controller: _departmentController,
-              decoration: const InputDecoration(labelText: 'Department'),
+              decoration: const InputDecoration(
+                labelText: 'Department',
+              ),
             ),
             TextFormField(
               controller: _experienceController,
-              decoration: const InputDecoration(labelText: 'Experience'),
+              decoration: const InputDecoration(
+                labelText: 'Experience',
+              ),
             ),
             TextFormField(
               controller: _placementController,
-              decoration: const InputDecoration(labelText: 'Placement'),
+              decoration: const InputDecoration(
+                labelText: 'Placement',
+              ),
             ),
-            TextFormField(
-              controller: _descriptionController,
-              decoration: const InputDecoration(labelText: 'Description'),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _descriptionController,
+                    maxLines: 4, // Set max lines for multiple lines of text
+                    decoration: const InputDecoration(
+                      labelText: 'Description',
+                    ),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    // Your logic when suffix icon is pressed
+                  },
+                  icon: const Icon(Icons.attach_file_rounded),
+                ),
+              ],
             ),
             TextFormField(
               controller: _conditionController,
-              decoration: const InputDecoration(labelText: 'Condition'),
+              decoration: const InputDecoration(
+                labelText: 'Condition',
+              ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(

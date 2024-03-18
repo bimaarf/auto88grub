@@ -4,6 +4,15 @@ import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarDetail.dart
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardImage.dart';
 import 'package:intl/intl.dart';
 
+class CardCardItem extends StatefulWidget {
+  final Map<String, dynamic> carData;
+
+  const CardCardItem({Key? key, required this.carData}) : super(key: key);
+
+  @override
+  State<CardCardItem> createState() => _CardCardItemState();
+}
+
 class CarPage extends StatefulWidget {
   const CarPage({Key? key}) : super(key: key);
 
@@ -11,35 +20,92 @@ class CarPage extends StatefulWidget {
   State<CarPage> createState() => _CarPageState();
 }
 
-class _CarPageState extends State<CarPage> {
-  late List<Map<String, dynamic>> _dataCars;
-  bool _isLoading = true;
+class _CardCardItemState extends State<CardCardItem> {
+  double scaleValue = 1.0;
+  late String formattedPrice;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: (_) {
+        setState(() {
+          scaleValue = 0.98;
+        });
+      },
+      onTapUp: (_) {
+        setState(() {
+          scaleValue = 1.0;
+        });
+        _navigateToDetailCar(context);
+      },
+      onTapCancel: () {
+        setState(() {
+          scaleValue = 1.0;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 500),
+        transform: Matrix4.diagonal3Values(scaleValue, scaleValue, 2.0),
+        child: Container(
+          width: 200,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: CardWithImage(
+            imageUrl:
+                'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
+            title: widget.carData['title']!.length > 300
+                ? widget.carData['title']!.substring(0, 300) + '...'
+                : widget.carData['title']!,
+            description: widget.carData['description'] ?? '',
+            price: formattedPrice,
+            note: widget.carData['created_at']!,
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   void initState() {
     super.initState();
-    _fetchData();
+    _formatPrice();
   }
 
-  Future<void> _fetchData() async {
-    setState(() {
-      _isLoading = true;
-    });
+  void _formatPrice() {
+    int price = widget.carData['price'];
+    formattedPrice =
+        NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(price);
+  }
 
-    try {
-      final List<Map<String, dynamic>> responseData =
-          await ServiceCarList.fetchCar();
-      setState(() {
-        _dataCars = responseData;
-      });
-    } catch (e) {
+  void _navigateToDetailCar(BuildContext context) {
+    if (widget.carData.containsKey('id') &&
+        widget.carData.containsKey('title') &&
+        widget.carData.containsKey('created_at')) {
+      // Check if description is null or empty
+      String description = widget.carData['description'] ?? '';
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CardCarDetail(
+            imageUrl:
+                'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
+            title: widget.carData['title']!,
+            subtitle: formattedPrice,
+            description: description,
+            note: widget.carData['created_at']!,
+          ),
+        ),
+      );
+    } else {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text("Error"),
-            content:
-                const Text("Failed to fetch data. Please try again later."),
+            content: const Text("Missing car details. Unable to navigate."),
             actions: <Widget>[
               TextButton(
                 child: const Text("OK"),
@@ -51,12 +117,13 @@ class _CarPageState extends State<CarPage> {
           );
         },
       );
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
     }
   }
+}
+
+class _CarPageState extends State<CarPage> {
+  late List<Map<String, dynamic>> _dataCars;
+  bool _isLoading = true;
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,61 +194,32 @@ class _CarPageState extends State<CarPage> {
             ),
     );
   }
-}
-
-class CardCardItem extends StatefulWidget {
-  final Map<String, dynamic> carData;
-
-  const CardCardItem({Key? key, required this.carData}) : super(key: key);
-
-  @override
-  State<CardCardItem> createState() => _CardCardItemState();
-}
-
-class _CardCardItemState extends State<CardCardItem> {
-  double scaleValue = 1.0;
-  late String formattedPrice;
 
   @override
   void initState() {
     super.initState();
-    _formatPrice();
+    _fetchData();
   }
 
-  void _formatPrice() {
-    int price = widget.carData['price'];
-    formattedPrice =
-        NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(price);
-  }
+  Future<void> _fetchData() async {
+    setState(() {
+      _isLoading = true;
+    });
 
-  void _navigateToDetailCar(BuildContext context) {
-    print('Car Data: ${widget.carData}');
-    print('Keys: ${widget.carData.keys.toList()}');
-
-    if (widget.carData.containsKey('id') &&
-        widget.carData.containsKey('title') &&
-        widget.carData.containsKey('description') &&
-        widget.carData.containsKey('created_at')) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => CardCarDetail(
-            imageUrl:
-                'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-            title: widget.carData['title']!,
-            subtitle: formattedPrice,
-            description: widget.carData['description']!,
-            note: widget.carData['created_at']!,
-          ),
-        ),
-      );
-    } else {
+    try {
+      final List<Map<String, dynamic>> responseData =
+          await ServiceCarList.fetchCar();
+      setState(() {
+        _dataCars = responseData;
+      });
+    } catch (e) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text("Error"),
-            content: const Text("Missing car details. Unable to navigate."),
+            content:
+                const Text("Failed to fetch data. Please try again later."),
             actions: <Widget>[
               TextButton(
                 child: const Text("OK"),
@@ -193,49 +231,10 @@ class _CardCardItemState extends State<CardCardItem> {
           );
         },
       );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) {
-        setState(() {
-          scaleValue = 0.98;
-        });
-      },
-      onTapUp: (_) {
-        setState(() {
-          scaleValue = 1.0;
-        });
-        _navigateToDetailCar(context);
-      },
-      onTapCancel: () {
-        setState(() {
-          scaleValue = 1.0;
-        });
-      },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 500),
-        transform: Matrix4.diagonal3Values(scaleValue, scaleValue, 2.0),
-        child: Container(
-          width: 200,
-          height: 200,
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: CardWithImage(
-            imageUrl:
-                'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-            title: widget.carData['title']!.length > 50
-                ? widget.carData['title']!.substring(0, 50) + '...'
-                : widget.carData['title']!,
-            subtitle: formattedPrice,
-            note: widget.carData['created_at']!,
-          ),
-        ),
-      ),
-    );
   }
 }

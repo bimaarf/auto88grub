@@ -59,7 +59,8 @@ class _QuestionPageState extends State<QuestionPage> {
         MaterialPageRoute(
           builder: (context) => UpdateQuestionPage(
             questionId: question['id']?.toString() ?? '',
-            name: question['name'] ?? '',
+            question: question['question'] ?? '',
+            answer: question['answer'] ?? '',
             categoryId: question['category']['id'].toString(),
             categoryName: question['category']['name'],
             categories: questions
@@ -113,7 +114,7 @@ class _QuestionPageState extends State<QuestionPage> {
             }
           });
         },
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
         backgroundColor: Colors.white,
       ),
     );

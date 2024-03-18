@@ -11,8 +11,7 @@ class ServiceCarList {
 
   static Future<List<Map<String, dynamic>>> fetchCar() async {
     final String token = await getTokenFromStorage();
-    final String baseUrl = dotenv.env['BASE_URL'] ??
-        ''; 
+    final String baseUrl = dotenv.env['BASE_URL'] ?? '';
     final url = Uri.parse('$baseUrl/api/car/show');
 
     if (token.isNotEmpty) {

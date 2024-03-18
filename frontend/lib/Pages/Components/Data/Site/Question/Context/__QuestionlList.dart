@@ -24,7 +24,7 @@ class QuestionList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  model['name'].toUpperCase(),
+                  model['question'].toUpperCase(),
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 15),
                 ),

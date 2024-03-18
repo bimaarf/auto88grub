@@ -16,7 +16,7 @@ class TestimonyController extends Controller
 
         $result = Testimonial::join('cars', 'car_testimonials.car_id', 'cars.id')
                     ->join('car_brands', 'car_brands.id', 'cars.car_brand_id')
-                    ->select('car_testimonials.*', 'cars.slug', 'car_brands.name as brand_name') // Perbaikan disini
+                    ->select('car_testimonials.*', 'cars.slug', 'car_brands.name as brand_name')
                     ->paginate($perPage, ['*'], 'page', $page);
         $result->getCollection()->transform(function ($car) {
             $car->title = $car->slug;

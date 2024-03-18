@@ -30,8 +30,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             brightness: Brightness.dark,
             primaryColor: Colors.white,
-            iconTheme: const IconThemeData(
-                color: Colors.black), // Set icon theme color
+            iconTheme: const IconThemeData(color: Colors.black),
             colorScheme: const ColorScheme.dark(
               background: Colors.black,
             ),
@@ -39,8 +38,7 @@ class MyApp extends StatelessWidget {
           darkTheme: ThemeData(
             brightness: Brightness.dark,
             primaryColor: Colors.white,
-            iconTheme: const IconThemeData(
-                color: Colors.black), // Set icon theme color
+            iconTheme: const IconThemeData(color: Colors.black),
             colorScheme: const ColorScheme.dark(
               background: Colors.black,
             ),

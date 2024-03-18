@@ -17,7 +17,6 @@ class VacancyController extends Controller
     }
     public function apply(Request $request, $applyId)
     {
-        // Validate request data
         $validatedData = $request->validate([
             'name' => 'required|string',
             'phone_number' => 'required',
@@ -25,7 +24,7 @@ class VacancyController extends Controller
             'domicile' => 'required|string',
             'education' => 'required|string',
             'major' => 'required|string',
-            'file' => 'nullable|mimes:pdf|max:2048', // Max file size is 2MB
+            'file' => 'nullable|mimes:pdf|max:2048',
         ]);
 
         $_data = new Application();
@@ -41,7 +40,6 @@ class VacancyController extends Controller
         if ($request->hasFile('file')) {
             $_file = $request->file('file');
 
-            // Check if the file size is less than 2MB (2048 kilobytes)
             if ($_file->getSize() > 2048 * 1024) {
                 return response()->json(['error' => 'File size cannot exceed 2MB.'], 400);
             }
@@ -53,7 +51,6 @@ class VacancyController extends Controller
         }
 
         $_data->save();
-
         return response()->json(['status' => 200], 200);
     }
 

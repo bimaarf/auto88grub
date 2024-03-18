@@ -128,7 +128,7 @@ export const CareerPreview = () => {
               <div className="space-y-2">
                 <label htmlFor="job_description">Job Description</label>
                 <div
-                  className="prose"
+                  className="prose whitespace-pre"
                   dangerouslySetInnerHTML={{
                     __html: getData.description,
                   }}></div>

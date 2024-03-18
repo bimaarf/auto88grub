@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Model/Services/Cars/fetchCar.dart';
+import 'package:frontend/Pages/Components/Home/Context/ListMenu/__ListDataHoriCar.dart';
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarDetail.dart';
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardImage.dart';
 import 'package:intl/intl.dart';
@@ -68,14 +69,14 @@ class _CardCarListState extends State<CardCarList> {
         _isLoading
             ? const Center(child: CircularProgressIndicator())
             : SizedBox(
-                height: 240,
+                height: 180,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: _dataCars.length,
                   controller: _scrollController,
                   itemBuilder: (BuildContext context, int index) {
                     var item = _dataCars[index];
-                    return CardCardItem(
+                    return ListDataHoriCar(
                       carData: item,
                     );
                   },
@@ -131,7 +132,8 @@ class CardCardItem extends StatefulWidget {
 }
 
 class _CardCardItemState extends State<CardCardItem> {
-  double scaleValue = 1.0;
+  bool _isTapped = false; // Declare _isTapped variable
+
   late String formattedPrice;
 
   @override
@@ -141,9 +143,17 @@ class _CardCardItemState extends State<CardCardItem> {
   }
 
   void _formatPrice() {
-    int price = widget.carData['price'];
-    formattedPrice =
-        NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(price);
+    // Check if 'price' key exists and is not null
+    if (widget.carData.containsKey('price') &&
+        widget.carData['price'] != null) {
+      // Convert 'price' to int
+      int? price = widget.carData['price'];
+      // Format price
+      formattedPrice =
+          NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(price);
+    } else {
+      formattedPrice = 'Price not available'; // Default value if price is null
+    }
   }
 
   void _navigateToDetailCar(BuildContext context) {
@@ -152,8 +162,10 @@ class _CardCardItemState extends State<CardCardItem> {
 
     if (widget.carData.containsKey('id') &&
         widget.carData.containsKey('title') &&
-        widget.carData.containsKey('description') &&
         widget.carData.containsKey('created_at')) {
+      // Check if description is null or empty
+      String description = widget.carData['description'] ?? '';
+
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -162,7 +174,7 @@ class _CardCardItemState extends State<CardCardItem> {
                 'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
             title: widget.carData['title']!,
             subtitle: formattedPrice,
-            description: widget.carData['description']!,
+            description: description,
             note: widget.carData['created_at']!,
           ),
         ),
@@ -194,23 +206,26 @@ class _CardCardItemState extends State<CardCardItem> {
       child: GestureDetector(
         onTapDown: (_) {
           setState(() {
-            scaleValue = 0.98;
+            _isTapped = true;
           });
         },
         onTapUp: (_) {
           setState(() {
-            scaleValue = 1.0;
+            _isTapped = false;
           });
-          _navigateToDetailCar(context);
+          _navigateToDetailCar(context); // Navigate to detail car
         },
         onTapCancel: () {
           setState(() {
-            scaleValue = 1.0;
+            _isTapped = false;
           });
         },
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 500),
-          transform: Matrix4.diagonal3Values(scaleValue, scaleValue, 2.0),
+          duration: const Duration(milliseconds: 300),
+          transform: _isTapped
+              ? Matrix4.diagonal3Values(1, 0.95, 0.95)
+              : Matrix4.identity(),
+          alignment: Alignment.center,
           child: Container(
             width: 200,
             height: 200,
@@ -224,7 +239,8 @@ class _CardCardItemState extends State<CardCardItem> {
               title: widget.carData['title']!.length > 50
                   ? widget.carData['title']!.substring(0, 50) + '...'
                   : widget.carData['title']!,
-              subtitle: formattedPrice,
+              description: widget.carData['description']!,
+              price: formattedPrice,
               note: widget.carData['created_at']!,
             ),
           ),
