@@ -21,25 +21,15 @@ export const HighLightHeader = ({ theme }) => {
   }, []);
   return (
     <>
-      <div
-        className="w-full -z-40 px-20 relative top-0 overflow-hidden h-highlight"
-        style={{
-          backgroundImage: `url(${theme && theme === "black" && bgDark})`,
-          backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
-          backgroundPosition: "top left",
-          backgroundSize: "cover",
-          // filter: "blur(1px)", // Apply blur effect to the image
-        }}
-      />
+  
 
-      <div className="absolute inset-0 mt-20 flex justify-center">
+      <div className=" flex justify-center">
         <div className="md:p-20 p-8 md:rounded-xl">
           <div className="flex justify-center items-center">
             <div
               className="md:space-y-4 text-3xl sm:text-4xl md:text-5xl font-bold text-center"
               style={{ fontFamily: "'Marko One', sans-serif" }}>
-              <div className="font-extrabold md:text-6xl opacity-75">
+              <div className="font-extrabold md:text-6xl opacity-75 text-shadow">
                 <span className="text-pretty">AUTO</span>
                 <span className="text-red-500">88</span>
                 <span className="text-pretty">GROUP</span>

@@ -59,52 +59,42 @@ export const CarouselBlog = ({ getBlog }) => {
           <div key={keySlide} itemID={keySlide + 1}>
             <div className="grid sm:grid-cols-3 md:grid-cols-5 gap-4">
               {slide.map((item, key) => (
-                <div
-                  key={key}
-                  onClick={() => window.open(item.link)}
-                  className="block active:scale-95 cursor-pointer duration-300 rounded border border-base-200 max-w-[32rem] bg-base-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                  <div className="flex justify-center ">
-                    <div className="relative bg-fixed rounded bg-gradient-to-r from-black bg-black max-w-xs overflow-hidden bg-cover bg-no-repeat">
-                      {/* <div className="z-10 absolute m-2">
-                        <div className="flex w-full justify-start items-center gap-2 bg-gradient-to-r from-black bg-black/25 bg-opacity-50 p-1 rounded-xl">
+                <div key={key}>
+                  {window.innerWidth <= 768 && key > 0 ? null : (
+                    <div
+                      onClick={() => window.open(item.link)}
+                      className="block active:scale-95 cursor-pointer duration-300 rounded border border-base-200 max-w-[32rem] bg-base-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                      <div className="flex justify-center ">
+                        <div className="relative bg-fixed rounded bg-gradient-to-r from-black bg-black max-w-xs overflow-hidden bg-cover bg-no-repeat">
                           <img
-                            className="rounded-full w-6"
-                            src={require("../Images/Banner/logo-tfnCopy.png")}
+                            loading="lazy"
                             alt=""
+                            src={item.thumbnail}
+                            className="max-w-xs w-60 hover:opacity-60 opacity-70 transition duration-300 ease-in-out hover:scale-105 object-cover h-28 w-object-left-top"
                           />
-                          <h3 className="logo-text-animation-by-bimarf animate-pulse w-full block font-bold text-xs">
-                            AUTO88GROUP
-                          </h3>
                         </div>
-                      </div> */}
-                      <img
-                        loading="lazy"
-                        alt=""
-                        src={item.thumbnail}
-                        className="max-w-xs w-60 hover:opacity-60 opacity-70 transition duration-300 ease-in-out hover:scale-105 object-cover h-28 w-object-left-top"
-                      />
+                      </div>
+                      <div className="pt-5 px-7 bg-base-100 rounded shadow-sm h-28">
+                        <h1 className="font-bold whitespace-pre-wrap text-start text-pretty text-sm">
+                          {item.title.length > 30
+                            ? item.title.slice(0, 30) + "..."
+                            : item.title}
+                        </h1>
+                        <p className="text-pretty font-medium text-xs whitespace-pre-wrap text-start">
+                          {item.description.length > 50
+                            ? item.description.slice(0, 50) + "..."
+                            : item.description}
+                        </p>
+                        <div className="relative bottom-0 right-0">
+                          <p
+                            className="text-gray-400 text-end"
+                            style={{ fontSize: 10 }}>
+                            {item.created_at}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="pt-5 px-7 bg-base-100 rounded shadow-sm h-28">
-                    <h1 className="font-bold whitespace-pre-wrap text-start text-pretty text-sm">
-                      {item.title.length > 30
-                        ? item.title.slice(0, 30) + "..."
-                        : item.title}
-                    </h1>
-                    <p className="text-pretty font-medium text-xs whitespace-pre-wrap text-start">
-                      {item.description.length > 50
-                        ? item.description.slice(0, 50) + "..."
-                        : item.description}
-                    </p>
-
-                    <div className="relative bottom-0 right-0">
-                      <p
-                        className="text-gray-400 text-end"
-                        style={{ fontSize: 10 }}>
-                        {item.created_at}
-                      </p>
-                    </div>
-                  </div>
+                  )}
                 </div>
               ))}
             </div>

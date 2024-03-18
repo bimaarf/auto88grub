@@ -25,6 +25,10 @@ class LandingController extends Controller
     {
         return Slider::where('category', 'banner')->get();
     }
+    public function popupShow()
+    {
+        return Slider::where('category', 'popup')->get();
+    }
     public function hlShow()
     {
         return HighLight::all();

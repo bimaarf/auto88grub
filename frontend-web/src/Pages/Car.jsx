@@ -214,10 +214,10 @@ export const Car = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="lg:container shadow bg-base-100 rounded-xl -mt-10 p-4 sm:mx-1 lg:mx-auto">
+      <div className="lg:container shadow bg-base-100 rounded-xl p-4 sm:mx-1 lg:mx-auto">
         <div className="md:flex justify-center items-start align-top gap-4">
-          <div className="sm:w-full md:w-1/4 md:border-r md:sticky md:top-16 md:pb-32 space-y-5 overflow-y-scroll max-h-screen pr-4">
-            <div className="collapse collapse-arrow w-full bg-opacity-0 mt-4">
+          <div className="sm:w-full md:w-1/4 md:border-r md:sticky md:top-16 md:pb-32 space-y-5 overflow-y-auto pr-4">
+            <div className="collapse collapse-arrow top-0 w-full bg-opacity-0 mt-4">
               <div className="collapse-title">
                 <div className="text-md font-medium pb-2 w-full border-b border-dashed mb-4">
                   <p>Filter Mobil</p>
@@ -460,7 +460,6 @@ export const Car = () => {
                 <div className="sm:w-full md:mt-0 mt-10 md:w-3/4">
                   <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                     <ListCar allCars={allCars} />
-                    {loadFetch && <ListCarSkeleton />}
                   </div>
                 </div>
               )}

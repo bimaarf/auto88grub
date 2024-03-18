@@ -14,7 +14,7 @@ class SliderController extends Controller
     {
         $options = [
             ['category' => 'Banner'],
-            ['category' => 'Career'],
+            ['category' => 'Popup'],
         ];
         return response()->json(['data' => $options]);
     }

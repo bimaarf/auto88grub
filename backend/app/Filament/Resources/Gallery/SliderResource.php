@@ -36,6 +36,7 @@ class SliderResource extends Resource
                 Forms\Components\Select::make('category')
                     ->options([
                         'banner' => 'Banner',
+                        'popup' => 'Popup',
                     ])
                     ->required()
                     ->native(false),

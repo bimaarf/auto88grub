@@ -55,7 +55,7 @@ export const ListNewCarSkeleton = () => {
           );
         }
         return rows;
-      })([], 0, 8)}
+      })([], 0, 4)}
     </>
   );
 };

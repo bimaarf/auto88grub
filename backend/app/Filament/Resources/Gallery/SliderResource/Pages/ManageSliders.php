@@ -29,7 +29,8 @@ class ManageSliders extends ManageRecords
     public function getTabs(): array
     {
         return [
-            'banner' => \Filament\Resources\Components\Tab::make()->query(fn ($query) => $query->where('category', 'Banner')->orderBy('order_column')),
+            // 'banner' => \Filament\Resources\Components\Tab::make()->query(fn ($query) => $query->where('category', 'Banner')->orderBy('order_column')),
+            'banner' => \Filament\Resources\Components\Tab::make()->query(fn ($query) => $query->orderBy('order_column')),
         ];
     }
 }

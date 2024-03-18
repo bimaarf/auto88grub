@@ -13,7 +13,7 @@ export const Headers = ({ setTheme, theme }) => {
     if (e.target.checked) {
       setTheme("sunset");
     } else {
-      setTheme("pastel");
+      setTheme("luxury");
     }
   };
   useEffect(() => {
@@ -21,13 +21,44 @@ export const Headers = ({ setTheme, theme }) => {
     const localTheme = secureLocalStorage.getItem("theme");
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
+  const dataTheme = [
+    { themeList: "light" },
+    { themeList: "dark" },
+    { themeList: "cupcake" },
+    { themeList: "emerald" },
+    { themeList: "corporate" },
+    { themeList: "synthwave" },
+    { themeList: "retro" },
+    { themeList: "cyberpunk" },
+    { themeList: "valentine" },
+    { themeList: "halloweeen" },
+    { themeList: "garden" },
+    { themeList: "forest" },
+    { themeList: "aqua" },
+    { themeList: "lofi" },
+    { themeList: "pastel" },
+    { themeList: "fantasy" },
+    { themeList: "wireframe" },
+    { themeList: "black" },
+    { themeList: "luxury" },
+    { themeList: "dracula" },
+    { themeList: "cmyk" },
+    { themeList: "autumn" },
+    { themeList: "business" },
+    { themeList: "acid" },
+    { themeList: "lemonade" },
+    { themeList: "night" },
+    { themeList: "coffe" },
+    { themeList: "winter" },
+    { themeList: "dim" },
+    { themeList: "nord" },
+    { themeList: "sunset" },
+  ];
   return (
     <>
       <HomeMarquee />
       <div
-        className={`p-4 lg:px-10 sticky top-0 z-50 bg-base-100 odd:shadow-lg ${
-          theme === "sunset" && "border-b border-base-200"
-        } *:backdrop-blur-0 even:backdrop:shadow-lg backdrop-contrast-200 backdrop-filter backdrop-opacity-0`}>
+        className={`p-2 lg:px-10 sticky top-0 z-50 bg-base-100 shadow-md *:backdrop-blur-0 even:backdrop:shadow-lg backdrop-contrast-200 backdrop-filter backdrop-opacity-0`}>
         <div className="lg:container lg:mx-auto whitespace-nowrap">
           <div className="flex justify-between items-center">
             <label className="swap swap-rotate hover:bg-pink-600 hover:bg-opacity-25 rounded-xl p-1 scale-75 active:scale-90 duration-200">
@@ -54,7 +85,7 @@ export const Headers = ({ setTheme, theme }) => {
             </label>
             <h1
               onClick={() => navRedirect("/")}
-              className="text-xl font-medium  cursor-pointer active:scale-95 duration-300">
+              className="text-xl font-semibold cursor-pointer active:scale-95 duration-300 md:mr-20">
               AUTO
               <span className="text-red-500">88</span>
               GROUP
@@ -114,7 +145,7 @@ export const Headers = ({ setTheme, theme }) => {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-300 text-pre rounded-box w-52">
+                  className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-200 text-pre rounded-box w-52">
                   <li>
                     <div
                       onClick={() => navRedirect("/konsultasi")}
@@ -146,6 +177,44 @@ export const Headers = ({ setTheme, theme }) => {
                   tabIndex={0}
                   role="button"
                   className={`flex ${
+                    location.pathname === "/konsultasi" ||
+                    location.pathname === "/tukar-tambah" ||
+                    location.pathname === "/kredit-mobil"
+                      ? "text-red-700"
+                      : ""
+                  } cursor-pointer active:scale-95 duration-200 justify-start items-center gap-1 font-semibold text-sm`}>
+                  <p>Theme</p>
+                  <i className="fas fa-caret-down"></i>
+                </div>
+                <ul
+                  style={{ height: "80vh", width: "50vh" }}
+                  tabIndex={0}
+                  className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-200 text-pre rounded-box w-52">
+                  {dataTheme &&
+                    dataTheme.map((item, key) => (
+                      <li key={key}>
+                        <div
+                          onClick={() => {
+                            document
+                              .querySelector("html")
+                              .setAttribute("data-theme", item.themeList);
+                            setTheme(item.themeList);
+                          }}
+                          className={`${
+                            theme === item.themeList && "text-red-700"
+                          } flex justify-start items-center gap-1 hover:text-red-700 font-medium text-sm`}>
+                          <i className="fas fa-snowflake"></i>
+                          <p className="whitespace-nowrap">{item.themeList}</p>
+                        </div>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+              <div className="dropdown">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className={`flex ${
                     location.pathname === "/syarat-dan-ketentuan" ||
                     location.pathname === "/tentang-kami" ||
                     location.pathname === "/kunjungi-kami"
@@ -157,7 +226,7 @@ export const Headers = ({ setTheme, theme }) => {
                 </div>
                 <ul
                   tabIndex={0}
-                  className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-300 text-pre rounded-box w-52">
+                  className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-200 text-pre rounded-box w-52">
                   <li>
                     <div
                       onClick={() => navRedirect("/syarat-dan-ketentuan")}
@@ -196,7 +265,7 @@ export const Headers = ({ setTheme, theme }) => {
                 onClick={() => navRedirect("/FAQ")}
                 className={`${
                   location.pathname === "/FAQ" ? "text-red-700" : ""
-                } flex justify-start hover:text-red-700 cursor-pointer active:scale-95 duration-200 items-center gap-1 font-medium text-sm`}>
+                } flex justify-start hover:text-red-700 cursor-pointer active:scale-95 duration-200 items-center gap-1 font-semibold text-sm`}>
                 <i className="fas fa-question"></i>
                 <p className="whitespace-nowrap">FAQ</p>
               </div>
@@ -204,19 +273,18 @@ export const Headers = ({ setTheme, theme }) => {
                 onClick={() => navRedirect("/karir")}
                 className={`${
                   location.pathname === "/karir" ? "text-red-700" : ""
-                } flex justify-start hover:text-red-700 cursor-pointer active:scale-95 duration-200 items-center gap-1 font-medium text-sm`}>
+                } flex justify-start hover:text-red-700 cursor-pointer active:scale-95 duration-200 items-center gap-1 font-semibold text-sm`}>
                 <i className="fas fa-link"></i>
                 <p className="whitespace-nowrap">Karir</p>
               </div>
               <div
                 className={`${
                   location.pathname === "/masuk" ? "text-red-700" : ""
-                } flex justify-start hover:text-red-700 cursor-pointer active:scale-95 duration-200 items-center gap-1 font-medium text-sm`}>
+                } flex justify-start hover:text-red-700 cursor-pointer active:scale-95 duration-200 items-center gap-1 font-semibold text-sm`}>
                 <i className="fas fa-sign-in"></i>
                 <p className="whitespace-nowrap">Masuk</p>
               </div>
             </div>
-            <p></p>
             <button
               onClick={() => setNavTogleBtn(navTogleBtn ? false : true)}
               className="py-2  px-4 fas fa-bars md:hidden rounded active:scale-95  hover:bg-opacity-20 duration-300 bg-basae-300 hover:bg-base-200 bg-opacity-10"></button>

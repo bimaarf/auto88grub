@@ -12,25 +12,28 @@ import "react-toastify/dist/ReactToastify.css";
 import TopBarProgress from "react-topbar-progress-indicator";
 import "./App.css";
 import { Headers } from "./Components/Headers";
+import { NotFound } from "./Components/___NotFound";
 import { About } from "./Pages/About";
 import { BlogPreview } from "./Pages/BlogPreview";
 import { Car } from "./Pages/Car";
 import { CarCredit } from "./Pages/CarCredit";
 import { CarPreview } from "./Pages/CarPreview";
 import { Career } from "./Pages/Career";
+import { CareerPreview } from "./Pages/CareerPreview";
 import { Consultation } from "./Pages/Consultation";
 import { CircleModal } from "./Pages/Context/__CircleModal";
+import { PopupBanner } from "./Pages/Context/__PopupBanner";
 import { FAQ } from "./Pages/FAQ";
 import { Home } from "./Pages/Home";
+import { PrivacyPolicy } from "./Pages/PrivacyPolicy";
 import { Promo } from "./Pages/Promo";
+import { fetchPopup } from "./Pages/Service/__FetchPopup";
 import { Terms } from "./Pages/Terms";
 import { Testimony } from "./Pages/Testimony";
 import { TradeIns } from "./Pages/TradeIns";
 import { Visit } from "./Pages/Visit";
+import ProgressBar from "./ProgressBar";
 import { StateProvider } from "./Providers/StateProvider";
-import { PrivacyPolicy } from "./Pages/PrivacyPolicy";
-import { CareerPreview } from "./Pages/CareerPreview";
-import { PopupBanner } from "./Pages/Context/__PopupBanner";
 axios.defaults.baseURL = process.env.REACT_APP_API;
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 axios.defaults.headers.post["Content-Type"] =
@@ -54,14 +57,29 @@ function App() {
       ? secureLocalStorage.getItem("theme")
       : "sunset"
   );
+  const [getPopup, setPopup] = useState(null);
+  useEffect(() => {
+    const fetchPopupService = async () => {
+      try {
+        const response = await fetchPopup();
+        setPopup(response);
+        console.log(response);
+      } catch (error) {
+        console.error("Error fetching popup:", error);
+      }
+    };
+
+    fetchPopupService();
+  }, []);
   return (
     <>
       <ToastContainer autoClose={1000} hideProgressBar={true} theme="dark" />
       <Router>
         <StateProvider>
-          <PopupBanner />
+          {getPopup && <PopupBanner getPopup={getPopup} />}
           <Headers setTheme={setTheme} theme={theme} />
           <CustomSwitch>
+            <Route path="*" exact element={<NotFound />} />
             <Route path="/" exact element={<Home />} />
             <Route path="/promo" element={<Promo />} />
             <Route path="/mobil" element={<Car />} />
@@ -78,6 +96,7 @@ function App() {
             <Route path="/karir" element={<Career />} />
             <Route path="/karir/preview" element={<CareerPreview />} />
             <Route path="/kebijakan-privasi" element={<PrivacyPolicy />} />
+            <Route path="/progress-bar" element={<ProgressBar />} />
           </CustomSwitch>
           {/* <Footer /> */}
           <CircleModal />

@@ -15,7 +15,7 @@ return new class() extends Migration
     {
         Schema::create('gallery_sliders', function (Blueprint $table) {
             $table->id();
-            $table->enum('category', ['banner']);
+            $table->enum('category', ['banner', 'popup']);
             $table->string('image');
             $table->integer('order_column')->nullable();
             $table->timestamps();
