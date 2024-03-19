@@ -229,17 +229,19 @@ export const CareerPreview = () => {
                   className="form-control bg-base-200 px-2 py-2 w-full outline-none border border-base-200 focus:border-sky-500 rounded"
                 />
               </div>
-              <div className="space-y-2 flex items-baseline flex-row-reverse gap-2">
-                <label htmlFor="fresh_graduate">
-                  Fresh Graduate / Belum pernah bekerja
-                </label>
-                <input
-                  onChange={handleChange}
-                  checked={formInput.fresh_graduate} // Pastikan checkbox dicentang berdasarkan nilai state formInput
-                  type="checkbox"
-                  name="fresh_graduate"
-                  id="fresh_graduate"
-                />
+              <div className="flex justify-start">
+                <div className="space-y-2 flex items-baseline flex-row-reverse gap-2">
+                  <label htmlFor="fresh_graduate">
+                    Fresh Graduate / Belum pernah bekerja
+                  </label>
+                  <input
+                    onChange={handleChange}
+                    checked={formInput.fresh_graduate} // Pastikan checkbox dicentang berdasarkan nilai state formInput
+                    type="checkbox"
+                    name="fresh_graduate"
+                    id="fresh_graduate"
+                  />
+                </div>
               </div>
 
               <div className="space-y-2 flex items-baseline gap-2">
@@ -278,7 +280,7 @@ export const CareerPreview = () => {
                   onChange={handleInputFile}
                 />
               </div>
-              <div className="flex justify-end items-center w-full">
+              <div className="flex justify-start items-center w-full">
                 <ReCAPTCHA
                   ref={recaptchaRef}
                   className="m-2 grecaptcha-badge"
@@ -287,7 +289,7 @@ export const CareerPreview = () => {
                   render="explicit"
                 />
               </div>
-              <div className="flex justify-end">
+              <div className="flex justify-start">
                 <button
                   disabled={isLoading || !veriCapcha ? true : false}
                   onClick={handleStore}

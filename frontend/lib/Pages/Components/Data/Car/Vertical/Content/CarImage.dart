@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarDetail.dart';
 
-class CardWithImage extends StatefulWidget {
+class CarVerticalImage extends StatefulWidget {
   final String imageUrl;
   final String title;
   final String description;
   final String price;
   final String note;
 
-  const CardWithImage({
+  const CarVerticalImage({
     Key? key,
     required this.imageUrl,
     required this.title,
@@ -18,10 +18,10 @@ class CardWithImage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _CardWithImageState createState() => _CardWithImageState();
+  _CarVerticalImageState createState() => _CarVerticalImageState();
 }
 
-class _CardWithImageState extends State<CardWithImage> {
+class _CarVerticalImageState extends State<CarVerticalImage> {
   bool _isTapped = false;
 
   @override
@@ -51,7 +51,7 @@ class _CardWithImageState extends State<CardWithImage> {
             : Matrix4.identity(),
         alignment: Alignment.center,
         child: Card(
-          color: Colors.white70.withOpacity(0.1),
+          color: Colors.white.withOpacity(0.05),
           margin: const EdgeInsets.all(5),
           child: Column(
             children: [

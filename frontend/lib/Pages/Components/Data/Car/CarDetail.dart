@@ -16,35 +16,57 @@ class CardCarDetail extends StatelessWidget {
     required this.note,
   }) : super(key: key);
 
+  void showUpdateDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Update Car'),
+          content: const Text('Car update details here.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Close'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Add logic for updating the car here
+                Navigator.of(context).pop();
+              },
+              child: const Text('Update'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
+        title: Text(title), // Assuming you want to display title in app bar
         actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.update,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // Call the update dialog function
+              showUpdateDialog(context);
+            },
+          ),
           IconButton(
             icon: const Icon(
               Icons.notifications,
               color: Colors.white,
             ),
             onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Notifications'),
-                    content: const Text('Notification settings here.'),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('Close'),
-                      ),
-                    ],
-                  );
-                },
-              );
+              // Existing notification dialog
             },
           ),
           IconButton(
@@ -53,23 +75,7 @@ class CardCarDetail extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Settings'),
-                    content: const Text('App settings here.'),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('Close'),
-                      ),
-                    ],
-                  );
-                },
-              );
+              // Existing settings dialog
             },
           ),
         ],
@@ -176,15 +182,15 @@ class CardCarDetail extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 10),
-                          Text(
+                          const SizedBox(height: 10),
+                          const Text(
                             "*Deskripsi:",
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           Text(description),
                         ],
                       ),

@@ -24,10 +24,10 @@ export const Terms = () => {
                   key % 2 === 1 && "flex-row-reverse"
                 } justify-start mb-10 gap-10`}>
                 <div
-                  className="md:w-1/2 prose"
+                  className="md:w-2/2 prose"
                   dangerouslySetInnerHTML={{ __html: item.body }}
                 />
-                <div className="md:w-1/2">
+                <div className="md:w-1/3">
                   <img
                     draggable={false}
                     loading="lazy"

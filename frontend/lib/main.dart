@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
           themeMode: ThemeMode.dark,
-          initialRoute: isLoggedIn ? '/home' : '/login',
+          initialRoute: '/',
           routes: {
             '/': (context) => NavigationBarApp(isLoggedIn: isLoggedIn),
             '/register': (context) => LoginPage(),

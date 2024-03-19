@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CardWithImage extends StatelessWidget {
+class CarImage extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String subtitle;
   final String note;
 
-  const CardWithImage({
+  const CarImage({
     Key? key,
     required this.imageUrl,
     required this.title,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Model/Services/Cars/fetchCar.dart';
-import 'package:frontend/Pages/Components/Data/Car/Horizontal/Content/CarList.dart';
+import 'package:frontend/Pages/Components/Data/Car/CarList.dart';
+import 'package:frontend/Pages/Components/Data/Car/Vertical/CarImage.dart';
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarDetail.dart';
-import 'package:frontend/Pages/Components/Home/PromotionalCar/CardImage.dart';
 import 'package:intl/intl.dart';
 
 class CarContent extends StatefulWidget {
@@ -233,7 +233,7 @@ class _PageContentState extends State<PageContent> {
               color: Colors.black,
               borderRadius: BorderRadius.circular(5),
             ),
-            child: CardWithImage(
+            child: CarVerticalImage(
               imageUrl:
                   'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
               title: widget.carData['title']!.length > 50
