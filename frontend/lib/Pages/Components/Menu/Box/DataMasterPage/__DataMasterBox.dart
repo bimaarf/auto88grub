@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Data/Master/Brand/BrandPage.dart';
-import 'package:frontend/Pages/Components/Home/Context/MasterDataBox/BrandMenu.dart';
-import 'package:frontend/Pages/Components/Home/Context/MasterDataBox/BrankasMenu.dart';
-import 'package:frontend/Pages/Components/Home/Context/MasterDataBox/ColorMenu.dart';
-import 'package:frontend/Pages/Components/Home/Context/MasterDataBox/CoordinateMenu.dart';
-import 'package:frontend/Pages/Components/Home/Context/MasterDataBox/CylinderMenu.dart';
-import 'package:frontend/Pages/Components/Home/Context/MasterDataBox/FuelMenu.dart';
-import 'package:frontend/Pages/Components/Home/Context/MasterDataBox/GearMenu.dart';
-import 'package:frontend/Pages/Components/Home/Context/MasterDataBox/KindeMenu.dart';
-import 'package:frontend/Pages/Components/Home/Context/MasterDataBox/ModelMenu.dart';
-import 'package:frontend/Pages/Components/Home/Context/MasterDataBox/SeriesMenu.dart';
-import 'package:frontend/Pages/Components/Home/Context/MasterDataBox/TransmissionMenu.dart';
-import 'package:frontend/Pages/Components/Home/Context/MasterDataBox/TypeMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/BrandMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/BrankasMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/ColorMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/CylinderMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/GearMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/KindeMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/ModelMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/TypeMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/MasterDataBox/CoordinateMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/MasterDataBox/FuelMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/MasterDataBox/SeriesMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/MasterDataBox/TransmissionMenu.dart';
 
-class ListDataMaster extends StatelessWidget {
-  const ListDataMaster({Key? key}) : super(key: key);
+class DataMasterBox extends StatelessWidget {
+  const DataMasterBox({Key? key}) : super(key: key);
 
   void _navigateToPage(BuildContext context) {
     Navigator.push(

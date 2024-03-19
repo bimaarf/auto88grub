@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
   var carItem;
 
   String? name;
-  void _navigateToProfileScreen(String name) {
+  void _navigateToProfileScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -112,7 +112,6 @@ class _HomeState extends State<Home> {
         _dataCars = responseData;
       });
     } catch (e) {
-      print('Error: $e');
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -160,20 +159,6 @@ class _HomeState extends State<Home> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Stack(
-                //   alignment: Alignment.topLeft,
-                //   children: [
-                //     Image.network(
-                //       'https://c.pxhere.com/photos/13/e8/automobile_automotive_black_and_white_car_dark_vehicle-915436.jpg!d',
-                //       fit: BoxFit.contain,
-                //     ),
-                //   ],
-                // ),
-                // CardCarList(
-                //   carItem:
-                //       carItem, // Replace with your actual list of car items
-                // ),
-
                 const Text(
                   'Administrator',
                   style: TextStyle(
@@ -401,7 +386,7 @@ class _HomeState extends State<Home> {
             child: Material(
               color: Colors.transparent,
               child: InkResponse(
-                onTap: () => _navigateToProfileScreen('Jokoww'),
+                onTap: () => _navigateToProfileScreen(),
                 splashColor: Colors.white.withOpacity(0.5),
                 highlightShape: BoxShape.rectangle,
                 containedInkWell: true,
@@ -452,7 +437,7 @@ class _HomeState extends State<Home> {
                                           color: Colors.white),
                                     ),
                                     Text(
-                                      name ?? 'User',
+                                      name ?? 'Guest',
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,

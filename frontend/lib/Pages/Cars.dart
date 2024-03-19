@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Pages/Components/Data/Car/Horizontal/CarContent.dart';
 import 'package:frontend/Pages/Components/Home/Context/ListMenu/__FirstMenuList.dart';
-import 'package:frontend/Pages/Components/Home/Context/ListMenu/__ListDataCar.dart';
-import 'package:frontend/Pages/Components/Home/Context/ListMenu/__ListDataMaster.dart';
-import 'package:frontend/Pages/Components/Home/Context/ListMenu/__ListDataSite.dart';
-import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarList.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/__DataMasterBox.dart';
+import 'package:frontend/Pages/Components/Menu/Box/GeneralPage/__GeneralBox.dart';
+import 'package:frontend/Pages/Components/Menu/Box/LandingPage/__LandingPage.dart';
 import 'package:frontend/Pages/Profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Cars extends StatefulWidget {
   const Cars({
@@ -19,10 +20,9 @@ class Cars extends StatefulWidget {
 }
 
 class _CarsState extends State<Cars> {
-  // Function to navigate to the profile screen
+  String? name;
 
-  void _navigateToProfileScreen(String profileName) {
-    // Use Navigator to push a new route
+  void _navigateToProfileScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -34,6 +34,11 @@ class _CarsState extends State<Cars> {
   @override
   void initState() {
     super.initState();
+    SharedPreferences.getInstance().then((prefs) {
+      setState(() {
+        name = prefs.getString('name');
+      });
+    });
   }
 
   @override
@@ -78,7 +83,7 @@ class _CarsState extends State<Cars> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const CardCarList(),
+                const CarContent(),
 
                 Container(
                   margin: const EdgeInsets.only(top: 10, bottom: 10),
@@ -89,9 +94,9 @@ class _CarsState extends State<Cars> {
                   child: const FirstMenuList(),
                 ),
 
-                const ListDataCar(),
-                const ListDataSite(),
-                const ListDataMaster(),
+                const GeneralBox(),
+                const LandingPage(),
+                const DataMasterBox(),
               ],
             ),
           )
@@ -110,7 +115,7 @@ class _CarsState extends State<Cars> {
             child: Material(
               color: Colors.transparent,
               child: InkResponse(
-                onTap: () => _navigateToProfileScreen('Jokow'),
+                onTap: () => _navigateToProfileScreen(),
                 splashColor: Colors.white.withOpacity(0.5),
                 highlightShape: BoxShape.rectangle,
                 containedInkWell: true,
@@ -149,11 +154,11 @@ class _CarsState extends State<Cars> {
                               Container(
                                 padding:
                                     const EdgeInsets.fromLTRB(0, 10, 4, 10),
-                                child: const Column(
+                                child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Selamat Datang,',
                                       style: TextStyle(
                                           fontSize: 12,
@@ -161,8 +166,8 @@ class _CarsState extends State<Cars> {
                                           color: Colors.white),
                                     ),
                                     Text(
-                                      'Bima Arifa R.',
-                                      style: TextStyle(
+                                      name ?? 'Guest',
+                                      style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white),

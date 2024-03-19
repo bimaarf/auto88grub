@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Data/Master/Brand/BrandPage.dart';
-import 'package:frontend/Pages/Components/Home/Context/CarDataBox/CarMenu.dart';
-import 'package:frontend/Pages/Components/Home/Context/SiteDataBox/QuestionMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/Car/_CarMenuBox.dart';
+import 'package:frontend/Pages/Components/Menu/Box/LandingPage/Question/_QuestionMenuBox.dart';
 
-class ListDataCar extends StatelessWidget {
-  const ListDataCar({Key? key}) : super(key: key);
+class GeneralBox extends StatelessWidget {
+  const GeneralBox({Key? key}) : super(key: key);
 
   void _navigateToPage(BuildContext context) {
     Navigator.push(
@@ -44,9 +44,9 @@ class ListDataCar extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(child: CarMenu()),
+            Expanded(child: CarMenuBox()),
             SizedBox(width: 10),
-            Expanded(child: FaqMenu()),
+            Expanded(child: QuestionMenuBox()),
           ],
         ),
         SizedBox(height: 8),

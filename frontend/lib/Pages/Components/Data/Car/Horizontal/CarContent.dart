@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Model/Services/Cars/fetchCar.dart';
-import 'package:frontend/Pages/Components/Home/Context/ListMenu/__ListDataHoriCar.dart';
+import 'package:frontend/Pages/Components/Data/Car/Horizontal/Content/CarList.dart';
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarDetail.dart';
 import 'package:frontend/Pages/Components/Home/PromotionalCar/CardImage.dart';
 import 'package:intl/intl.dart';
 
-class CardCarList extends StatefulWidget {
-  const CardCarList({Key? key}) : super(key: key);
+class CarContent extends StatefulWidget {
+  const CarContent({Key? key}) : super(key: key);
 
   @override
-  State<CardCarList> createState() => _CardCarListState();
+  State<CarContent> createState() => _CarContentState();
 }
 
-class _CardCarListState extends State<CardCarList> {
+class _CarContentState extends State<CarContent> {
   late List<Map<String, dynamic>> _dataCars;
   bool _isLoading = true;
   final ScrollController _scrollController = ScrollController();
@@ -65,7 +65,7 @@ class _CardCarListState extends State<CardCarList> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const MobilRow(),
+        const PageTitle(),
         _isLoading
             ? const Center(child: CircularProgressIndicator())
             : SizedBox(
@@ -76,7 +76,7 @@ class _CardCarListState extends State<CardCarList> {
                   controller: _scrollController,
                   itemBuilder: (BuildContext context, int index) {
                     var item = _dataCars[index];
-                    return ListDataHoriCar(
+                    return CarList(
                       carData: item,
                     );
                   },
@@ -87,8 +87,8 @@ class _CardCarListState extends State<CardCarList> {
   }
 }
 
-class MobilRow extends StatelessWidget {
-  const MobilRow({Key? key}) : super(key: key);
+class PageTitle extends StatelessWidget {
+  const PageTitle({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -122,16 +122,16 @@ class MobilRow extends StatelessWidget {
   }
 }
 
-class CardCardItem extends StatefulWidget {
+class PageContent extends StatefulWidget {
   final Map<String, dynamic> carData;
 
-  const CardCardItem({Key? key, required this.carData}) : super(key: key);
+  const PageContent({Key? key, required this.carData}) : super(key: key);
 
   @override
-  State<CardCardItem> createState() => _CardCardItemState();
+  State<PageContent> createState() => _PageContentState();
 }
 
-class _CardCardItemState extends State<CardCardItem> {
+class _PageContentState extends State<PageContent> {
   bool _isTapped = false; // Declare _isTapped variable
 
   late String formattedPrice;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Data/Site/Sliders/SliderPage.dart';
 
-class SliderMenu extends StatelessWidget {
-  const SliderMenu({Key? key}) : super(key: key);
+class SliderMenuBox extends StatelessWidget {
+  const SliderMenuBox({Key? key}) : super(key: key);
 
   void _navigateToPage(BuildContext context) {
     Navigator.push(

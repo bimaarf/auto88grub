@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Data/Car/CarPage.dart';
 
-class CarMenu extends StatelessWidget {
-  const CarMenu({Key? key}) : super(key: key);
+class CarMenuBox extends StatelessWidget {
+  const CarMenuBox({Key? key}) : super(key: key);
 
   void _navigateToPage(BuildContext context) {
     Navigator.push(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Data/Site/Question/QuestionPage.dart';
 
-class FaqMenu extends StatelessWidget {
-  const FaqMenu({Key? key}) : super(key: key);
+class QuestionMenuBox extends StatelessWidget {
+  const QuestionMenuBox({Key? key}) : super(key: key);
 
   void _navigateToPage(BuildContext context) {
     Navigator.push(
