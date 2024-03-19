@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Model/Services/Cars/fetchCar.dart';
+import 'package:frontend/Pages/Components/Data/Car/CarDetail.dart';
 import 'package:frontend/Pages/Components/Data/Car/Vertical/Content/CarImage.dart';
-import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarDetail.dart';
 import 'package:intl/intl.dart';
 
 class CardCardItem extends StatefulWidget {
@@ -22,7 +22,7 @@ class CarPage extends StatefulWidget {
 
 class _CardCardItemState extends State<CardCardItem> {
   double scaleValue = 1.0;
-  late String formattedPrice;
+  late String formattedPrice; // Declare formattedPrice as String
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +58,7 @@ class _CardCardItemState extends State<CardCardItem> {
             title: widget.carData['title']!.length > 300
                 ? widget.carData['title']!.substring(0, 300) + '...'
                 : widget.carData['title']!,
+            carId: widget.carData['id'] ?? '',
             description: widget.carData['description'] ?? '',
             price: formattedPrice,
             note: widget.carData['created_at']!,
@@ -89,13 +90,14 @@ class _CardCardItemState extends State<CardCardItem> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => CardCarDetail(
+          builder: (context) => CarDetail(
             imageUrl:
                 'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-            title: widget.carData['title']!,
-            subtitle: formattedPrice,
+            title: widget.carData['title'].toString(),
+            carId: widget.carData['id'].toString(), // Convert to string
+            price: formattedPrice,
             description: description,
-            note: widget.carData['created_at']!,
+            note: widget.carData['created_at'].toString(), // Convert to string
           ),
         ),
       );

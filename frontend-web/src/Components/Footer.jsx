@@ -22,7 +22,7 @@ export const Footer = () => {
               <a
                 href="https://www.instagram.com/auto88group.official"
                 target="__blank">
-                @auto88group.official
+                auto88group.official
               </a>
             </div>
           </div>
@@ -64,7 +64,7 @@ export const Footer = () => {
               <a
                 href="https://www.facebook.com/auto88group.id"
                 target="__blank">
-                @auto88group.official
+                auto88group.official
               </a>
             </div>
           </div>
@@ -73,7 +73,7 @@ export const Footer = () => {
             <div className="mt-4 flex items-center gap-2">
               <i className="fa-brands fa-twitter"></i>
               <a href="https://twitter.com/auto88group" target="__blank">
-                @auto88group
+                auto88group
               </a>
             </div>
           </div>

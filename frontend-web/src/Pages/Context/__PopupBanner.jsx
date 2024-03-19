@@ -3,17 +3,13 @@ import React, { useEffect } from "react";
 
 export const PopupBanner = ({ getPopup }) => {
   useEffect(() => {
-    // Periksa apakah cookie tersedia
     const modalShown = getCookie("modalShown");
     if (!modalShown && getPopup) {
-      // Tampilkan modal jika cookie tidak tersedia dan getPopup ada
       document.getElementById("my_modal_2").showModal();
-      // Atur cookie untuk menandai bahwa modal telah ditampilkan
-      setCookie("modalShown", "true", 2); // Reset cookie setiap 2 menit
+      setCookie("modalShown", "true", 60); 
     }
   }, [getPopup]);
 
-  // Fungsi untuk mengatur cookie
   const setCookie = (name, value, minutes) => {
     const date = new Date();
     date.setTime(date.getTime() + minutes * 60 * 1000);
@@ -21,7 +17,6 @@ export const PopupBanner = ({ getPopup }) => {
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
   };
 
-  // Fungsi untuk mendapatkan nilai cookie
   const getCookie = (name) => {
     const nameEQ = name + "=";
     const cookies = document.cookie.split(";");

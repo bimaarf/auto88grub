@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/Pages/Components/Data/Car/CarUpdate.dart'; // Import halaman update mobil yang sesuai
 
-class CardCarDetail extends StatelessWidget {
+class CarDetail extends StatelessWidget {
+  final String carId;
   final String imageUrl;
   final String title;
-  final String subtitle;
   final String note;
+  final String price; // Rename subtitle to price
   final String description;
 
-  const CardCarDetail({
+  const CarDetail({
     Key? key,
+    required this.carId,
     required this.imageUrl,
     required this.title,
-    required this.subtitle,
+    required this.price,
     required this.description,
     required this.note,
   }) : super(key: key);
@@ -32,7 +35,7 @@ class CardCarDetail extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                // Add logic for updating the car here
+                // Ganti dengan logika update mobil yang sesuai
                 Navigator.of(context).pop();
               },
               child: const Text('Update'),
@@ -52,16 +55,6 @@ class CardCarDetail extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: const Icon(
-              Icons.update,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // Call the update dialog function
-              showUpdateDialog(context);
-            },
-          ),
-          IconButton(
-            icon: const Icon(
               Icons.notifications,
               color: Colors.white,
             ),
@@ -69,14 +62,20 @@ class CardCarDetail extends StatelessWidget {
               // Existing notification dialog
             },
           ),
-          IconButton(
-            icon: const Icon(
-              Icons.settings,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // Existing settings dialog
+          PopupMenuButton<String>(
+            onSelected: (String result) {
+              // Handle menu item selection here
             },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'settings',
+                child: Text('Settings'),
+              ),
+              const PopupMenuItem<String>(
+                value: 'about',
+                child: Text('About'),
+              ),
+            ],
           ),
         ],
       ),
@@ -199,28 +198,28 @@ class CardCarDetail extends StatelessWidget {
                 ),
               ),
             ),
-            AnimatedBuilder(
-              animation: ModalRoute.of(context)!.animation!,
-              builder: (context, child) {
-                return Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        InkWell(
-                          onTap: () {},
-                          child: const Icon(Icons.stars,
-                              color: Colors.red, size: 30),
-                        ),
-                      ],
+            Positioned(
+              bottom: 20,
+              right: 20,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Navigates to UpdateCarPage when button is pressed
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UpdateCarPage(
+                        carId: carId.toString(),
+                        imageUrl: imageUrl,
+                        title: title,
+                        price: price,
+                        description: description,
+                        note: note,
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+                child: const Text('Update Car'),
+              ),
             ),
           ],
         ),

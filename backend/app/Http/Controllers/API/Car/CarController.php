@@ -18,6 +18,7 @@ use App\Models\Main\Testimonial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
@@ -168,5 +169,15 @@ class CarController extends Controller
         $getCar->slug = Str::slug($getCar->title);
 
         return $getCar;
+    }
+    public function updateCar(Request $request, $carId)
+    {
+        $input               = Car::find($carId);
+        $input->tiele        = $request->tiele;
+        $input->description  = $request->description;
+        $input->price        = $request->price;
+        $input->save();
+        return response()->json(['status' => 200], 200);
+
     }
 }
