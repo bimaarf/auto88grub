@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarDetail.dart';
+import 'package:frontend/Pages/Components/Data/Car/CarDetail.dart';
 
 class CarVerticalImage extends StatefulWidget {
+  final int carId;
   final String imageUrl;
   final String title;
   final String description;
@@ -10,13 +11,13 @@ class CarVerticalImage extends StatefulWidget {
 
   const CarVerticalImage({
     Key? key,
+    required this.carId,
     required this.imageUrl,
     required this.title,
     required this.description,
     required this.price,
     required this.note,
   }) : super(key: key);
-
   @override
   _CarVerticalImageState createState() => _CarVerticalImageState();
 }
@@ -192,10 +193,11 @@ class _CarVerticalImageState extends State<CarVerticalImage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CardCarDetail(
+        builder: (context) => CarDetail(
+          carId: widget.carId.toString(),
+          price: widget.price,
           imageUrl: widget.imageUrl,
           title: widget.title,
-          subtitle: widget.price,
           description: widget.description,
           note: widget.note,
         ),

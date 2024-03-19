@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarDetail.dart';
+import 'package:frontend/Pages/Components/Data/Car/CarDetail.dart';
 
 class CarList extends StatefulWidget {
   final Map<String, dynamic> carData;
@@ -20,11 +20,12 @@ class _CarListState extends State<CarList> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => CardCarDetail(
+            builder: (context) => CarDetail(
               imageUrl:
                   'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
               title: widget.carData['title']!,
-              subtitle: widget.carData['price'] != null
+              carId: widget.carData['id']!,
+              price: widget.carData['price'] != null
                   ? '\$${widget.carData['price']}'
                   : 'Price not available',
               description: widget.carData['description'] ?? '',

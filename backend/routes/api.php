@@ -58,6 +58,9 @@ Route::group(['prefix' => 'car'], function () {
         Route::get('/new/show', 'getNew');
         Route::get('/preview/{slug}/{carId}', 'previewCar');
         Route::post('/filter/show', 'filter');
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::post('update/{carId}', 'updateCar');
+        });
     });
     Route::group(['prefix' => 'promo'], function () {
         Route::controller(CarPromoController::class)->group(function () {

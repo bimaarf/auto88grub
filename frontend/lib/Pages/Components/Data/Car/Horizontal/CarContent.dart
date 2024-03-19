@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Model/Services/Cars/fetchCar.dart';
+import 'package:frontend/Pages/Components/Data/Car/CarDetail.dart';
 import 'package:frontend/Pages/Components/Data/Car/CarList.dart';
-import 'package:frontend/Pages/Components/Data/Car/Vertical/CarImage.dart';
-import 'package:frontend/Pages/Components/Home/PromotionalCar/CardCarDetail.dart';
+import 'package:frontend/Pages/Components/Data/Car/Horizontal/Content/CarImage.dart';
 import 'package:intl/intl.dart';
 
 class CarContent extends StatefulWidget {
@@ -132,8 +132,7 @@ class PageContent extends StatefulWidget {
 }
 
 class _PageContentState extends State<PageContent> {
-  bool _isTapped = false; // Declare _isTapped variable
-
+  bool _isTapped = false;
   late String formattedPrice;
 
   @override
@@ -143,39 +142,51 @@ class _PageContentState extends State<PageContent> {
   }
 
   void _formatPrice() {
-    // Check if 'price' key exists and is not null
-    if (widget.carData.containsKey('price') &&
-        widget.carData['price'] != null) {
-      // Convert 'price' to int
-      int? price = widget.carData['price'];
-      // Format price
+    if (widget.carData.containsKey('price') && widget.carData['price'] is int) {
+      int price = widget.carData['price'];
       formattedPrice =
           NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(price);
     } else {
-      formattedPrice = 'Price not available'; // Default value if price is null
+      formattedPrice = 'Price not available';
     }
   }
 
   void _navigateToDetailCar(BuildContext context) {
-    print('Car Data: ${widget.carData}');
-    print('Keys: ${widget.carData.keys.toList()}');
-
     if (widget.carData.containsKey('id') &&
         widget.carData.containsKey('title') &&
         widget.carData.containsKey('created_at')) {
-      // Check if description is null or empty
-      String description = widget.carData['description'] ?? '';
+      // Extracting other fields
+      String title =
+          widget.carData['title']?.toString() ?? 'Title not available';
+      String description = widget.carData['description']?.toString() ??
+          'Description not available';
+      String imageUrl = widget.carData['imageUrl']?.toString() ?? '';
+      String createdAt = widget.carData['created_at']?.toString() ?? '';
 
+      // Handling carId
+      String carId = widget.carData['id']?.toString() ?? '';
+
+      // Handling price
+      String price;
+      if (widget.carData['price'] is int) {
+        int carPrice = widget.carData['price'];
+        price = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp')
+            .format(carPrice);
+      } else {
+        price = 'Price not available';
+      }
+
+      // Navigating to the CarDetail page with the extracted data
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => CardCarDetail(
-            imageUrl:
-                'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-            title: widget.carData['title']!,
-            subtitle: formattedPrice,
+          builder: (context) => CarDetail(
+            imageUrl: imageUrl,
+            title: title,
+            carId: carId,
+            price: price,
             description: description,
-            note: widget.carData['created_at']!,
+            note: createdAt,
           ),
         ),
       );
@@ -213,7 +224,7 @@ class _PageContentState extends State<PageContent> {
           setState(() {
             _isTapped = false;
           });
-          _navigateToDetailCar(context); // Navigate to detail car
+          _navigateToDetailCar(context);
         },
         onTapCancel: () {
           setState(() {
@@ -223,7 +234,7 @@ class _PageContentState extends State<PageContent> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           transform: _isTapped
-              ? Matrix4.diagonal3Values(1, 0.95, 0.95)
+              ? Matrix4.diagonal3Values(0.98, 1.0, 1.0)
               : Matrix4.identity(),
           alignment: Alignment.center,
           child: Container(
@@ -233,15 +244,15 @@ class _PageContentState extends State<PageContent> {
               color: Colors.black,
               borderRadius: BorderRadius.circular(5),
             ),
-            child: CarVerticalImage(
-              imageUrl:
-                  'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-              title: widget.carData['title']!.length > 50
-                  ? widget.carData['title']!.substring(0, 50) + '...'
-                  : widget.carData['title']!,
-              description: widget.carData['description']!,
+            child: CarImage(
+              imageUrl: widget.carData['imageUrl']?.toString() ?? '',
+              title:
+                  widget.carData['title']?.toString() ?? 'Title not available',
+              description: widget.carData['description']?.toString() ??
+                  'Description not available',
+              carId: widget.carData['id'].toString(),
               price: formattedPrice,
-              note: widget.carData['created_at']!,
+              note: widget.carData['created_at']?.toString() ?? '',
             ),
           ),
         ),
