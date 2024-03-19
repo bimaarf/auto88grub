@@ -3,15 +3,15 @@ import 'package:frontend/Pages/Components/Data/Master/Brand/BrandPage.dart';
 import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/BrandMenu.dart';
 import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/BrankasMenu.dart';
 import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/ColorMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/CoordinateMenu.dart';
 import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/CylinderMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/FuelMenu.dart';
 import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/GearMenu.dart';
 import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/KindeMenu.dart';
 import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/ModelMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/SeriesMenu.dart';
+import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/TransmissionMenu.dart';
 import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/DataMasterBox/TypeMenu.dart';
-import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/MasterDataBox/CoordinateMenu.dart';
-import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/MasterDataBox/FuelMenu.dart';
-import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/MasterDataBox/SeriesMenu.dart';
-import 'package:frontend/Pages/Components/Menu/Box/DataMasterPage/MasterDataBox/TransmissionMenu.dart';
 
 class DataMasterBox extends StatelessWidget {
   const DataMasterBox({Key? key}) : super(key: key);

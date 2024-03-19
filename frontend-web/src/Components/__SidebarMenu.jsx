@@ -161,7 +161,7 @@ export const SidebarMenu = ({
                 </p>
               </div>
             </div>
-            <div className="collapse-content">
+            {/* <div className="collapse-content">
               {dataTheme &&
                 dataTheme.map((item, key) => (
                   <div
@@ -184,7 +184,7 @@ export const SidebarMenu = ({
                     </h1>
                   </div>
                 ))}
-            </div>
+            </div> */}
           </div>
           <div
             className="collapse bg-transparent"

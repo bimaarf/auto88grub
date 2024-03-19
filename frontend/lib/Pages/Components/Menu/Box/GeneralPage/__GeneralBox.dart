@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Data/Master/Brand/BrandPage.dart';
-import 'package:frontend/Pages/Components/Menu/Box/Car/_CarMenuBox.dart';
+import 'package:frontend/Pages/Components/Menu/Box/GeneralPage/Car/_CarMenuBox.dart';
 import 'package:frontend/Pages/Components/Menu/Box/LandingPage/Question/_QuestionMenuBox.dart';
 
 class GeneralBox extends StatelessWidget {
