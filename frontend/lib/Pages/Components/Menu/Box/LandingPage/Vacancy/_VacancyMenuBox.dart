@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Pages/Components/Data/Site/Vacancy/VacancyPage.dart';
 
-class VacancyMenu extends StatelessWidget {
-  const VacancyMenu({Key? key}) : super(key: key);
+class VacancyMenuBox extends StatelessWidget {
+  const VacancyMenuBox({Key? key}) : super(key: key);
 
   void _navigateToPage(BuildContext context) {
     Navigator.push(
