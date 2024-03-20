@@ -45,7 +45,7 @@ class _UpdateFuelPageState extends State<UpdateFuelPage> {
     });
     try {
       String baseUrl = dotenv.env['BASE_URL']!;
-      String token = 'Bearer $_token'; // Add your token retrieval logic here
+      String token = 'Bearer $_token';
 
       Map<String, String> headers = {
         'Authorization': 'Bearer $token',

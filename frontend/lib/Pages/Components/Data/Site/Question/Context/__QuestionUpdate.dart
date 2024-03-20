@@ -71,11 +71,8 @@ class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
       });
 
       _category = await ServiceCategoryQuestion.fetchCategoryQuestion(baseUrl);
-
-      // Check if the selected category ID exists in the fetched categories
       if (!_category.any(
           (category) => category['id'].toString() == _selectedCategoryId)) {
-        // If not, set the selected category ID to the first item in the list
         _selectedCategoryId =
             _category.isNotEmpty ? _category.first['id'].toString() : '';
       }
@@ -128,7 +125,6 @@ class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
             duration: Duration(seconds: 2),
           ),
         );
-        print('Failed to update Question: ${response.statusCode}');
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -137,7 +133,6 @@ class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
           duration: Duration(seconds: 2),
         ),
       );
-      print('Error updating Question: $e');
     } finally {
       setState(() {
         _isLoading = false;

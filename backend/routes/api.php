@@ -58,10 +58,11 @@ Route::group(['prefix' => 'car'], function () {
         Route::get('/new/show', 'getNew');
         Route::get('/preview/{slug}/{carId}', 'previewCar');
         Route::post('/filter/show', 'filter');
-        Route::middleware('auth:sanctum')->group(function () {
-            Route::post('update/{carId}', 'updateCar');
-        });
+        // Route::middleware('auth:sanctum')->group(function () {
+        //     Route::post('update/{carId}', 'updateCar');
+        // });
     });
+
     Route::group(['prefix' => 'promo'], function () {
         Route::controller(CarPromoController::class)->group(function () {
             Route::get('show', 'showPromo');
@@ -92,9 +93,13 @@ Route::controller(LandingController::class)->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::controller(CarController::class)->group(function () {
+        Route::post('car/update/{carId}', 'updateCar');
+    });
 
     Route::post('logout', [AuthController::class, 'logout']);
     Route::group(['prefix' => 'slider'], function () {
+
         Route::controller(SliderController::class)->group(function () {
             Route::get('/category/view', 'categView');
             Route::get('/view', 'view');
