@@ -38,7 +38,9 @@ dependencies:
   file_picker: ^6.1.1
   permission_handler: ^11.3.0
   text_area: ^0.0.3
-  flash: ^3.1.0
+  # flash: ^3.1.0
+  flutter_native_splash: ^2.4.0
+
   getwidget: ^4.0.0
   # html_editor_enhanced: ^2.5.1
 # flutter:
@@ -62,6 +64,12 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+flutter_native_splash:
+  color: "#000000" # warna latar belakang
+  image: lib/Assets/logo.png # path ke gambar splash screen
+  android: true
+  ios: true
+
 flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

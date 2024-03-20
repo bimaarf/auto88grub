@@ -5,7 +5,7 @@ import 'package:frontend/Pages/Cars.dart';
 import 'package:frontend/Pages/Home.dart';
 import 'package:frontend/Pages/Profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:getwidget/getwidget.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 Future<String?> initializeToken() async {
   final prefs = await SharedPreferences.getInstance();
@@ -15,8 +15,11 @@ Future<String?> initializeToken() async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await dotenv.load();
   runApp(MyApp());
+  FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatelessWidget {
