@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CarImage extends StatefulWidget {
+class CarHorizonImage extends StatefulWidget {
   final String carId;
   final String imageUrl;
   final String title;
@@ -8,7 +8,7 @@ class CarImage extends StatefulWidget {
   final String note;
   final String description;
 
-  const CarImage({
+  const CarHorizonImage({
     Key? key,
     required this.carId,
     required this.imageUrl,
@@ -19,10 +19,10 @@ class CarImage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CarImage> createState() => _CarImageState();
+  State<CarHorizonImage> createState() => _CarHorizonImageState();
 }
 
-class _CarImageState extends State<CarImage> {
+class _CarHorizonImageState extends State<CarHorizonImage> {
   @override
   Widget build(BuildContext context) {
     return Card(
