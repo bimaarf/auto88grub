@@ -23,13 +23,13 @@ class _CarListState extends State<CarList> {
             builder: (context) => CarDetail(
               imageUrl:
                   'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
-              title: widget.carData['title']!,
-              carId: widget.carData['id']!,
+              title: widget.carData['title']!.toString(),
+              carId: widget.carData['id']!.toString(),
               price: widget.carData['price'] != null
                   ? '\$${widget.carData['price']}'
                   : 'Price not available',
               description: widget.carData['description'] ?? '',
-              note: widget.carData['created_at']!,
+              note: widget.carData['created_at']!.toString(),
             ),
           ),
         );

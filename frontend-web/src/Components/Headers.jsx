@@ -175,7 +175,7 @@ export const Headers = ({ setTheme, theme }) => {
                   </li>
                 </ul>
               </div>
-              <div className="dropdown">
+              {/* <div className="dropdown">
                 <div
                   tabIndex={0}
                   role="button"
@@ -212,7 +212,7 @@ export const Headers = ({ setTheme, theme }) => {
                       </li>
                     ))}
                 </ul>
-              </div>
+              </div> */}
               <div className="dropdown">
                 <div
                   tabIndex={0}

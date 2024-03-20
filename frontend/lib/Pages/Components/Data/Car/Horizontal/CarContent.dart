@@ -144,8 +144,8 @@ class _PageContentState extends State<PageContent> {
   void _formatPrice() {
     if (widget.carData.containsKey('price') && widget.carData['price'] is int) {
       int price = widget.carData['price'];
-      formattedPrice =
-          NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(price);
+      formattedPrice = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp')
+          .format(price.toDouble());
     } else {
       formattedPrice = 'Price not available';
     }

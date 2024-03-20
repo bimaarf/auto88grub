@@ -6,7 +6,7 @@ class CarDetail extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String note;
-  final String price; // Rename subtitle to price
+  final String price;
   final String description;
 
   const CarDetail({
@@ -51,7 +51,7 @@ class CarDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(title), // Assuming you want to display title in app bar
+        title: const Text('Car Detail'), // Change title to 'Car Detail'
         actions: <Widget>[
           IconButton(
             icon: const Icon(
