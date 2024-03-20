@@ -281,6 +281,7 @@ export const Headers = ({ setTheme, theme }) => {
                 <p className="whitespace-nowrap">Karir</p>
               </div>
               <div
+              onClick={() => window.location.href = process.env.REACT_APP_API}
                 className={`${
                   location.pathname === "/masuk" ? "text-red-700" : ""
                 } flex justify-start hover:text-red-700 cursor-pointer active:scale-95 duration-200 items-center gap-1 font-semibold text-sm`}>

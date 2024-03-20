@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:getwidget/getwidget.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -44,6 +45,11 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (response.statusCode == 200) {
+        GFToast.showToast(
+          'You are logged in!',
+          context,
+          toastPosition: GFToastPosition.BOTTOM,
+        );
         final responseData = jsonDecode(response.body);
         final token = responseData['data']['token'];
         final name = responseData['data']['name'];
@@ -66,16 +72,24 @@ class _LoginPageState extends State<LoginPage> {
           _isLoading = false;
         });
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Server error'),
-            duration: Duration(seconds: 2),
-          ),
+        GFToast.showToast(
+          'There is something wrong!',
+          context,
+          toastPosition: GFToastPosition.BOTTOM,
         );
         setState(() {
           _isLoading = false;
         });
       }
+    } else {
+      GFToast.showToast(
+        'Enter data correctly!',
+        context,
+        toastPosition: GFToastPosition.BOTTOM,
+      );
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -102,7 +116,14 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     TextFormField(
                       key: const ValueKey('email'),
-                      decoration: const InputDecoration(labelText: 'Email'),
+                      decoration: InputDecoration(
+                        hintText: 'Enter rabbit number',
+                        border: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.amber, width: 4),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter an email';
@@ -119,8 +140,15 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                     TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Enter rabbit number',
+                        border: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: Colors.amber, width: 4),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
                       key: const ValueKey('password'),
-                      decoration: const InputDecoration(labelText: 'Password'),
                       obscureText: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -152,6 +180,12 @@ class _LoginPageState extends State<LoginPage> {
                         child: const Text('Login'),
                       ),
                     ),
+                    // GFButton(
+                    //   onPressed: _trySubmit,
+                    //   text: 'Update Car',
+                    //   size: GFSize.LARGE,
+                    //   blockButton: true,
+                    // ),
                   ],
                 ),
               ),

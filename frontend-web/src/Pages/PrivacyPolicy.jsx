@@ -27,7 +27,7 @@ export const PrivacyPolicy = () => {
                   className="md:w-1/2 prose"
                   dangerouslySetInnerHTML={{ __html: item.body }}
                 /> */}
-                <div className="md:w-full whitespace-pre-line prose">
+                <div className="md:w-full whitespace-pre-line text-justify prose">
                   {item.body}
                 </div>
                 {item.image && (
