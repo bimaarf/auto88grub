@@ -167,17 +167,20 @@ class CarController extends Controller
 
         $getCar->title = $getCar->slug;
         $getCar->slug = Str::slug($getCar->title);
-
         return $getCar;
     }
+
     public function updateCar(Request $request, $carId)
     {
-        $input               = Car::find($carId);
-        $input->tiele        = $request->tiele;
-        $input->description  = $request->description;
-        $input->price        = $request->price;
-        $input->save();
-        return response()->json(['status' => 200], 200);
-
+        try {
+            $input               = Car::find($carId);
+            $input->slug        = $request->title;
+            $input->description  = $request->description;
+            $input->price        = $request->price;
+            $input->save();
+            return response()->json(['status' => 200], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 500], 500);
+        }
     }
 }

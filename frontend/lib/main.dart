@@ -5,6 +5,7 @@ import 'package:frontend/Pages/Cars.dart';
 import 'package:frontend/Pages/Home.dart';
 import 'package:frontend/Pages/Profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:getwidget/getwidget.dart';
 
 Future<String?> initializeToken() async {
   final prefs = await SharedPreferences.getInstance();
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
         final String? token = snapshot.data;
         final isLoggedIn = token != null;
         return MaterialApp(
+          title: 'GetWidget',
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             brightness: Brightness.dark,
             primaryColor: Colors.white,
@@ -46,7 +49,9 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.dark,
           initialRoute: '/',
           routes: {
-            '/': (context) => NavigationBarApp(isLoggedIn: isLoggedIn),
+            '/': (context) => isLoggedIn
+                ? NavigationBarApp(isLoggedIn: isLoggedIn)
+                : LoginPage(),
             '/register': (context) => LoginPage(),
             '/home': (context) => NavigationBarApp(isLoggedIn: isLoggedIn),
             '/profile': (context) => const ProfileScreen(),

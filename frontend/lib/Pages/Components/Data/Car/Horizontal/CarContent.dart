@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/Model/Services/Cars/fetchCar.dart';
 import 'package:frontend/Pages/Components/Data/Car/CarDetail.dart';
 import 'package:frontend/Pages/Components/Data/Car/CarList.dart';
-import 'package:frontend/Pages/Components/Data/Car/Horizontal/Content/CarImage.dart';
+import 'package:frontend/Pages/Components/Data/Car/Horizontal/Content/CarHorizonImage.dart';
 import 'package:intl/intl.dart';
 
 class CarContent extends StatefulWidget {
@@ -244,7 +244,7 @@ class _PageContentState extends State<PageContent> {
               color: Colors.black,
               borderRadius: BorderRadius.circular(5),
             ),
-            child: CarImage(
+            child: CarHorizonImage(
               imageUrl: widget.carData['imageUrl']?.toString() ?? '',
               title:
                   widget.carData['title']?.toString() ?? 'Title not available',

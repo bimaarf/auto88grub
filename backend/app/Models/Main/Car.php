@@ -34,7 +34,7 @@ class Car extends Model implements HasMedia
      * @var string
      */
     protected $table = 'cars';
-
+    protected $fillable = ['title', 'description', 'price'];
     public function promos(): HasMany
     {
         return $this->hasMany(Promo::class, 'car_id');

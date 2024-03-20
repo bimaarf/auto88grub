@@ -35,7 +35,6 @@ class CarDetail extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                // Ganti dengan logika update mobil yang sesuai
                 Navigator.of(context).pop();
               },
               child: const Text('Update'),
@@ -51,7 +50,7 @@ class CarDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text('Car Detail'), // Change title to 'Car Detail'
+        title: const Text('Car Detail'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -64,9 +63,30 @@ class CarDetail extends StatelessWidget {
           ),
           PopupMenuButton<String>(
             onSelected: (String result) {
-              // Handle menu item selection here
+              if (result == 'sunting') {
+                // Navigate to the UpdateCarPage
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UpdateCarPage(
+                      carId: carId,
+                      imageUrl: imageUrl,
+                      title: title,
+                      price: price,
+                      description: description,
+                      note: note,
+                    ),
+                  ),
+                );
+              } else {
+                // Handle other menu item selections here
+              }
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'sunting',
+                child: Text('Sunting'),
+              ),
               const PopupMenuItem<String>(
                 value: 'settings',
                 child: Text('Settings'),
@@ -203,7 +223,6 @@ class CarDetail extends StatelessWidget {
               right: 20,
               child: ElevatedButton(
                 onPressed: () {
-                  // Navigates to UpdateCarPage when button is pressed
                   Navigator.push(
                     context,
                     MaterialPageRoute(
