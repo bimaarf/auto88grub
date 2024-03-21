@@ -13,7 +13,7 @@ class Login extends BasePage
         $this->form->fill([
             'email' => 'auto88grup@gmail.com',
             'password' => 'password',
-            'remember' => true,
+            'remember' => false,
         ]);
     }
 }

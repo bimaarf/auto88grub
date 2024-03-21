@@ -59,9 +59,11 @@ class _CardCardItemState extends State<CardCardItem> {
                 ? widget.carData['title']!.substring(0, 300) + '...'
                 : widget.carData['title']!,
             carId: widget.carData['id'] ?? '',
+            slug: widget.carData['slug']!,
             description: widget.carData['description'] ?? '',
             price: formattedPrice,
             note: widget.carData['created_at']!,
+            police_number: widget.carData['police_number']!,
           ),
         ),
       ),
@@ -94,10 +96,13 @@ class _CardCardItemState extends State<CardCardItem> {
             imageUrl:
                 'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
             title: widget.carData['title'].toString(),
+            slug: widget.carData['slug'].toString(),
             carId: widget.carData['id'].toString(), // Convert to string
             price: formattedPrice,
             description: description,
             note: widget.carData['created_at'].toString(), // Convert to string
+            police_number:
+                widget.carData['police_number'].toString(), // Convert to string
           ),
         ),
       );

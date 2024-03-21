@@ -25,11 +25,13 @@ class _ListDataHoriCarState extends State<ListDataHoriCar> {
                   'https://www.auto88group.com/image/car/1775/20240201113209.jpg',
               carId: widget.carData['id']!,
               title: widget.carData['title']!,
+              slug: widget.carData['slug']!,
               price: widget.carData['price'] != null
                   ? '\$${widget.carData['price']}'
                   : 'Price not available',
               description: widget.carData['description'] ?? '',
               note: widget.carData['created_at']!,
+              police_number: widget.carData['police_number']!,
             ),
           ),
         );
