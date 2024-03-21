@@ -302,6 +302,7 @@ export const Headers = ({ setTheme, theme }) => {
         setNavTogleBtn={setNavTogleBtn}
         navRedirect={navRedirect}
       />
+      
     </>
   );
 };

@@ -56,15 +56,12 @@ class AuthController extends BaseController
             return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
         }
     }
-    public function logout(Request $request): JsonResponse
+    public function logout(Request $request)
     {
-        $user           = $request->user();
-        $accessToken    = $user->currentAccessToken();
-        if ($accessToken) {
-            $accessToken->delete();
-            return response()->json(['status' => 200, 'message' => 'Logged out successfully'], 200);
-        } else {
-            return response()->json(['status' => 500, 'message' => 'No active token found'], 500);
-        }
+        $user = $request->user();
+        $accessToken = $user->currentAccessToken();
+        $accessToken->delete();
+        return response()->json(['status' => 200], 200);
     }
+
 }

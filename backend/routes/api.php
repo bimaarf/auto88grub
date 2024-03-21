@@ -93,11 +93,12 @@ Route::controller(LandingController::class)->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('logout', [AuthController::class, 'logout']);
+
     Route::controller(CarController::class)->group(function () {
         Route::post('car/update/{carId}', 'updateCar');
     });
 
-    Route::post('logout', [AuthController::class, 'logout']);
     Route::group(['prefix' => 'slider'], function () {
 
         Route::controller(SliderController::class)->group(function () {

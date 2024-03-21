@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:frontend/Pages/Components/Data/Car/CarUpdate.dart'; // Import halaman update mobil yang sesuai
+import 'package:frontend/Model/Services/Cars/fetchDetailCar.dart';
+import 'package:frontend/Pages/Components/Data/Car/CarUpdate.dart';
 
-class CarDetail extends StatelessWidget {
+class CarDetail extends StatefulWidget {
   final String carId;
   final String imageUrl;
   final String title;
@@ -9,7 +11,7 @@ class CarDetail extends StatelessWidget {
   final String note;
   final String price;
   final String description;
-  final String police_number;
+  final String policeNumber;
 
   const CarDetail({
     Key? key,
@@ -20,33 +22,37 @@ class CarDetail extends StatelessWidget {
     required this.price,
     required this.description,
     required this.note,
-    required this.police_number,
+    required this.policeNumber,
   }) : super(key: key);
 
-  void showUpdateDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Update Car'),
-          content: const Text('Car update details here.'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Close'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Update'),
-            ),
-          ],
-        );
-      },
-    );
+  @override
+  State<CarDetail> createState() => _CarDetailState();
+}
+
+class _CarDetailState extends State<CarDetail> {
+  bool isLoading = false;
+  late Map<String, dynamic> carDetail = {};
+
+  @override
+  void initState() {
+    super.initState();
+    fetchDetailCar();
+  }
+
+  Future<void> fetchDetailCar() async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+      carDetail =
+          await ServiceDetailCar.fetchCarDetail(widget.carId, widget.slug);
+    } catch (e) {
+      print('Error fetching car detail: $e');
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
@@ -54,7 +60,7 @@ class CarDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(police_number),
+        title: Text(widget.policeNumber),
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -68,22 +74,26 @@ class CarDetail extends StatelessWidget {
           PopupMenuButton<String>(
             onSelected: (String result) {
               if (result == 'update') {
-                // Navigate to the UpdateCarPage
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => UpdateCarPage(
-                      carId: carId,
-                      imageUrl: imageUrl,
-                      title: title,
-                      slug: slug,
-                      price: price,
-                      description: description,
-                      note: note,
-                      police_number: police_number,
+                      carId: widget.carId,
+                      imageUrl: widget.imageUrl,
+                      title: widget.title,
+                      slug: widget.slug,
+                      price: widget.price,
+                      description: widget.description,
+                      note: widget.note,
+                      policeNumber: widget.policeNumber,
                     ),
                   ),
-                );
+                ).then((value) {
+                  if (value != null && value) {
+                    // Refresh detail car jika perlu
+                    fetchDetailCar();
+                  }
+                });
               } else {
                 // Handle other menu item selections here
               }
@@ -105,153 +115,50 @@ class CarDetail extends StatelessWidget {
           ),
         ],
       ),
-      body: NotificationListener<ScrollNotification>(
-        onNotification: (scrollNotification) {
-          return false;
-        },
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.network(
-                      imageUrl,
-                      height: 275,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                    ListTile(
-                      title: Text(
-                        title,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Container(
-                      color: Colors.black45,
-                      padding: const EdgeInsets.all(10),
-                      width: double.infinity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.car_crash,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    "MPV",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(width: 15),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.settings,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    "4x2",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(width: 15),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.local_gas_station_sharp,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    "Premium",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(width: 15),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.chair,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    "3 Rows",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.network(
+                    widget.imageUrl,
+                    height: 275,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                  Container(
+                    color: Colors.black45,
+                    padding: const EdgeInsets.all(10),
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          carDetail['title'],
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const Text(
+                          'Description :',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            "*Deskripsi:",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        ),
+                        Text(
+                          carDetail['description'],
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const SizedBox(height: 5),
-                          Text(description),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            // Positioned(
-            //   bottom: 20,
-            //   right: 20,
-            //   child: ElevatedButton(
-            //     onPressed: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => UpdateCarPage(
-            //             carId: carId.toString(),
-            //             imageUrl: imageUrl,
-            //             title: title,
-            //             slug: slug,
-            //             price: price,
-            //             description: description,
-            //             note: note,
-            //             police_number: police_number,
-            //           ),
-            //         ),
-            //       );
-            //     },
-            //     child: const Text('Update Car'),
-            //   ),
-            // ),
-          ],
-        ),
-      ),
     );
   }
 }

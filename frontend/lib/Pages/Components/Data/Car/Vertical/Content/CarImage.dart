@@ -9,7 +9,7 @@ class CarVerticalImage extends StatefulWidget {
   final String description;
   final String price;
   final String note;
-  final String police_number;
+  final String policeNumber;
 
   const CarVerticalImage({
     Key? key,
@@ -20,8 +20,9 @@ class CarVerticalImage extends StatefulWidget {
     required this.description,
     required this.price,
     required this.note,
-    required this.police_number,
+    required this.policeNumber,
   }) : super(key: key);
+
   @override
   _CarVerticalImageState createState() => _CarVerticalImageState();
 }
@@ -168,7 +169,7 @@ class _CarVerticalImageState extends State<CarVerticalImage> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
                       child: Text(
-                        widget.police_number,
+                        widget.policeNumber,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: const TextStyle(
@@ -180,15 +181,13 @@ class _CarVerticalImageState extends State<CarVerticalImage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 10),
+                    margin: const EdgeInsets.only(left: 10),
                     child: Text(
                       widget.title,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
+                          fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -212,9 +211,26 @@ class _CarVerticalImageState extends State<CarVerticalImage> {
           slug: widget.slug,
           description: widget.description,
           note: widget.note,
-          police_number: widget.police_number,
+          policeNumber: widget.policeNumber,
         ),
       ),
+    );
+  }
+}
+
+class CarListGrid extends StatelessWidget {
+  final List<CarVerticalImage> cars;
+
+  const CarListGrid({Key? key, required this.cars}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.count(
+      crossAxisCount: 2,
+      crossAxisSpacing: 10.0,
+      mainAxisSpacing: 10.0,
+      padding: const EdgeInsets.all(10.0),
+      children: cars,
     );
   }
 }

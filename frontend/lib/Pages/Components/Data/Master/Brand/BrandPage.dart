@@ -25,7 +25,7 @@ class _BrandPageState extends State<BrandPage> {
   Future<void> initializeBaseUrl() async {
     await dotenv.load();
     baseUrl = dotenv.env['BASE_URL']!;
-    await fetchBrand(); // Await fetchBrand
+    await fetchBrand();
   }
 
   Future<String> getTokenFromStorage() async {
@@ -38,14 +38,10 @@ class _BrandPageState extends State<BrandPage> {
       setState(() {
         isLoading = true;
       });
-
       brands = await ServiceBrand.fetchBrands(baseUrl);
-
-      setState(() {
-        isLoading = false;
-      });
     } catch (e) {
       print('Error fetching brand data: $e');
+    } finally {
       setState(() {
         isLoading = false;
       });
