@@ -9,18 +9,22 @@ class UpdateCarPage extends StatefulWidget {
   final String carId;
   final String imageUrl;
   final String title;
+  final String slug;
   final String price;
   final String note;
   final String description;
+  final String police_number;
 
   const UpdateCarPage({
     Key? key,
     required this.carId,
     required this.imageUrl,
     required this.title,
+    required this.slug,
     required this.price,
-    required this.description,
     required this.note,
+    required this.description,
+    required this.police_number,
   }) : super(key: key);
 
   @override
@@ -79,8 +83,10 @@ class _UpdateCarPageState extends State<UpdateCarPage> {
     };
 
     try {
-      final response = await http.post(
-        Uri.parse('$baseUrl/api/car/update/${widget.carId}'),
+      final response = await http.put(
+        // Changed http.post to http.put
+        Uri.parse(
+            '$baseUrl/api/car/update/${widget.carId}'), // Changed Uri.parse to put the carId in the URL
         headers: headers,
         body: json.encode(body),
       );
@@ -133,7 +139,7 @@ class _UpdateCarPageState extends State<UpdateCarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update Car'),
+        title: Text(widget.police_number),
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(

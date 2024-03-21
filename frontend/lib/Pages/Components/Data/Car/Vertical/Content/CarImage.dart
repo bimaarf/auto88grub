@@ -5,18 +5,22 @@ class CarVerticalImage extends StatefulWidget {
   final int carId;
   final String imageUrl;
   final String title;
+  final String slug;
   final String description;
   final String price;
   final String note;
+  final String police_number;
 
   const CarVerticalImage({
     Key? key,
     required this.carId,
     required this.imageUrl,
     required this.title,
+    required this.slug,
     required this.description,
     required this.price,
     required this.note,
+    required this.police_number,
   }) : super(key: key);
   @override
   _CarVerticalImageState createState() => _CarVerticalImageState();
@@ -55,6 +59,7 @@ class _CarVerticalImageState extends State<CarVerticalImage> {
           color: Colors.white.withOpacity(0.05),
           margin: const EdgeInsets.all(5),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
                 borderRadius:
@@ -76,38 +81,8 @@ class _CarVerticalImageState extends State<CarVerticalImage> {
                   },
                 ),
               ),
-              ListTile(
-                title: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.title,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      widget.description.length > 100
-                          ? '${widget.description.substring(0, 100)}...'
-                          : widget.description,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: const TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                subtitle: Text(
-                  widget.price,
-                  style: const TextStyle(fontSize: 12),
-                ),
-              ),
               Container(
+                color: Colors.white.withOpacity(0.03),
                 padding: const EdgeInsets.all(10),
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -182,6 +157,42 @@ class _CarVerticalImageState extends State<CarVerticalImage> {
                   ],
                 ),
               ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.03),
+                      borderRadius: BorderRadius.zero,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+                      child: Text(
+                        widget.police_number,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: Text(
+                      widget.title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -198,8 +209,10 @@ class _CarVerticalImageState extends State<CarVerticalImage> {
           price: widget.price,
           imageUrl: widget.imageUrl,
           title: widget.title,
+          slug: widget.slug,
           description: widget.description,
           note: widget.note,
+          police_number: widget.police_number,
         ),
       ),
     );

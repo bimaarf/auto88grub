@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/Model/Services/Cars/fetchCar.dart';
 import 'package:frontend/Pages/Components/Data/Car/CarDetail.dart';
-import 'package:frontend/Pages/Components/Data/Car/CarList.dart';
 import 'package:frontend/Pages/Components/Data/Car/Horizontal/Content/CarHorizonImage.dart';
+import 'package:frontend/Pages/Components/Data/Car/Horizontal/Content/CarHorizonList.dart';
 import 'package:intl/intl.dart';
 
 class CarContent extends StatefulWidget {
@@ -76,7 +76,7 @@ class _CarContentState extends State<CarContent> {
                   controller: _scrollController,
                   itemBuilder: (BuildContext context, int index) {
                     var item = _dataCars[index];
-                    return CarList(
+                    return CarHorizonList(
                       carData: item,
                     );
                   },
@@ -154,19 +154,19 @@ class _PageContentState extends State<PageContent> {
   void _navigateToDetailCar(BuildContext context) {
     if (widget.carData.containsKey('id') &&
         widget.carData.containsKey('title') &&
+        widget.carData.containsKey('slug') &&
+        widget.carData.containsKey('police_number') &&
         widget.carData.containsKey('created_at')) {
-      // Extracting other fields
       String title =
           widget.carData['title']?.toString() ?? 'Title not available';
+      String slug = widget.carData['slug']?.toString() ?? 'Slug not available';
       String description = widget.carData['description']?.toString() ??
           'Description not available';
       String imageUrl = widget.carData['imageUrl']?.toString() ?? '';
       String createdAt = widget.carData['created_at']?.toString() ?? '';
+      String police_number = widget.carData['police_number']?.toString() ?? '';
 
-      // Handling carId
       String carId = widget.carData['id']?.toString() ?? '';
-
-      // Handling price
       String price;
       if (widget.carData['price'] is int) {
         int carPrice = widget.carData['price'];
@@ -176,17 +176,18 @@ class _PageContentState extends State<PageContent> {
         price = 'Price not available';
       }
 
-      // Navigating to the CarDetail page with the extracted data
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => CarDetail(
             imageUrl: imageUrl,
             title: title,
+            slug: slug,
             carId: carId,
             price: price,
             description: description,
             note: createdAt,
+            police_number: police_number,
           ),
         ),
       );
@@ -248,10 +249,12 @@ class _PageContentState extends State<PageContent> {
               imageUrl: widget.carData['imageUrl']?.toString() ?? '',
               title:
                   widget.carData['title']?.toString() ?? 'Title not available',
+              slug: widget.carData['slug']?.toString() ?? 'Slug not available',
               description: widget.carData['description']?.toString() ??
                   'Description not available',
               carId: widget.carData['id'].toString(),
               price: formattedPrice,
+              police_number: widget.carData['police_number']?.toString() ?? '',
               note: widget.carData['created_at']?.toString() ?? '',
             ),
           ),

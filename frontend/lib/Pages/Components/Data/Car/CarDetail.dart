@@ -5,18 +5,22 @@ class CarDetail extends StatelessWidget {
   final String carId;
   final String imageUrl;
   final String title;
+  final String slug;
   final String note;
   final String price;
   final String description;
+  final String police_number;
 
   const CarDetail({
     Key? key,
     required this.carId,
     required this.imageUrl,
     required this.title,
+    required this.slug,
     required this.price,
     required this.description,
     required this.note,
+    required this.police_number,
   }) : super(key: key);
 
   void showUpdateDialog(BuildContext context) {
@@ -50,7 +54,7 @@ class CarDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text('Car Detail'),
+        title: Text(police_number),
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -63,7 +67,7 @@ class CarDetail extends StatelessWidget {
           ),
           PopupMenuButton<String>(
             onSelected: (String result) {
-              if (result == 'sunting') {
+              if (result == 'update') {
                 // Navigate to the UpdateCarPage
                 Navigator.push(
                   context,
@@ -72,9 +76,11 @@ class CarDetail extends StatelessWidget {
                       carId: carId,
                       imageUrl: imageUrl,
                       title: title,
+                      slug: slug,
                       price: price,
                       description: description,
                       note: note,
+                      police_number: police_number,
                     ),
                   ),
                 );
@@ -84,8 +90,8 @@ class CarDetail extends StatelessWidget {
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
               const PopupMenuItem<String>(
-                value: 'sunting',
-                child: Text('Sunting'),
+                value: 'update',
+                child: Text('Update'),
               ),
               const PopupMenuItem<String>(
                 value: 'settings',
@@ -131,6 +137,7 @@ class CarDetail extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [
@@ -218,28 +225,30 @@ class CarDetail extends StatelessWidget {
                 ),
               ),
             ),
-            Positioned(
-              bottom: 20,
-              right: 20,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UpdateCarPage(
-                        carId: carId.toString(),
-                        imageUrl: imageUrl,
-                        title: title,
-                        price: price,
-                        description: description,
-                        note: note,
-                      ),
-                    ),
-                  );
-                },
-                child: const Text('Update Car'),
-              ),
-            ),
+            // Positioned(
+            //   bottom: 20,
+            //   right: 20,
+            //   child: ElevatedButton(
+            //     onPressed: () {
+            //       Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //           builder: (context) => UpdateCarPage(
+            //             carId: carId.toString(),
+            //             imageUrl: imageUrl,
+            //             title: title,
+            //             slug: slug,
+            //             price: price,
+            //             description: description,
+            //             note: note,
+            //             police_number: police_number,
+            //           ),
+            //         ),
+            //       );
+            //     },
+            //     child: const Text('Update Car'),
+            //   ),
+            // ),
           ],
         ),
       ),

@@ -84,7 +84,6 @@ class _CarsState extends State<Cars> {
                   ),
                 ),
                 const CarContent(),
-
                 Container(
                   margin: const EdgeInsets.only(top: 10, bottom: 10),
                   decoration: BoxDecoration(
