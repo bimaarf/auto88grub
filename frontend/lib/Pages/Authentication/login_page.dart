@@ -96,103 +96,136 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Stack(
-                alignment: Alignment.topLeft,
-                children: [
-                  Image.network(
-                    'https://c.pxhere.com/photos/13/e8/automobile_automotive_black_and_white_car_dark_vehicle-915436.jpg!d',
-                    fit: BoxFit.contain,
-                  ),
-                ],
-              ),
-              Form(
-                key: _formKey,
-                child: Column(
+      body: Center(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                Stack(
                   children: [
-                    TextFormField(
-                      key: const ValueKey('email'),
-                      decoration: InputDecoration(
-                        hintText: 'Enter rabbit number',
-                        border: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.amber, width: 4),
-                          borderRadius: BorderRadius.circular(12),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'Assets/auto.png',
+                          width: 300,
                         ),
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter an email';
-                        }
-                        if (!RegExp(
-                                r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
-                            .hasMatch(value)) {
-                          return 'Please enter a valid email';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _email = value!;
-                      },
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Enter rabbit number',
-                        border: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.amber, width: 4),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      key: const ValueKey('password'),
-                      obscureText: true,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a password';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _password = value!;
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: _isLoading ? null : _trySubmit,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white.withOpacity(0.1),
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
+                        const SizedBox(height: 20),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.08),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 34),
-                          textStyle: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                          child: Column(
+                            children: [
+                              const Text(
+                                'Login',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              loginForm(),
+                            ],
                           ),
                         ),
-                        child: const Text('Login'),
-                      ),
+                      ],
                     ),
-                    // GFButton(
-                    //   onPressed: _trySubmit,
-                    //   text: 'Update Car',
-                    //   size: GFSize.LARGE,
-                    //   blockButton: true,
-                    // ),
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Form loginForm() {
+    return Form(
+      key: _formKey,
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const Text('Email'),
+        const SizedBox(height: 6),
+        TextFormField(
+          key: const ValueKey('email'),
+          decoration: InputDecoration(
+            hintText: 'Enter your email',
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.amber, width: 4),
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter an email';
+            }
+            if (!RegExp(
+                    r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
+                .hasMatch(value)) {
+              return 'Please enter a valid email';
+            }
+            return null;
+          },
+          onSaved: (value) {
+            _email = value!;
+          },
+        ),
+        const SizedBox(height: 6),
+        const Text('Enter your password'),
+        const SizedBox(height: 6),
+        TextFormField(
+          decoration: InputDecoration(
+            hintText: 'Enter your password',
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.amber, width: 4),
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+          key: const ValueKey('password'),
+          obscureText: true,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter a password';
+            }
+            return null;
+          },
+          onSaved: (value) {
+            _password = value!;
+          },
+        ),
+        Center(
+          child: ElevatedButton(
+            onPressed: _isLoading ? null : _trySubmit,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white.withOpacity(0.1),
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 34),
+              textStyle: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            child: const Text('Login'),
+          ),
+        ),
+        // GFButton(
+        //   onPressed: _trySubmit,
+        //   text: 'Update Car',
+        //   size: GFSize.LARGE,
+        //   blockButton: true,
+        // ),
+      ]),
     );
   }
 }

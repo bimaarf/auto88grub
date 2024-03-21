@@ -17,7 +17,9 @@ use App\Models\Gallery\Slider;
 use App\Models\HighLight;
 use App\Models\Other\CustomerService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Response;
 
 class LandingController extends Controller
 {
@@ -25,10 +27,14 @@ class LandingController extends Controller
     {
         return Slider::where('category', 'banner')->get();
     }
+
     public function popupShow()
     {
-        return Slider::where('category', 'popup')->get();
+        $sliders = Slider::where('category', 'popup')->get()->toArray();
+        shuffle($sliders);
+        return Response::json($sliders);
     }
+
     public function hlShow()
     {
         return HighLight::all();
