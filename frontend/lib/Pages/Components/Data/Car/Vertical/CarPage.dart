@@ -63,7 +63,7 @@ class _CardCardItemState extends State<CardCardItem> {
             description: widget.carData['description'] ?? '',
             price: formattedPrice,
             note: widget.carData['created_at']!,
-            police_number: widget.carData['police_number']!,
+            policeNumber: widget.carData['police_number']!,
           ),
         ),
       ),
@@ -101,7 +101,7 @@ class _CardCardItemState extends State<CardCardItem> {
             price: formattedPrice,
             description: description,
             note: widget.carData['created_at'].toString(), // Convert to string
-            police_number:
+            policeNumber:
                 widget.carData['police_number'].toString(), // Convert to string
           ),
         ),

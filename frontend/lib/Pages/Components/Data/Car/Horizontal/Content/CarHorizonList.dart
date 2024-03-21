@@ -31,7 +31,7 @@ class _CarHorizonListState extends State<CarHorizonList> {
                   : 'Price not available',
               description: widget.carData['description'] ?? '',
               note: widget.carData['created_at']!.toString(),
-              police_number: widget.carData['police_number']!.toString(),
+              policeNumber: widget.carData['police_number']!.toString(),
             ),
           ),
         );

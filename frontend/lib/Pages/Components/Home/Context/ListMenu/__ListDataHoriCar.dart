@@ -31,7 +31,7 @@ class _ListDataHoriCarState extends State<ListDataHoriCar> {
                   : 'Price not available',
               description: widget.carData['description'] ?? '',
               note: widget.carData['created_at']!,
-              police_number: widget.carData['police_number']!,
+              policeNumber: widget.carData['police_number']!,
             ),
           ),
         );

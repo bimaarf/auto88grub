@@ -4,7 +4,7 @@ class CarHorizonImage extends StatefulWidget {
   final String carId;
   final String imageUrl;
   final String title;
-  final String police_number;
+  final String policeNumber;
   final String slug;
   final String price;
   final String note;
@@ -15,7 +15,7 @@ class CarHorizonImage extends StatefulWidget {
     required this.carId,
     required this.imageUrl,
     required this.title,
-    required this.police_number,
+    required this.policeNumber,
     required this.slug,
     required this.price,
     required this.note,

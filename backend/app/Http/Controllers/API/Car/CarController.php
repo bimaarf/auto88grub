@@ -164,7 +164,8 @@ class CarController extends Controller
 
         $getCar->title = $getCar->slug;
         $getCar->slug = Str::slug($getCar->title);
-        return $getCar;
+        // return $getCar;
+        return response()->json(['data' => $getCar]);
     }
 
     public function updateCar(Request $request, $carId)

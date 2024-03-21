@@ -13,7 +13,7 @@ class UpdateCarPage extends StatefulWidget {
   final String price;
   final String note;
   final String description;
-  final String police_number;
+  final String policeNumber;
 
   const UpdateCarPage({
     Key? key,
@@ -24,7 +24,7 @@ class UpdateCarPage extends StatefulWidget {
     required this.price,
     required this.note,
     required this.description,
-    required this.police_number,
+    required this.policeNumber,
   }) : super(key: key);
 
   @override
@@ -83,15 +83,14 @@ class _UpdateCarPageState extends State<UpdateCarPage> {
     };
 
     try {
-      final response = await http.put(
-        // Changed http.post to http.put
-        Uri.parse(
-            '$baseUrl/api/car/update/${widget.carId}'), // Changed Uri.parse to put the carId in the URL
+      final response = await http.post(
+        Uri.parse('$baseUrl/api/car/update/${widget.carId}'),
         headers: headers,
         body: json.encode(body),
       );
       if (response.statusCode == 200) {
-        Navigator.pop(context);
+        // Kembali ke halaman sebelumnya (detail mobil) dan memberi tahu bahwa pembaruan berhasil
+        Navigator.pop(context, true);
         GFToast.showToast(
           'Car successfully updated!',
           context,
@@ -139,7 +138,7 @@ class _UpdateCarPageState extends State<UpdateCarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.police_number),
+        title: Text(widget.policeNumber),
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(

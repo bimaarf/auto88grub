@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:getwidget/getwidget.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen();
@@ -41,48 +42,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
       isLoading = true;
     });
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear(); // Clear all saved data
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    final response = await http.post(
-      Uri.parse('$baseUrl/api/logout'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $token',
-      },
-    );
-    setState(() {
-      isLoading = false;
-    });
-    if (response.statusCode == 200) {
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        '/login',
-        (route) => false,
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Logout Gagal'),
-            content: const Text('Terjadi kesalahan saat melakukan logout.'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    '/login',
-                    (route) => false,
-                  );
-                },
-                child: const Text('Tutup'),
-              ),
-            ],
-          );
+    try {
+      final client = http.Client();
+      final response = await client.post(
+        Uri.parse('$baseUrl/api/logout'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
         },
       );
+
+      if (response.statusCode == 200) {
+        await prefs.clear();
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          '/login',
+          (route) => false,
+        );
+        GFToast.showToast(
+          'You are logged out!',
+          context,
+          toastPosition: GFToastPosition.BOTTOM,
+        );
+      } else {
+        GFToast.showToast(
+          'Failed to logout. Please try again!',
+          context,
+          toastPosition: GFToastPosition.BOTTOM,
+        );
+      }
+    } catch (e) {
+      GFToast.showToast(
+        'An error occurred. Please try again!',
+        context,
+        toastPosition: GFToastPosition.BOTTOM,
+      );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 

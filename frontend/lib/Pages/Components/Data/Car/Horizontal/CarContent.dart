@@ -164,7 +164,7 @@ class _PageContentState extends State<PageContent> {
           'Description not available';
       String imageUrl = widget.carData['imageUrl']?.toString() ?? '';
       String createdAt = widget.carData['created_at']?.toString() ?? '';
-      String police_number = widget.carData['police_number']?.toString() ?? '';
+      String policeNumber = widget.carData['police_number']?.toString() ?? '';
 
       String carId = widget.carData['id']?.toString() ?? '';
       String price;
@@ -187,7 +187,7 @@ class _PageContentState extends State<PageContent> {
             price: price,
             description: description,
             note: createdAt,
-            police_number: police_number,
+            policeNumber: policeNumber,
           ),
         ),
       );
@@ -254,7 +254,7 @@ class _PageContentState extends State<PageContent> {
                   'Description not available',
               carId: widget.carData['id'].toString(),
               price: formattedPrice,
-              police_number: widget.carData['police_number']?.toString() ?? '',
+              policeNumber: widget.carData['police_number']?.toString() ?? '',
               note: widget.carData['created_at']?.toString() ?? '',
             ),
           ),
