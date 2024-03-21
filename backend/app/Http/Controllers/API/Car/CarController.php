@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
+
     public function getComponents()
     {
         $data['brand'] = Brand::all();
@@ -98,10 +99,8 @@ class CarController extends Controller
         }
 
         $perPage = $request->input('perPage', 10);
-
         $cars = $query->paginate($perPage);
-
-        $cars->getCollection()->map(function ($car) {
+        $cars->getCollection()->transform(function ($car) {
             $car->title = $car->slug;
             $car->slug = Str::slug($car->title);
             return $car;
@@ -131,11 +130,9 @@ class CarController extends Controller
     }
     public function showCar(Request $request)
     {
-        // Default values for pagination
         $page = $request->query('page', 1);
         $perPage = $request->query('perPage', 6);
 
-        // Eager load related models to avoid N+1 queries
         $getCar = Car::with([
             'promos', 'documents', 'officials', 'originals', 'outdoors',
             'location', 'brand', 'model', 'type', 'cylinder', 'transmission', 'series',
