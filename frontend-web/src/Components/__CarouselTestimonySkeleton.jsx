@@ -15,7 +15,7 @@ export const CarouselTestimonySkeleton = () => {
                   rows.push(
                     <div
                       key={i}
-                      className="block active:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-base-200 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                      className="block active:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-base-200 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
                       <div className="relative overflow-hidden bg-cover flex bg-no-repeat justify-center items-center">
                         <img
                           className="skeleton animate-ping"

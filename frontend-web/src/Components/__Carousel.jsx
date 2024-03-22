@@ -7,7 +7,7 @@ export const CarouselSl = ({ getSliders }) => {
       <Carousel
         loop
         autoplay
-        className="rounded-xl w-full sm:scale-150 md:scale-150 mx-auto"
+        className="rounded-xl w-full sm:scale-100 md:scale-150 mx-auto"
         prevArrow={({ handlePrev }) => (
           <IconButton
             variant="text"

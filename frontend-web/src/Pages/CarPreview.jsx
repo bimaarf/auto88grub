@@ -13,7 +13,6 @@ export const CarPreview = () => {
   const { state } = useStateContext();
   const { getRecCars } = state;
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
 
   const fadeInOnScroll = (ref) => {
     const element = ref.current;
@@ -59,7 +58,7 @@ export const CarPreview = () => {
                       rows.push(
                         <div
                           key={i}
-                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-base-200/40 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-base-200/40 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
                           <div className="relative overflow-hidden bg-cover bg-no-repeat">
                             <img
                               src="https://www.auto88group.com/image/car/1775/20240201113209.jpg"
@@ -83,7 +82,7 @@ export const CarPreview = () => {
                       rows.push(
                         <div
                           key={i}
-                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-base-200/40 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                          className="block hover:scale-90 scale-95 cursor-pointer duration-300 w-full max-w-[32rem] bg-base-200/40 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
                           <div className="relative overflow-hidden bg-cover bg-no-repeat">
                             <img
                               src="https://www.auto88group.com/image/car/1775/20240201113209.jpg"
@@ -100,7 +99,7 @@ export const CarPreview = () => {
               </TECarouselItem>
             </div>
           </TECarousel>
-          {getCars && (
+          {getCars ? (
             <>
               <div className="border-b border-base-300 py-4 mt-20 w-full flex justify-between">
                 <p className="font-medium text-xl">Video</p>
@@ -175,13 +174,116 @@ export const CarPreview = () => {
                 {getCars.description}
               </p>
             </>
+          ) : (
+            <>
+              <div className="border-b border-base-300 py-4 mt-20 w-full flex justify-between">
+                <p className="font-medium text-xl">Video</p>
+                <p className="font-bold text-blue-600 text-xl">
+                  Klick untuk menonton
+                </p>
+              </div>
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
+                <p className="font-medium text-xl">Merk</p>
+                <div className="font-bold text-xl uppercase">
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                </div>
+              </div>
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
+                <p className="font-medium text-xl">Model</p>
+                <div className="font-bold text-xl uppercase">
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                </div>
+              </div>
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
+                <p className="font-medium text-xl">Tipe</p>
+                <div className="font-bold text-xl uppercase">
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                </div>
+              </div>
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
+                <p className="font-medium text-xl">Jenis</p>
+                <div className="font-bold text-xl uppercase">
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                </div>
+              </div>
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
+                <p className="font-medium text-xl">Silinder</p>
+                <div className="font-bold text-xl uppercase">
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                </div>
+              </div>
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
+                <p className="font-medium text-xl">Transmisi</p>
+                <div className="font-bold text-xl uppercase">
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                </div>
+              </div>
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
+                <p className="font-medium text-xl">Seri</p>
+                <div className="font-bold text-xl uppercase">
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                </div>
+              </div>
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
+                <p className="font-medium text-xl">Gardan</p>
+                <div className="font-bold text-xl uppercase">
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                </div>
+              </div>
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
+                <p className="font-medium text-xl">Bahan Bakar</p>
+                <div className="font-bold text-xl uppercase">
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                </div>
+              </div>
+              <div className="border-b border-base-300 py-4 w-full flex justify-between">
+                <p className="font-medium text-xl">Warna</p>
+                <div className="font-bold text-xl uppercase">
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                  <span className="loading text-red-700 loading-dots loading-md"></span>
+                </div>
+              </div>
+              <h1 className="sm:text-xl mt-10 md:text-4xl w-full border-b border-base-300 mb-6 pb-4 border-dashed font-medium text-pretty">
+                Deskripsi Kendaraan
+              </h1>
+              <div
+                className="whitespace-pre-wrap prose text-pretty w-full bg-opacity-20 skeleton"
+                style={{ whiteSpace: "pre-wrap" }}>
+                <div className="flex justify-center">
+                  <p className="skeleton h-10 w-1/2 mt-10 bg-opacity-30 rounded"></p>
+                </div>
+                <div className="space-y-3 mt-10 p-10">
+                  <p className="skeleton h-6 w-1/2 bg-opacity-30 rounded"></p>
+                  <p className="skeleton h-6 w-full bg-opacity-30 rounded"></p>
+                  <p className="skeleton h-6 w-full bg-opacity-30 rounded"></p>
+                  <p className="skeleton h-6 w-full bg-opacity-30 rounded"></p>
+                  <p className="skeleton h-6 w-full bg-opacity-30 rounded"></p>
+                  <p className="skeleton h-6 w-full bg-opacity-30 rounded"></p>
+                  <p className="skeleton h-6 w-2/3 mt-10 bg-opacity-30 rounded"></p>
+                  <p className="skeleton h-6 w-full bg-opacity-30 rounded"></p>
+                  <p className="skeleton h-6 w-full bg-opacity-30 rounded"></p>
+                  <p className="skeleton h-6 w-full bg-opacity-30 rounded"></p>
+                  <p className="skeleton h-6 w-full bg-opacity-30 rounded"></p>
+                  <p className="skeleton h-6 w-1/3 bg-opacity-30 rounded"></p>
+                </div>
+              </div>
+            </>
           )}
 
           <div className="pb-32 mt-20 bg-transparent border-t border-dashed">
             <div className="mt-10 z-30 ">
               <div className="flex justify-center">
                 <div
-                  className="md:space-y-4 sm:text-xl whitespace-nowrap  text-pretty p-4  font-bold text-center"
+                  className="md:space-y-4 sm:text-xl whitespace-nowrap text-pretty p-4 font-bold text-center"
                   style={{ fontFamily: "'Marko One', sans-serif" }}>
                   <div className="md:space-y-10 md:text-3xl slide-in fade-in-left">
                     <h1 className="slide-in fade-in-left">Mobil Rekomendasi</h1>

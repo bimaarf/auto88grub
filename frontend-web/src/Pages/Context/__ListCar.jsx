@@ -1,5 +1,4 @@
 import React from "react";
-import { CurrentFormat } from "../../Components/___CurrentFormat";
 import { useNavigate } from "react-router-dom";
 import { CurrentXFormat } from "../../Components/___CurrentXFormat";
 
@@ -23,7 +22,7 @@ export const ListCar = ({ getAllCars }) => {
               });
             }}
             key={key}
-            className="block select-none border-base-300 border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-base-200 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+            className="block select-none border-base-300 border hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-base-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
             <div className="relative overflow-hidden flex justify-center bg-cover bg-no-repeat">
               <img
                 className="rounded-t-lg h-40 object-cover bg-cover w-full"
@@ -40,7 +39,7 @@ export const ListCar = ({ getAllCars }) => {
               <p className="text-pretty font-light text-xs md:text-md text-left uppercase">
                 {item.type.name} / {item.series.name} / {item.fuel.name}
               </p>
-              <p className="text-pretty text-sm md:text-xl font-bold text-right">
+              <p className="text-pretty text-sm font-bold text-right">
                 <CurrentXFormat value={item.price} />
               </p>
               <div className="flex justify-between">

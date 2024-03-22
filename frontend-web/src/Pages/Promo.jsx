@@ -63,6 +63,7 @@ export const Promo = () => {
   }, [loadFetch, reachedEnd, allCars, filteredCars, formInput]);
 
   useEffect(() => {
+    setLoadFetch(true);
     async function fetchData() {
       await GET_CAR_COMP();
       await GET_ALL_CAR();
