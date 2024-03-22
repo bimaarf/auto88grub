@@ -63,7 +63,7 @@ export const CarouselBlog = ({ getBlog }) => {
                   {window.innerWidth <= 768 && key > 0 ? null : (
                     <div
                       onClick={() => window.open(item.link)}
-                      className="block active:scale-95 cursor-pointer duration-300 rounded border border-base-200 max-w-[32rem] bg-base-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                      className="block active:scale-95 cursor-pointer duration-300 rounded border border-base-200 max-w-[32rem] bg-base-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
                       <div className="flex justify-center ">
                         <div className="relative bg-fixed rounded bg-gradient-to-r from-black bg-black max-w-xs overflow-hidden bg-cover bg-no-repeat">
                           <img

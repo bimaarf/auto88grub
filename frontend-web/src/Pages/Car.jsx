@@ -52,6 +52,7 @@ export const Car = () => {
   }, [loadFetch, reachedEnd, allCars, filteredCars, formInput]);
 
   useEffect(() => {
+    setLoadFetch(true);
     async function fetchData() {
       await GET_CAR_COMP();
       await GET_ALL_CAR();
@@ -214,8 +215,8 @@ export const Car = () => {
   return (
     <>
       <HighLightHeader />
-      <div className="lg:container shadow bg-base-100 rounded-xl p-4 sm:mx-1 lg:mx-auto">
-        <div className="md:flex justify-center items-start align-top gap-4">
+      <div className="md:container shadow bg-base-100 rounded-xl p-2 md:mx-auto">
+        <div className="md:flex justify-center items-start align-top gap-2">
           <div className="sm:w-full md:w-1/4 md:border-r md:sticky md:top-16 md:pb-32 space-y-5 overflow-y-auto pr-4">
             <div className="collapse collapse-arrow top-0 w-full bg-opacity-0 mt-4">
               <div className="collapse-title">
@@ -450,7 +451,7 @@ export const Car = () => {
             </div>
           </div>
           <div className="sm:w-full md:mt-0 mt-10 md:w-3/4">
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
               {allCars && !filteredCars && <ListCar getAllCars={allCars} />}
               {!allCars && filteredCars && (
                 <ListCar getAllCars={filteredCars} />
@@ -458,7 +459,7 @@ export const Car = () => {
               {loadFetch && <ListCarSkeleton />}
               {allCars && (
                 <div className="sm:w-full md:mt-0 mt-10 md:w-3/4">
-                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
                     <ListCar allCars={allCars} />
                   </div>
                 </div>

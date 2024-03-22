@@ -1,7 +1,6 @@
 import React from "react";
 import { CurrentXFormat } from "./___CurrentXFormat";
 import { useNavigate } from "react-router-dom";
-import { CurrentFormat } from "./___CurrentFormat";
 
 export const ListNewCar = ({ getNewCars }) => {
   const navRedirect = useNavigate();
@@ -10,6 +9,7 @@ export const ListNewCar = ({ getNewCars }) => {
       {getNewCars.data.map((item, key) => (
         <div
           onClick={() => {
+            window.scrollTo(0, 0);
             const params = new URLSearchParams();
             params.append("slug", item.slug);
             params.append("index", item.id);
@@ -19,7 +19,7 @@ export const ListNewCar = ({ getNewCars }) => {
             });
           }}
           key={key}
-          className="block select-none border border-base-200 hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-base-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+          className="block select-none border border-base-200 hover:border-red-500 active:scale-95 cursor-pointer duration-300 w-full max-w-[32rem] rounded-lg bg-base-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
           <div className="relative overflow-hidden flex justify-center bg-cover bg-no-repeat">
             <img
               className="rounded-t-lg h-40 w-full object-cover"
@@ -36,9 +36,9 @@ export const ListNewCar = ({ getNewCars }) => {
             <p className="text-pretty font-light text-xs md:text-md text-left uppercase">
               {item.type.name} / {item.series.name} / {item.fuel.name}
             </p>
-            <p className="text-pretty text-xs md:text-md font-medium line-through text-right">
-              <CurrentXFormat value={item.price} />
-            </p>
+            <p className="text-pretty text-sm font-bold text-right">
+                <CurrentXFormat value={item.price} />
+              </p>
             <div className="flex justify-between">
               <div className="space-y-2 mt-4 justify-between items-center whitespace-nowrap gap-2 font-medium  text-pretty">
                 <div className="flex justify-start text-xs col-span-2 items-center gap-2">
